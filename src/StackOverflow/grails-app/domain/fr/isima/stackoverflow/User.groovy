@@ -24,11 +24,11 @@ class User implements Serializable
 	boolean passwordExpired
 
 	// Custom fields
-	String firstName
+    String firstName
 	String lastName
 	String description
 	Date registerDate
-	Integer reputation
+	Integer reputation = 0
 
 	// Constraints
 	static transients = ['springSecurityService']
@@ -36,7 +36,9 @@ class User implements Serializable
 	static constraints = {
 		password blank: false, password: true
 		username blank: false, unique: true
-		description maxSize: 2500
+        firstName blank: false, minSize: 3, maxSize: 50
+        lastName blank: false, minSize: 3, maxSize: 50
+		description nullable: true, maxSize: 2500
 	}
 
 	static mapping = {

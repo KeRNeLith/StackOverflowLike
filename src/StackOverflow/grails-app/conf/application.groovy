@@ -1,4 +1,4 @@
-
+grails.plugin.springsecurity.logout.postOnly = false
 
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'fr.isima.stackoverflow.User'
