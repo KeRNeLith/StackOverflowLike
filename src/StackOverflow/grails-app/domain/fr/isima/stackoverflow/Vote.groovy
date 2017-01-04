@@ -1,9 +1,6 @@
 package fr.isima.stackoverflow
 
-import fr.isima.stackoverflow.User
-import fr.isima.stackoverflow.Post
-
-class Vote 
+class Vote
 {
 	enum Value 
 	{

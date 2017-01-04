@@ -38,28 +38,26 @@ class UserSpec extends Specification
             user.hasErrors()
             user.errors.errorCount == 4
             user.errors['username'].code == 'minSize.notmet'
-            user.errors['password'].code == 'size.toosmall'
+            user.errors['password'].code == 'minSize.notmet'
             user.errors['firstName'].code == 'minSize.notmet'
             user.errors['lastName'].code == 'minSize.notmet'
 
         when: 'User is invalid (too long)'
             user.username = 'Lorem ipsum dolor sit amet, consectetur massa nunc.'
-            user.password = 'Lorem ipsum dolor sit'
+            user.password = 'azerty'    // Valid password
             user.firstName = 'Lorem ipsum dolor sit amet, consectetur massa nunc.'
             user.lastName = 'Lorem ipsum dolor sit amet, consectetur massa nunc.'
 
         then: 'validate user => return false'
             !user.validate()
             user.hasErrors()
-            user.errors.errorCount == 4
+            user.errors.errorCount == 3
             user.errors['username'].code == 'maxSize.exceeded'
-            user.errors['password'].code == 'size.toobig'
             user.errors['firstName'].code == 'maxSize.exceeded'
             user.errors['lastName'].code == 'maxSize.exceeded'
 
         when: 'User is valid'
             user.username = 'Test'
-            user.password = 'azerty'
             user.firstName = 'Jean'
             user.lastName = 'Dupont'
 

@@ -1,8 +1,6 @@
 package fr.isima.stackoverflow
 
-import fr.isima.stackoverflow.Post
-
-class Question extends Post 
+class Question extends Post
 {
 	// Attributes
 	String title
@@ -11,7 +9,7 @@ class Question extends Post
 	// Constraints
     static constraints = {
 		title blank: false, maxSize: 150
-		nbViews min: 0d
+		nbViews min: 0
     }
 	
 	// Relations

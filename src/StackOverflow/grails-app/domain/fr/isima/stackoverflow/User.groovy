@@ -3,9 +3,6 @@ package fr.isima.stackoverflow
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 
-import fr.isima.stackoverflow.Question
-import fr.isima.stackoverflow.Answer
-
 @EqualsAndHashCode(includes='username')
 @ToString(includes='username', includeNames=true, includePackage=false)
 class User implements Serializable 
@@ -34,7 +31,7 @@ class User implements Serializable
 	static transients = ['springSecurityService']
 
 	static constraints = {
-		password password: true, size: 6..20
+		password password: true, minSize: 6
 		username unique: true, minSize: 3, maxSize: 50
         firstName minSize: 3, maxSize: 50
         lastName minSize: 3, maxSize: 50

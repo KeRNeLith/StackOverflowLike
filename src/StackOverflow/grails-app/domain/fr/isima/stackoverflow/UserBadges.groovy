@@ -1,9 +1,6 @@
 package fr.isima.stackoverflow
 
-import fr.isima.stackoverflow.User
-import fr.isima.stackoverflow.Badge
-
-class UserBadges 
+class UserBadges
 {
 	User user
 	Badge badge

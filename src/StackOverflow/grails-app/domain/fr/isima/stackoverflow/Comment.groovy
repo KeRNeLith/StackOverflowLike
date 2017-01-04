@@ -1,7 +1,5 @@
 package fr.isima.stackoverflow
 
-import fr.isima.stackoverflow.Post
-
 class Comment extends Post
 {
     // Attributes

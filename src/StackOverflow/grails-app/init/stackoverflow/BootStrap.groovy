@@ -1,10 +1,10 @@
 package stackoverflow
 
-import fr.isima.stackoverflow.Role;
-import fr.isima.stackoverflow.User;
-import fr.isima.stackoverflow.UserRole;
+import fr.isima.stackoverflow.Role
+import fr.isima.stackoverflow.User
+import fr.isima.stackoverflow.UserRole
 
-class BootStrap 
+class BootStrap
 {
     def init = 
 	{

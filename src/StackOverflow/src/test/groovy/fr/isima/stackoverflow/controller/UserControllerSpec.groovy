@@ -1,6 +1,5 @@
 package fr.isima.stackoverflow.controller
 
-import fr.isima.stackoverflow.User
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
