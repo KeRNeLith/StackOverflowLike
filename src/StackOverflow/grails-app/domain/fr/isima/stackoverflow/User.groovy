@@ -27,17 +27,17 @@ class User implements Serializable
     String firstName
 	String lastName
 	String description
-	Date registerDate
+	Date registerDate = new Date()
 	Integer reputation = 0
 
 	// Constraints
 	static transients = ['springSecurityService']
 
 	static constraints = {
-		password blank: false, password: true
-		username blank: false, unique: true
-        firstName blank: false, minSize: 3, maxSize: 50
-        lastName blank: false, minSize: 3, maxSize: 50
+		password password: true, size: 6..20
+		username unique: true, minSize: 3, maxSize: 50
+        firstName minSize: 3, maxSize: 50
+        lastName minSize: 3, maxSize: 50
 		description nullable: true, maxSize: 2500
 	}
 

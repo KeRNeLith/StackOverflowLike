@@ -1,5 +1,6 @@
 package fr.isima.stackoverflow.controller
 
+import fr.isima.stackoverflow.User
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
@@ -7,16 +8,18 @@ import spock.lang.Specification
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
 @TestFor(UserController)
-class UserControllerSpec extends Specification {
-
-    def setup() {
+class UserControllerSpec extends Specification
+{
+    def setup()
+    {
     }
 
-    def cleanup() {
+    def cleanup()
+    {
     }
 
     void "test something"() {
         expect:"fix me"
-            true == false
+        true == false
     }
 }
