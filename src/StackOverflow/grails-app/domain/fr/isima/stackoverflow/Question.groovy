@@ -4,7 +4,7 @@ class Question extends Post
 {
 	// Attributes
 	String title
-	Integer nbViews
+	Integer nbViews = 0
 
 	// Constraints
     static constraints = {
