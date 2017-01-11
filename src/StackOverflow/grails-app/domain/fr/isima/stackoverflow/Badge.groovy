@@ -15,6 +15,6 @@ class Badge
 	
 	// Constraints
     static constraints = {
-		name blank: false, maxSize: 50
+		name blank: false, maxSize: 50, unique: ['rank']
     }
 }

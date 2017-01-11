@@ -13,6 +13,7 @@ class Vote
 	
 	// Constraints
     static constraints = {
+		user unique: ['post']
     }
 	
 	// Relations

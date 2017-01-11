@@ -3,12 +3,11 @@ package fr.isima.stackoverflow
 class Tag 
 {
 	// Attributes
-	String tagName
+	TagValue tag
 
 	// Constraints
     static constraints = {
     }
-	
-	// Relations
-	static belongsTo = [question: Question]
+
+    static belongsTo = [questions: Question]
 }

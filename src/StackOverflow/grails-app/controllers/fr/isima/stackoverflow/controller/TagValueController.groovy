@@ -1,12 +1,12 @@
 package fr.isima.stackoverflow.controller
 
-import fr.isima.stackoverflow.Post
+import fr.isima.stackoverflow.TagValue
 import grails.plugin.springsecurity.annotation.Secured;
 
 @Secured('ROLE_ADMIN')
-class PostController
+class TagValueController
 {
-    def scaffold = Post
+    def scaffold = TagValue
 
     //def index() { }
 }

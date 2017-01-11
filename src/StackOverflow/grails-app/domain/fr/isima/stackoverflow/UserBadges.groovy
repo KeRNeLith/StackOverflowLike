@@ -7,5 +7,6 @@ class UserBadges
 	Date dateEarned
 	
     static constraints = {
+		user unique: ['badge', 'dateEarned']
     }
 }

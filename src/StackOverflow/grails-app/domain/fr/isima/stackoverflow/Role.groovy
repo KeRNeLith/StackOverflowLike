@@ -5,8 +5,8 @@ import groovy.transform.ToString
 
 @EqualsAndHashCode(includes='authority')
 @ToString(includes='authority', includeNames=true, includePackage=false)
-class Role implements Serializable {
-
+class Role implements Serializable
+{
 	private static final long serialVersionUID = 1
 
 	String authority

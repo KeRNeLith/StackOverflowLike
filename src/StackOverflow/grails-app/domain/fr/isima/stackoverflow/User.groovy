@@ -36,6 +36,7 @@ class User implements Serializable
         firstName minSize: 3, maxSize: 50
         lastName minSize: 3, maxSize: 50
 		description nullable: true, maxSize: 2500
+		reputation min: 0
 	}
 
 	static mapping = {

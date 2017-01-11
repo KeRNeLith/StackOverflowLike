@@ -8,7 +8,7 @@ class Question extends Post
 
 	// Constraints
     static constraints = {
-		title blank: false, maxSize: 150
+		title blank: false, maxSize: 150, unique: 'user'
 		nbViews min: 0
     }
 	
