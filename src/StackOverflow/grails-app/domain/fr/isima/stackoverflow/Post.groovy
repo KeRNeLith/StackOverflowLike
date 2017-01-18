@@ -4,8 +4,8 @@ abstract class Post
 {
 	// Attributes
 	String message
-	//Date postedDate
-	//Date lastModified
+	Date dateCreated
+	Date lastUpdated
 
 	// Constraints
     static constraints = {
