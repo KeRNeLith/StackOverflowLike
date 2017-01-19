@@ -3,9 +3,10 @@
     <head>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'question.label', default: 'Question')}" />
-        <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <title>SegFault - ${this.question.title}</title>
 
         <asset:stylesheet src="qa-styles.css"/>
+        <asset:stylesheet src="font-awesome.min.css"/>
     </head>
     <body>
         <a href="#show-question" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -26,33 +27,31 @@
 
             <div class="qa-part-q-view">
                 <div class="qa-q-view  hentry question" id="question_${this.question.id}">
-
-                    <div class="qa-q-view-stats">
-                        <div class="qa-voting qa-voting-net" id="voting_18839">
-                            <div class="qa-vote-buttons qa-vote-buttons-net">
-                                <g:link action="show" id="${this.question.id}">
-                                   +
-                                </g:link>
-                                <g:link action="show" id="${this.question.id}">
-                                    -
-                                </g:link>
+                    <g:form controller="vote" action="performVote">
+                        <div class="qa-q-view-stats">
+                            <div class="qa-voting qa-voting-net" id="voting_${this.question.id}">
+                                <div class="qa-vote-buttons qa-vote-buttons-net">
+                                    <g:submitButton title="${message (code: 'question.show.voteUpTooltip')}" name="vote_up_question_${this.question.id}" value="+" class="qa-vote-first-button qa-vote-up-button" />
+                                    <g:submitButton title="${message (code: 'question.show.voteDownTooltip')}" name="vote_down_question_${this.question.id}" value="-" class="qa-vote-second-button qa-vote-down-button" />
+                                </div>
+                                <div class="qa-vote-count qa-vote-count-net">
+                                    <span class="qa-netvote-count">
+                                        <span class="qa-netvote-count-data">${this.question.votes.size()}</span>
+                                        <span class="qa-netvote-count-pad"> <g:if test="${this.question.votes.size() > 1}"><g:message code="question.show.votes" /></g:if><g:else><g:message code="question.show.vote" /></g:else></span>
+                                    </span>
+                                </div>
+                                <div class="qa-vote-clear">
+                                </div>
                             </div>
-                            <div class="qa-vote-count qa-vote-count-net">
-                                <span class="qa-netvote-count">
-                                    <span class="qa-netvote-count-data">0<span class="votes-up"><span class="value-title" title="13"></span></span><span class="votes-down"><span class="value-title" title="1"></span></span></span><span class="qa-netvote-count-pad"> votes</span>
-                                </span>
-                            </div>
-                            <div class="qa-vote-clear">
-                            </div>
+                            <span class="qa-view-count">
+                                <span class="qa-view-count-data">${this.question.nbViews}</span>
+                                <span class="qa-view-count-pad"> <g:if test="${this.question.nbViews > 1}"><g:message code="question.show.views" /></g:if><g:else><g:message code="question.show.view" /></g:else></span>
+                            </span>
                         </div>
-                        <span class="qa-view-count">
-                            <span class="qa-view-count-data">${this.question.nbViews}</span>
-                            <span class="qa-view-count-pad"> <g:if test="${this.question.nbViews > 1}"><g:message code="question.show.views" /></g:if><g:else><g:message code="question.show.view" /></g:else></span>
-                        </span>
-                    </div>
+                    </g:form>
 
                     <div class="qa-q-view-main">
-                        <g:form action="show">
+                        <g:form controller="answer" action="create">
                             <span class="qa-q-view-avatar-meta">
                                 <span class="qa-q-view-avatar">
                                     <g:link controller="user" action="show" id="${this.question.user.id}" class="qa-avatar-link">
@@ -99,7 +98,8 @@
                             </div>
 
                             <div class="qa-q-view-buttons">
-                                <input name="q_doanswer" id="q_doanswer" value="<g:message code="question.show.answer" />" title="Answer this question" type="submit" class="qa-form-light-button qa-form-light-button-answer">
+                                <i class="fa fa-comment" aria-hidden="true"></i>
+                                <g:submitButton id="doanswer_question" name="doanswer_question_${this.question.id}" title="${message (code: 'question.show.addAnswerTooltip')}" value="${message (code: 'question.show.answer')}" class="qa-form-light-button qa-form-light-button-answer" />
                             </div>
                         </g:form>
                     </div> <!-- End qa-q-view-main -->
@@ -119,29 +119,27 @@
                 <g:each in = "${this.question.answers}" var = "answer">
                     <div class="qa-a-list-item  hentry answer" id="answer_${answer.id}">
 
-                        <div class="qa-voting qa-voting-net" id="voting_${answer.id}">
-                            <div class="qa-vote-buttons qa-vote-buttons-net">
-                                <g:link controller="answer" action="show" id="${answer.id}">
-                                    +
-                                </g:link>
-                                <g:link controller="answer" action="show" id="${answer.id}">
-                                    -
-                                </g:link>
-                            </div>
-                            <div class="qa-vote-count qa-vote-count-net">
-                                <span class="qa-netvote-count">
-                                    <span class="qa-netvote-count-data">0<span class="votes-up">
-                                        <span class="value-title"></span>
-                                    </span>
-                                        <span class="votes-down"><span class="value-title"></span>
+                        <g:form controller="vote" action="performVote">
+                            <div class="qa-voting qa-voting-net" id="voting_${answer.id}">
+                                <div class="qa-vote-buttons qa-vote-buttons-net">
+                                    <g:submitButton title="${message (code: 'question.show.voteUpTooltip')}" name="vote_up_question_${this.question.id}_answer_${answer.id}" value="+" class="qa-vote-first-button qa-vote-up-button" />
+                                    <g:submitButton title="${message (code: 'question.show.voteDownTooltip')}" name="vote_down_question_${this.question.id}_answer_${answer.id}" value="-" class="qa-vote-second-button qa-vote-down-button" />
+                                </div>
+                                <div class="qa-vote-count qa-vote-count-net">
+                                    <span class="qa-netvote-count">
+                                        <span class="qa-netvote-count-data">0<span class="votes-up">
+                                            <span class="value-title"></span>
                                         </span>
+                                            <span class="votes-down"><span class="value-title"></span>
+                                            </span>
+                                        </span>
+                                        <span class="qa-netvote-count-pad"> <g:if test="${answer.votes.size() > 1}"><g:message code="question.show.votes" /></g:if><g:else><g:message code="question.show.vote" /></g:else></span>
                                     </span>
-                                    <span class="qa-netvote-count-pad"> <g:if test="${answer.votes.size() > 1}"><g:message code="question.show.votes" /></g:if><g:else><g:message code="question.show.vote" /></g:else></span>
-                                </span>
+                                </div>
+                                <div class="qa-vote-clear">
+                                </div>
                             </div>
-                            <div class="qa-vote-clear">
-                            </div>
-                        </div>
+                        </g:form>
 
                         <div class="qa-a-item-main">
                             <span class="qa-a-item-avatar-meta">
@@ -172,7 +170,7 @@
                                 </span>
                             </span>
 
-                            <form method="post" action="http://www.question2answer.org/qa/18839/sweet-clean-twitter-bootstrap-theme-for-question2answer-org">
+                            <g:form controller="comment" action="create">
                                 <div class="qa-a-selection">
                                 </div>
                                 <div class="qa-a-item-content">
@@ -181,7 +179,8 @@
                                     </div>
                                 </div>
                                 <div class="qa-a-item-buttons">
-                                    <input name="answer_${answer.id}_docomment" value="<g:message code="question.show.comment" />" title="Add a comment on this answer" type="submit" class="qa-form-light-button qa-form-light-button-comment">
+                                    <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                    <g:submitButton name="answer_${answer.id}_docomment" title="${message (code: 'question.show.addCommentTooltip')}" value="${message (code: 'question.show.comment')}" class="qa-form-light-button qa-form-light-button-comment" />
                                 </div>
 
                                 <div class="qa-a-item-c-list" id="comment_${answer.id}_list">
@@ -217,17 +216,12 @@
                                             <div class="qa-c-item-content">
                                                 <div class="entry-content">${comment.message}</div>
                                             </div>
-                                            <div class="qa-c-item-footer">
-                                                <div class="qa-c-item-buttons">
-                                                    <input name="answer_${answer.id}_docomment" value="reply" title="Reply to this comment" type="submit" class="qa-form-light-button qa-form-light-button-comment">
-                                                </div>
-                                            </div>
                                             <div class="qa-c-item-clear">
                                             </div>
                                         </div> <!-- END qa-c-item -->
                                     </g:each>
                                 </div> <!-- END qa-c-list -->
-                            </form>
+                            </g:form>
 
                         </div> <!-- END qa-a-item-main -->
                         <div class="qa-a-item-clear">

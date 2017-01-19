@@ -28,4 +28,5 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 
 grails.plugin.springsecurity.roleHierarchy = '''
    ROLE_ADMIN > ROLE_USER
+   ROLE_USER > ROLE_ANONYMOUS
 '''

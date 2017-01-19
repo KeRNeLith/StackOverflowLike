@@ -9,6 +9,7 @@
 //= require bootstrap
 //= require_tree .
 //= require_self
+//= encoding UTF-8
 
 if (typeof jQuery !== 'undefined') {
     (function($) {

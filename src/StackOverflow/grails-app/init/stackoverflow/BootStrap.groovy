@@ -13,6 +13,7 @@ class BootStrap
 	{
         def adminRole = new Role(authority: 'ROLE_ADMIN').save()
         def userRole = new Role(authority: 'ROLE_USER').save()
+        def anonymousRole = new Role(authority: 'ROLE_ANONYMOUS').save()
 
         def kernelith = new User(username: 'kernelith', password: 'azerty', firstName: 'Alexandre', lastName: 'Rabérin').save()
         def tjgamerz = new User(username: 'TJGamerz', password: 'azerty', firstName: 'Jonas', lastName: 'Elysée').save()
@@ -37,7 +38,7 @@ class BootStrap
         }
 
         assert User.count() == 3
-        assert Role.count() == 2
+        assert Role.count() == 3
         assert UserRole.count() == 3
         assert Question.count() == 1
         assert Answer.count() == 2
