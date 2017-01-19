@@ -161,7 +161,7 @@ class VoteController
                     questionId = a.question.id
                 }
 
-                redirect(controller: 'question', action: 'show', id: questionId)
+                redirect(controller: 'question', action: 'display', id: questionId)
             }
             else
             {

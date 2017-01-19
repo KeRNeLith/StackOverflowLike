@@ -20,8 +20,13 @@ class QuestionController
         respond Question.list(params), model:[questionCount: Question.count()]
     }
 
-    @Secured('ROLE_ANONYMOUS')
     def show(Question question)
+    {
+        respond question
+    }
+
+    @Secured('ROLE_ANONYMOUS')
+    def display(Question question)
     {
         def questionVotes = questionService.voteCount(question.votes)
         // Sort answers by votes and posting date
