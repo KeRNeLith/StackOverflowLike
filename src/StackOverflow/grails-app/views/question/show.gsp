@@ -37,8 +37,8 @@
                                 </div>
                                 <div class="qa-vote-count qa-vote-count-net">
                                     <span class="qa-netvote-count">
-                                        <span class="qa-netvote-count-data">${this.question.votes.size()}</span>
-                                        <span class="qa-netvote-count-pad"> <g:if test="${this.question.votes.size() > 1}"><g:message code="question.show.votes" /></g:if><g:else><g:message code="question.show.vote" /></g:else></span>
+                                        <span class="qa-netvote-count-data"><g:if test="${this.questionVotes >= 0}">+</g:if>${this.questionVotes}</span>
+                                        <span class="qa-netvote-count-pad"> <g:if test="${this.questionVotes > 1}"><g:message code="question.show.votes" /></g:if><g:else><g:message code="question.show.vote" /></g:else></span>
                                     </span>
                                 </div>
                                 <div class="qa-vote-clear">
@@ -117,7 +117,10 @@
             <div class="qa-part-a-list">
             <h2 id="a_list_title">${this.question.answers.size()} <g:if test="${this.question.answers.size() > 1}"><g:message code="question.show.Answers" /></g:if><g:else><g:message code="question.show.Answer" /></g:else></h2>
             <div class="qa-a-list" id="a_list">
-                <g:each in = "${this.question.answers}" var = "answer">
+                <g:each in = "${this.sortedAnswers}" var = "answerAssoc">
+                    <g:set var="answer" value="${answerAssoc.key}"/>
+                    <g:set var="votes" value="${answerAssoc.value}"/>
+
                     <div class="qa-a-list-item  hentry answer" id="answer_${answer.id}">
 
                         <g:form controller="vote" action="performVote">
@@ -129,7 +132,7 @@
                                 </div>
                                 <div class="qa-vote-count qa-vote-count-net">
                                     <span class="qa-netvote-count">
-                                        <span class="qa-netvote-count-data">${answer.votes.size()}
+                                        <span class="qa-netvote-count-data"><g:if test="${votes >= 0}">+</g:if>${votes}
                                             <span class="votes-up">
                                                 <span class="value-title"></span>
                                             </span>
@@ -137,7 +140,7 @@
                                                 <span class="value-title"></span>
                                             </span>
                                         </span>
-                                        <span class="qa-netvote-count-pad"> <g:if test="${answer.votes.size() > 1}"><g:message code="question.show.votes" /></g:if><g:else><g:message code="question.show.vote" /></g:else></span>
+                                        <span class="qa-netvote-count-pad"> <g:if test="${votes > 1}"><g:message code="question.show.votes" /></g:if><g:else><g:message code="question.show.vote" /></g:else></span>
                                     </span>
                                 </div>
                                 <div class="qa-vote-clear">

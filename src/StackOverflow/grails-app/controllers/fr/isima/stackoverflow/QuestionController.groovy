@@ -11,6 +11,8 @@ class QuestionController
 {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def questionService
+
     @Secured('ROLE_USER')
     def index(Integer max)
     {
@@ -21,7 +23,11 @@ class QuestionController
     @Secured('ROLE_ANONYMOUS')
     def show(Question question)
     {
-        respond question
+        def questionVotes = questionService.voteCount(question.votes)
+        // Sort answers by votes and posting date
+        def sortedAnswers = questionService.sortAnswersByVotes(question)
+
+        respond question, model: [questionVotes: questionVotes, sortedAnswers: sortedAnswers]
     }
 
     @Secured('ROLE_USER')
