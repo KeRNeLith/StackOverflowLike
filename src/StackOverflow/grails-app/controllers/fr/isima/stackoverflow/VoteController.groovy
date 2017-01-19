@@ -170,7 +170,7 @@ class VoteController
         }
         else
         {
-            redirect(controller: 'question', action: 'list')
+            redirect(controller: 'question', action: 'index')
         }
     }
 }
