@@ -11,9 +11,9 @@ Web developpement project of a StackOverflow like website.
 
 ## UserBadges
 Defines **when** a User receives a Badge.
- 
+
 ------
- 
+
 ## Expected features
 
 - [ ] The project will offer a system to ask and answer questions.
