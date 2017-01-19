@@ -31,8 +31,9 @@
                         <div class="qa-q-view-stats">
                             <div class="qa-voting qa-voting-net" id="voting_${this.question.id}">
                                 <div class="qa-vote-buttons qa-vote-buttons-net">
-                                    <g:submitButton title="${message (code: 'question.show.voteUpTooltip')}" name="vote_up_question_${this.question.id}" value="+" class="qa-vote-first-button qa-vote-up-button" />
-                                    <g:submitButton title="${message (code: 'question.show.voteDownTooltip')}" name="vote_down_question_${this.question.id}" value="-" class="qa-vote-second-button qa-vote-down-button" />
+                                    <g:submitButton title="${message (code: 'question.show.voteUpTooltip')}" name="vote" value="up" class="qa-vote-first-button qa-vote-up-button" />
+                                    <g:submitButton title="${message (code: 'question.show.voteDownTooltip')}" name="vote" value="down" class="qa-vote-second-button qa-vote-down-button" />
+                                    <g:hiddenField name="post" value="${this.question.id}" />
                                 </div>
                                 <div class="qa-vote-count qa-vote-count-net">
                                     <span class="qa-netvote-count">
@@ -122,15 +123,18 @@
                         <g:form controller="vote" action="performVote">
                             <div class="qa-voting qa-voting-net" id="voting_${answer.id}">
                                 <div class="qa-vote-buttons qa-vote-buttons-net">
-                                    <g:submitButton title="${message (code: 'question.show.voteUpTooltip')}" name="vote_up_question_${this.question.id}_answer_${answer.id}" value="+" class="qa-vote-first-button qa-vote-up-button" />
-                                    <g:submitButton title="${message (code: 'question.show.voteDownTooltip')}" name="vote_down_question_${this.question.id}_answer_${answer.id}" value="-" class="qa-vote-second-button qa-vote-down-button" />
+                                    <g:submitButton title="${message (code: 'question.show.voteUpTooltip')}" name="vote" value="up" class="qa-vote-first-button qa-vote-up-button" />
+                                    <g:submitButton title="${message (code: 'question.show.voteDownTooltip')}" name="vote" value="down" class="qa-vote-second-button qa-vote-down-button" />
+                                    <g:hiddenField name="post" value="${answer.id}" />
                                 </div>
                                 <div class="qa-vote-count qa-vote-count-net">
                                     <span class="qa-netvote-count">
-                                        <span class="qa-netvote-count-data">0<span class="votes-up">
-                                            <span class="value-title"></span>
-                                        </span>
-                                            <span class="votes-down"><span class="value-title"></span>
+                                        <span class="qa-netvote-count-data">${answer.votes.size()}
+                                            <span class="votes-up">
+                                                <span class="value-title"></span>
+                                            </span>
+                                            <span class="votes-down">
+                                                <span class="value-title"></span>
                                             </span>
                                         </span>
                                         <span class="qa-netvote-count-pad"> <g:if test="${answer.votes.size() > 1}"><g:message code="question.show.votes" /></g:if><g:else><g:message code="question.show.vote" /></g:else></span>

@@ -1,13 +1,13 @@
-package fr.isima.stackoverflow.controller
+package fr.isima.stackoverflow
 
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 /**
- * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
+ * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
-@TestFor(VoteController)
-class VoteControllerSpec extends Specification {
+@TestFor(VoteService)
+class VoteServiceSpec extends Specification {
 
     def setup() {
     }

@@ -18,11 +18,13 @@ class QuestionController
         respond Question.list(params), model:[questionCount: Question.count()]
     }
 
+    @Secured('ROLE_ANONYMOUS')
     def show(Question question)
     {
         respond question
     }
 
+    @Secured('ROLE_USER')
     def create()
     {
         respond new Question(params)
