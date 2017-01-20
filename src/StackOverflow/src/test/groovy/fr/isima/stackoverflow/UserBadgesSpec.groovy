@@ -15,8 +15,17 @@ class UserBadgesSpec extends Specification {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+    void "UserBadges constraints"() {
+      when: 'UserBadge is valid'
+          def user = new User(username: 'Test', password: 'azerty', firstName: 'Jean', lastName: 'Dupont')
+          def badge = new Badge(name: 'Validity', rank: Badge.Rank.GOLD)
+          def nowDate = new Date()
+
+          def usrBad = new UserBadges(user: user, badge: badge, dateEarned: nowDate)
+
+      then: 'validate UserBadges => return true'
+          usrBad.validate()
+          !usrBad.hasErrors()
+          usrBad.errors.errorCount == 0
     }
 }

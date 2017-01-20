@@ -15,7 +15,7 @@ abstract class Post
 	static mapping = {
 		autoTimestamp true
 	}
-	
+
 	// Relations
 	static hasMany = [votes: Vote]
 	static belongsTo = [user: User]

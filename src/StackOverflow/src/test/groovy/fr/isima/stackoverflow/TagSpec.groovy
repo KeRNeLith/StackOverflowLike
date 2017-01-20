@@ -15,8 +15,16 @@ class TagSpec extends Specification {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+    void "Tag constraints"() {
+      when: 'Tag is valid'
+          def user = new User(username: 'Test', password: 'azerty', firstName: 'Jean', lastName: 'Dupont')
+          def question = new Question (user: user, message: "simple message", title: 'some title', nbViews: 0)
+          def tagv = new TagValue(tagName: 'validTag')
+          def tag = new Tag(tag: tagv, questions: question)
+
+      then: 'validate Tag => return true'
+          tag.validate()
+          !tag.hasErrors()
+          tag.errors.errorCount == 0
     }
 }

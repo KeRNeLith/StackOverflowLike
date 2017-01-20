@@ -11,7 +11,7 @@ class Question extends Post
 		title blank: false, maxSize: 150, unique: 'user'
 		nbViews min: 0
     }
-	
+
 	// Relations
 	static hasMany = [tags: Tag, answers: Answer]
 }
