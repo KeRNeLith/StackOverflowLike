@@ -5,7 +5,7 @@
         <g:set var="entityName" value="${message(code: 'question.label', default: 'Question')}" />
         <title>SegFault - ${this.question.title}</title>
 
-        <asset:stylesheet src="qa-styles.css"/>
+        <asset:stylesheet src="question/display/qa-styles.css"/>
         <asset:stylesheet src="font-awesome.min.css"/>
     </head>
     <body>
@@ -52,7 +52,7 @@
                     </g:form>
 
                     <div class="qa-q-view-main">
-                        <g:form controller="answer" action="create">
+                        <g:form controller="answer" action="redact">
                             <span class="qa-q-view-avatar-meta">
                                 <span class="qa-q-view-avatar">
                                     <g:link controller="user" action="show" id="${this.question.user.id}" class="qa-avatar-link">
@@ -100,7 +100,8 @@
 
                             <div class="qa-q-view-buttons">
                                 <i class="fa fa-comment" aria-hidden="true"></i>
-                                <g:submitButton id="doanswer_question" name="doanswer_question_${this.question.id}" title="${message (code: 'question.show.addAnswerTooltip')}" value="${message (code: 'question.show.answer')}" class="qa-form-light-button qa-form-light-button-answer" />
+                                <g:submitButton id="doanswer_question" name="question_${this.question.id}" title="${message (code: 'question.show.addAnswerTooltip')}" value="${message (code: 'question.show.answer')}" class="qa-form-light-button qa-form-light-button-answer" />
+                                <g:hiddenField name="question" value="${this.question.id}" />
                             </div>
                         </g:form>
                     </div> <!-- End qa-q-view-main -->

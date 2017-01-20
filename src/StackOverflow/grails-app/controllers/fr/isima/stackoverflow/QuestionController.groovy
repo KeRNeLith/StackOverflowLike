@@ -11,8 +11,10 @@ class QuestionController
 {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    // Services
     def questionService
 
+    // Actions
     @Secured('ROLE_USER')
     def index(Integer max)
     {

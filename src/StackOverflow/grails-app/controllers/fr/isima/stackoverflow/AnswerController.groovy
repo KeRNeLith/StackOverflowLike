@@ -11,6 +11,11 @@ class AnswerController
 {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    // Services
+    def springSecurityService
+    def questionService
+
+    // Actions
     def index(Integer max)
     {
         params.max = Math.min(max ?: 10, 100)
@@ -25,6 +30,26 @@ class AnswerController
     def create()
     {
         respond new Answer(params)
+    }
+
+    def redact()
+    {
+        if (params.containsKey('question'))
+        {
+            def questionId = params.long('question')
+            if (Question.exists(questionId))
+            {
+                respond new Answer(params), view: 'redact', model: [answerTo: questionId]
+            }
+            else
+            {
+                notFound()
+            }
+        }
+        else
+        {
+            notFound()
+        }
     }
 
     @Transactional
@@ -52,6 +77,45 @@ class AnswerController
                 redirect answer
             }
             '*' { respond answer, [status: CREATED] }
+        }
+    }
+
+    @Transactional
+    def addAnswer(Answer answer)
+    {
+        if (answer == null)
+        {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        // Validate message constraint
+        if (!answer.validate(['message']))
+        {
+            transactionStatus.setRollbackOnly()
+            respond answer.errors, view:'redact'
+            return
+        }
+
+        // Add response
+        if (params.containsKey('question'))
+        {
+            def questionId = params.long('question')
+            def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
+
+            if (questionService.addAnswerToQuestion(answer.message, user, questionId))
+            {
+                redirect(controller: 'question', action: 'display', id: questionId)
+            }
+            else
+            {
+                notFound()
+            }
+        }
+        else
+        {
+            notFound()
         }
     }
 

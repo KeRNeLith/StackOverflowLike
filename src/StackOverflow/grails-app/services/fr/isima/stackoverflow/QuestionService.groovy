@@ -46,4 +46,26 @@ class QuestionService
 
         return nbPositives + nbNegatives
     }
+
+    /**
+     * Add a response to the given question.
+     * @param message Response message.
+     * @param writer User that write answer.
+     * @param questionId Question id.
+     * @return true if succeed.
+     */
+    def addAnswerToQuestion(String message, User writer, Long questionId)
+    {
+        def ret = false
+
+        def question = Question.get(questionId)
+        if (writer != null && question != null)
+        {
+            question.addToAnswers(message: message, question: question, user: writer).save()
+
+            ret = true
+        }
+
+        return ret
+    }
 }
