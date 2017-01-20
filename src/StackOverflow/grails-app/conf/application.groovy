@@ -30,5 +30,3 @@ grails.plugin.springsecurity.roleHierarchy = '''
    ROLE_ADMIN > ROLE_USER
    ROLE_USER > ROLE_ANONYMOUS
 '''
-
-grails.plugin.fields.disableLookupCache = true

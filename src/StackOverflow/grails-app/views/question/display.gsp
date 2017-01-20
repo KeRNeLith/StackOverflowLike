@@ -178,7 +178,7 @@
                                 </span>
                             </span>
 
-                            <g:form controller="comment" action="create">
+                            <g:form controller="comment" action="redact">
                                 <div class="qa-a-selection">
                                 </div>
                                 <div class="qa-a-item-content">
@@ -188,7 +188,8 @@
                                 </div>
                                 <div class="qa-a-item-buttons">
                                     <i class="fa fa-comment-o" aria-hidden="true"></i>
-                                    <g:submitButton name="answer_${answer.id}_docomment" title="${message (code: 'question.show.addCommentTooltip')}" value="${message (code: 'question.show.comment')}" class="qa-form-light-button qa-form-light-button-comment" />
+                                    <g:submitButton name="answer_${answer.id}" title="${message (code: 'question.show.addCommentTooltip')}" value="${message (code: 'question.show.comment')}" class="qa-form-light-button qa-form-light-button-comment" />
+                                    <g:hiddenField name="answer" value="${answer.id}" />
                                 </div>
 
                                 <div class="qa-a-item-c-list" id="comment_${answer.id}_list">

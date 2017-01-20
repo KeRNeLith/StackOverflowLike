@@ -26,6 +26,9 @@ class QuestionService
 
         def answers = question.answers
         answers.each {
+            // Sort comments
+            it.comments = it.comments.sort { a, b -> a.dateCreated <=> b.dateCreated }
+
             // Associate answer to it's vote ratio
             sortedAnswers.put(it, voteCount(it.votes))
         }

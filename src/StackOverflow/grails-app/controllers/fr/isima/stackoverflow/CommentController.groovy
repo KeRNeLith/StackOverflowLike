@@ -11,6 +11,11 @@ class CommentController
 {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    // Services
+    def springSecurityService
+    def answerService
+
+    // Actions
     def index(Integer max)
     {
         params.max = Math.min(max ?: 10, 100)
@@ -25,6 +30,27 @@ class CommentController
     def create()
     {
         respond new Comment(params)
+    }
+
+    @Secured('ROLE_USER')
+    def redact()
+    {
+        if (params.containsKey('answer'))
+        {
+            def answerId = params.long('answer')
+            if (Answer.exists(answerId))
+            {
+                respond new Comment(params), view: 'redact', model: [commentTo: answerId]
+            }
+            else
+            {
+                notFound()
+            }
+        }
+        else
+        {
+            notFound()
+        }
     }
 
     @Transactional
@@ -52,6 +78,48 @@ class CommentController
                 redirect comment
             }
             '*' { respond comment, [status: CREATED] }
+        }
+    }
+
+    @Secured('ROLE_USER')
+    @Transactional
+    def addComment(Comment comment)
+    {
+        if (comment == null)
+        {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        // Validate message constraint
+        if (!comment.validate(['message']))
+        {
+            transactionStatus.setRollbackOnly()
+            respond comment.errors, view:'redact'
+            return
+        }
+
+        // Add comment
+        if (params.containsKey('answer'))
+        {
+            def answerId = params.long('answer')
+            def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
+
+            if (answerService.addCommentToAnswer(comment.message, user, answerId))
+            {
+                Answer a = Answer.read(answerId)
+
+                redirect(controller: 'question', action: 'display', id: a.question.id)
+            }
+            else
+            {
+                notFound()
+            }
+        }
+        else
+        {
+            notFound()
         }
     }
 

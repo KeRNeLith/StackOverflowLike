@@ -32,6 +32,7 @@ class AnswerController
         respond new Answer(params)
     }
 
+    @Secured('ROLE_USER')
     def redact()
     {
         if (params.containsKey('question'))
@@ -80,6 +81,7 @@ class AnswerController
         }
     }
 
+    @Secured('ROLE_USER')
     @Transactional
     def addAnswer(Answer answer)
     {
