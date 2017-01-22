@@ -12,7 +12,12 @@ class AnswerControllerSpec extends Specification {
 
         // TODO: Populate valid properties like...
         //params["name"] = 'someValidName'
-        assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
+        def user = new User(username: 'Test', password: 'azerty', firstName: 'Jean', lastName: 'Dupont')
+        params["user"] = user
+        params["question"]  = new Question (user: user, message: "simple message", title: 'some title', nbViews: 0)
+        params["message"] =  "Just a random message"
+
+        //assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
     }
 
     void "Test the index action returns the correct model"() {

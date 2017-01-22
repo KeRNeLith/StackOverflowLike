@@ -12,7 +12,17 @@ class UserBadgesControllerSpec extends Specification {
 
         // TODO: Populate valid properties like...
         //params["name"] = 'someValidName'
-        assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
+
+        def user = new User(username: 'Test', password: 'azerty', firstName: 'Jean', lastName: 'Dupont')
+        def badge = new Badge(name: 'Validity', rank: Badge.Rank.GOLD)
+        def nowDate = new Date()
+
+        params["user"] = user
+        params["badge"] = badge
+        params["dateEarned"] = nowDate
+        //def usrBad = new UserBadges(user: user, badge: badge, dateEarned: nowDate)
+
+        //assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
     }
 
     void "Test the index action returns the correct model"() {
