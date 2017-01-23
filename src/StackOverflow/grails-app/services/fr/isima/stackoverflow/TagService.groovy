@@ -26,4 +26,19 @@ class TagService
             }
         }
     }
+
+    /**
+     * Get unique list of tags.
+     * @param maxTags Max number of tags used.
+     * @return List of tags.
+     */
+    def getMostRecentTags(Integer maxTags)
+    {
+        def c = Tag.createCriteria()
+        def results = c.list (max: maxTags) {
+            distinct("tag")
+        }
+
+        return results
+    }
 }

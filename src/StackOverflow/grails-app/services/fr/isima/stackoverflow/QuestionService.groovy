@@ -33,6 +33,41 @@ class QuestionService
     }
 
     /**
+     * Get most recent questions
+     * @param maxResult Max result wanted.
+     * @return List of questions.
+     */
+    def getMostRecentQuestions(Integer maxResult)
+    {
+        def c = Question.createCriteria()
+        def results = c.list (max: maxResult) {
+            order("dateCreated", "desc")
+        }
+
+        return results.sort { !it.dateCreated }
+    }
+
+    /**
+     * Get most recent questions for the given tag.
+     * @param maxResult Max result wanted.
+     * @param tag Question tag.
+     * @return List of questions.
+     */
+    def getQuestionsForTag(Integer maxResult, TagValue tag)
+    {
+        def c = Tag.createCriteria()
+        def results = c.list (max: maxResult) {
+            eq("tag", tag)
+            question { order("dateCreated", "desc") }
+        }
+
+        def questions = []
+        results.each { questions.add(it.question) }
+
+        return questions
+    }
+
+    /**
      * Use question answers and sort them. Additionally compute their number of votes (positive plus negative)
      * @param id Question id
      */

@@ -8,10 +8,6 @@ Web developpement project of a StackOverflow like website.
 	- src : Source code of the Grails project.
 	
 # Todo
-
-## UserBadges
-Defines **when** a User receives a Badge.
-
 ------
 
 ## Expected features
@@ -20,7 +16,7 @@ Defines **when** a User receives a Badge.
 - [x] An answer can be upvoted. It means it's the more accurate answer for the question. Of course, they can also be downvoted.
 - [x] The answers will be ordered by number of votes, this feature should be a matter of presentation.
 - [x] Questions can also be voted to reflect their interests in the community.
-- [ ] A question can be tagged to appear in categories.
+- [x] A question can be tagged to appear in categories.
 - [x] A question or an answer can be edited to add some additional information or to fix a typo.
 - [ ] A reputation mechanism brings a gamification to the application (The rules have to be defined).
 - [ ] Some actions (to be defined) will allow the user to gain some badges (part of the gamification).

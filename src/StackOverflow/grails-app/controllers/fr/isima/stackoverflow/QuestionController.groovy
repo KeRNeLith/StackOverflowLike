@@ -24,6 +24,23 @@ class QuestionController
         respond Question.list(params), model:[questionCount: Question.count()]
     }
 
+    @Secured('ROLE_USER')
+    def home()
+    {
+        def nbCategories = 5
+        def nbRecentQuestions = 20
+        def nbQuestionByCat = 10
+
+        def tags = tagService.getMostRecentTags(nbCategories)
+        def questionsByCat = [:]
+        tags.each {
+            questionsByCat.put(it.tagName, questionService.getQuestionsForTag(nbQuestionByCat, it))
+        }
+        
+        // Get recent and question by category
+        respond recents: questionService.getMostRecentQuestions(nbRecentQuestions), questionsByCat: questionsByCat
+    }
+
     def show(Question question)
     {
         respond question
