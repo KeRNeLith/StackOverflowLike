@@ -36,7 +36,7 @@ class QuestionController
         tags.each {
             questionsByCat.put(it.tagName, questionService.getQuestionsForTag(nbQuestionByCat, it))
         }
-        
+
         // Get recent and question by category
         respond recents: questionService.getMostRecentQuestions(nbRecentQuestions), questionsByCat: questionsByCat
     }
