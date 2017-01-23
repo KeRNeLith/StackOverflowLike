@@ -19,7 +19,7 @@ Web developpement project of a StackOverflow like website.
 - [x] A question can be tagged to appear in categories.
 - [x] A question or an answer can be edited to add some additional information or to fix a typo.
 - [x] A reputation mechanism brings a gamification to the application (The rules have to be defined). => when posting and receiving votes
-- [ ] Some actions (to be defined) will allow the user to gain some badges (part of the gamification).
+- [x] Some actions (to be defined) will allow the user to gain some badges (part of the gamification). => when posting and receiving positives votes
 - [ ] Users can fill a profile.
 - [ ] The profile will sum up all the user's actions (questions asked, answers given, edits, ...) and the earned reputation.
 - [ ] The profile will compute the grand total of the user's reputation.
