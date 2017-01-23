@@ -16,7 +16,7 @@ Defines **when** a User receives a Badge.
 
 ## Expected features
 
-- [ ] The project will offer a system to ask and answer questions.
+- [x] The project will offer a system to ask and answer questions.
 - [x] An answer can be upvoted. It means it's the more accurate answer for the question. Of course, they can also be downvoted.
 - [x] The answers will be ordered by number of votes, this feature should be a matter of presentation.
 - [x] Questions can also be voted to reflect their interests in the community.

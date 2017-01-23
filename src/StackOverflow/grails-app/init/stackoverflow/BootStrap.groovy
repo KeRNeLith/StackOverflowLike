@@ -4,6 +4,7 @@ import fr.isima.stackoverflow.Answer
 import fr.isima.stackoverflow.Comment
 import fr.isima.stackoverflow.Question
 import fr.isima.stackoverflow.Role
+import fr.isima.stackoverflow.TagValue
 import fr.isima.stackoverflow.User
 import fr.isima.stackoverflow.UserRole
 
@@ -32,6 +33,10 @@ class BootStrap
         def answer2 = new Answer(message: 'response 2', question: question1, user: fooUser)
         question1.addToAnswers(answer1).addToAnswers(answer2).save()
 
+        def tagCsharp = new TagValue(tagName: 'C#').save()
+        def tagJava = new TagValue(tagName: 'Java').save()
+        def tagCpp = new TagValue(tagName: 'C++').save()
+
         UserRole.withSession {
             it.flush()
             it.clear()
@@ -43,6 +48,7 @@ class BootStrap
         assert Question.count() == 1
         assert Answer.count() == 2
         assert Comment.count() == 2
+        assert TagValue.count() == 3
     }
 
     def destroy =

@@ -12,6 +12,7 @@ class QuestionController
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     // Services
+    def springSecurityService
     def questionService
 
     // Actions
@@ -27,6 +28,12 @@ class QuestionController
         respond question
     }
 
+    @Secured('ROLE_USER')
+    def redact()
+    {
+        respond new Question(params), view: 'redact', model: [tags: TagValue.findAll()]
+    }
+
     @Secured('ROLE_ANONYMOUS')
     def display(Question question)
     {
@@ -34,7 +41,9 @@ class QuestionController
         // Sort answers by votes and posting date
         def sortedAnswers = questionService.sortAnswersByVotes(question)
 
-        respond question, model: [questionVotes: questionVotes, sortedAnswers: sortedAnswers]
+        def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
+
+        respond question, model: [questionVotes: questionVotes, sortedAnswers: sortedAnswers, currentUser: user]
     }
 
     @Secured('ROLE_USER')
@@ -68,6 +77,46 @@ class QuestionController
                 redirect question
             }
             '*' { respond question, [status: CREATED] }
+        }
+    }
+
+    @Secured('ROLE_USER')
+    @Transactional
+    def addQuestion(Question question)
+    {
+        println params
+        if (question == null)
+        {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        // Validate message constraint
+        if (!question.validate(['title', 'message']))
+        {
+            transactionStatus.setRollbackOnly()
+            respond question.errors, view:'redact'
+            return
+        }
+
+        // Add optional tags
+        def tags = null
+        if (params.containsKey('tags'))
+        {
+            tags = params.list('tags');
+        }
+
+        def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
+
+        int questionId = questionService.createQuestion(question.title, question.message, user, tags)
+        if (questionId > 0)
+        {
+            redirect(action: 'display', id: questionId)
+        }
+        else
+        {
+            notFound()
         }
     }
 

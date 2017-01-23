@@ -9,5 +9,5 @@ class Tag
     static constraints = {
     }
 
-    static belongsTo = [questions: Question]
+    static belongsTo = [question: Question]
 }

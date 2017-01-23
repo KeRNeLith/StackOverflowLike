@@ -6,6 +6,39 @@ import grails.transaction.Transactional
 class QuestionService
 {
     /**
+     * Create a question.
+     * @param title Question title.
+     * @param message Question message.
+     * @param writer Question writer.
+     * @param tags Optionals tags
+     * @return Created question id, otherwise -1.
+     */
+    def int createQuestion(String title, String message, User writer, def tags)
+    {
+        int ret = -1;
+
+        Question question = new Question(title: title, message: message, user: writer)
+        if (question.save(flush: true))
+        {
+            ret = question.id
+
+            tags.each {
+                TagValue tagVal = TagValue.findById(it)
+
+                Tag newTag = new Tag(question: question, tag: tagVal)
+                if (newTag.save(flush: true))
+                {
+                    question.addToTags(newTag)
+                }
+            }
+
+            question.save()
+        }
+
+        return ret
+    }
+
+    /**
      * Use question answers and sort them. Additionally compute their number of votes (positive plus negative)
      * @param id Question id
      */

@@ -20,7 +20,7 @@
 
         <div class="qa-main">
             <h1>
-                <g:link action="show" id="${this.question.id}">
+                <g:link action="display" id="${this.question.id}">
                     <span class="entry-title">${this.question.title}</span>
                 </g:link>
             </h1>
@@ -52,52 +52,52 @@
                     </g:form>
 
                     <div class="qa-q-view-main">
-                        <g:form controller="answer" action="redact">
-                            <span class="qa-q-view-avatar-meta">
-                                <span class="qa-q-view-avatar">
-                                    <g:link controller="user" action="show" id="${this.question.user.id}" class="qa-avatar-link">
-                                        <asset:image src="avatar.jpg" width="50" height="50" class="qa-avatar-image" alt=""/>
-                                    </g:link>
-                                </span>
-                                <span class="qa-q-view-meta">
-                                    <g:link action="show" id="${this.question.id}" class="qa-q-view-what"><g:message code="question.show.Asked" /></g:link>
-                                    <span class="qa-q-view-when">
-                                        <span class="qa-q-view-when-data">
-                                            <span class="published updated">
-                                                <span class="value-title"><g:formatDate date="${this.question.dateCreated}" type="datetime" style="MEDIUM"/></span>
-                                            </span>
+                        <span class="qa-q-view-avatar-meta">
+                            <span class="qa-q-view-avatar">
+                                <g:link controller="user" action="show" id="${this.question.user.id}" class="qa-avatar-link">
+                                    <asset:image src="avatar.jpg" width="50" height="50" class="qa-avatar-image" alt=""/>
+                                </g:link>
+                            </span>
+                            <span class="qa-q-view-meta">
+                                <g:link action="show" id="${this.question.id}" class="qa-q-view-what"><g:message code="question.show.Asked" /></g:link>
+                                <span class="qa-q-view-when">
+                                    <span class="qa-q-view-when-data">
+                                        <span class="published updated">
+                                            <span class="value-title"><g:formatDate date="${this.question.dateCreated}" type="datetime" style="MEDIUM"/></span>
                                         </span>
                                     </span>
-                                    <span class="qa-q-view-who">
-                                        <span class="qa-q-view-who-pad"><g:message code="question.show.by" /> </span>
-                                        <span class="qa-q-view-who-data">
-                                            <span class="vcard author">
-                                                <g:link controller="user" action="show" id="${this.question.user.id}" class="qa-user-link url fn entry-title nickname">${this.question.user.username}</g:link>
-                                            </span>
+                                </span>
+                                <span class="qa-q-view-who">
+                                    <span class="qa-q-view-who-pad"><g:message code="question.show.by" /> </span>
+                                    <span class="qa-q-view-who-data">
+                                        <span class="vcard author">
+                                            <g:link controller="user" action="show" id="${this.question.user.id}" class="qa-user-link url fn entry-title nickname">${this.question.user.username}</g:link>
                                         </span>
                                     </span>
                                 </span>
                             </span>
+                        </span>
 
-                            <div class="qa-q-view-content">
-                                <div class="entry-content">
-                                    ${this.question.message}
-                                </div>
+                        <div class="qa-q-view-content">
+                            <div class="entry-content">
+                                ${this.question.message}
                             </div>
+                        </div>
 
-                            <div class="qa-q-view-extra">
-                            </div>
+                        <div class="qa-q-view-extra">
+                        </div>
 
-                            <div class="qa-q-view-tags">
-                                <ul class="qa-q-view-tag-list">
-                                    <g:each in = "${this.question.tags}" var = "tag">
-                                        <li class="qa-q-view-tag-item">
-                                            <g:link controller="tagValue" action="show" id="${tag.tag.id}" class="qa-tag-link">${tag.tag.tagName}</g:link>
-                                        </li>
-                                    </g:each>
-                                </ul>
-                            </div>
+                        <div class="qa-q-view-tags">
+                            <ul class="qa-q-view-tag-list">
+                                <g:each in = "${this.question.tags}" var = "tag">
+                                    <li class="qa-q-view-tag-item">
+                                        <g:link controller="tagValue" action="show" id="${tag.tag.id}" class="qa-tag-link">${tag.tag.tagName}</g:link>
+                                    </li>
+                                </g:each>
+                            </ul>
+                        </div>
 
+                        <g:form controller="answer" action="redact">
                             <div class="qa-q-view-buttons">
                                 <i class="fa fa-comment" aria-hidden="true"></i>
                                 <g:submitButton id="doanswer_question" name="question_${this.question.id}" title="${message (code: 'question.show.addAnswerTooltip')}" value="${message (code: 'question.show.answer')}" class="qa-form-light-button qa-form-light-button-answer" />

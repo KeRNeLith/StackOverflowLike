@@ -1,44 +1,35 @@
 package fr.isima.stackoverflow
 
-import grails.plugin.springsecurity.annotation.Secured
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Secured('ROLE_ADMIN')
 @Transactional(readOnly = true)
-class TagController
-{
+class TagController {
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max)
-    {
+    def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Tag.list(params), model:[tagCount: Tag.count()]
     }
 
-    def show(Tag tag)
-    {
+    def show(Tag tag) {
         respond tag
     }
 
-    def create()
-    {
+    def create() {
         respond new Tag(params)
     }
 
     @Transactional
-    def save(Tag tag)
-    {
-        if (tag == null)
-        {
+    def save(Tag tag) {
+        if (tag == null) {
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
 
-        if (tag.hasErrors())
-        {
+        if (tag.hasErrors()) {
             transactionStatus.setRollbackOnly()
             respond tag.errors, view:'create'
             return
@@ -55,23 +46,19 @@ class TagController
         }
     }
 
-    def edit(Tag tag)
-    {
+    def edit(Tag tag) {
         respond tag
     }
 
     @Transactional
-    def update(Tag tag)
-    {
-        if (tag == null)
-        {
+    def update(Tag tag) {
+        if (tag == null) {
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
 
-        if (tag.hasErrors())
-        {
+        if (tag.hasErrors()) {
             transactionStatus.setRollbackOnly()
             respond tag.errors, view:'edit'
             return
@@ -89,10 +76,9 @@ class TagController
     }
 
     @Transactional
-    def delete(Tag tag)
-    {
-        if (tag == null)
-        {
+    def delete(Tag tag) {
+
+        if (tag == null) {
             transactionStatus.setRollbackOnly()
             notFound()
             return
@@ -109,8 +95,7 @@ class TagController
         }
     }
 
-    protected void notFound()
-    {
+    protected void notFound() {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'tag.label', default: 'Tag'), params.id])

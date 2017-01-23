@@ -36,6 +36,9 @@
             </div>
         </div>
     </div>
+    <g:form controller="question" action="redact">
+        <g:submitButton name="Ask a question"/>
+    </g:form>
 
     <g:layoutBody/>
 
