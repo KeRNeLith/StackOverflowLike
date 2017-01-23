@@ -15,10 +15,10 @@ class TagControllerSpec extends Specification {
         def user = new User(username: 'Test', password: 'azerty', firstName: 'Jean', lastName: 'Dupont')
         def question = new Question (user: user, message: "simple message", title: 'some title', nbViews: 0)
         def tagv = new TagValue(tagName: 'validTag')
-        def tag = new Tag(tag: tagv, questions: question)
+        def tag = new Tag(tag: tagv, question: question)
 
         params["tag"] = tagv
-        params["questions"] = question
+        params["question"] = question
 
         //assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
     }

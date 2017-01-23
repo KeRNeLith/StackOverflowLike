@@ -20,7 +20,7 @@ class TagSpec extends Specification {
           def user = new User(username: 'Test', password: 'azerty', firstName: 'Jean', lastName: 'Dupont')
           def question = new Question (user: user, message: "simple message", title: 'some title', nbViews: 0)
           def tagv = new TagValue(tagName: 'validTag')
-          def tag = new Tag(tag: tagv, questions: question)
+          def tag = new Tag(tag: tagv, question: question)
 
       then: 'validate Tag => return true'
           tag.validate()
