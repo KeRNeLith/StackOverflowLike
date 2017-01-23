@@ -14,4 +14,8 @@ class Question extends Post
 
 	// Relations
 	static hasMany = [tags: Tag, answers: Answer]
+
+	static mapping = {
+		tags cascade: "all-delete-orphan"
+	}
 }

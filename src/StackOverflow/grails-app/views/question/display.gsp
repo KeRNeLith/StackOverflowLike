@@ -76,6 +76,15 @@
                                     </span>
                                 </span>
                             </span>
+                            <sec:ifLoggedIn>
+                                <g:if test="${this.currentUser.id == question.user.id}">
+                                    <span>
+                                        <g:form controller="question" action="redactEdit" id="${this.question.id}">
+                                            <g:submitButton title="Edit question" name="edit" value="Edit" />
+                                        </g:form>
+                                    </span>
+                                </g:if>
+                            </sec:ifLoggedIn>
                         </span>
 
                         <div class="qa-q-view-content">

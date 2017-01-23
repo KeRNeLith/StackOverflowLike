@@ -5,6 +5,8 @@ import grails.transaction.Transactional
 @Transactional
 class QuestionService
 {
+    def tagService
+
     /**
      * Create a question.
      * @param title Question title.
@@ -22,15 +24,7 @@ class QuestionService
         {
             ret = question.id
 
-            tags.each {
-                TagValue tagVal = TagValue.findById(it)
-
-                Tag newTag = new Tag(question: question, tag: tagVal)
-                if (newTag.save(flush: true))
-                {
-                    question.addToTags(newTag)
-                }
-            }
+            tagService.updateTagsToQuestion(question, tags)
 
             question.save()
         }

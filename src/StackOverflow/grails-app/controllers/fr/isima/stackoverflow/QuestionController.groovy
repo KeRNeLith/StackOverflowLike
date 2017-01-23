@@ -14,6 +14,7 @@ class QuestionController
     // Services
     def springSecurityService
     def questionService
+    def tagService
 
     // Actions
     @Secured('ROLE_USER')
@@ -84,7 +85,6 @@ class QuestionController
     @Transactional
     def addQuestion(Question question)
     {
-        println params
         if (question == null)
         {
             transactionStatus.setRollbackOnly()
@@ -96,7 +96,7 @@ class QuestionController
         if (!question.validate(['title', 'message']))
         {
             transactionStatus.setRollbackOnly()
-            respond question.errors, view:'redact'
+            respond question.errors, view:'redact', model: [tags: TagValue.findAll()]
             return
         }
 
@@ -125,6 +125,12 @@ class QuestionController
         respond question
     }
 
+    @Secured('ROLE_USER')
+    def redactEdit(Question question)
+    {
+        respond question, view: 'redactEdit', model: [tags: TagValue.findAll()]
+    }
+
     @Transactional
     def update(Question question)
     {
@@ -151,6 +157,37 @@ class QuestionController
             }
             '*'{ respond question, [status: OK] }
         }
+    }
+
+    @Secured('ROLE_USER')
+    @Transactional
+    def updateEdit(Question question)
+    {
+        println params
+        if (question == null)
+        {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (question.hasErrors())
+        {
+            transactionStatus.setRollbackOnly()
+            respond question.errors, view:'redactEdit'
+            return
+        }
+
+        // Update tags
+        if (params.containsKey('selectedTags'))
+        {
+            def tags = params.list('selectedTags');
+            tagService.updateTagsToQuestion(question, tags)
+        }
+
+        question.save flush:true
+
+        redirect(action: 'display', id: question.id)
     }
 
     @Transactional
