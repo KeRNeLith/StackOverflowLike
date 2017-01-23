@@ -15,8 +15,25 @@ class CommentSpec extends Specification {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+    void "Comment Constraints"() {
+      when: 'Comment is valid'
+          def user = new User(username: 'Test', password: 'azerty', firstName: 'Jean', lastName: 'Dupont')
+          def question = new Question (user: user, message: "simple message", title: 'some title', nbViews: 0)
+          def answer = new Answer(user: user, question: question, message: "Just a random message")
+
+          def comment = new Comment(message: 'Just a random message', user: user, answer: answer)
+
+      then: 'validate Comment => return true'
+          comment.validate()
+          !comment.hasErrors()
+          comment.errors.errorCount == 0
+
+      when: 'Comment has no message'
+          comment = new Comment(user: user, answer: answer)
+
+      then: 'validate Comment => return false'
+          !comment.validate()
+          comment.hasErrors()
+          comment.errors.errorCount == 1
     }
 }

@@ -15,8 +15,16 @@ class VoteSpec extends Specification {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+    void "Vote constraints"() {
+      when: 'Vote is valid'
+          def user = new User(username: 'Test', password: 'azerty', firstName: 'Jean', lastName: 'Dupont')
+          def question = new Question (user: user, message: "simple message", title: 'some title', nbViews: 0)
+          def vote = new Vote(user: user, post: question, vote: Vote.Value.UP)
+
+      then: 'validate Vote => return true'
+          vote.validate()
+          !vote.hasErrors()
+          vote.errors.errorCount == 0
     }
+
 }

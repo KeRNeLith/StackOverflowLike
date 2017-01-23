@@ -15,8 +15,25 @@ class AnswerSpec extends Specification {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+    void "Answer constraints"() {
+      when: 'Answer is valid'
+          def user = new User(username: 'Test', password: 'azerty', firstName: 'Jean', lastName: 'Dupont')
+          def question = new Question (user: user, message: "simple message", title: 'some title', nbViews: 0)
+          def answer = new Answer(user: user, question: question, message: "Just a random message")
+
+      then: 'validate answer => return true'
+          answer.validate()
+          !answer.hasErrors()
+          answer.errors.errorCount == 0
+
+      when: 'Answer has no message'
+          answer = new Answer(question: question, user: user)
+
+      then: 'validate answer => return false'
+          !answer.validate()
+          answer.hasErrors()
+          answer.errors.errorCount == 1
+
+
     }
 }
