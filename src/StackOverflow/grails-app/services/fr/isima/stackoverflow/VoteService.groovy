@@ -5,7 +5,9 @@ import grails.transaction.Transactional
 @Transactional
 class VoteService
 {
+    // Services
     def userService
+    def badgeService
 
     /**
      * Add of update the vote for the specified user for the given post
@@ -45,6 +47,7 @@ class VoteService
             if (state == Vote.Value.UP)
             {
                 userService.updateUserReputation(post.user, 10)
+                badgeService.checkThumbUpBadge(post)
             }
             // Down post's writer reputation
             else
@@ -57,6 +60,12 @@ class VoteService
         {
             resultVote.vote = state
             resultVote.save()
+
+            // Change to a thumb up
+            if (state == Vote.Value.UP)
+            {
+                badgeService.checkThumbUpBadge(post)
+            }
         }
         // Else do nothing
     }

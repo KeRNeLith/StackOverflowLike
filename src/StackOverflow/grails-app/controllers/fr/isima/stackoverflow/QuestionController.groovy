@@ -24,7 +24,7 @@ class QuestionController
         respond Question.list(params), model:[questionCount: Question.count()]
     }
 
-    @Secured('ROLE_USER')
+    @Secured('ROLE_ANONYMOUS')
     def home()
     {
         def nbCategories = 5

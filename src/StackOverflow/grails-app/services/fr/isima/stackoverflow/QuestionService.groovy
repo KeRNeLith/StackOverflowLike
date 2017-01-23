@@ -8,6 +8,7 @@ class QuestionService
     // Services
     def tagService
     def userService
+    def badgeService
 
     /**
      * Create a question.
@@ -31,6 +32,7 @@ class QuestionService
             question.save()
 
             userService.updateUserReputation(writer, 10)
+            badgeService.addFirstQuestionBadge(writer)
         }
 
         return ret
@@ -135,6 +137,7 @@ class QuestionService
             ret = true
 
             userService.updateUserReputation(writer, 10)
+            badgeService.addFirstAnswerBadge(writer)
         }
 
         return ret

@@ -5,7 +5,9 @@ import grails.transaction.Transactional
 @Transactional
 class AnswerService
 {
+    // Services
     def userService
+    def badgeService
 
     /**
      * Add a comment to the given answer.
@@ -26,6 +28,7 @@ class AnswerService
             ret = true
 
             userService.updateUserReputation(writer, 10)
+            badgeService.addFirstCommentBadge(writer)
         }
 
         return ret

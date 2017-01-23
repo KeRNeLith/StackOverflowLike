@@ -1,6 +1,7 @@
 package stackoverflow
 
 import fr.isima.stackoverflow.Answer
+import fr.isima.stackoverflow.Badge
 import fr.isima.stackoverflow.Comment
 import fr.isima.stackoverflow.Question
 import fr.isima.stackoverflow.Role
@@ -46,21 +47,12 @@ class BootStrap
         def answer2 = new Answer(message: 'response 2', question: question1, user: fooUser)
         question1.addToAnswers(answer1).addToAnswers(answer2).addToTags(question: question1, tag: tagGroovy).save()
 
-        def questionx = new Question(title: 'Titre 2', message: 'Message question 1', user: kernelith).save()
-        questionx.addToTags(question: questionx, tag: tagGroovy).save()
-        def questionxx = new Question(title: 'Titre 3', message: 'Message question 1', user: kernelith).save()
-        questionxx.addToTags(question: questionxx, tag: tagCsharp).save()
-        def questionxxx = new Question(title: 'Titre 4', message: 'Message question 1', user: kernelith).save()
-        questionxxx.addToTags(question: questionxxx, tag: tagCSS).addToTags(question: questionxxx, tag: tagHTML).save()
-        def questionxxxx = new Question(title: 'Titre 5', message: 'Message question 1', user: kernelith).save()
-        questionxxxx.addToTags(question: questionxxxx, tag: tagHTML).save()
-        new Question(title: 'Titre 6', message: 'Message question 1', user: kernelith).save()
-        new Question(title: 'Titre 7', message: 'Message question 1', user: kernelith).save()
-        new Question(title: 'Titre 8', message: 'Message question 1', user: kernelith).save()
-        new Question(title: 'Titre 9', message: 'Message question 1', user: kernelith).save()
-        new Question(title: 'Titre 10', message: 'Message question 1', user: kernelith).save()
-        new Question(title: 'Titre 11', message: 'Message question 1', user: kernelith).save()
-        new Question(title: 'Titre 12', message: 'Message question 1', user: kernelith).save()
+        def badge1 = new Badge(name: 'Ask your First Question', rank: Badge.Rank.SILVER).save()
+        def badge2 = new Badge(name: 'First Answer', rank: Badge.Rank.BRONZE).save()
+        def badge3 = new Badge(name: 'First Comment', rank: Badge.Rank.BRONZE).save()
+        def badge4 = new Badge(name: 'Gain a positive vote', rank: Badge.Rank.BRONZE).save()
+        def badge5 = new Badge(name: 'Gain more than 10 positives votes', rank: Badge.Rank.SILVER).save()
+        def badge6 = new Badge(name: 'Gain more than 50 positives votes', rank: Badge.Rank.GOLD).save()
 
         UserRole.withSession {
             it.flush()
@@ -70,7 +62,7 @@ class BootStrap
         assert User.count() == 3
         assert Role.count() == 3
         assert UserRole.count() == 3
-        //assert Question.count() == 1
+        assert Question.count() == 1
         assert Answer.count() == 2
         assert Comment.count() == 2
         assert TagValue.count() == 12
