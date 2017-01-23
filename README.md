@@ -21,7 +21,7 @@ Defines **when** a User receives a Badge.
 - [x] The answers will be ordered by number of votes, this feature should be a matter of presentation.
 - [x] Questions can also be voted to reflect their interests in the community.
 - [ ] A question can be tagged to appear in categories.
-- [ ] A question or an answer can be edited to add some additional information or to fix a typo.
+- [x] A question or an answer can be edited to add some additional information or to fix a typo.
 - [ ] A reputation mechanism brings a gamification to the application (The rules have to be defined).
 - [ ] Some actions (to be defined) will allow the user to gain some badges (part of the gamification).
 - [ ] Users can fill a profile.

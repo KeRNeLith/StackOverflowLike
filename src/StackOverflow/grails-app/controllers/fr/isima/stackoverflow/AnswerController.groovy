@@ -126,6 +126,12 @@ class AnswerController
         respond answer
     }
 
+    @Secured('ROLE_USER')
+    def redactEdit(Answer answer)
+    {
+        respond answer, view: 'redactEdit'
+    }
+
     @Transactional
     def update(Answer answer)
     {
@@ -152,6 +158,29 @@ class AnswerController
             }
             '*'{ respond answer, [status: OK] }
         }
+    }
+
+    @Secured('ROLE_USER')
+    @Transactional
+    def updateEdit(Answer answer)
+    {
+        if (answer == null)
+        {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (answer.hasErrors())
+        {
+            transactionStatus.setRollbackOnly()
+            respond answer.errors, view:'redactEdit'
+            return
+        }
+
+        answer.save flush:true
+
+        redirect(controller: 'question', action: 'display', id: answer.question.id)
     }
 
     @Transactional

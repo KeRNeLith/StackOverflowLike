@@ -53,6 +53,12 @@ class CommentController
         }
     }
 
+    @Secured('ROLE_USER')
+    def redactEdit(Comment comment)
+    {
+        respond comment, view: 'redactEdit'
+    }
+
     @Transactional
     def save(Comment comment)
     {
@@ -154,6 +160,29 @@ class CommentController
             }
             '*'{ respond comment, [status: OK] }
         }
+    }
+
+    @Secured('ROLE_USER')
+    @Transactional
+    def updateEdit(Comment comment)
+    {
+        if (comment == null)
+        {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (comment.hasErrors())
+        {
+            transactionStatus.setRollbackOnly()
+            respond comment.errors, view:'redactEdit'
+            return
+        }
+
+        comment.save flush:true
+
+        redirect(controller: 'question', action: 'display', id: comment.answer.question.id)
     }
 
     @Transactional

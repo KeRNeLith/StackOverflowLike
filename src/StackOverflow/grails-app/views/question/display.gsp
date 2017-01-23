@@ -75,16 +75,16 @@
                                         </span>
                                     </span>
                                 </span>
+                                <sec:ifLoggedIn>
+                                    <g:if test="${this.currentUser.id == question.user.id}">
+                                        <span>
+                                            <g:form controller="question" action="redactEdit" id="${this.question.id}">
+                                                <g:submitButton title="Edit question" name="edit" value="Edit" />
+                                            </g:form>
+                                        </span>
+                                    </g:if>
+                                </sec:ifLoggedIn>
                             </span>
-                            <sec:ifLoggedIn>
-                                <g:if test="${this.currentUser.id == question.user.id}">
-                                    <span>
-                                        <g:form controller="question" action="redactEdit" id="${this.question.id}">
-                                            <g:submitButton title="Edit question" name="edit" value="Edit" />
-                                        </g:form>
-                                    </span>
-                                </g:if>
-                            </sec:ifLoggedIn>
                         </span>
 
                         <div class="qa-q-view-content">
@@ -125,82 +125,91 @@
             </div> <!-- End qa-part-a-form -->
 
             <div class="qa-part-a-list">
-            <h2 id="a_list_title">${this.question.answers.size()} <g:if test="${this.question.answers.size() > 1}"><g:message code="question.show.Answers" /></g:if><g:else><g:message code="question.show.Answer" /></g:else></h2>
-            <div class="qa-a-list" id="a_list">
-                <g:each in = "${this.sortedAnswers}" var = "answerAssoc">
-                    <g:set var="answer" value="${answerAssoc.key}"/>
-                    <g:set var="votes" value="${answerAssoc.value}"/>
+                <h2 id="a_list_title">${this.question.answers.size()} <g:if test="${this.question.answers.size() > 1}"><g:message code="question.show.Answers" /></g:if><g:else><g:message code="question.show.Answer" /></g:else></h2>
+                <div class="qa-a-list" id="a_list">
+                    <g:each in = "${this.sortedAnswers}" var = "answerAssoc">
+                        <g:set var="answer" value="${answerAssoc.key}"/>
+                        <g:set var="votes" value="${answerAssoc.value}"/>
 
-                    <div class="qa-a-list-item  hentry answer" id="answer_${answer.id}">
+                        <div class="qa-a-list-item  hentry answer" id="answer_${answer.id}">
 
-                        <g:form controller="vote" action="performVote">
-                            <div class="qa-voting qa-voting-net" id="voting_${answer.id}">
-                                <div class="qa-vote-buttons qa-vote-buttons-net">
-                                    <g:submitButton title="${message (code: 'question.show.voteUpTooltip')}" name="vote" value="up" class="qa-vote-first-button qa-vote-up-button" />
-                                    <g:submitButton title="${message (code: 'question.show.voteDownTooltip')}" name="vote" value="down" class="qa-vote-second-button qa-vote-down-button" />
-                                    <g:hiddenField name="post" value="${answer.id}" />
-                                </div>
-                                <div class="qa-vote-count qa-vote-count-net">
-                                    <span class="qa-netvote-count">
-                                        <span class="qa-netvote-count-data"><g:if test="${votes >= 0}">+</g:if>${votes}
-                                            <span class="votes-up">
-                                                <span class="value-title"></span>
+                            <g:form controller="vote" action="performVote">
+                                <div class="qa-voting qa-voting-net" id="voting_${answer.id}">
+                                    <div class="qa-vote-buttons qa-vote-buttons-net">
+                                        <g:submitButton title="${message (code: 'question.show.voteUpTooltip')}" name="vote" value="up" class="qa-vote-first-button qa-vote-up-button" />
+                                        <g:submitButton title="${message (code: 'question.show.voteDownTooltip')}" name="vote" value="down" class="qa-vote-second-button qa-vote-down-button" />
+                                        <g:hiddenField name="post" value="${answer.id}" />
+                                    </div>
+                                    <div class="qa-vote-count qa-vote-count-net">
+                                        <span class="qa-netvote-count">
+                                            <span class="qa-netvote-count-data"><g:if test="${votes >= 0}">+</g:if>${votes}
+                                                <span class="votes-up">
+                                                    <span class="value-title"></span>
+                                                </span>
+                                                <span class="votes-down">
+                                                    <span class="value-title"></span>
+                                                </span>
                                             </span>
-                                            <span class="votes-down">
-                                                <span class="value-title"></span>
-                                            </span>
+                                            <span class="qa-netvote-count-pad"> <g:if test="${votes > 1}"><g:message code="question.show.votes" /></g:if><g:else><g:message code="question.show.vote" /></g:else></span>
                                         </span>
-                                        <span class="qa-netvote-count-pad"> <g:if test="${votes > 1}"><g:message code="question.show.votes" /></g:if><g:else><g:message code="question.show.vote" /></g:else></span>
-                                    </span>
-                                </div>
-                                <div class="qa-vote-clear">
-                                </div>
-                            </div>
-                        </g:form>
-
-                        <div class="qa-a-item-main">
-                            <span class="qa-a-item-avatar-meta">
-                                <span class="qa-a-item-avatar">
-                                    <g:link controller="user" action="show" id="${answer.user.id}" class="qa-avatar-link">
-                                        <asset:image src="avatar.jpg" width="40" height="40" class="qa-avatar-image" alt=""/>
-                                    </g:link>
-                                </span>
-                                <span class="qa-a-item-meta">
-                                    <g:link controller="answer" action="show" id="${answer.id}" class="qa-a-item-what">
-                                        <g:message code="question.show.Answered" />
-                                    </g:link>
-                                    <span class="qa-a-item-when">
-                                        <span class="qa-a-item-when-data">
-                                            <span class="published updated">
-                                                <span class="value-title"><g:formatDate date="${answer.dateCreated}" type="datetime" style="MEDIUM"/></span>
-                                            </span>
-                                        </span>
-                                    </span>
-                                    <span class="qa-a-item-who">
-                                        <span class="qa-a-item-who-pad"><g:message code="question.show.by" /> </span>
-                                        <span class="qa-a-item-who-data">
-                                            <span class="vcard author">
-                                                <g:link controller="user" action="show" id="${answer.user.id}" class="qa-user-link url fn entry-title nickname">${answer.user.username}</g:link>
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </span>
-
-                            <g:form controller="comment" action="redact">
-                                <div class="qa-a-selection">
-                                </div>
-                                <div class="qa-a-item-content">
-                                    <div class="entry-content">
-                                        ${answer.message}
+                                    </div>
+                                    <div class="qa-vote-clear">
                                     </div>
                                 </div>
-                                <div class="qa-a-item-buttons">
-                                    <i class="fa fa-comment-o" aria-hidden="true"></i>
-                                    <g:submitButton name="answer_${answer.id}" title="${message (code: 'question.show.addCommentTooltip')}" value="${message (code: 'question.show.comment')}" class="qa-form-light-button qa-form-light-button-comment" />
-                                    <g:hiddenField name="answer" value="${answer.id}" />
-                                </div>
+                            </g:form>
 
+                            <div class="qa-a-item-main">
+                                <span class="qa-a-item-avatar-meta">
+                                    <span class="qa-a-item-avatar">
+                                        <g:link controller="user" action="show" id="${answer.user.id}" class="qa-avatar-link">
+                                            <asset:image src="avatar.jpg" width="40" height="40" class="qa-avatar-image" alt=""/>
+                                        </g:link>
+                                    </span>
+                                    <span class="qa-a-item-meta">
+                                        <g:link controller="answer" action="show" id="${answer.id}" class="qa-a-item-what">
+                                            <g:message code="question.show.Answered" />
+                                        </g:link>
+                                        <span class="qa-a-item-when">
+                                            <span class="qa-a-item-when-data">
+                                                <span class="published updated">
+                                                    <span class="value-title"><g:formatDate date="${answer.dateCreated}" type="datetime" style="MEDIUM"/></span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                        <span class="qa-a-item-who">
+                                            <span class="qa-a-item-who-pad"><g:message code="question.show.by" /> </span>
+                                            <span class="qa-a-item-who-data">
+                                                <span class="vcard author">
+                                                    <g:link controller="user" action="show" id="${answer.user.id}" class="qa-user-link url fn entry-title nickname">${answer.user.username}</g:link>
+                                                </span>
+                                            </span>
+                                        </span>
+                                        <sec:ifLoggedIn>
+                                            <g:if test="${this.currentUser.id == answer.user.id}">
+                                                <span>
+                                                    <g:form controller="answer" action="redactEdit" id="${answer.id}">
+                                                        <g:submitButton title="Edit answer" name="edit" value="Edit" />
+                                                    </g:form>
+                                                </span>
+                                            </g:if>
+                                        </sec:ifLoggedIn>
+                                    </span>
+                                </span>
+
+                                <g:form controller="comment" action="redact">
+                                    <div class="qa-a-selection">
+                                    </div>
+                                    <div class="qa-a-item-content">
+                                        <div class="entry-content">
+                                            ${answer.message}
+                                        </div>
+                                    </div>
+                                    <div class="qa-a-item-buttons">
+                                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                        <g:submitButton name="answer_${answer.id}" title="${message (code: 'question.show.addCommentTooltip')}" value="${message (code: 'question.show.comment')}" class="qa-form-light-button qa-form-light-button-comment" />
+                                        <g:hiddenField name="answer" value="${answer.id}" />
+                                    </div>
+                                </g:form>
                                 <div class="qa-a-item-c-list" id="comment_${answer.id}_list">
                                     <g:each in = "${answer.comments}" var = "comment">
                                         <div class="qa-c-list-item  hentry comment" id="comment_${comment.id}">
@@ -229,6 +238,15 @@
                                                             </span>
                                                         </span>
                                                     </span>
+                                                    <sec:ifLoggedIn>
+                                                        <g:if test="${this.currentUser.id == comment.user.id}">
+                                                            <span>
+                                                                <g:form controller="comment" action="redactEdit" id="${comment.id}">
+                                                                    <g:submitButton title="Edit comment" name="edit" value="Edit" />
+                                                                </g:form>
+                                                            </span>
+                                                        </g:if>
+                                                    </sec:ifLoggedIn>
                                                 </span>
                                             </span>
                                             <div class="qa-c-item-content">
@@ -239,15 +257,14 @@
                                         </div> <!-- END qa-c-item -->
                                     </g:each>
                                 </div> <!-- END qa-c-list -->
-                            </g:form>
 
-                        </div> <!-- END qa-a-item-main -->
-                        <div class="qa-a-item-clear">
-                        </div>
-                    </div> <!-- END qa-a-list-item -->
-                </g:each>
-            </div>
-        </div> <!-- End qa-part-a-list -->
+                            </div> <!-- END qa-a-item-main -->
+                            <div class="qa-a-item-clear">
+                            </div>
+                        </div> <!-- END qa-a-list-item -->
+                    </g:each>
+                </div>
+            </div> <!-- End qa-part-a-list -->
         </div> <!-- End qa-main -->
     </body>
 </html>

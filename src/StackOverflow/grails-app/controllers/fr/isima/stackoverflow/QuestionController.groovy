@@ -163,7 +163,6 @@ class QuestionController
     @Transactional
     def updateEdit(Question question)
     {
-        println params
         if (question == null)
         {
             transactionStatus.setRollbackOnly()
