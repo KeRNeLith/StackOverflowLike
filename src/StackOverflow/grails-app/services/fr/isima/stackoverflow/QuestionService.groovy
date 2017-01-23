@@ -5,7 +5,9 @@ import grails.transaction.Transactional
 @Transactional
 class QuestionService
 {
+    // Services
     def tagService
+    def userService
 
     /**
      * Create a question.
@@ -27,6 +29,8 @@ class QuestionService
             tagService.updateTagsToQuestion(question, tags)
 
             question.save()
+
+            userService.updateUserReputation(writer, 10)
         }
 
         return ret
@@ -129,6 +133,8 @@ class QuestionService
             question.addToAnswers(message: message, question: question, user: writer).save()
 
             ret = true
+
+            userService.updateUserReputation(writer, 10)
         }
 
         return ret

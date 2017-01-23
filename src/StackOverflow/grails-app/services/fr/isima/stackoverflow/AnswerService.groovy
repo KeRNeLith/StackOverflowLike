@@ -5,6 +5,8 @@ import grails.transaction.Transactional
 @Transactional
 class AnswerService
 {
+    def userService
+
     /**
      * Add a comment to the given answer.
      * @param message Comment message.
@@ -22,6 +24,8 @@ class AnswerService
             answer.addToComments(message: message, answer: answer, user: writer).save()
 
             ret = true
+
+            userService.updateUserReputation(writer, 10)
         }
 
         return ret

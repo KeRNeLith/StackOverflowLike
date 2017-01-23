@@ -5,6 +5,7 @@ import grails.transaction.Transactional
 @Transactional
 class VoteService
 {
+    def userService
 
     /**
      * Add of update the vote for the specified user for the given post
@@ -39,6 +40,17 @@ class VoteService
         {
             post.addToVotes(user: user, vote: state)
             post.save()
+
+            // Up post's writer reputation
+            if (state == Vote.Value.UP)
+            {
+                userService.updateUserReputation(post.user, 10)
+            }
+            // Down post's writer reputation
+            else
+            {
+                userService.updateUserReputation(post.user, -10)
+            }
         }
         // Update previous vote only if it is different
         else if (resultVote.vote != state)
