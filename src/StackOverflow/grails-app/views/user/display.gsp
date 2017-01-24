@@ -6,9 +6,51 @@
         <title><g:message code="default.show.label" args="[entityName]" /></title>
     </head>
     <body>
-        <p>
-            Reputation: ${user.reputation}
-        </p>
+        <h1>Profil of: ${user.username} (Reputation: ${user.reputation})</h1>
+        <sec:ifLoggedIn>
+            <g:form action="updateProfile" resource="${this.user}" method="PUT">
+                <g:hiddenField name="id" value="${user.id}"/>
+                <g:hiddenField name="version" value="${user.version}"/>
+                <div class="panel panel-primary top-margin-50">
+                    <div class="panel-heading">
+                        <h3>Update user profile information</h3>
+                    </div>
+                    <g:if test="${flash.message}">
+                        <div class="message" role="status">${flash.message}</div>
+                    </g:if>
+                    <g:hasErrors bean="${this.user}">
+                        <ul class="errors" role="alert">
+                            <g:eachError bean="${this.user}" var="error">
+                                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+                            </g:eachError>
+                        </ul>
+                    </g:hasErrors>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-4" style="display: inline-block">
+                                <label>Enter a new username:</label> <br/>
+                                <label>Enter a new password:</label> <br/>
+                            </div>
+                            <div class="col-md-6" style="display: inline-block">
+                                <g:field type="text" name="username" placeholder="${user.username}"/>
+                                <br />
+                                <g:field type="password" name="password"/>
+                                <br />
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="row text-center">
+
+                            <button type="submit" class="btn btn-warning text-center">
+                                <strong>
+                                    ${message(code: 'user.update.button', default: 'Update the user')}
+                                </strong>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </g:form>
+        </sec:ifLoggedIn>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3>Questions asked</h3>

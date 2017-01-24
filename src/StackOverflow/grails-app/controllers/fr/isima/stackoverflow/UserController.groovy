@@ -13,6 +13,7 @@ class UserController
     // Services
     def badgeService
     def userService
+    def springSecurityService
 
     // Actions
     def index(Integer max)
@@ -131,6 +132,46 @@ class UserController
                 redirect user
             }
             '*'{ respond user, [status: OK] }
+        }
+    }
+
+    @Transactional
+    def updateProfile()
+    {
+        def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
+
+        if (user == null)
+        {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        // TODO update user
+        /*if (params.containsKey('username'))
+        {
+            user.username = params.username
+        }
+
+        if (params.containsKey('password'))
+        {
+            user.password = params.password
+        }*/
+
+        if (user.hasErrors())
+        {
+            transactionStatus.setRollbackOnly()
+            respond user.errors, view:'display'
+            return
+        }
+
+        user.save flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
+                redirect(action: 'display', id: user.id)
+            }
         }
     }
 
