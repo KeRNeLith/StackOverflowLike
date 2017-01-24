@@ -1,7 +1,6 @@
 package fr.isima.stackoverflow
 
 import grails.plugin.springsecurity.annotation.Secured
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -13,6 +12,7 @@ class UserController
 
     // Services
     def badgeService
+    def userService
 
     // Actions
     def index(Integer max)
@@ -33,6 +33,12 @@ class UserController
     }
 
     def create()
+    {
+        respond new User(params)
+    }
+
+    @Secured('ROLE_ANONYMOUS')
+    def register()
     {
         respond new User(params)
     }
@@ -62,6 +68,36 @@ class UserController
                 redirect user
             }
             '*' { respond user, [status: CREATED] }
+        }
+    }
+
+    @Secured('ROLE_ANONYMOUS')
+    @Transactional
+    def registerSave(User user)
+    {
+        if (user == null)
+        {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (user.hasErrors())
+        {
+            transactionStatus.setRollbackOnly()
+            respond user.errors, view:'register'
+            return
+        }
+
+        user = userService.createUser(user)
+
+        if (user != null)
+        {
+            redirect action: 'display', id: user.id
+        }
+        else
+        {
+            redirect action: 'register'
         }
     }
 

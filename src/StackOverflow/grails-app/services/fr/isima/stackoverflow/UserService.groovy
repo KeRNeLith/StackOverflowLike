@@ -6,6 +6,21 @@ import grails.transaction.Transactional
 class UserService
 {
     /**
+     * Create a new user based on input params.
+     * @param user User to register.
+     */
+    def createUser(User user)
+    {
+        user.save(flush: true)
+        if (user != null)
+        {
+            UserRole.create user, Role.findByAuthority('ROLE_USER')
+        }
+
+        return user
+    }
+
+    /**
      * Update user reputation.
      * @param user User reputation.
      * @param change Value changes.

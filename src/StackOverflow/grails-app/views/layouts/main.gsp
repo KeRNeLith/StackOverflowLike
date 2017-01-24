@@ -26,8 +26,8 @@
                     <!-- Login part -->
                     <div class="nav navbar-nav navbar-right">
                         <sec:ifNotLoggedIn>
-                            <g:link class="navbar-brand" url="/user/create">${message(code: 'menu.user.signup', default: 'Sign up')}</g:link>
-                            <g:link controller="login" action="auth" class="navbar-brand">${message(code: 'menu.user.signin', default: 'Sign in')}</g:link>
+                            <g:link controller="user" action="register" class="navbar-brand">Sign up</g:link>
+                            <g:link controller="login" action="auth" class="navbar-brand">Sign in</g:link>
                         </sec:ifNotLoggedIn>
                         <sec:ifLoggedIn>
                             <g:link controller="user" action="show" id="${sec.loggedInUserInfo(field: 'id')}" class="navbar-brand">
