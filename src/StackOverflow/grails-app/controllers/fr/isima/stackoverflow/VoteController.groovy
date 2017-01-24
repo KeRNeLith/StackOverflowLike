@@ -149,7 +149,8 @@ class VoteController
         {
             def postId = params.long('post')
             def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
-            def voteState = Vote.Value.valueOf((params.vote as String).toUpperCase())
+            def btnValue = params.vote as String
+            def voteState = btnValue.equalsIgnoreCase('/\\') ? Vote.Value.UP : Vote.Value.DOWN
 
             Post post = Post.get(postId)
             if (post != null)

@@ -13,8 +13,6 @@ class UserControllerSpec extends Specification {
         // TODO: Populate valid properties like...
         params["username"] = 'someValidName'
         params["password"] = 'azerty'
-        params["firstName"] = 'Jean'
-        params["lastName"] = 'Dupont'
         //assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
     }
 

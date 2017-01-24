@@ -54,7 +54,7 @@
                     <div class="qa-q-view-main">
                         <span class="qa-q-view-avatar-meta">
                             <span class="qa-q-view-avatar">
-                                <g:link controller="user" action="show" id="${this.question.user.id}" class="qa-avatar-link">
+                                <g:link controller="user" action="display" id="${this.question.user.id}" class="qa-avatar-link">
                                     <asset:image src="avatar.jpg" width="50" height="50" class="qa-avatar-image" alt=""/>
                                 </g:link>
                             </span>
@@ -71,7 +71,7 @@
                                     <span class="qa-q-view-who-pad"><g:message code="question.show.by" /> </span>
                                     <span class="qa-q-view-who-data">
                                         <span class="vcard author">
-                                            <g:link controller="user" action="show" id="${this.question.user.id}" class="qa-user-link url fn entry-title nickname">${this.question.user.username}</g:link>
+                                            <g:link controller="user" action="display" id="${this.question.user.id}" class="qa-user-link url fn entry-title nickname">${this.question.user.username}</g:link>
                                         </span>
                                     </span>
                                 </span>
@@ -161,7 +161,7 @@
                             <div class="qa-a-item-main">
                                 <span class="qa-a-item-avatar-meta">
                                     <span class="qa-a-item-avatar">
-                                        <g:link controller="user" action="show" id="${answer.user.id}" class="qa-avatar-link">
+                                        <g:link controller="user" action="display" id="${answer.user.id}" class="qa-avatar-link">
                                             <asset:image src="avatar.jpg" width="40" height="40" class="qa-avatar-image" alt=""/>
                                         </g:link>
                                     </span>
@@ -180,7 +180,7 @@
                                             <span class="qa-a-item-who-pad"><g:message code="question.show.by" /> </span>
                                             <span class="qa-a-item-who-data">
                                                 <span class="vcard author">
-                                                    <g:link controller="user" action="show" id="${answer.user.id}" class="qa-user-link url fn entry-title nickname">${answer.user.username}</g:link>
+                                                    <g:link controller="user" action="display" id="${answer.user.id}" class="qa-user-link url fn entry-title nickname">${answer.user.username}</g:link>
                                                 </span>
                                             </span>
                                         </span>
@@ -215,7 +215,7 @@
                                         <div class="qa-c-list-item  hentry comment" id="comment_${comment.id}">
                                             <span class="qa-c-item-avatar-meta">
                                                 <span class="qa-c-item-avatar">
-                                                    <g:link controller="user" action="show" id="${comment.user.id}" class="qa-avatar-link">
+                                                    <g:link controller="user" action="display" id="${comment.user.id}" class="qa-avatar-link">
                                                         <asset:image src="avatar.jpg" width="20" height="20" class="qa-avatar-image" alt=""/>
                                                     </g:link>
                                                 </span>
@@ -234,7 +234,7 @@
                                                         <span class="qa-c-item-who-pad"><g:message code="question.show.by" /> </span>
                                                         <span class="qa-c-item-who-data">
                                                             <span class="vcard author">
-                                                                <g:link controller="user" action="show" id="${comment.user.id}" class="qa-user-link url fn entry-title nickname">${comment.user.username}</g:link>
+                                                                <g:link controller="user" action="display" id="${comment.user.id}" class="qa-user-link url fn entry-title nickname">${comment.user.username}</g:link>
                                                             </span>
                                                         </span>
                                                     </span>

@@ -94,4 +94,42 @@ class BadgeService
     {
         UserBadges userBadge = new UserBadges(user: user, badge: badge, dateEarned: new Date()).save()
     }
+
+    /**
+     * Get all badges related to given user.
+     * @param user User.
+     */
+    def getUserBadges(User user)
+    {
+        def c = UserBadges.createCriteria()
+        def results = c.list {
+            eq('user', user)
+            projections {
+                property('badge')
+            }
+        }
+
+        return results
+    }
+
+    /**
+     * Get all badges related as a map associating badge to the number of this same badge obtained.
+     * @param List of badges.
+     */
+    def getUserBadgesSorted(def badges)
+    {
+        def badgesAssoc = [:]
+        badges.each {
+            if (badgesAssoc.containsKey(it))
+            {
+                badgesAssoc[it]++
+            }
+            else
+            {
+                badgesAssoc[it] = 1
+            }
+        }
+
+        return badgesAssoc
+    }
 }

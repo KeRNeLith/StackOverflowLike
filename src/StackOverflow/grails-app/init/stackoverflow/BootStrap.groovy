@@ -17,9 +17,9 @@ class BootStrap
         def userRole = new Role(authority: 'ROLE_USER').save()
         def anonymousRole = new Role(authority: 'ROLE_ANONYMOUS').save()
 
-        def kernelith = new User(username: 'kernelith', password: 'azerty', firstName: 'Alexandre', lastName: 'Rabérin').save()
-        def tjgamerz = new User(username: 'TJGamerz', password: 'azerty', firstName: 'Jonas', lastName: 'Elysée').save()
-        def fooUser = new User(username: 'foo', password: 'azerty', firstName: 'Jean', lastName: 'Dupont').save()
+        def kernelith = new User(username: 'kernelith', password: 'azerty').save()
+        def tjgamerz = new User(username: 'TJGamerz', password: 'azerty').save()
+        def fooUser = new User(username: 'foo', password: 'azerty').save()
 
         UserRole.create kernelith, adminRole
         UserRole.create tjgamerz, adminRole

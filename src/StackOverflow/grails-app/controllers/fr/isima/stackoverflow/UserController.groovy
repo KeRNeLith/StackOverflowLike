@@ -11,6 +11,10 @@ class UserController
 {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    // Services
+    def badgeService
+
+    // Actions
     def index(Integer max)
     {
         params.max = Math.min(max ?: 10, 100)
@@ -20,6 +24,12 @@ class UserController
     def show(User user)
     {
         respond user
+    }
+
+    @Secured('ROLE_ANONYMOUS')
+    def display(User user)
+    {
+        respond user, model: [ badges: badgeService.getUserBadgesSorted(badgeService.getUserBadges(user)) ]
     }
 
     def create()

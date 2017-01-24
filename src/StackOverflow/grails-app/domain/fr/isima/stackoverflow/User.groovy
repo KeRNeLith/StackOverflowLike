@@ -21,9 +21,6 @@ class User implements Serializable
 	boolean passwordExpired
 
 	// Custom fields
-    String firstName
-	String lastName
-	String description
 	Date registerDate = new Date()
 	Integer reputation = 0
 
@@ -33,9 +30,6 @@ class User implements Serializable
 	static constraints = {
 		password password: true, minSize: 6
 		username unique: true, minSize: 3, maxSize: 50
-        firstName minSize: 3, maxSize: 50
-        lastName minSize: 3, maxSize: 50
-		description nullable: true, maxSize: 2500
 		reputation min: 0
 	}
 

@@ -20,7 +20,7 @@ class UserSpec extends Specification
     void "User constraints"()
     {
         when: 'User is valid'
-            def user = new User(username: 'Test', password: 'azerty', firstName: 'Jean', lastName: 'Dupont')
+            def user = new User(username: 'Test', password: 'azerty')
 
         then: 'validate user => return true'
             user.validate()
@@ -30,36 +30,26 @@ class UserSpec extends Specification
         when: 'User is invalid (too small)'
             user.username = 'Te'
             user.password = 'az'
-            user.firstName = 'Je'
-            user.lastName = 'Du'
 
         then: 'validate user => return false'
             !user.validate()
             user.hasErrors()
-            user.errors.errorCount == 4
+            user.errors.errorCount == 2
             user.errors['username'].code == 'minSize.notmet'
             user.errors['password'].code == 'minSize.notmet'
-            user.errors['firstName'].code == 'minSize.notmet'
-            user.errors['lastName'].code == 'minSize.notmet'
 
         when: 'User is invalid (too long)'
             user.username = 'Lorem ipsum dolor sit amet, consectetur massa nunc.'
             user.password = 'azerty'    // Valid password
-            user.firstName = 'Lorem ipsum dolor sit amet, consectetur massa nunc.'
-            user.lastName = 'Lorem ipsum dolor sit amet, consectetur massa nunc.'
 
         then: 'validate user => return false'
             !user.validate()
             user.hasErrors()
-            user.errors.errorCount == 3
+            user.errors.errorCount == 1
             user.errors['username'].code == 'maxSize.exceeded'
-            user.errors['firstName'].code == 'maxSize.exceeded'
-            user.errors['lastName'].code == 'maxSize.exceeded'
 
         when: 'User is valid'
             user.username = 'Test'
-            user.firstName = 'Jean'
-            user.lastName = 'Dupont'
 
         then: 'validate user => return true'
             user.validate()
