@@ -17,7 +17,6 @@ class QuestionController
     def tagService
 
     // Actions
-    @Secured('ROLE_USER')
     def index(Integer max)
     {
         params.max = Math.min(max ?: 10, 100)
@@ -67,7 +66,6 @@ class QuestionController
         respond question, model: [questionVotes: questionVotes, sortedAnswers: sortedAnswers, currentUser: user]
     }
 
-    @Secured('ROLE_USER')
     def create()
     {
         respond new Question(params)
