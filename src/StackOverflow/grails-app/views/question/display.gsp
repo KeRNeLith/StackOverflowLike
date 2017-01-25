@@ -44,7 +44,7 @@
                                 <div class="qa-vote-count qa-vote-count-net">
                                     <span class="qa-netvote-count">
                                         <span class="qa-netvote-count-data"><g:if test="${this.questionVotes >= 0}">+</g:if>${this.questionVotes}</span>
-                                        <span class="qa-netvote-count-pad"> <g:if test="${this.questionVotes > 1}"><g:message code="question.show.votes" /></g:if><g:else><g:message code="question.show.vote" /></g:else></span>
+                                        <span class="qa-netvote-count-pad"> <g:if test="${this.questionVotes > 1 || -this.questionVotes > 1}"><g:message code="question.show.votes" /></g:if><g:else><g:message code="question.show.vote" /></g:else></span>
                                     </span>
                                 </div>
                                 <div class="qa-vote-clear">
@@ -156,7 +156,7 @@
                                                     <span class="value-title"></span>
                                                 </span>
                                             </span>
-                                            <span class="qa-netvote-count-pad"> <g:if test="${votes > 1}"><g:message code="question.show.votes" /></g:if><g:else><g:message code="question.show.vote" /></g:else></span>
+                                            <span class="qa-netvote-count-pad"> <g:if test="${votes > 1  || -votes > 1}"><g:message code="question.show.votes" /></g:if><g:else><g:message code="question.show.vote" /></g:else></span>
                                         </span>
                                     </div>
                                     <div class="qa-vote-clear">
