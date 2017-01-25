@@ -3,20 +3,15 @@
     <head>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'question.label', default: 'Question')}" />
-        <title>SegFault - ${this.question.title}</title>
+        <title>${this.question.title} - SegFault</title>
 
         <asset:stylesheet src="question/display/qa-styles.css"/>
         <asset:stylesheet src="font-awesome.min.css"/>
     </head>
     <body>
-        <a href="#show-question" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
+        <g:form controller="question" action="redact">
+            <g:submitButton class="btn btn-success" name="${message(code: 'question.ask.button')}"/>
+        </g:form>
 
         <div class="qa-main">
             <h1>
@@ -79,7 +74,7 @@
                                     <g:if test="${this.currentUser.id == question.user.id}">
                                         <span>
                                             <g:form controller="question" action="redactEdit" id="${this.question.id}">
-                                                <g:submitButton title="Edit question" name="edit" value="Edit" />
+                                                <g:submitButton title="${message(code: 'question.show.edit.button.tooltip')}" name="edit" value="${message(code: 'question.show.edit.button.label')}" />
                                             </g:form>
                                         </span>
                                     </g:if>
@@ -188,7 +183,7 @@
                                             <g:if test="${this.currentUser.id == answer.user.id}">
                                                 <span>
                                                     <g:form controller="answer" action="redactEdit" id="${answer.id}">
-                                                        <g:submitButton title="Edit answer" name="edit" value="Edit" />
+                                                        <g:submitButton title="${message(code: 'question.show.edit.answer.button.tooltip')}" name="edit" value="${message(code: 'question.show.edit.answer.button.label')}" />
                                                     </g:form>
                                                 </span>
                                             </g:if>
@@ -242,7 +237,7 @@
                                                         <g:if test="${this.currentUser.id == comment.user.id}">
                                                             <span>
                                                                 <g:form controller="comment" action="redactEdit" id="${comment.id}">
-                                                                    <g:submitButton title="Edit comment" name="edit" value="Edit" />
+                                                                    <g:submitButton title="${message(code: 'question.show.edit.comment.button.tooltip')}" name="edit" value="${message(code: 'question.show.edit.comment.button.label')}" />
                                                                 </g:form>
                                                             </span>
                                                         </g:if>

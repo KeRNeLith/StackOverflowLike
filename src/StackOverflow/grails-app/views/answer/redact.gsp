@@ -3,22 +3,14 @@
     <head>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'answer.label', default: 'Answer')}" />
-        <title>SegFault</title>
+        <title><g:message code="answer.redact.title"/> - SegFault</title>
 
         <asset:stylesheet src="answer/redact/bootstrap.min.css"/>
     </head>
     <body>
-        <a href="#create-answer" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-
         <div class="col-md-8">
             <h3>
-                Write your response
+                <g:message code="answer.redact.write.title"/>
             </h3>
             <g:hasErrors bean="${this.answer}">
                 <ul class="errors" role="alert">
@@ -34,7 +26,7 @@
                 </f:field>
                 <br>
 
-                <g:submitButton title="Send your response" name="send" value="Send" class="btn btn-success" />
+                <g:submitButton title="${message(code: 'answer.send.button.tooltip')}" name="send" value="${message(code: 'answer.send.button.label')}" class="btn btn-success" />
                 <g:hiddenField name="question" value="${this.answerTo}" />
             </g:form>
         </div>

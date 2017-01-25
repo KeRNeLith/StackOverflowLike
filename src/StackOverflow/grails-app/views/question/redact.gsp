@@ -3,20 +3,13 @@
     <head>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'question.label', default: 'Question')}" />
-        <title>SegFault</title>
+        <title><g:message code="question.redact.title"/> - SegFault</title>
 
         <asset:stylesheet src="answer/redact/bootstrap.min.css"/>
     </head>
     <body>
-        <a href="#create-question" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
         <div id="create-question" class="content scaffold-create" role="main">
-            <h1>Ask a question</h1>
+            <h1><g:message code="question.redact.write.title"/></h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -35,10 +28,10 @@
                     <g:textArea name="message" rows="10" class="form-control"/>
                 </f:field>
 
-                <h4>Tags :</h4>
+                <h4><g:message code="question.redact.tags"/></h4>
                 <g:select name="tags" from="${this.tags}" optionKey="id" optionValue="tagName" multiple="true"/>
 
-                <g:submitButton title="Ask your question" name="send" value="Ask" class="btn btn-success" />
+                <g:submitButton title="${message(code: 'question.redact.button.tooltip')}" name="send" value="${message(code: 'question.redact.button.label')}" class="btn btn-success" />
             </g:form>
         </div>
     </body>

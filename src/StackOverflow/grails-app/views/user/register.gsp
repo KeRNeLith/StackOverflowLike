@@ -3,9 +3,9 @@
     <head>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-        <title><g:message code="default.create.label" args="[entityName]" /></title>
+        <title><g:message code="user.register.title"/> - SegFault</title>
 
-        <asset:stylesheet src="registration.css"/>
+        <asset:stylesheet src="user/registration.css"/>
     </head>
     <body>
         <div class="container top-margin-50">
@@ -21,10 +21,10 @@
                 </ul>
                 </g:hasErrors>
                 <g:form action="registerSave">
-                    <h1>Create a new account</h1>
-                    <f:field bean="user" property="username" class="input pass"/>
-                    <f:field bean="user" property="password" class="input pass"/>
-                    <g:submitButton name="create" class="inputButton" value="Create an account" />
+                    <h1><g:message code="user.register.createAccount.title"/></h1>
+                    <f:field bean="user" property="username" placeholder="${message(code: 'register.field.username')}" class="input pass"/>
+                    <f:field bean="user" property="password" placeholder="${message(code: 'register.field.password')}" class="input pass"/>
+                    <g:submitButton name="create" class="inputButton" value="${message(code: 'user.register.button.label')}" />
                 </g:form>
             </div>
         </div>

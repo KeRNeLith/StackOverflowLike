@@ -55,6 +55,9 @@ class QuestionController
     @Secured('ROLE_ANONYMOUS')
     def display(Question question)
     {
+        question.nbViews++;
+        question.save()
+
         def questionVotes = questionService.voteCount(question.votes)
         // Sort answers by votes and posting date
         def sortedAnswers = questionService.sortAnswersByVotes(question)

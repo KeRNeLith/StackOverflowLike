@@ -19,21 +19,21 @@
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     </button>
-                    <g:link class="navbar-brand" url="/">${message(code: 'menu.home.label', default: 'Home')}</g:link>
+                    <g:link class="navbar-brand" url="/">${message(code: 'home.label')}</g:link>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav"></ul>
                     <!-- Login part -->
                     <div class="nav navbar-nav navbar-right">
                         <sec:ifNotLoggedIn>
-                            <g:link controller="user" action="register" class="navbar-brand">Sign up</g:link>
-                            <g:link controller="login" action="auth" class="navbar-brand">Sign in</g:link>
+                            <g:link controller="user" action="register" class="navbar-brand"><g:message code='signup.button'/></g:link>
+                            <g:link controller="login" action="auth" class="navbar-brand"><g:message code='signin.button'/></g:link>
                         </sec:ifNotLoggedIn>
                         <sec:ifLoggedIn>
-                            <g:link controller="user" action="show" id="${sec.loggedInUserInfo(field: 'id')}" class="navbar-brand">
+                            <g:link controller="user" action="display" id="${sec.loggedInUserInfo(field: 'id')}" class="navbar-brand">
                                 <sec:username/>
                             </g:link>
-                            <g:link controller="logout" class="navbar-brand">Logout</g:link>
+                            <g:link controller="logout" class="navbar-brand"><g:message code='logout.button'/></g:link>
                         </sec:ifLoggedIn>
                     </div>
                 </div>
@@ -41,14 +41,8 @@
         </div>
 
         <div class="container body-content">
-            <g:form controller="question" action="redact">
-                <g:submitButton name="Ask a question"/>
-            </g:form>
-
             <g:layoutBody/>
         </div>
-
-        <div class="footer" role="contentinfo"></div>
 
         <div id="spinner" class="spinner" style="display:none;">
             <g:message code="spinner.alt" default="Loading&hellip;"/>

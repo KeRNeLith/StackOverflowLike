@@ -6,7 +6,13 @@
     </head>
     <body>
         <div>
-            <h1>Most recent questions</h1>
+            <g:form controller="question" action="redact">
+                <g:submitButton class="btn btn-success" name="${message(code: 'question.ask.button')}"/>
+            </g:form>
+        </div>
+
+        <div>
+            <h1><g:message code="question.home.mostRecent.title"/></h1>
             <ul>
                 <g:each in = "${this.recents}" var = "question">
                     <li>
@@ -17,7 +23,7 @@
         </div>
 
         <div>
-            <h1>Questions by Tag</h1>
+            <h1><g:message code="question.home.byCat.title"/></h1>
             <g:each in = "${this.questionsByCat}" var = "questionAssoc">
                 <g:set var="tagName" value="${questionAssoc.key}"/>
                 <g:set var="questions" value="${questionAssoc.value}"/>
