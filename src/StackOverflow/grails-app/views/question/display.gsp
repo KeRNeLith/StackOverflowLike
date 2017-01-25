@@ -23,9 +23,11 @@
                     <i class="fa fa-check" aria-hidden="true"></i>
                 </g:if>
                 <g:else>
-                    <g:form controller="question" action="resolve" id="${this.question.id}">
-                        <g:submitButton class="btn btn-success" name="${message(code: 'question.mark.resolved.button')}"/>
-                    </g:form>
+                    <g:isOwner owner="${this.question.user}">
+                        <g:form controller="question" action="resolve" id="${this.question.id}">
+                            <g:submitButton class="btn btn-success" name="${message(code: 'question.mark.resolved.button')}"/>
+                        </g:form>
+                    </g:isOwner>
                 </g:else>
             </h1>
 
