@@ -5,7 +5,9 @@ Web developpement project of a StackOverflow like website.
 ## Repository achitecture
 	- analysis : Conception of the website.
 	- doc : Documentation and explanation.
+	- rendu : Dossier contenant l'archive de rendu du projet.
 	- src : Source code of the Grails project.
+	- UIDesign : Idée de design utilisables.
 	
 # Todo
 ------
