@@ -16,7 +16,8 @@ class AnswerServiceSpec extends Specification {
     def cleanup() {
     }
 
-    void "Adding Comment to Answer"() {
+    /*void "Adding Comment to Answer"()
+    {
         when: 'Comment is successfully added'
             def user = new User(username: 'Test', password: 'azerty', firstName: 'Jean', lastName: 'Dupont')
             def question = new Question (user: user, message: "simple message", title: 'some title', nbViews: 0)
@@ -34,5 +35,5 @@ class AnswerServiceSpec extends Specification {
             !answer.comments.hasErrors()
             answer.comments.errors.errorCount == 0
             answer.comments.count() == 1;
-    }
+    }*/
 }
