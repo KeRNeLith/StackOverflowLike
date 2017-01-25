@@ -98,32 +98,32 @@
             <div class="panel-body">
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th class="text-center"><g:message code="user.profile.answers.votes.title"/></th>
-                        <th class="text-center"><g:message code="user.profile.answers.question.title"/></th>
-                        <th class="text-center"><g:message code="user.profile.answers.tags.title"/></th>
-                    </tr>
+                        <tr>
+                            <th class="text-center"><g:message code="user.profile.answers.votes.title"/></th>
+                            <th class="text-center"><g:message code="user.profile.answers.question.title"/></th>
+                            <th class="text-center"><g:message code="user.profile.answers.tags.title"/></th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <g:each in="${user.answers}" var="answer">
-                        <tr class="text-center">
-                            <td>${answer.votes.size()}</td>
-                            <td>
-                                <g:link controller="question" action="display" id="${answer.question.id}">
-                                    ${answer.question.title}
-                                </g:link>
-                            </td>
-                            <td>
-                                <g:each in="${answer.question.tags}" var="tag">
-                                    <g:link controller="tag" action="show" id="${tag.id}">
-                                        <div class="label label-default right-margin-10">
-                                            ${tag.tag.tagName}
-                                        </div>
+                        <g:each in="${user.answers}" var="answer">
+                            <tr class="text-center">
+                                <td>${answer.votes.size()}</td>
+                                <td>
+                                    <g:link controller="question" action="display" id="${answer.question.id}">
+                                        ${answer.question.title}
                                     </g:link>
-                                </g:each>
-                            </td>
-                        </tr>
-                    </g:each>
+                                </td>
+                                <td>
+                                    <g:each in="${answer.question.tags}" var="tag">
+                                        <g:link controller="tag" action="show" id="${tag.id}">
+                                            <div class="label label-default right-margin-10">
+                                                ${tag.tag.tagName}
+                                            </div>
+                                        </g:link>
+                                    </g:each>
+                                </td>
+                            </tr>
+                        </g:each>
                     </tbody>
                 </table>
             </div>
