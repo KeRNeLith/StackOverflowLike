@@ -18,6 +18,15 @@
                 <g:link action="display" id="${this.question.id}">
                     <span class="entry-title">${this.question.title}</span>
                 </g:link>
+
+                <g:if test="${this.question.isResolved}">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </g:if>
+                <g:else>
+                    <g:form controller="question" action="resolve" id="${this.question.id}">
+                        <g:submitButton class="btn btn-success" name="${message(code: 'question.mark.resolved.button')}"/>
+                    </g:form>
+                </g:else>
             </h1>
 
             <div class="qa-part-q-view">

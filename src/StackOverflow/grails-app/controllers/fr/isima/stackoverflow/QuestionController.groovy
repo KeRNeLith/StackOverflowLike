@@ -149,6 +149,21 @@ class QuestionController
         respond question, view: 'redactEdit', model: [tags: TagValue.findAll()]
     }
 
+    @Secured('ROLE_USER')
+    def resolve(Question question)
+    {
+        if (question == null)
+        {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        questionService.resolveQuestion(question)
+
+        redirect(action: 'display', id: question.id)
+    }
+
     @Transactional
     def update(Question question)
     {

@@ -39,6 +39,19 @@ class QuestionService
     }
 
     /**
+     * Mark the input question as resolved.
+     * @param question Question to mark
+     */
+    def resolveQuestion(Question question)
+    {
+        if (!question.isResolved)
+        {
+            question.isResolved = true
+            question.save(flush: true)
+        }
+    }
+
+    /**
      * Get most recent questions
      * @param maxResult Max result wanted.
      * @return List of questions.
