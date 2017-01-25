@@ -5,6 +5,7 @@ http://spring.io/blog/2010/08/11/simplified-spring-security-with-grails/
 
 [Projet] (https://www.dropbox.com/s/enwzpigobf7irgv/TP_Web_Development.pptx?dl=0)
 [Cours] (https://www.dropbox.com/sh/zwn009rxnf18hkc/AAAY4CbL6G5UYC0FOVbYYAaYa?dl=0)
+[Cours Stateless] (https://www.dropbox.com/s/ukom86qybezbp1z/Cloud%20Design%20Patterns%20-%20TP.pptx?dl=0)
 
 # Interesting Bootstraps
 ------

@@ -12,7 +12,8 @@ Web developpement project of a StackOverflow like website.
 # Todo
 ------
 
-## Expected features
+## Part 1 
+### Expected features
 
 - [x] The project will offer a system to ask and answer questions.
 - [x] An answer can be upvoted. It means it's the more accurate answer for the question. Of course, they can also be downvoted.
@@ -26,3 +27,12 @@ Web developpement project of a StackOverflow like website.
 - [x] The profile will sum up all the user's actions (questions asked, answers given, edits, ...) and the earned reputation.
 - [x] The profile will compute the grand total of the user's reputation.
 - [x] Admins should act as moderators (Can use the Grails generated CRUD).
+
+## Part 2 
+### Expected features
+
+- [ ] Provide Feature flipping capabilities
+- [ ] Be Stateless
+- [ ] With an authentication mechanism (spring-security-rest)
+- [ ] Embed Health Check for all underlying components
+- [ ] Implement Circuit Breaker & Graceful degradation with a third party service 
