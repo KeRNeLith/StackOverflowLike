@@ -1,6 +1,7 @@
 package fr.isima.stackoverflow
 
 import grails.plugin.springsecurity.annotation.Secured
+import org.springframework.beans.factory.annotation.Value
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -16,6 +17,12 @@ class QuestionController
     def questionService
     def tagService
 
+    @Value('${message}')
+    private String message;
+
+    @Value('${node.subMessage}')
+    private String otherMessage;
+
     // Actions
     def index(Integer max)
     {
@@ -26,6 +33,8 @@ class QuestionController
     @Secured('ROLE_ANONYMOUS')
     def home()
     {
+        println this.message;
+        println this.otherMessage;
         def nbCategories = 5
         def nbRecentQuestions = 20
         def nbQuestionByCat = 10

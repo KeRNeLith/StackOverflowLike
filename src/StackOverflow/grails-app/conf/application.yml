@@ -1,4 +1,8 @@
 ---
+spring:
+    application:
+        name: SegFault
+---
 grails:
     profile: web
     codegen:
