@@ -13,6 +13,7 @@ class UrlMappings {
         "/"(controller:"question", action:"home")
         "500"(view:'/error')
         "404"(view:'/notFound')
+        "503"(view:'/unavailable')
 		"/login/$action?"(controller: "login")
 		"/logout/$action?"(controller: "logout")
     }

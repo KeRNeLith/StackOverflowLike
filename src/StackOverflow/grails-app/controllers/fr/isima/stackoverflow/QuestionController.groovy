@@ -16,12 +16,7 @@ class QuestionController
     def springSecurityService
     def questionService
     def tagService
-
-    @Value('${message}')
-    private String message;
-
-    @Value('${node.subMessage}')
-    private String otherMessage;
+    def featuresFlippingService
 
     // Actions
     def index(Integer max)
@@ -33,8 +28,6 @@ class QuestionController
     @Secured('ROLE_ANONYMOUS')
     def home()
     {
-        println this.message;
-        println this.otherMessage;
         def nbCategories = 5
         def nbRecentQuestions = 20
         def nbQuestionByCat = 10

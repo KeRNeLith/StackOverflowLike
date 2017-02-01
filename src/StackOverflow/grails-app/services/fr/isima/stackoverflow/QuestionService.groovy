@@ -9,6 +9,7 @@ class QuestionService
     def tagService
     def userService
     def badgeService
+    def featuresFlippingService
 
     /**
      * Create a question.
@@ -21,6 +22,10 @@ class QuestionService
     def int createQuestion(String title, String message, User writer, def tags)
     {
         int ret = -1;
+
+        // Post question feature not enabled
+        if (!featuresFlippingService.isPostQuestionEnabled())
+            return ret
 
         Question question = new Question(title: title, message: message, user: writer)
         if (question.save(flush: true))
@@ -141,6 +146,10 @@ class QuestionService
     def addAnswerToQuestion(String message, User writer, Long questionId)
     {
         def ret = false
+
+        // Post answer feature not enabled
+        if (!featuresFlippingService.isAnswerPostingEnabled())
+            return ret
 
         def question = Question.get(questionId)
         if (writer != null && question != null)

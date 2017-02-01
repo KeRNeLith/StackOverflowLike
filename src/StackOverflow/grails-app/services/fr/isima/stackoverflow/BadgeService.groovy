@@ -6,12 +6,18 @@ import javafx.geometry.Pos
 @Transactional
 class BadgeService
 {
+    def featuresFlippingService
+
     /**
      * Add the badge if it is the first question of the user.
      * @param user Concerned user.
      */
     def addFirstQuestionBadge(User user)
     {
+        // Badges feature not enabled
+        if (!featuresFlippingService.isBadgesEnabled())
+            return
+
         def c = Question.createCriteria()
         def result = c.count {
             eq('user', user)
@@ -29,6 +35,10 @@ class BadgeService
      */
     def addFirstAnswerBadge(User user)
     {
+        // Badges feature not enabled
+        if (!featuresFlippingService.isBadgesEnabled())
+            return
+
         def c = Answer.createCriteria()
         def result = c.count {
             eq('user', user)
@@ -46,6 +56,10 @@ class BadgeService
      */
     def addFirstCommentBadge(User user)
     {
+        // Badges feature not enabled
+        if (!featuresFlippingService.isBadgesEnabled())
+            return
+
         def c = Comment.createCriteria()
         def result = c.count {
             eq('user', user)
@@ -63,6 +77,10 @@ class BadgeService
      */
     def checkThumbUpBadge(Post post)
     {
+        // Badges feature not enabled
+        if (!featuresFlippingService.isBadgesEnabled())
+            return
+
         def thumbUpCount = 0
         post.votes.each {
             if (it.vote == Vote.Value.UP)
@@ -90,7 +108,7 @@ class BadgeService
      * @param badge Badge to give.
      * @param user User that will receive the badge.
      */
-    def addBadgeToUser(Badge badge, User user)
+    private def addBadgeToUser(Badge badge, User user)
     {
         UserBadges userBadge = new UserBadges(user: user, badge: badge, dateEarned: new Date()).save()
     }
@@ -101,6 +119,10 @@ class BadgeService
      */
     def getUserBadges(User user)
     {
+        // Badges feature not enabled
+        if (!featuresFlippingService.isBadgesEnabled())
+            return []
+
         def c = UserBadges.createCriteria()
         def results = c.list {
             eq('user', user)

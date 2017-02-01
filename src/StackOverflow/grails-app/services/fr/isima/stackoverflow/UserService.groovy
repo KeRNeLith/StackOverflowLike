@@ -5,12 +5,19 @@ import grails.transaction.Transactional
 @Transactional
 class UserService
 {
+    // Services
+    def featuresFlippingService
+
     /**
      * Create a new user based on input params.
      * @param user User to register.
      */
     def createUser(User user)
     {
+        // Post question feature not enabled
+        if (!featuresFlippingService.isSignUpEnabled())
+            return null
+
         user.save(flush: true)
         if (user != null)
         {

@@ -8,6 +8,7 @@ class AnswerService
     // Services
     def userService
     def badgeService
+    def featuresFlippingService
 
     /**
      * Add a comment to the given answer.
@@ -19,6 +20,10 @@ class AnswerService
     def addCommentToAnswer(String message, User writer, Long answerId)
     {
         def ret = false
+
+        // Post comment feature not enabled
+        if (!featuresFlippingService.isCommentPostingEnabled())
+            return ret
 
         def answer = Answer.get(answerId)
         if (writer != null && answer != null)
