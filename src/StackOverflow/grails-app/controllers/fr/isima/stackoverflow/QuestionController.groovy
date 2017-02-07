@@ -16,7 +16,6 @@ class QuestionController
     def springSecurityService
     def questionService
     def tagService
-    def featuresFlippingService
 
     // Actions
     def index(Integer max)
@@ -56,7 +55,10 @@ class QuestionController
     @Secured('ROLE_ANONYMOUS')
     def display(Question question)
     {
-        question.nbViews++;
+        if (question == null)
+            notFound()
+
+        question.nbViews++
         question.save()
 
         def questionVotes = questionService.voteCount(question.votes)

@@ -39,7 +39,6 @@ class FeaturesFlippingService
      */
     def boolean isSignUpEnabled()
     {
-        return false
         return signUpEnabled
     }
 

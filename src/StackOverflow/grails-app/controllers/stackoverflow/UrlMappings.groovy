@@ -3,7 +3,7 @@ package stackoverflow
 class UrlMappings {
 
     static mappings = {
-        "/$controller/$action?/$id?(.$format)?"{
+        "/api/$controller/$action?/$id?(.$format)?"{
             constraints {
                 // apply constraints here
             }
