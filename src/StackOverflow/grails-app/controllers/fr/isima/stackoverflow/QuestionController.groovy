@@ -17,12 +17,6 @@ class QuestionController
     def questionService
     def tagService
 
-    @Value('${message}')
-    private String message;
-
-    @Value('${node.subMessage}')
-    private String otherMessage;
-
     // Actions
     def index(Integer max)
     {
@@ -33,8 +27,6 @@ class QuestionController
     @Secured('ROLE_ANONYMOUS')
     def home()
     {
-        println this.message;
-        println this.otherMessage;
         def nbCategories = 5
         def nbRecentQuestions = 20
         def nbQuestionByCat = 10
@@ -63,7 +55,10 @@ class QuestionController
     @Secured('ROLE_ANONYMOUS')
     def display(Question question)
     {
-        question.nbViews++;
+        if (question == null)
+            notFound()
+
+        question.nbViews++
         question.save()
 
         def questionVotes = questionService.voteCount(question.votes)

@@ -8,6 +8,7 @@ class VoteService
     // Services
     def userService
     def badgeService
+    def featuresFlippingService
 
     /**
      * Add of update the vote for the specified user for the given post
@@ -31,6 +32,10 @@ class VoteService
      */
     def updateVotes(Post post, User user, Vote.Value state)
     {
+        // Vote feature not enabled
+        if (!featuresFlippingService.isVotesEnabled())
+            return
+
         def alreadyVotes = Vote.createCriteria()
         def resultVote = alreadyVotes.get {
             eq('post', post)

@@ -24,8 +24,36 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 	[pattern: '/**/css/**',      filters: 'none'],
 	[pattern: '/**/images/**',   filters: 'none'],
 	[pattern: '/**/favicon.ico', filters: 'none'],
-	[pattern: '/**',             filters: 'JOINED_FILTERS']
+	// Stateless chain with anonymous accesses
+		// Display
+	[
+			pattern: '/api/**/display/**',
+			filters: 'anonymousAuthenticationFilter,restTokenValidationFilter,restExceptionTranslationFilter,filterInvocationInterceptor'
+	],
+		// Register
+	[
+			pattern: '/api/**/register**',
+			filters: 'anonymousAuthenticationFilter,restTokenValidationFilter,restExceptionTranslationFilter,filterInvocationInterceptor'
+	],
+		// Other : home
+	[
+			pattern: '/api/**/home/**',
+			filters: 'anonymousAuthenticationFilter,restTokenValidationFilter,restExceptionTranslationFilter,filterInvocationInterceptor'
+	],
+	// Stateless chain
+	[
+			pattern: '/api/**',
+			filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter'
+	],
+	// Traditional chain
+	[
+			pattern: '/**',
+			filters: 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'
+	]
 ]
+
+// Enable anonymous accesses for certain URLs
+grails.plugin.springsecurity.rest.token.validation.enableAnonymousAccess = true
 
 grails.plugin.springsecurity.roleHierarchy = '''
    ROLE_ADMIN > ROLE_USER

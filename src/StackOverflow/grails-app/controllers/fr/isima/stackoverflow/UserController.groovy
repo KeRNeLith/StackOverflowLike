@@ -14,6 +14,7 @@ class UserController
     def badgeService
     def userService
     def springSecurityService
+    def featuresFlippingService
 
     // Actions
     def index(Integer max)
@@ -41,6 +42,9 @@ class UserController
     @Secured('ROLE_ANONYMOUS')
     def register()
     {
+        if (!featuresFlippingService.isSignUpEnabled())
+            render(status: 503)
+
         respond new User(params)
     }
 
@@ -76,6 +80,9 @@ class UserController
     @Transactional
     def registerSave(User user)
     {
+        if (!featuresFlippingService.isSignUpEnabled())
+            render(status: 503)
+
         if (user == null)
         {
             transactionStatus.setRollbackOnly()

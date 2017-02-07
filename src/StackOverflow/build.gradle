@@ -46,9 +46,10 @@ dependencies {
     compile "org.grails.plugins:hibernate5"
     compile "org.hibernate:hibernate-core:5.1.2.Final"
     compile "org.hibernate:hibernate-ehcache:5.1.2.Final"
-	compile 'org.grails.plugins:spring-security-core:3.1.1'
-    compile 'org.grails.plugins:spring-security-ui:3.0.0.M2'
-    // Spring Cloud.
+	//compile 'org.grails.plugins:spring-security-core:3.1.1'
+    // For REST API
+    compile "org.grails.plugins:spring-security-rest:2.0.0.M2"
+    // For Spring Cloud Config Server.
     compile "org.springframework.cloud:spring-cloud-starter-config"
 
     console "org.grails:grails-console"
