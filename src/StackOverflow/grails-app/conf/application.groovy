@@ -24,6 +24,7 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 	[pattern: '/**/css/**',      filters: 'none'],
 	[pattern: '/**/images/**',   filters: 'none'],
 	[pattern: '/**/favicon.ico', filters: 'none'],
+	[pattern: '/**/health', filters: 'none'],    // For health check
 	// Stateless chain with anonymous accesses
 		// Display
 	[

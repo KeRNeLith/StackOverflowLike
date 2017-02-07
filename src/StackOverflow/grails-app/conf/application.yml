@@ -24,10 +24,16 @@ spring:
 
 # Spring Actuator Endpoints are Disabled by Default
 endpoints:
-    enabled: false
+    enabled: true
     jmx:
         enabled: true
-
+    health:
+        sensitive: false
+---
+# Config security for HTTP health endpoint (Maybe temporary not secured, otherwise set to true)
+management:
+    security:
+        enabled: false
 ---
 grails:
     mime:
