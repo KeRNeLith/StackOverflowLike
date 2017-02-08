@@ -5,9 +5,15 @@ angular
     .controller("QuestionsController", QuestionsController);
 
 function QuestionsController($scope, $http) {
+    /*
     var vm = this;
-    $http.get('localhost:8080/api/questions/home').
+    return $http.get('localhost:8080/api/question/home').
+    success(function(response){
+      $scope.greeting = response;
+    });
+    //*/
+    $http.get('localhost:8080/api/question/home').
     then(function(response){
-      $scope.greeting = response.data;
+      $scope.greeting = "some answer";
     });
 }

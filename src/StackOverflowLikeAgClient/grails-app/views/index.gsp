@@ -91,14 +91,14 @@
 	<head>
 		<title>Hello AngularJS</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    	<!-- <script src="hello.js"></script> -->
-      <asset:javascript src="/stackoverflowlikeagclient/controllers/questionsController.js" />
+    	<script src="app.js"></script>
+    <!--  <asset:javascript src="/stackoverflowlikeagclient/controllers/questionsController.js" /> -->
 
 
 	</head>
 
 	<body>
-		<div ng-controller="QuestionsController">
+		<div ng-controller="Hello">
 			<p>The ID is {{greeting.id}}</p>
 			<p>The content is {{greeting.content}}</p>
 		</div>
