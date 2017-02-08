@@ -19,7 +19,7 @@ class QuestionService
      * @param tags Optionals tags
      * @return Created question id, otherwise -1.
      */
-    def int createQuestion(String title, String message, User writer, def tags)
+    int createQuestion(String title, String message, User writer, def tags)
     {
         int ret = -1;
 
@@ -128,7 +128,7 @@ class QuestionService
      * @param votes List of votes.
      * @return Vote ratio.
      */
-    def int voteCount(def votes)
+    int voteCount(def votes)
     {
         def nbPositives = votes.count { it.vote == Vote.Value.UP }
         def nbNegatives = - (votes.size() - nbPositives)
@@ -143,9 +143,9 @@ class QuestionService
      * @param questionId Question id.
      * @return true if succeed.
      */
-    def addAnswerToQuestion(String message, User writer, Long questionId)
+    boolean addAnswerToQuestion(String message, User writer, Long questionId)
     {
-        def ret = false
+        boolean ret = false
 
         // Post answer feature not enabled
         if (!featuresFlippingService.isAnswerPostingEnabled())

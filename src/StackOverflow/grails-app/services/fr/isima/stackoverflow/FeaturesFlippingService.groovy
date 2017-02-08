@@ -13,7 +13,7 @@ class FeaturesFlippingService
      * Posting answers feature enabled.
      * @return True if enabled.
      */
-    def boolean isAnswerPostingEnabled()
+    boolean isAnswerPostingEnabled()
     {
         return postAnswerEnabled
     }
@@ -25,7 +25,7 @@ class FeaturesFlippingService
      * Posting comments feature enabled.
      * @return True if enabled.
      */
-    def boolean isCommentPostingEnabled()
+    boolean isCommentPostingEnabled()
     {
         return postCommentEnabled
     }
@@ -37,7 +37,7 @@ class FeaturesFlippingService
      * Signing up feature enabled.
      * @return True if enabled.
      */
-    def boolean isSignUpEnabled()
+    boolean isSignUpEnabled()
     {
         return signUpEnabled
     }
@@ -49,7 +49,7 @@ class FeaturesFlippingService
      * Signing in feature enabled.
      * @return True if enabled.
      */
-    def boolean isSignInEnabled()
+    boolean isSignInEnabled()
     {
         return signInEnabled
     }
@@ -61,7 +61,7 @@ class FeaturesFlippingService
      * Posting question feature enabled.
      * @return True if enabled.
      */
-    def boolean isPostQuestionEnabled()
+    boolean isPostQuestionEnabled()
     {
         return postQuestionEnabled
     }
@@ -73,7 +73,7 @@ class FeaturesFlippingService
      * Edit user profile feature enabled.
      * @return True if enabled.
      */
-    def boolean isEditProfileEnabled()
+    boolean isEditProfileEnabled()
     {
         return editProfileEnabled
     }
@@ -85,7 +85,7 @@ class FeaturesFlippingService
      * Badges feature enabled.
      * @return True if enabled.
      */
-    def boolean isBadgesEnabled()
+    boolean isBadgesEnabled()
     {
         return badgesEnabled
     }
@@ -97,7 +97,7 @@ class FeaturesFlippingService
      * Badges feature enabled.
      * @return True if enabled.
      */
-    def boolean isVotesEnabled()
+    boolean isVotesEnabled()
     {
         return votesEnabled
     }
