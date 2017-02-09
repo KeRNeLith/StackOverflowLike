@@ -57,7 +57,10 @@ class QuestionController
     def display(Question question)
     {
         if (question == null)
+        {
             notFound()
+            return
+        }
 
         question.nbViews++
         question.save()

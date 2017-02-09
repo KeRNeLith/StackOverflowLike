@@ -48,7 +48,6 @@ dependencies {
     compile "org.hibernate:hibernate-core:5.1.2.Final"
     compile "org.hibernate:hibernate-ehcache:5.1.2.Final"
     compile "org.grails:grails-datastore-rest-client:5.0.0.RC2"
-	//compile 'org.grails.plugins:spring-security-core:3.1.1'
     // For REST API
     compile "org.grails.plugins:spring-security-rest:2.0.0.M2"
     // For Spring Cloud Config Server.

@@ -35,4 +35,4 @@ Web developpement project of a StackOverflow like website.
 - [ ] Be Stateless (Grails AngularsJS)
 - [x] With an authentication mechanism (spring-security-rest)
 - [ ] Embed Health Check for all underlying components
-- [ ] Implement Circuit Breaker & Graceful degradation with a third party service (seems to be with Spring Cloud)
+- [x] Implement Circuit Breaker & Graceful degradation with a third party service (seems to be with Spring Cloud)
