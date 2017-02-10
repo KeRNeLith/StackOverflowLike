@@ -91,16 +91,19 @@
 	<head>
 		<title>Hello AngularJS</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    	<script src="app.js"></script>
-    <!--  <asset:javascript src="/stackoverflowlikeagclient/controllers/questionsController.js" /> -->
+    	<!-- <script src="app.js"></script> -->
+      <asset:javascript src="app.js" />
 
 
 	</head>
 
 	<body>
 		<div ng-controller="Hello">
+			<p> bonsoir </p>
+			<p> all of it is {{greeting}}</p>
 			<p>The ID is {{greeting.id}}</p>
 			<p>The content is {{greeting.content}}</p>
+			<p>The content is {{greeting.recents[0].id}}</p>
 		</div>
 	</body>
 </html>
