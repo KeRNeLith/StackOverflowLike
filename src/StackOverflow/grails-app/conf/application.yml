@@ -6,6 +6,8 @@ spring:
         name: SegFault
 ---
 grails:
+    cors:
+       enabled: true
     profile: web
     codegen:
         defaultPackage: stackoverflow

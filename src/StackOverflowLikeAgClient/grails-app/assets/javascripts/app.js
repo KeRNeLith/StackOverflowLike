@@ -4,7 +4,7 @@ angular.module('demo', [])
   <!-- http://rest-service.guides.spring.io/greeting -->
   <!-- https://jsonplaceholder.typicode.com/posts/1 -->
 
-    return $http.get('/localhost:8080').
+    return $http.get('http://localhost:8080').
         then(function(response) {
             $scope.greeting = response.data;
         });
