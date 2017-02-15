@@ -21,7 +21,7 @@
     </script>
 </head>
 
-<body ng-app="stackoverflowlikeagclient" ng-controller="IndexController as indexCtrl">
+<body ng-app="stackoverflowlikeangularclient" ng-controller="IndexController as indexCtrl">
 
     <div class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="container">
@@ -81,29 +81,6 @@
         <g:message code="spinner.alt" default="Loading&hellip;"/>
     </div>
 
-    <asset:javascript src="/stackoverflowlikeagclient/stackoverflowlikeagclient.js" />
+    <asset:javascript src="/stackoverflowlikeangularclient/stackoverflowlikeangularclient.js" />
 </body>
 </html>
-
-
-<!--<!doctype html>
-<html ng-app="demo">
-	<head>
-		<title>Hello AngularJS</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    	<!-- <script src="app.js"></script> --><!--
-      <asset:javascript src="app.js" />
-
-
-	</head>
-
-	<body>
-		<div ng-controller="Hello">
-			<p> bonsoir </p>
-			<p> all of it is {{greeting}}</p>
-			<p>The ID is {{greeting.id}}</p>
-			<p>The content is {{greeting.content}}</p>
-			<p>The content is {{greeting.recents[0].id}}</p>
-		</div>
-	</body>
-</html>-->
