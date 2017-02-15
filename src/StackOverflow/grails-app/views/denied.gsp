@@ -7,7 +7,7 @@
     </head>
     <body>
         <ul class="errors">
-            <li><g:message code="error.message.unavailable" /></li>
+            <li><g:message code="error.message.denied" /></li>
         </ul>
     </body>
 </html>

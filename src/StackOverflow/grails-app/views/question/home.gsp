@@ -10,7 +10,9 @@
                 <g:submitButton class="btn btn-success" name="${message(code: 'question.ask.button')}"/>
             </g:form>
         </div>
-
+        <p>
+            <g:message code="question.home.number.fact" args="[randomSentence]"/>
+        </p>
         <div>
             <h1><g:message code="question.home.mostRecent.title"/></h1>
             <table class="table table-striped">

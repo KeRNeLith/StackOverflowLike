@@ -17,9 +17,9 @@ class AnswerService
      * @param answerId Answer id.
      * @return true if succeed.
      */
-    def addCommentToAnswer(String message, User writer, Long answerId)
+    boolean addCommentToAnswer(String message, User writer, Long answerId)
     {
-        def ret = false
+        boolean ret = false
 
         // Post comment feature not enabled
         if (!featuresFlippingService.isCommentPostingEnabled())

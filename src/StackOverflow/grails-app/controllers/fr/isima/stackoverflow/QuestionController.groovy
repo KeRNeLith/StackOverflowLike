@@ -17,6 +17,7 @@ class QuestionController
     def springSecurityService
     def questionService
     def tagService
+    def numbersService
 
     // Actions
     def index(Integer max)
@@ -39,7 +40,7 @@ class QuestionController
         }
 
         // Get recent and question by category
-        respond recents: questionService.getMostRecentQuestions(nbRecentQuestions), questionsByCat: questionsByCat
+        respond recents: questionService.getMostRecentQuestions(nbRecentQuestions), questionsByCat: questionsByCat, randomSentence: numbersService.getRandomNumberSentence()
     }
 
     def show(Question question)
@@ -57,7 +58,10 @@ class QuestionController
     def display(Question question)
     {
         if (question == null)
+        {
             notFound()
+            return
+        }
 
         question.nbViews++
         question.save()

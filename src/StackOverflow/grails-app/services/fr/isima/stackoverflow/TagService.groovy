@@ -11,7 +11,7 @@ class TagService
      * @param tags Tags.
      * @return True if operation succeed, otherwise false.
      */
-    def boolean updateTagsToQuestion(Question question, def tags)
+    boolean updateTagsToQuestion(Question question, def tags)
     {
         if (question.tags)
             question.tags.clear()
