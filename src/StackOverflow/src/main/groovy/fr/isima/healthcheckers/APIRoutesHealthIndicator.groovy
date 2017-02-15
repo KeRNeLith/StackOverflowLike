@@ -27,18 +27,24 @@ class APIRoutesHealthIndicator implements HealthIndicator
 		// Check some API's anonymous routes
 		if (linkService != null)
 		{
+			boolean error = false
+
 			String apiBaseURL = linkService.serverUrl()
 
-			Question lastQuestion
+			Question lastQuestion = null
 			Question.withTransaction{status->
 				lastQuestion = Question.find("FROM Question ORDER BY dateCreated DESC")
+			}
+
+			if (lastQuestion == null)
+			{
+				error = true
 			}
 
 			// List of URLs to check
 			def urlsToCheck = [ '/', '/api/question/home', '/api/question/display/' + lastQuestion.id ]
 
 			// Check URLs
-			boolean error = false
 			int i = 0
 			while (!error && i < urlsToCheck.size())
 			{
