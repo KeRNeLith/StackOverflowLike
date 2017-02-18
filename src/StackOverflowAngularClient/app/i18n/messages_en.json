@@ -3,7 +3,14 @@
   {
     "home":
     {
-      "fact": "Fact about number: {{fact}}"
+      "fact": "Fact about number: {{fact}}",
+      "titles":
+      {
+        "mostRecent": "Most recent questions",
+        "question": "Question",
+        "tags": "Tags",
+        "byCat": "Questions by Tag"
+      }
     }
   }
 }

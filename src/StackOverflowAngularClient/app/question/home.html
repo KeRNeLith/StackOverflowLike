@@ -1,5 +1,3 @@
-<p>Home</p>
-
 <!--<div>
     <g:form controller="question" action="redact">
         <g:submitButton class="btn btn-success" name="${message(code: 'question.ask.button')}"/>
@@ -8,35 +6,66 @@
 <p>
     {{ 'question.home.fact' | translate: { fact: randomSentence } }}
 </p>
-<!--<div>
-    <h1><g:message code="question.home.mostRecent.title"/></h1>
+<div>
+    <h1>{{ 'question.home.titles.mostRecent' | translate }}</h1>
     <table class="table table-striped">
         <thead>
-        <tr>
-            <th class="text-center"><g:message code="question.home.question.title"/></th>
-            <th class="text-center"><g:message code="question.home.tags.title"/></th>
-        </tr>
+            <tr>
+                <th class="text-center">{{ 'question.home.titles.question' | translate }}</th>
+                <th class="text-center">{{ 'question.home.titles.tags' | translate }}</th>
+            </tr>
         </thead>
         <tbody>
-        <g:each in = "${this.recents}" var = "question">
-            <tr>
+            <tr ng-repeat="question in recents">
                 <td class="text-center">
-                    <h4><g:link action="display" id="${question.id}">${question.title}</g:link></h4>
+                    <!--<h4><g:link action="display" id="${question.id}">${question.title}</g:link></h4>-->
+                    <h4>{{question.title}}</h4>
                 </td>
                 <td class="text-center">
-                    <g:each in="${question.tags}" var="tag">
-                        <h4 style="display:inline-block;">
-                            <g:link controller="tag" action="show" id="${tag.tag.id}">
-                                <div class="label label-default right-margin-10">
-                                    ${tag.tag.tagName}
-                                </div>
-                            </g:link>
-                        </h4>
-                    </g:each>
+                    <h4 ng-repeat="tag in question.tags" style="display:inline-block;">
+                        <!--<g:link controller="tag" action="show" id="${tag.tag.id}">-->
+                            <div class="label label-default right-margin-10">
+                                {{tag.tag}}
+                            </div>
+                        <!--</g:link>-->
+                    </h4>
                 </td>
             </tr>
-        </g:each>
         </tbody>
     </table>
-</div>-->
-{{homeData}}
+
+    <div>
+        <h1>{{ 'question.home.titles.byCat' | translate }}</h1>
+        <div ng-repeat="(tag, questions) in questionsByCat">
+            <h2>{{tag}}</h2>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{ 'question.home.titles.question' | translate }}</th>
+                        <th class="text-center">{{ 'question.home.titles.tags' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="question in questions">
+                        <td class="text-center">
+                            <h4>
+                                <!--<g:link action="display" id="${question.id}">${question.title}</g:link>-->
+                                {{question.title}}
+                            </h4>
+                        </td>
+                        <td class="text-center">
+                            <h4 ng-repeat="tag in question.tags" style="display:inline-block;">
+                                <!--<g:link controller="tag" action="show" id="${tag.tag.id}">-->
+                                    <div class="label label-default right-margin-10">
+                                        {{tag.tag}}
+                                    </div>
+                                <!--</g:link>-->
+                            </h4>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -3,7 +3,14 @@
   {
     "home":
     {
-      "fact": "Fait amusant à propos du nombre : {{fact}}"
+      "fact": "Fait amusant à propos du nombre : {{fact}}",
+      "titles":
+      {
+        "mostRecent": "Questions les plus récentes",
+        "question": "Question",
+        "tags": "Tags",
+        "byCat": "Questions par catégories"
+      }
     }
   }
 }

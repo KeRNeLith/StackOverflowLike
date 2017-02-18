@@ -26,6 +26,8 @@ questionModule.controller('HomeCtrl', function($scope, $http)
               // TMP
               $scope.homeData = data;
 
+              $scope.recents = data.recents;
+              $scope.questionsByCat = data.questionsByCat;
               $scope.randomSentence = data.randomSentence;
           });
 });

@@ -1,14 +1,17 @@
 package stackoverflow
 
+import fr.isima.marshallers.JSONMarshallers
 import fr.isima.stackoverflow.Answer
 import fr.isima.stackoverflow.Badge
 import fr.isima.stackoverflow.Comment
 import fr.isima.stackoverflow.Question
 import fr.isima.stackoverflow.Role
+import fr.isima.stackoverflow.Tag
 import fr.isima.stackoverflow.TagValue
 import fr.isima.stackoverflow.User
 import fr.isima.stackoverflow.UserRole
 import fr.isima.stackoverflow.Vote
+import grails.converters.JSON
 
 class BootStrap
 {
@@ -76,6 +79,9 @@ class BootStrap
         def answer6 = new Answer(message: 'On fait pas de philo ici !', question: question4, user: kernelith)
         question4.addToAnswers(answer6).save()
 
+        def question5 = new Question(title: 'Question sans réponse (Java)', message: 'Bonjour, j\'aurai voulu savoir quand sortira Java 9 ?', user: tjgamerz).save()
+        question5.addToTags(question: question3, tag: tagJava).save()
+
         def badge1 = new Badge(name: 'Ask your First Question', rank: Badge.Rank.SILVER).save()
         def badge2 = new Badge(name: 'First Answer', rank: Badge.Rank.BRONZE).save()
         def badge3 = new Badge(name: 'First Comment', rank: Badge.Rank.BRONZE).save()
@@ -91,10 +97,13 @@ class BootStrap
         assert User.count() == 3
         assert Role.count() == 3
         assert UserRole.count() == 3
-        assert Question.count() == 4
+        assert Question.count() == 5
         assert Answer.count() == 6
         assert Comment.count() == 2
         assert TagValue.count() == 12
+
+        // Initialize Marshallers
+        JSONMarshallers.init()
     }
 
     def destroy =

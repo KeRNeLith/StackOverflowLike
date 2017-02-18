@@ -1,5 +1,6 @@
 package fr.isima.stackoverflow
 
+import grails.rest.RestfulController
 import org.springframework.security.access.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -11,6 +12,7 @@ class TagController
 {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    // Actions
     def index(Integer max)
     {
         params.max = Math.min(max ?: 10, 100)

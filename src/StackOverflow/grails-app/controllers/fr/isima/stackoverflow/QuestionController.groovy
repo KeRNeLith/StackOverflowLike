@@ -1,6 +1,9 @@
 package fr.isima.stackoverflow
 
+import fr.isima.marshallers.questions.QuestionMarshallers
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
+import grails.rest.RestfulController
 import org.springframework.beans.factory.annotation.Value
 
 import static org.springframework.http.HttpStatus.*
@@ -27,8 +30,7 @@ class QuestionController
     }
 
     @Secured('ROLE_ANONYMOUS')
-    def home()
-    {
+    def home() {
         def nbCategories = 5
         def nbRecentQuestions = 20
         def nbQuestionByCat = 10
@@ -39,8 +41,10 @@ class QuestionController
             questionsByCat.put(it.tagName, questionService.getQuestionsForTag(nbQuestionByCat, it))
         }
 
-        // Get recent and question by category
-        respond recents: questionService.getMostRecentQuestions(nbRecentQuestions), questionsByCat: questionsByCat, randomSentence: numbersService.getRandomNumberSentence()
+        JSON.use(QuestionMarshallers.LIGHT_QUESTION) {
+            // Get recent and question by category
+            respond recents: questionService.getMostRecentQuestions(nbRecentQuestions), questionsByCat: questionsByCat, randomSentence: numbersService.getRandomNumberSentence()
+        }
     }
 
     def show(Question question)
