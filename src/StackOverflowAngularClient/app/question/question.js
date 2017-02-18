@@ -21,7 +21,11 @@ questionModule.controller('HomeCtrl', function($scope, $http)
     $http .get('http://localhost:8080/api/question/home')
           .then(function(response)
           {
-            console.log(response);
-            $scope.homeData = response.data;
+              var data = response.data;
+
+              // TMP
+              $scope.homeData = data;
+
+              $scope.randomSentence = data.randomSentence;
           });
 });

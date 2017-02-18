@@ -1,0 +1,9 @@
+{
+  "question":
+  {
+    "home":
+    {
+      "fact": "Fact about number: {{fact}}"
+    }
+  }
+}

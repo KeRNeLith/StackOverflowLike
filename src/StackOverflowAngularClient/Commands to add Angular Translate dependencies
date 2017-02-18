@@ -1,0 +1,17 @@
+### ANGULAR-TRANSLATE STUFF
+# adds angular-translate library
+bower install --save angular-translate
+
+# util for asynchronous loading translations files
+bower install --save angular-translate-loader-static-files
+# util to save selected language preferences to localStorage
+bower install --save angular-translate-storage-local
+# util to track missed IDs in translation files
+bower install --save angular-translate-handler-log
+
+# list of predefined settings for each locale
+bower install --save angular-i18n
+
+
+Notes:
+It uses bower executable that should be in node_modules after running the command: npm install

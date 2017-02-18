@@ -1,0 +1,9 @@
+{
+  "question":
+  {
+    "home":
+    {
+      "fact": "Fait amusant à propos du nombre : {{fact}}"
+    }
+  }
+}
