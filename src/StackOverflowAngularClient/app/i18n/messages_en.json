@@ -1,4 +1,8 @@
 {
+  "layout":
+  {
+    "home": "Home"
+  },
   "question":
   {
     "home":

@@ -5,6 +5,7 @@ var questionModule = angular.module('segFault.question', ['ngRoute']);
 // Define available routes
 questionModule.config(['$routeProvider', function($routeProvider)
 {
+  // Home page
   $routeProvider.when('/', {
     templateUrl: 'question/home.html',
     controller: 'HomeCtrl'
@@ -13,9 +14,15 @@ questionModule.config(['$routeProvider', function($routeProvider)
       templateUrl: 'question/home.html',
       controller: 'HomeCtrl'
   });
+
+  // Display question
+  $routeProvider.when('/question/display/:id', {
+      templateUrl: 'question/display.html',
+      controller: 'QuestionDisplayCtrl'
+  });
 }]);
 
-// Define controller
+// Define controllers
 questionModule.controller('HomeCtrl', function($scope, $http)
 {
     $http .get('http://localhost:8080/api/question/home')
@@ -23,11 +30,21 @@ questionModule.controller('HomeCtrl', function($scope, $http)
           {
               var data = response.data;
 
-              // TMP
-              $scope.homeData = data;
-
               $scope.recents = data.recents;
               $scope.questionsByCat = data.questionsByCat;
               $scope.randomSentence = data.randomSentence;
           });
+});
+
+questionModule.controller('QuestionDisplayCtrl', function($scope, $http, $routeParams)
+{
+    //$routeParams.id
+    // TODO
+});
+
+// Directives
+questionModule.directive('sfQuestionEntry', function () {
+    return {
+        templateUrl: 'question/templates/_questionEntry.html'
+    };
 });

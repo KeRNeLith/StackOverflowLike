@@ -15,6 +15,7 @@ class TagsMarshallers
 
 	public static lightTagMarshaller = { Tag tag ->
 		def output = [:]
+		output['id'] = tag.tag.id
 		output['tag'] = tag.tag.tagName
 		return output
 	}

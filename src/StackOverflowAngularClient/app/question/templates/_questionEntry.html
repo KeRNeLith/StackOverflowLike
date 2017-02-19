@@ -1,0 +1,14 @@
+<td class="text-center">
+    <h4>
+        <a ng-href="#!/question/display/{{question.id}}">{{question.title}}</a>
+    </h4>
+</td>
+<td class="text-center">
+    <h4 ng-repeat="tag in question.tags" style="display:inline-block;">
+        <a ng-href="#!/tag/display/{{tag.id}}">
+            <div class="label label-default right-margin-10">
+                {{tag.tag}}
+            </div>
+        </a>
+    </h4>
+</td>

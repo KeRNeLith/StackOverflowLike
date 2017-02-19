@@ -45,6 +45,7 @@ class QuestionMarshallers
 	private static getLightQuestionData(Question question)
 	{
 		def output = [:]
+		output['id'] = question.id
 		output['title'] = question.title
 		output['views'] = question.nbViews
 		output['resolved'] = question.isResolved

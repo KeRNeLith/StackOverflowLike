@@ -4,11 +4,17 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="assets/stylesheets/app.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+    <link rel="icon" href="assets/images/favicon.ico">
+
     <style>
       [ng-cloak] {
         display: none;
       }
     </style>
+
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
     <script>
       // include angular loader, which allows the files to load in any order
@@ -49,10 +55,33 @@
       });
     </script>
     <title>SegFault</title>
-    <link rel="stylesheet" href="assets/stylesheets/app.css">
-    <link rel="stylesheet" href="assets/stylesheets/bootstrap.css">
   </head>
   <body ng-cloak>
+
+      <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
+                <a ng-href="#!/" class="navbar-brand">{{ 'layout.home' | translate }}</a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav"></ul>
+              <!-- Login part -->
+              <div class="nav navbar-nav navbar-right">
+                  <!--<sec:ifNotLoggedIn>
+                    <g:link controller="user" action="register" class="navbar-brand"><g:message code='signup.button'/></g:link>
+                    <g:link controller="login" action="auth" class="navbar-brand"><g:message code='signin.button'/></g:link>
+                  </sec:ifNotLoggedIn>
+                  <sec:ifLoggedIn>
+                    <g:link controller="user" action="display" id="${sec.loggedInUserInfo(field: 'id')}" class="navbar-brand">
+                      <sec:username/>
+                    </g:link>
+                    <g:link controller="logout" class="navbar-brand"><g:message code='logout.button'/></g:link>
+                  </sec:ifLoggedIn>-->
+              </div>
+            </div>
+        </div>
+      </div>
 
     <div ng-view></div>
 

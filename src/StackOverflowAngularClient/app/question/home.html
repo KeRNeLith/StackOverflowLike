@@ -16,21 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="question in recents">
-                <td class="text-center">
-                    <!--<h4><g:link action="display" id="${question.id}">${question.title}</g:link></h4>-->
-                    <h4>{{question.title}}</h4>
-                </td>
-                <td class="text-center">
-                    <h4 ng-repeat="tag in question.tags" style="display:inline-block;">
-                        <!--<g:link controller="tag" action="show" id="${tag.tag.id}">-->
-                            <div class="label label-default right-margin-10">
-                                {{tag.tag}}
-                            </div>
-                        <!--</g:link>-->
-                    </h4>
-                </td>
-            </tr>
+            <tr ng-repeat="question in recents" sf-question-entry="question"></tr>
         </tbody>
     </table>
 
@@ -47,23 +33,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="question in questions">
-                        <td class="text-center">
-                            <h4>
-                                <!--<g:link action="display" id="${question.id}">${question.title}</g:link>-->
-                                {{question.title}}
-                            </h4>
-                        </td>
-                        <td class="text-center">
-                            <h4 ng-repeat="tag in question.tags" style="display:inline-block;">
-                                <!--<g:link controller="tag" action="show" id="${tag.tag.id}">-->
-                                    <div class="label label-default right-margin-10">
-                                        {{tag.tag}}
-                                    </div>
-                                <!--</g:link>-->
-                            </h4>
-                        </td>
-                    </tr>
+                    <tr ng-repeat="question in questions" sf-question-entry="question"></tr>
                 </tbody>
             </table>
         </div>
