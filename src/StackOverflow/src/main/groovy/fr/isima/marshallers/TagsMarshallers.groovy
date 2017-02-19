@@ -1,4 +1,4 @@
-package fr.isima.marshallers.tags
+package fr.isima.marshallers
 
 import fr.isima.stackoverflow.Tag
 

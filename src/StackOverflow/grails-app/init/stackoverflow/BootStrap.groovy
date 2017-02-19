@@ -77,7 +77,9 @@ class BootStrap
 
         def question4 = new Question(title: 'Question ouverte', message: 'Que signifie une question ouverte ?', user: fooUser).save()
         def answer6 = new Answer(message: 'On fait pas de philo ici !', question: question4, user: kernelith)
-        question4.addToAnswers(answer6).save()
+        def answer7 = new Answer(message: 'Rien n\'empêche de commencer un jour', question: question4, user: fooUser)
+        question4   .addToAnswers(answer6)
+                    .addToAnswers(answer7).save()
 
         def question5 = new Question(title: 'Question sans réponse (Java)', message: 'Bonjour, j\'aurai voulu savoir quand sortira Java 9 ?', user: tjgamerz).save()
         question5.addToTags(question: question3, tag: tagJava).save()
@@ -98,7 +100,7 @@ class BootStrap
         assert Role.count() == 3
         assert UserRole.count() == 3
         assert Question.count() == 5
-        assert Answer.count() == 6
+        assert Answer.count() == 7
         assert Comment.count() == 2
         assert TagValue.count() == 12
 

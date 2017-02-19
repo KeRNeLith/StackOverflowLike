@@ -1,4 +1,4 @@
-package fr.isima.marshallers.users
+package fr.isima.marshallers
 
 import fr.isima.stackoverflow.User
 
@@ -14,6 +14,7 @@ class UserMarshallers
 
 	public static lightUserMarshaller = { User user ->
 		def output = [:]
+		output['id'] = user.id
 		output['username'] = user.username
 		return output
 	}

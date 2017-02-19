@@ -1,10 +1,8 @@
 package fr.isima.stackoverflow
 
-import fr.isima.marshallers.questions.QuestionMarshallers
+import fr.isima.marshallers.QuestionMarshallers
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
-import grails.rest.RestfulController
-import org.springframework.beans.factory.annotation.Value
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -73,10 +71,11 @@ class QuestionController
         def questionVotes = questionService.voteCount(question.votes)
         // Sort answers by votes and posting date
         def sortedAnswers = questionService.sortAnswersByVotes(question)
+        //def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
 
-        def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
-
-        respond question, model: [questionVotes: questionVotes, sortedAnswers: sortedAnswers, currentUser: user]
+	    JSON.use(QuestionMarshallers.FULL_QUESTION_FOR_DISPLAY) {
+		    respond question: question, questionVotes: questionVotes, sortedAnswers: sortedAnswers
+	    }
     }
 
     def create()

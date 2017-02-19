@@ -105,10 +105,11 @@ class QuestionService
     /**
      * Use question answers and sort them. Additionally compute their number of votes (positive plus negative)
      * @param id Question.
+     * @return List of sorted answers (by votes and dates).
      */
     def sortAnswersByVotes(Question question)
     {
-        def sortedAnswers = [:]
+        def sortedAnswers = []
 
         def answers = question.answers
         answers.each {
@@ -116,11 +117,11 @@ class QuestionService
             it.comments = it.comments.sort { a, b -> a.dateCreated <=> b.dateCreated }
 
             // Associate answer to it's vote ratio
-            sortedAnswers.put(it, voteCount(it.votes))
+            sortedAnswers.add([answer: it, votes: voteCount(it.votes)])
         }
 
         // Sort first on number of votes and after on posting date
-        return sortedAnswers.sort { a, b -> b.value <=> a.value ?: a.key.dateCreated <=> b.key.dateCreated }
+        return sortedAnswers.sort { a, b -> b.votes <=> a.votes ?: a.answer.dateCreated <=> b.answer.dateCreated }
     }
 
     /**
