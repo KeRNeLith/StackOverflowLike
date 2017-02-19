@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-  <!--[if lt IE 7]>      <html ng-app="segFault" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-  <!--[if IE 7]>         <html ng-app="segFault" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-  <!--[if IE 8]>         <html ng-app="segFault" class="no-js lt-ie9"> <![endif]-->
-  <!--[if gt IE 8]><!--> <html ng-app="segFault" class="no-js"> <!--<![endif]-->
+  <!--[if lt IE 7]>      <html ng-app="segFault" ng-controller="PageCtrl" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html ng-app="segFault" ng-controller="PageCtrl" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html ng-app="segFault" ng-controller="PageCtrl" class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html ng-app="segFault" ng-controller="PageCtrl" class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SegFault</title>
+    <title>{{ PageService.title() }}</title>
     <meta name="description" content="Questions & Answer website like Stack Overflow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -65,8 +65,14 @@
     <script src="bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js"></script>
     <!-- Application -->
     <script src="app.js"></script>
+    <!-- Services -->
+    <script src="services/pageService.js"></script>
+    <!-- Question related -->
     <script src="question/question.js"></script>
+    <script src="controllers/question/questionControllers.js"></script>
+    <script src="directives/question/questionDirectives.js"></script>
     <!-- TO BE COMPLETED WITH NEW MODULES -->
+    <!-- Other -->
     <script src="components/version/version.js"></script>
     <script src="components/version/version-directive.js"></script>
     <script src="components/version/interpolate-filter.js"></script>

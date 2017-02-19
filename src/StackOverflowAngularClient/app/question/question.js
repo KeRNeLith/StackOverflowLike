@@ -21,30 +21,3 @@ questionModule.config(['$routeProvider', function($routeProvider)
       controller: 'QuestionDisplayCtrl'
   });
 }]);
-
-// Define controllers
-questionModule.controller('HomeCtrl', function($scope, $http)
-{
-    $http .get('http://localhost:8080/api/question/home')
-          .then(function(response)
-          {
-              var data = response.data;
-
-              $scope.recents = data.recents;
-              $scope.questionsByCat = data.questionsByCat;
-              $scope.randomSentence = data.randomSentence;
-          });
-});
-
-questionModule.controller('QuestionDisplayCtrl', function($scope, $http, $routeParams)
-{
-    //$routeParams.id
-    // TODO
-});
-
-// Directives
-questionModule.directive('sfQuestionEntry', function () {
-    return {
-        templateUrl: 'question/templates/_questionEntry.html'
-    };
-});

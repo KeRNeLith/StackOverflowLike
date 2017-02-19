@@ -10,11 +10,18 @@ var segFaultApp = angular.module('segFault', [
     'segFault.version'
 ]);
 
+// General controller
+segFaultApp.controller('PageCtrl', function PageCtrl($scope, PageService)
+{
+    $scope.PageService = PageService;
+});
+
+// Application configuration
 segFaultApp.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider)
 {
-  $locationProvider.hashPrefix('!');
+    $locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({redirectTo: '/'});
+    $routeProvider.otherwise({redirectTo: '/'});
 }]);
 
 // Translation

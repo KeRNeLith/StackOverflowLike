@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-controller="PageCtrl">
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
@@ -45,7 +45,13 @@
         'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js'
         // Application
         'app.js',
+        // Services
+        'services/pageService.js',
+        // Questions related
         'question/question.js',
+        'controllers/question/questionControllers.js',
+        'directives/question/questionDirectives.js',
+        // Other
         'components/version/version.js',
         'components/version/version-directive.js',
         'components/version/interpolate-filter.js'
@@ -54,7 +60,7 @@
         angular.bootstrap(document, ['segFault']);
       });
     </script>
-    <title>SegFault</title>
+    <title>{{ PageService.title() }}</title>
   </head>
   <body ng-cloak>
 
