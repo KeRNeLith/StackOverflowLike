@@ -18,6 +18,7 @@ questionModule.config(['$routeProvider', function($routeProvider)
   // Display question
   $routeProvider.when('/question/display/:id', {
       templateUrl: 'question/display.html',
-      controller: 'QuestionDisplayCtrl'
+      controller: 'QuestionDisplayCtrl',
+      css: 'assets/stylesheets/question/display.css'
   });
 }]);

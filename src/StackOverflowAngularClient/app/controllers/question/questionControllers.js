@@ -5,8 +5,10 @@
 var questionModule = angular.module('segFault.question');
 
 // Define controllers
-questionModule.controller('HomeCtrl', function($scope, $http)
+questionModule.controller('HomeCtrl', function($scope, $http, PageService)
 {
+    PageService.setTitle(PageService.default());
+    
     $http.get('http://localhost:8080/api/question/home')
         .then(function(response)
         {
@@ -27,7 +29,7 @@ questionModule.controller('QuestionDisplayCtrl', function($scope, $http, $routeP
 
             let question = data.question;
             $scope.question = question;
-            PageService.setTitle(question.title + ' - ' + PageService.title());
+            PageService.setTitle(question.title + ' - ' + PageService.default());
 
             $scope.questionVotes = data.questionVotes;
             $scope.answers = data.sortedAnswers;

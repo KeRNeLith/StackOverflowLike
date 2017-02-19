@@ -8,7 +8,13 @@ class PageService
 {
     constructor()
     {
-        this._title = 'Segfault';
+        this._default = 'Segfault';
+        this._title = this._default;
+    }
+
+    default()
+    {
+        return this._default;
     }
 
     title()

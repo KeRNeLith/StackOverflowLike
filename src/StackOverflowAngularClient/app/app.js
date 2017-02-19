@@ -2,12 +2,15 @@
 
 // Declare app level module which depends on views, and components
 var segFaultApp = angular.module('segFault', [
+    // Utils dependencies
     'ngRoute',
-    'pascalprecht.translate', // angular-translate
+    'routeStyles',              // Custom CSS per route
+    'pascalprecht.translate',   // Angular-translate
     'ngCookies',
-    'segFault.question',
+    'segFault.version',
+    // Modules
+    'segFault.question'
     // TO BE COMPLETED HERE
-    'segFault.version'
 ]);
 
 // General controller
