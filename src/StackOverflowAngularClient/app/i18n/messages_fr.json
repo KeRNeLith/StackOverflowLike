@@ -15,6 +15,25 @@
         "tags": "Tags",
         "byCat": "Questions par catégories"
       }
+    },
+    "display":
+    {
+      "vote": "vote",
+      "votes": "votes",
+      "voteUpTooltip": "Cliquez pour ajouter un vote positif",
+      "voteDownTooltip": "Cliquez pour ajouter un vote négatif",
+      "view": "vue",
+      "views": "vues",
+      "Asked": "Posté le",
+      "by": "par",
+      "answer": "répondre",
+      "Answer": "Réponse",
+      "Answers": "Réponses",
+      "Answered": "Répondu le",
+      "addAnswerTooltip": "Répondre à cette question",
+      "comment": "commenter",
+      "Commented": "Commenté le",
+      "addCommentTooltip": "Ajouter un commentaire à cette réponse"
     }
   }
 }

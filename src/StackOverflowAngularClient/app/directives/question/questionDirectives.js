@@ -10,3 +10,13 @@ questionModule.directive('sfQuestionEntry', function () {
         templateUrl: 'question/templates/_questionEntry.html'
     };
 });
+
+questionModule.directive('sfQuestionVotes', function () {
+    return {
+        scope: {
+            post: '=',
+            votes: '='
+        },
+        templateUrl: 'question/templates/_voteCount.html'
+    };
+});

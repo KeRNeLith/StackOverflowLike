@@ -15,6 +15,25 @@
         "tags": "Tags",
         "byCat": "Questions by Tag"
       }
+    },
+    "display":
+    {
+      "vote": "vote",
+      "votes": "votes",
+      "voteUpTooltip": "Click to vote up",
+      "voteDownTooltip": "Click to vote down",
+      "view": "view",
+      "views": "views",
+      "Asked": "Asked on",
+      "by": "by",
+      "answer": "answer",
+      "Answer": "Answer",
+      "Answers": "Answers",
+      "Answered": "Answered on",
+      "addAnswerTooltip": "Answer this question",
+      "comment": "comment",
+      "Commented": "Commented on",
+      "addCommentTooltip": "Add a comment on this answer"
     }
   }
 }

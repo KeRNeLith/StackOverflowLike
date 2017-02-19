@@ -48,19 +48,14 @@ class QuestionMarshallers
 	}
 
 	public static fullQuestionMarshaller = { Question question ->
-		def output = getLightQuestionData(question)
+		def output = getMediumQuestionData(question)
 		output['answers'] = question.answers
-		output['dateCreated'] = question.dateCreated
-		output['lastUpdated'] = question.lastUpdated
 		output['votes'] = question.votes
 		return output
 	}
 
 	public static fullQuestionForDisplayMarshaller = { Question question ->
-		def output = getLightQuestionData(question)
-		output['dateCreated'] = question.dateCreated
-		output['lastUpdated'] = question.lastUpdated
-		return output
+		return getMediumQuestionData(question)
 	}
 
 	private static getLightQuestionData(Question question)
@@ -73,6 +68,15 @@ class QuestionMarshallers
 		output['title'] = question.title
 		output['tags'] = question.tags
 		output['user'] = question.user
+		return output
+	}
+
+	private static getMediumQuestionData(Question question)
+	{
+		def output = getLightQuestionData(question)
+		output['dateCreated'] = question.dateCreated
+		output['lastUpdated'] = question.lastUpdated
+		output['message'] = question.message
 		return output
 	}
 }
