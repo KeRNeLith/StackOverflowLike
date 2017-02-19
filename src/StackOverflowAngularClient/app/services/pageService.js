@@ -2,6 +2,8 @@
  * Created by kernelith on 19/02/17.
  */
 
+'use strict';
+
 var segFaultApp = angular.module('segFault');
 
 class PageService

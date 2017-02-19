@@ -9,6 +9,7 @@ var segFaultApp = angular.module('segFault', [
     'ngCookies',
     'segFault.version',
     // Modules
+    'segFault.auth',
     'segFault.question'
     // TO BE COMPLETED HERE
 ]);
@@ -26,6 +27,9 @@ segFaultApp.config(['$locationProvider', '$routeProvider', function($locationPro
 
     $routeProvider.otherwise({redirectTo: '/'});
 }]);
+
+// Setup Up target API (Grails API)
+segFaultApp.constant('API', 'http://localhost:8080');
 
 // Translation
 segFaultApp.config(function($translateProvider)

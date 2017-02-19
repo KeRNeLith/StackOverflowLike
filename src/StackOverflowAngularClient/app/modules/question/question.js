@@ -7,17 +7,17 @@ questionModule.config(['$routeProvider', function($routeProvider)
 {
   // Home page
   $routeProvider.when('/', {
-    templateUrl: 'question/home.html',
+    templateUrl: 'modules/question/home.html',
     controller: 'HomeCtrl'
   });
   $routeProvider.when('/question/home', {
-      templateUrl: 'question/home.html',
+      templateUrl: 'modules/question/home.html',
       controller: 'HomeCtrl'
   });
 
   // Display question
   $routeProvider.when('/question/display/:id', {
-      templateUrl: 'question/display.html',
+      templateUrl: 'modules/question/display.html',
       controller: 'QuestionDisplayCtrl',
       css: 'assets/stylesheets/question/display.css'
   });

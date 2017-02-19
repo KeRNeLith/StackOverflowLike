@@ -2,6 +2,8 @@
  * Created by kernelith on 19/02/17.
  */
 
+'use strict';
+
 var routeStyleModule = angular.module('routeStyles', ['ngRoute']);
 
 routeStyleModule.directive('head', ['$rootScope','$compile','$interpolate', function($rootScope, $compile, $interpolate)
