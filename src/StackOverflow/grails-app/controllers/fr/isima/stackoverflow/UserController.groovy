@@ -77,41 +77,16 @@ class UserController
 
         User user = new User(request.JSON)
 
-        if (user == null)
+        def retCode = userService.createUser(user)
+
+        def status = BAD_REQUEST
+        // If succeed
+        if (retCode == 'success.register.user')
         {
-            transactionStatus.setRollbackOnly()
-            render status: BAD_REQUEST
-            return
+            status = CREATED
         }
 
-        user.validate()
-        if (user.hasErrors())
-        {
-            transactionStatus.setRollbackOnly()
-
-            String errorMsg = ''
-            if (user.errors['username'] != null && user.errors['password'] != null)
-                errorMsg = 'error.register.invalid.both'
-            else if (user.errors['username'] != null)
-                errorMsg = 'error.register.invalid.username'
-            else if (user.errors['password'] != null)
-                errorMsg = 'error.register.invalid.password'
-
-            render status: BAD_REQUEST, message: errorMsg
-            return
-        }
-
-        user = userService.createUser(user)
-
-        if (user != null)
-        {
-            render status: CREATED
-        }
-        // User already exists
-        else
-        {
-            render status: NOT_ACCEPTABLE, message: 'error.register.alreadyExists'
-        }
+        render status: status, message: retCode
     }
 
     def edit(User user)

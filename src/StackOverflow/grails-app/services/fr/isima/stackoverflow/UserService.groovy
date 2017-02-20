@@ -11,20 +11,52 @@ class UserService
     /**
      * Create a new user based on input params.
      * @param user User to register.
+     * @return Valid string if user is created, otherwise list of error codes.
      */
     def createUser(User user)
     {
         // Post question feature not enabled
         if (!featuresFlippingService.isSignUpEnabled())
-            return null
+            return [ 'error.service.unavailable' ]
+
+        if (user == null)
+        {
+            transactionStatus.setRollbackOnly()
+            return [ 'error.register.impossible' ]
+        }
+
+        user.validate()
+        if (user.hasErrors())
+        {
+            transactionStatus.setRollbackOnly()
+
+            def errors = []
+            // Check username
+            if (user.errors['username'].code == 'minSize.notmet')
+                errors << 'error.register.username.toosmall'
+            else if (user.errors['username'].code == 'maxSize.exceeded')
+                errors << 'error.register.username.toolong'
+            else if (user.errors['username'].code == 'unique')
+                errors << 'error.register.user.alreadyExists'
+
+            // Check password
+            if (user.errors['password'] != null)
+                errors << 'error.register.invalid.password'
+
+            return errors
+        }
 
         user = user.save(flush: true, insert: true)
         if (user != null)
         {
             UserRole.create user, Role.findByAuthority('ROLE_USER')
+            return 'success.register.user'
         }
-
-        return user
+        // Should never arrive here
+        else
+        {
+            return [ 'error.register.user.alreadyExists' ]
+        }
     }
 
     /**

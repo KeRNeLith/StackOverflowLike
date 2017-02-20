@@ -3,17 +3,24 @@
   {
     "service":
     {
-      "unavailable": "TODO"
+      "unavailable": "This service is temporary unavailable. Please try again later."
     },
     "register":
     {
+      "impossible": "Impossible to register user.",
       "invalid":
       {
-        "both": "TODO",
-        "username": "TODO",
-        "password": "TODO"
-      },
-      "alreadyExists": "TODO"
+        "password": "The provided password is invalid.",
+        "username":
+        {
+          "tooLong": "Username is too long.",
+          "tooSmall": "Username is too small"
+        },
+        "user":
+        {
+          "alreadyExists": "User already exists"
+        }
+      }
     }
   },
   "layout":
@@ -51,6 +58,13 @@
       "comment": "comment",
       "Commented": "Commented on",
       "addCommentTooltip": "Add a comment on this answer"
+    }
+  },
+  "success":
+  {
+    "register":
+    {
+      "user": "Register succeed!"
     }
   }
 }

@@ -28,7 +28,8 @@ class QuestionController
     }
 
     @Secured('ROLE_ANONYMOUS')
-    def home() {
+    def home()
+    {
         def nbCategories = 5
         def nbRecentQuestions = 20
         def nbQuestionByCat = 10
@@ -134,7 +135,7 @@ class QuestionController
         def tags = null
         if (params.containsKey('tags'))
         {
-            tags = params.list('tags');
+            tags = params.list('tags')
         }
 
         def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
