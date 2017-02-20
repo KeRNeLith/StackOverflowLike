@@ -57,6 +57,7 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 
 // Enable anonymous accesses for certain URLs
 grails.plugin.springsecurity.rest.token.validation.enableAnonymousAccess = true
+grails.plugin.springsecurity.rest.token.rendering.authoritiesPropertyName = 'permissions'
 
 grails.plugin.springsecurity.roleHierarchy = '''
    ROLE_ADMIN > ROLE_USER

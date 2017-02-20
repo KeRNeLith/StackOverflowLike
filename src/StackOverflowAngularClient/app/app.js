@@ -4,7 +4,6 @@
 var segFaultApp = angular.module('segFault', [
     // Utils dependencies
     'ngRoute',
-    'routeStyles',              // Custom CSS per route
     'pascalprecht.translate',   // Angular-translate
     'ngCookies',
     'segFault.version',

@@ -1,4 +1,10 @@
 {
+  "button":
+  {
+    "logout": "Se déconnecter",
+    "signIn": "Se connecter",
+    "signUp": "S'inscrire"
+  },
   "error":
   {
     "service":

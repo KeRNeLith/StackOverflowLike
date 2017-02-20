@@ -27,12 +27,17 @@ class AuthCtrl
 
     logout()
     {
-        this.UserService.logout()
+        this.UserService.logout();
     }
 
     isAuthenticated()
     {
-        return this.AuthService.isAuthenticated()
+        return this.AuthService.isAuthenticated();
+    }
+
+    currentUser()
+    {
+        return this.AuthService.currentUser();
     }
 }
 loginModule.controller('AuthCtrl', AuthCtrl);

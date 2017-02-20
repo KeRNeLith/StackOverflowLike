@@ -1,6 +1,6 @@
 'use strict';
 
-var questionModule = angular.module('segFault.question', ['ngRoute']);
+var questionModule = angular.module('segFault.question', ['ngRoute', 'routeStyles'/* Custom CSS per route */ ]);
 
 // Define available routes
 questionModule.config(['$routeProvider', function($routeProvider)

@@ -41,8 +41,9 @@ segFaultAuthModule.factory('AuthInterceptor', function ($window, API, AuthServic
         responseError: function(response)
         {
             // Unauthorized => Redirect to login
-            if (response.status == 401)
+            if (response.status == 401 || response.status === 403)
             {
+                AuthService.logout();   // Clear token
                 $window.location.href = '/login'
             }
 
