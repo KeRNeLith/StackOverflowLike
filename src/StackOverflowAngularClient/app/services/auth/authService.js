@@ -14,6 +14,16 @@ class AuthService
     }
 
     // JWT methods
+    handleRequest(response)
+    {
+        let token = response.data ? response.data.access_token : null;
+        if(token)
+        {
+            //this.parseJWTToken(token);
+            this.saveToken(token);
+        }
+    }
+
     parseJWTToken(token)
     {
         // Decode token payload
@@ -38,7 +48,7 @@ class AuthService
     }
 
     // Auth methods
-    isAuthentificated()
+    isAuthenticated()
     {
         let token = this.getToken();
         if (token)

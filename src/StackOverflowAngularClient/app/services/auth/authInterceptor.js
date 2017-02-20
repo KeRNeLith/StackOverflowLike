@@ -29,9 +29,9 @@ segFaultAuthModule.factory('AuthInterceptor', function ($window, API, AuthServic
         // If a token was sent back => save it
         response: function (response)
         {
-            if (response.config.url.indexOf(API) === 0 && response.data.access_token)
+            if (response.config.url.indexOf(API) === 0)
             {
-                AuthService.saveToken(response.data.access_token);
+                AuthService.handleRequest(response);
             }
 
             return response;

@@ -1,0 +1,10 @@
+<div ng-app="segFault" ng-controller="AuthCtrl as authCtrl">
+    <input type="text" ng-model="authCtrl.username" placeholder="username"><br>
+    <input type="password" ng-model="authCtrl.password" placeholder="password"><br>
+    <br>
+
+    <button ng-click="authCtrl.register()">Register</button>
+    <button ng-click="authCtrl.login()">Login</button>
+    <button ng-click="authCtrl.logout()" ng-show="authCtrl.isAuthenticated()">Logout</button>
+    <br><br>
+</div>

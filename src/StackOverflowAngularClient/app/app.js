@@ -10,6 +10,7 @@ var segFaultApp = angular.module('segFault', [
     'segFault.version',
     // Modules
     'segFault.auth',
+    'segFault.login',
     'segFault.question'
     // TO BE COMPLETED HERE
 ]);

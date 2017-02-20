@@ -15,12 +15,6 @@ class UserService
         this.AuthService = AuthService;
     }
 
-    /*handleRequest(response)
-    {
-        this.AuthService.save(response.data.token);
-        return response.data.message;
-    }*/
-
     // Authentication methods
     register(username, password)
     {
@@ -36,6 +30,11 @@ class UserService
             username: username,
             password: password
         });
+    }
+
+    logout()
+    {
+        this.AuthService.logout();
     }
 }
 
