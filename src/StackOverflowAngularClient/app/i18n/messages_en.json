@@ -1,4 +1,21 @@
 {
+  "error":
+  {
+    "service":
+    {
+      "unavailable": "TODO"
+    },
+    "register":
+    {
+      "invalid":
+      {
+        "both": "TODO",
+        "username": "TODO",
+        "password": "TODO"
+      },
+      "alreadyExists": "TODO"
+    }
+  },
   "layout":
   {
     "home": "Home"

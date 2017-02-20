@@ -8,6 +8,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class UserController
 {
+    static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     // Services
@@ -36,15 +37,6 @@ class UserController
 
     def create()
     {
-        respond new User(params)
-    }
-
-    @Secured('ROLE_ANONYMOUS')
-    def register()
-    {
-        if (!featuresFlippingService.isSignUpEnabled())
-            render(status: 503)
-
         respond new User(params)
     }
 
@@ -78,22 +70,34 @@ class UserController
 
     @Secured('ROLE_ANONYMOUS')
     @Transactional
-    def registerSave(User user)
+    def register()
     {
         if (!featuresFlippingService.isSignUpEnabled())
-            render(status: 503)
+            render status: SERVICE_UNAVAILABLE, message: 'error.service.unavailable'
+
+        User user = new User(request.JSON)
 
         if (user == null)
         {
             transactionStatus.setRollbackOnly()
-            notFound()
+            render status: BAD_REQUEST
             return
         }
 
+        user.validate()
         if (user.hasErrors())
         {
             transactionStatus.setRollbackOnly()
-            respond user.errors, view:'register'
+
+            String errorMsg = ''
+            if (user.errors['username'] != null && user.errors['password'] != null)
+                errorMsg = 'error.register.invalid.both'
+            else if (user.errors['username'] != null)
+                errorMsg = 'error.register.invalid.username'
+            else if (user.errors['password'] != null)
+                errorMsg = 'error.register.invalid.password'
+
+            render status: BAD_REQUEST, message: errorMsg
             return
         }
 
@@ -101,11 +105,12 @@ class UserController
 
         if (user != null)
         {
-            redirect action: 'display', id: user.id
+            render status: CREATED
         }
+        // User already exists
         else
         {
-            redirect action: 'register'
+            render status: NOT_ACCEPTABLE, message: 'error.register.alreadyExists'
         }
     }
 

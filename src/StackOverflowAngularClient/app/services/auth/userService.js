@@ -10,16 +10,33 @@ class UserService
 {
     constructor($http, API, AuthService)
     {
+        this.$http = $http;
+        this.API = API;
+        this.AuthService = AuthService;
     }
 
     handleRequest(response)
     {
-        AuthService.save(response.data.token);
+        this.AuthService.save(response.data.token);
         return response.data.message;
     }
 
     // Authentication methods
-    //...
+    register(username, password)
+    {
+        return this.$http.post(this.API + '/api/user/register', {
+            username: username,
+            password: password
+        });
+    }
+
+    login(username, password)
+    {
+        return this.$http.post(this.API + '/api/login', {
+            username: username,
+            password: password
+        });
+    }
 }
 
 segFaultAuthModule.service('UserService', UserService);

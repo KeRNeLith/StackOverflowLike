@@ -9,10 +9,8 @@ class UrlMappings {
             }
         }
 
-        //"/"(view:"/index")
         "/"(controller:"question", action:"home")
 
-        "400"(view:'/error')
         "401"(view:'/denied')
         "404"(view:'/notFound')
         "500"(view:'/error')

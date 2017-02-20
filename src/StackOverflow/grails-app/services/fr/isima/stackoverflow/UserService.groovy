@@ -18,7 +18,7 @@ class UserService
         if (!featuresFlippingService.isSignUpEnabled())
             return null
 
-        user.save(flush: true)
+        user = user.save(flush: true, insert: true)
         if (user != null)
         {
             UserRole.create user, Role.findByAuthority('ROLE_USER')
