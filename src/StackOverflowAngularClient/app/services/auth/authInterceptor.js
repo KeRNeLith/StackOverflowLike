@@ -6,18 +6,47 @@
 
 var segFaultAuthModule = angular.module('segFault.auth');
 
-segFaultAuthModule.factory('AuthInterceptor', function (API, AuthService) {
+segFaultAuthModule.factory('AuthInterceptor', function ($window, API, AuthService) {
     return {
         // Automatically attach Authorization header
         request: function (config)
         {
+            let token = AuthService.getToken();
+            if(config.url.indexOf(API) === 0 && token)
+            {
+                config.headers.Authorization = 'Bearer ' + token;
+            }
+
+            return config;
+        },
+
+        requestError: function(config)
+        {
+            // Nothing
             return config;
         },
 
         // If a token was sent back => save it
-        reponse: function (res)
+        response: function (response)
         {
-            return res;
+            if (response.config.url.indexOf(API) === 0 && response.data.access_token)
+            {
+                AuthService.saveToken(response.data.access_token);
+            }
+
+            return response;
+        },
+
+        // Automatically ask to login when getting unauthorized
+        responseError: function(response)
+        {
+            // Unauthorized => Redirect to login
+            if (response.status == 401)
+            {
+                $window.location.href = '/login'
+            }
+
+            return response;
         }
     }
 });

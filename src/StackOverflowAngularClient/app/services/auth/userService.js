@@ -15,11 +15,11 @@ class UserService
         this.AuthService = AuthService;
     }
 
-    handleRequest(response)
+    /*handleRequest(response)
     {
         this.AuthService.save(response.data.token);
         return response.data.message;
-    }
+    }*/
 
     // Authentication methods
     register(username, password)
