@@ -1,6 +1,0 @@
-#Wed, 08 Feb 2017 16:47:04 +0100
-
-info.app.version=0.1
-info.app.name=StackOverflowLikeAgClient
-grails.env=development
-info.app.grailsVersion=3.2.4
