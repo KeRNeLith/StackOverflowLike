@@ -7,14 +7,20 @@
 var loginModule = angular.module('segFault.login');
 
 // Define controllers
-loginModule.controller('LoginCtrl', function($scope, PageService)
+loginModule.controller('LoginCtrl', function($scope, $translate, PageService)
 {
-    PageService.setTitle('Login - ' + PageService.default());
+    $translate('login.title.page').then(function (translatedKey)
+    {
+        PageService.setTitle(translatedKey + ' - ' + PageService.default());
+    });
 });
 
-loginModule.controller('RegisterCtrl', function($scope, PageService)
+loginModule.controller('RegisterCtrl', function($scope, $translate, PageService)
 {
-    PageService.setTitle('Register - ' + PageService.default());
+    $translate('register.title.page').then(function (translatedKey)
+    {
+        PageService.setTitle(translatedKey + ' - ' + PageService.default());
+    });
 });
 
 loginModule.controller('AuthCtrl', function ($scope, $timeout, UserService, AuthService, RedirectionService) {

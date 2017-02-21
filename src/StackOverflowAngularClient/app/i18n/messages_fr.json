@@ -76,6 +76,7 @@
   {
     "title":
     {
+      "page": "Connexion",
       "label": "Compte utilisateur"
     }
   },
@@ -128,6 +129,7 @@
   {
     "title":
     {
+      "page": "Inscription",
       "label": "Création d'un compte"
     }
   },

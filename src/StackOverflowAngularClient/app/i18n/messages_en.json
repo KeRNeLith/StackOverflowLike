@@ -80,6 +80,7 @@
   {
     "title":
     {
+      "page": "Login",
       "label": "Account Login"
     }
   },
@@ -128,6 +129,7 @@
   {
     "title":
     {
+      "page": "Register",
       "label": "Create a new account"
     }
   },
