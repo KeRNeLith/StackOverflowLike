@@ -1,10 +1,58 @@
-<div ng-app="segFault" ng-controller="AuthCtrl as authCtrl">
-    <input type="text" ng-model="authCtrl.username" placeholder="username"><br>
-    <input type="password" ng-model="authCtrl.password" placeholder="password"><br>
-    <br>
+<div id="login">
+    <div class="inner">
+        <div class="container top-margin-50">
+            <div id="logDiv" ng-app="segFault" ng-controller="AuthCtrl as authCtrl" class="top-margin-50">
+                <form name="loginForm" novalidate>
+                    <h1>{{'login.title.label' | translate}}</h1>
 
-    <button ng-click="authCtrl.register()">Register</button>
-    <button ng-click="authCtrl.login()">Login</button>
-    <button ng-click="authCtrl.logout()" ng-show="authCtrl.isAuthenticated()">Logout</button>
-    <br><br>
+                    <!-- Username -->
+                    <input required
+                           type="text"
+                           minlength="3"
+                           maxlength="50"
+                           name="uUsername"
+                           autofocus="autofocus"
+                           ng-model="authCtrl.username"
+                           placeholder="{{'placeholder.field.username' | translate}}"
+                           class="input pass">
+                    <div ng-show="loginForm.$submitted || loginForm.uUsername.$touched" class="text-center error">
+                        <span ng-show="loginForm.uUsername.$error.required">{{'error.login.invalid.username.notSet' | translate}}</span>
+                        <span ng-show="loginForm.uUsername.$error.minlength">{{'error.login.invalid.username.tooSmall' | translate}}</span>
+                        <span ng-show="loginForm.uUsername.$error.maxlength">{{'error.login.invalid.username.tooLong' | translate}}</span>
+                    </div>
+
+                    <!-- Password -->
+                    <input required
+                           type="password"
+                           minlength="6"
+                           name="uPassword"
+                           ng-model="authCtrl.password"
+                           placeholder="{{'placeholder.field.password' | translate}}"
+                           class="input pass" >
+                    <div ng-show="loginForm.$submitted || loginForm.uUsername.$touched" class="text-center error">
+                        <span ng-show="loginForm.uPassword.$error.required">{{'error.login.invalid.password.notSet' | translate}}</span>
+                        <span ng-show="loginForm.uPassword.$error.minlength">{{'error.login.invalid.password.tooSmall' | translate}}</span>
+                    </div>
+
+                    <div ng-show="loginForm.$pristine && loginForm.uUsername.$untouched && loginForm.uPassword.$untouched" class="text-center error">
+                        <span ng-show="error">{{error | translate}}</span>
+                    </div>
+
+                    <!-- Sign in -->
+                    <input name="SignIn"
+                           ng-click="authCtrl.login()"
+                           value="{{'button.signIn' | translate}}"
+                           class="inputButton"
+                           type="submit">
+
+                    <!-- Go to register -->
+                    <div class="text-center">
+                        <a ng-href="#!/register">
+                            {{'button.register' | translate}}
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

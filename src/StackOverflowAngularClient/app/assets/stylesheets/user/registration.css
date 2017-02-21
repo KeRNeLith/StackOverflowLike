@@ -83,3 +83,11 @@ h1, input {
 .inputButton:focus {
     outline: none;
 }
+
+form input.ng-invalid.ng-touched {
+    background-color: #c71111;
+}
+
+.error {
+    color: #b11111;
+}

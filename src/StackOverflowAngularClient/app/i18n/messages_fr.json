@@ -2,11 +2,34 @@
   "button":
   {
     "logout": "Se déconnecter",
+    "register": "S'inscrire",
     "signIn": "Se connecter",
     "signUp": "S'inscrire"
   },
   "error":
   {
+    "login":
+    {
+      "invalid":
+      {
+        "username":
+        {
+          "notSet": "Veuillez saisir un nom d'utilisateur.",
+          "tooLong": "Le nom d'utilisateur est trop long.",
+          "tooSmall": "Le nom d'utilisateur est trop court."
+        },
+        "password":
+        {
+          "notSet": "Veuillez saisir un mot de passe.",
+          "tooSmall": "Le mot de passe est trop court."
+        }
+      },
+      "signIn":
+      {
+        "fails": "Nom d'utilisateur ou mot de passe invalide.",
+        "impossible": "Impossible de contacter le server."
+      }
+    },
     "service":
     {
       "unavailable": "Ce service est temporairement indisponible. Veuillez réessayer plus tard."
@@ -19,6 +42,7 @@
         "password": "Le mot de passe saisie est invalide.",
         "username":
         {
+          "notSet": "Veuillez saisir un nom d'utilisateur.",
           "tooLong": "Le nom d'utilisateur est trop long.",
           "tooSmall": "Le nom d'utilisateur est trop court."
         },
@@ -29,9 +53,24 @@
       }
     }
   },
+  "login":
+  {
+    "title":
+    {
+      "label": "Compte utilisateur"
+    }
+  },
   "layout":
   {
     "home": "Accueil"
+  },
+  "placeholder":
+  {
+    "field":
+    {
+      "username": "Nom d'utilisateur",
+      "password": "Mot de passe"
+    }
   },
   "question":
   {

@@ -2,11 +2,34 @@
   "button":
   {
     "logout": "Logout",
+    "register": "Register",
     "signIn": "Sign In",
     "signUp": "Sign Up"
   },
   "error":
   {
+    "login":
+    {
+      "invalid":
+      {
+        "username":
+        {
+          "notSet": "Please provide a valid username.",
+          "tooLong": "Username is too long.",
+          "tooSmall": "Username is too small."
+        },
+        "password":
+        {
+          "notSet": "Please provide a valid password.",
+          "tooSmall": "Password is too small."
+        }
+      },
+      "signIn":
+      {
+        "fails": "Invalid credentials.",
+        "impossible": "Impossible to contact server."
+      }
+    },
     "service":
     {
       "unavailable": "This service is temporary unavailable. Please try again later."
@@ -19,8 +42,9 @@
         "password": "The provided password is invalid.",
         "username":
         {
+          "notSet": "Please type a username.",
           "tooLong": "Username is too long.",
-          "tooSmall": "Username is too small"
+          "tooSmall": "Username is too small."
         },
         "user":
         {
@@ -32,6 +56,21 @@
   "layout":
   {
     "home": "Home"
+  },
+  "login":
+  {
+    "title":
+    {
+      "label": "Account Login"
+    }
+  },
+  "placeholder":
+  {
+    "field":
+    {
+      "username": "Username",
+      "password": "Password"
+    }
   },
   "question":
   {
