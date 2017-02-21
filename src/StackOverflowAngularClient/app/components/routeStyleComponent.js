@@ -18,26 +18,36 @@ routeStyleModule.directive('head', ['$rootScope','$compile','$interpolate', func
         link: function(scope, elem){
             elem.append($compile(html)(scope));
             scope.routeStyles = {};
-            $rootScope.$on('$routeChangeStart', function (e, next) {
-                if(next && next.$$route && next.$$route.css){
-                    if(!angular.isArray(next.$$route.css)){
-                        next.$$route.css = [next.$$route.css];
+            $rootScope.$on(/*'$routeChangeStart'*/'$routeChangeSuccess' /* Fix issue when auto redirecting user to login page */,
+                function (e, next)
+                {
+                    if(next && next.$$route && next.$$route.css)
+                    {
+                        if(!angular.isArray(next.$$route.css))
+                        {
+                            next.$$route.css = [next.$$route.css];
+                        }
+                        angular.forEach(next.$$route.css, function(sheet) {
+                            scope.routeStyles[sheet] = sheet;
+                        });
                     }
-                    angular.forEach(next.$$route.css, function(sheet){
-                        scope.routeStyles[sheet] = sheet;
-                    });
-                }
-            });
+                });
+
             $rootScope.$on('$routeChangeSuccess', function(e, current, previous) {
-                if (previous && previous.$$route && previous.$$route.css) {
-                    if (!angular.isArray(previous.$$route.css)) {
+                if (previous && previous.$$route && previous.$$route.css)
+                {
+                    if (!angular.isArray(previous.$$route.css))
+                    {
                         previous.$$route.css = [previous.$$route.css];
                     }
-                    if (current.$$route && current.$$route.css && !angular.isArray(current.$$route.css)) {
+                    if (current.$$route && current.$$route.css && !angular.isArray(current.$$route.css))
+                    {
                         current.$$route.css = [current.$$route.css];
                     }
+
                     angular.forEach(previous.$$route.css, function (sheet) {
-                        if (!current.$$route || !current.$$route.css || current.$$route.css.indexOf(sheet) === -1) {
+                        if (!current.$$route || !current.$$route.css || current.$$route.css.indexOf(sheet) === -1)
+                        {
                             // Only remove if not also required in the current page.
                             scope.routeStyles[sheet] = undefined;
                         }

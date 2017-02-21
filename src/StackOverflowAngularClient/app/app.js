@@ -14,13 +14,13 @@ var segFaultApp = angular.module('segFault', [
     // TO BE COMPLETED HERE
 ]);
 
-// General controller
+// General controller for pages
 segFaultApp.controller('PageCtrl', function PageCtrl($scope, PageService)
 {
     $scope.PageService = PageService;
 });
 
-// Application configuration
+// Application routes configuration
 segFaultApp.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider)
 {
     $locationProvider.hashPrefix('!');
@@ -30,6 +30,23 @@ segFaultApp.config(['$locationProvider', '$routeProvider', function($locationPro
 
 // Setup Up target API (Grails API)
 segFaultApp.constant('API', 'http://localhost:8080');
+
+// Setup redirect URL after login
+segFaultApp.value('redirectURLAfterLogin', { url: '/'});
+
+// Check route changes
+segFaultApp.run(function ($location, $rootScope, AuthService, RedirectionService)
+{
+    $rootScope.$on('$routeChangeStart', function (event, nextRoute, previousRoute)
+    {
+        // If login required and user is not logged, capture the current path
+        if (nextRoute.loginRequired && !AuthService.isAuthenticated())
+        {
+            RedirectionService.saveAttemptURL();
+            RedirectionService.redirectToLogin();
+        }
+    });
+});
 
 // Translation
 segFaultApp.config(function($translateProvider)

@@ -7,8 +7,8 @@ loginModule.config(['$routeProvider', function($routeProvider)
 {
   // Login Page
   $routeProvider.when('/login', {
-    templateUrl: 'modules/login/login.html',
-    controller: 'LoginCtrl',
+      templateUrl: 'modules/login/login.html',
+      controller: 'LoginCtrl',
       css: 'assets/stylesheets/user/registration.css'
   });
 

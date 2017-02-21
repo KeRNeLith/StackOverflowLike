@@ -7,8 +7,8 @@ questionModule.config(['$routeProvider', function($routeProvider)
 {
   // Home page
   $routeProvider.when('/', {
-    templateUrl: 'modules/question/home.html',
-    controller: 'HomeCtrl'
+      templateUrl: 'modules/question/home.html',
+      controller: 'HomeCtrl'
   });
   $routeProvider.when('/question/home', {
       templateUrl: 'modules/question/home.html',

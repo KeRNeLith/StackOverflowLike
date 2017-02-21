@@ -20,7 +20,6 @@ class AuthService
         let token = response.data ? response.data.access_token : null;
         if(token)
         {
-            //this.parseJWTToken(token);
             this.saveToken(token);
         }
     }

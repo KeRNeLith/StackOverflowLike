@@ -21,7 +21,7 @@ loginModule.controller('RegisterCtrl', function($scope, PageService)
     // TODO
 });
 
-loginModule.controller('AuthCtrl', function ($scope, UserService, AuthService) {
+loginModule.controller('AuthCtrl', function ($scope, UserService, AuthService, RedirectionService) {
     let self = this;
 
     self.login = function()
@@ -34,17 +34,17 @@ loginModule.controller('AuthCtrl', function ($scope, UserService, AuthService) {
                             self.resetForm($scope.loginForm);
                             
                             // Display error
-                            $scope.error = 'error.login.signIn.fails';
+                            $scope.errorMessage = 'error.login.signIn.fails';
                         }
                         else
                         {
                             // Go back to previous URL before needs to authenticate
-                            // ... TODO
+                            RedirectionService.redirectToAttemptedURL();
                         }
                     },
                         function errorCallback(response)
                         {
-                            $scope.error = 'error.login.signIn.impossible';
+                            $scope.errorMessage = 'error.login.signIn.impossible';
                         });
     };
 

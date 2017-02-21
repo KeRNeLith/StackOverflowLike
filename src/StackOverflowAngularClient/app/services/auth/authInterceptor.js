@@ -6,7 +6,7 @@
 
 var segFaultAuthModule = angular.module('segFault.auth');
 
-segFaultAuthModule.factory('AuthInterceptor', function ($window, API, AuthService) {
+segFaultAuthModule.factory('AuthInterceptor', function ($location, API, AuthService) {
     return {
         // Automatically attach Authorization header
         request: function (config)
@@ -44,7 +44,7 @@ segFaultAuthModule.factory('AuthInterceptor', function ($window, API, AuthServic
             if (response.status == 401 || response.status === 403)
             {
                 AuthService.logout();   // Clear token
-                $window.location.href = '#!/login'
+                $location.path('/login');
             }
 
             return response;

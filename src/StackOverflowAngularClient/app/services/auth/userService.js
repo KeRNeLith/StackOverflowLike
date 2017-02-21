@@ -8,11 +8,12 @@ var segFaultAuthModule = angular.module('segFault.auth');
 
 class UserService
 {
-    constructor($http, API, AuthService)
+    constructor($http, API, AuthService, RedirectionService)
     {
         this.$http = $http;
         this.API = API;
         this.AuthService = AuthService;
+        this.RedirectionService = RedirectionService;
     }
 
     // Authentication methods
@@ -35,6 +36,7 @@ class UserService
     logout()
     {
         this.AuthService.logout();
+        this.RedirectionService.redirectToHome();
     }
 }
 

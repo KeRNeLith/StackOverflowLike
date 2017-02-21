@@ -35,7 +35,7 @@
                     </div>
 
                     <div ng-show="loginForm.$pristine && loginForm.uUsername.$untouched && loginForm.uPassword.$untouched" class="text-center error">
-                        <span ng-show="error">{{error | translate}}</span>
+                        <span ng-show="errorMessage">{{errorMessage | translate}}</span>
                     </div>
 
                     <!-- Sign in -->
