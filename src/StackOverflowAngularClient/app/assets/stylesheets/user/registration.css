@@ -95,3 +95,7 @@ form input.ng-invalid.ng-touched {
 .success {
     color: #048d00;
 }
+
+.info {
+    color: #b17d00;
+}

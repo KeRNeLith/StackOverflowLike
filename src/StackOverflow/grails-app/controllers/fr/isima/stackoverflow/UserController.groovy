@@ -89,6 +89,25 @@ class UserController
         render status: status, message: retCode
     }
 
+    @Secured('ROLE_ANONYMOUS')
+    def available()
+    {
+        if (!featuresFlippingService.isSignUpEnabled())
+            render status: SERVICE_UNAVAILABLE, message: 'error.service.unavailable'
+
+        String username = params.username
+        User user = User.findByUsername(username)
+
+        def status = NOT_ACCEPTABLE
+        // If succeed
+        if (user == null)
+        {
+            status = OK
+        }
+
+        render status: status
+    }
+
     def edit(User user)
     {
         respond user

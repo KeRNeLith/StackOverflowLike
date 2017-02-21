@@ -27,26 +27,11 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 	[pattern: '/**/css/**',      filters: 'none'],
 	[pattern: '/**/images/**',   filters: 'none'],
 	[pattern: '/**/favicon.ico', filters: 'none'],
-	// Stateless chain with anonymous accesses
-		// Display
-	[
-			pattern: '/api/**/display/**',
-			filters: 'anonymousAuthenticationFilter,restTokenValidationFilter,restExceptionTranslationFilter,filterInvocationInterceptor'
-	],
-		// Register
-	[
-			pattern: '/api/**/register**',
-			filters: 'anonymousAuthenticationFilter,restTokenValidationFilter,restExceptionTranslationFilter,filterInvocationInterceptor'
-	],
-		// Other : home
-	[
-			pattern: '/api/**/home/**',
-			filters: 'anonymousAuthenticationFilter,restTokenValidationFilter,restExceptionTranslationFilter,filterInvocationInterceptor'
-	],
 	// Stateless chain
 	[
 			pattern: '/api/**',
-			filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter'
+			// Filter that disable anonymous requests: -anonymousAuthenticationFilter
+			filters: 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter'
 	],
 	// Traditional chain
 	[

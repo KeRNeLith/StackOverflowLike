@@ -6,6 +6,16 @@
     "signIn": "Se connecter",
     "signUp": "S'inscrire"
   },
+  "info":
+  {
+    "register":
+    {
+      "checking":
+      {
+        "username": "Vérifie si le nom d'utilisateur est disponible..."
+      }
+    }
+  },
   "error":
   {
     "login":
@@ -125,7 +135,11 @@
   {
     "register":
     {
-      "user": "Inscription réussie !"
+      "user": "Inscription réussie !",
+      "username":
+      {
+        "available": "Nom d'utilisateur disponible"
+      }
     }
   }
 }

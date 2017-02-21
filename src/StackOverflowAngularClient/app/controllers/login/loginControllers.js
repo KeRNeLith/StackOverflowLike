@@ -10,15 +10,11 @@ var loginModule = angular.module('segFault.login');
 loginModule.controller('LoginCtrl', function($scope, PageService)
 {
     PageService.setTitle('Login - ' + PageService.default());
-
-    // TODO
 });
 
 loginModule.controller('RegisterCtrl', function($scope, PageService)
 {
     PageService.setTitle('Register - ' + PageService.default());
-
-    // TODO
 });
 
 loginModule.controller('AuthCtrl', function ($scope, $timeout, UserService, AuthService, RedirectionService) {

@@ -7,6 +7,7 @@
 
                     <!-- Username -->
                     <input required
+                           sf-username
                            type="text"
                            minlength="3"
                            maxlength="50"
@@ -19,6 +20,11 @@
                         <span ng-show="registerForm.uUsername.$error.required">{{'error.register.invalid.username.notSet' | translate}}</span>
                         <span ng-show="registerForm.uUsername.$error.minlength">{{'error.register.invalid.username.tooSmall' | translate}}</span>
                         <span ng-show="registerForm.uUsername.$error.maxlength">{{'error.register.invalid.username.tooLong' | translate}}</span>
+                    </div>
+                    <div class="text-center">
+                        <span ng-show="registerForm.uUsername.$pending.username" class="info">{{'info.register.checking.username' | translate}}</span>
+                        <span ng-show="registerForm.uUsername.$error.username" class="error">{{'error.register.invalid.user.alreadyExists' | translate}}</span>
+                        <span ng-show="registerForm.uUsername.$valid" class="success">{{'success.register.username.available' | translate}}</span>
                     </div>
                     <div ng-show="registerForm.$pristine && registerForm.uUsername.$untouched && registerForm.uPassword.$untouched" class="text-center error">
                         <span ng-show="usernameError">{{usernameError | translate}}</span>
