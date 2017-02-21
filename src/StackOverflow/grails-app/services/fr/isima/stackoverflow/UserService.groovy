@@ -15,14 +15,14 @@ class UserService
      */
     def createUser(User user)
     {
-        // Post question feature not enabled
+        // Sign up feature not enabled
         if (!featuresFlippingService.isSignUpEnabled())
-            return [ 'error.service.unavailable' ]
+            return [ '"error.service.unavailable"' ]
 
         if (user == null)
         {
             transactionStatus.setRollbackOnly()
-            return [ 'error.register.impossible' ]
+            return [ '"error.register.impossible"' ]
         }
 
         user.validate()
@@ -32,16 +32,21 @@ class UserService
 
             def errors = []
             // Check username
-            if (user.errors['username'].code == 'minSize.notmet')
-                errors << 'error.register.username.toosmall'
-            else if (user.errors['username'].code == 'maxSize.exceeded')
-                errors << 'error.register.username.toolong'
-            else if (user.errors['username'].code == 'unique')
-                errors << 'error.register.user.alreadyExists'
+            if (user.errors['username'] != null)
+            {
+                if (user.errors['username'].code == 'minSize.notmet')
+                    errors << '"error.register.invalid.username.tooSmall"'
+                else if (user.errors['username'].code == 'maxSize.exceeded')
+                    errors << '"error.register.invalid.username.tooLong"'
+                else if (user.errors['username'].code == 'nullable')
+                    errors << '"error.register.invalid.username.notSet"'
+                else if (user.errors['username'].code == 'unique')
+                    errors << '"error.register.invalid.user.alreadyExists"'
+            }
 
             // Check password
             if (user.errors['password'] != null)
-                errors << 'error.register.invalid.password'
+                errors << '"error.register.invalid.password.incorrect"'
 
             return errors
         }
@@ -50,12 +55,12 @@ class UserService
         if (user != null)
         {
             UserRole.create user, Role.findByAuthority('ROLE_USER')
-            return 'success.register.user'
+            return '"success.register.user"'
         }
         // Should never arrive here
         else
         {
-            return [ 'error.register.user.alreadyExists' ]
+            return [ '"error.register.invalid.user.alreadyExists"' ]
         }
     }
 

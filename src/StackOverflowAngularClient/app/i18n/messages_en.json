@@ -39,17 +39,26 @@
       "impossible": "Impossible to register user.",
       "invalid":
       {
-        "password": "The provided password is invalid.",
         "username":
         {
-          "notSet": "Please type a username.",
+          "notSet": "Please chose a username.",
           "tooLong": "Username is too long.",
           "tooSmall": "Username is too small."
+        },
+        "password":
+        {
+          "incorrect": "The provided password is invalid.",
+          "notSet": "Please provide a valid password.",
+          "tooSmall": "Password is too small."
         },
         "user":
         {
           "alreadyExists": "User already exists"
         }
+      },
+      "signUp":
+      {
+        "impossible": "Impossible to contact server."
       }
     }
   },
@@ -105,11 +114,18 @@
       "addCommentTooltip": "Add a comment on this answer"
     }
   },
+  "register":
+  {
+    "title":
+    {
+      "label": "Create a new account"
+    }
+  },
   "success":
   {
     "register":
     {
-      "user": "Register succeed!"
+      "user": "Registration succeed!"
     }
   }
 }

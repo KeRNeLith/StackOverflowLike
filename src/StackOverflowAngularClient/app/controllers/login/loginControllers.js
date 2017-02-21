@@ -21,7 +21,7 @@ loginModule.controller('RegisterCtrl', function($scope, PageService)
     // TODO
 });
 
-loginModule.controller('AuthCtrl', function ($scope, UserService, AuthService, RedirectionService) {
+loginModule.controller('AuthCtrl', function ($scope, $timeout, UserService, AuthService, RedirectionService) {
     let self = this;
 
     self.login = function()
@@ -50,7 +50,56 @@ loginModule.controller('AuthCtrl', function ($scope, UserService, AuthService, R
 
     self.register = function()
     {
-        UserService.register(self.username, self.password);
+        UserService .register(self.username, self.password)
+                    .then(function successCallback(response)
+                    {
+                        if (response.status >= 400)
+                        {
+                            self.resetForm($scope.registerForm);
+
+                            // Display errors
+                            if (response.data.message)
+                            {
+                                let errors = JSON.parse(response.data.message);
+
+                                let usernameError = null;
+                                let passwordError = null;
+                                let otherErrors = [];
+
+                                // Check error's type
+                                angular.forEach(errors, function (errorCode) {
+                                    if (errorCode.search('username') != -1)
+                                    {
+                                        usernameError = errorCode;
+                                    }
+                                    else if (errorCode.search('password') != -1)
+                                    {
+                                        passwordError = errorCode;
+                                    }
+                                    else
+                                    {
+                                        otherErrors.push(errorCode);
+                                    }
+                                });
+
+                                $scope.usernameError = usernameError;
+                                $scope.passwordError = passwordError;
+                                $scope.otherErrors = otherErrors;
+                            }
+                        }
+                        else
+                        {
+                            $scope.successMessage = 'success.register.user';
+
+                            // Timeout before redirecting
+                            // (require bind to set method context execution to the one of RedirectionService)
+                            $timeout(RedirectionService.redirectToHome.bind(RedirectionService), 3500);
+                        }
+                    },
+                        function errorCallback(response)
+                        {
+                            $scope.errorMessage = 'error.register.signUp.impossible';
+                        });
     };
 
     self.logout = function()

@@ -39,17 +39,26 @@
       "impossible": "Impossible d'enregistrer l'utilisateur.",
       "invalid":
       {
-        "password": "Le mot de passe saisie est invalide.",
         "username":
         {
           "notSet": "Veuillez saisir un nom d'utilisateur.",
           "tooLong": "Le nom d'utilisateur est trop long.",
           "tooSmall": "Le nom d'utilisateur est trop court."
         },
+        "password":
+        {
+          "incorrect": "Le mot de passe saisie est invalide.",
+          "notSet": "Veuillez saisir un mot de passe.",
+          "tooSmall": "Le mot de passe est trop court."
+        },
         "user":
         {
           "alreadyExists": "L'utilisateur existe déjà."
         }
+      },
+      "signUp":
+      {
+        "impossible": "Impossible de contacter le server."
       }
     }
   },
@@ -103,6 +112,13 @@
       "comment": "commenter",
       "Commented": "Commenté le",
       "addCommentTooltip": "Ajouter un commentaire à cette réponse"
+    }
+  },
+  "register":
+  {
+    "title":
+    {
+      "label": "Création d'un compte"
     }
   },
   "success":

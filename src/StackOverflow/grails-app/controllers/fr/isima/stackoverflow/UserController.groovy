@@ -81,7 +81,7 @@ class UserController
 
         def status = BAD_REQUEST
         // If succeed
-        if (retCode == 'success.register.user')
+        if (retCode == '"success.register.user"')
         {
             status = CREATED
         }
