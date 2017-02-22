@@ -10,7 +10,7 @@ var questionModule = angular.module('segFault.question');
 questionModule.controller('HomeCtrl', function($scope, $http, API, PageService)
 {
     PageService.setTitle(PageService.default());
-    
+
     $http.get(API + '/api/question/home')
         .then(function(response)
         {

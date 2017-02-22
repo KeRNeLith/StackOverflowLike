@@ -34,7 +34,7 @@ loginModule.controller('AuthCtrl', function ($scope, $timeout, UserService, Auth
                         if (response.status >= 400)
                         {
                             self.resetForm($scope.loginForm);
-                            
+
                             // Display error
                             $scope.errorMessage = 'error.login.signIn.fails';
                         }

@@ -143,5 +143,14 @@
         "available": "Nom d'utilisateur disponible"
       }
     }
+  },
+  "user":
+  {
+    "profile":
+    {
+      "label": "Profile de {{username}}",
+      "inscriptionDate": "Date d'inscription",
+      "reputation": "Réputation"
+    }
   }
 }
