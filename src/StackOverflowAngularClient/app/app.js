@@ -6,6 +6,7 @@ var segFaultApp = angular.module('segFault', [
     'ngRoute',
     'pascalprecht.translate',   // Angular-translate
     'ngCookies',
+    'segFault.general',
     'segFault.version',
     // Modules
     'segFault.auth',
@@ -16,12 +17,6 @@ var segFaultApp = angular.module('segFault', [
     'segFault.user'
     // TO BE COMPLETED HERE
 ]);
-
-// General controller for pages
-segFaultApp.controller('PageCtrl', function PageCtrl($scope, PageService)
-{
-    $scope.PageService = PageService;
-});
 
 // Application routes configuration
 segFaultApp.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider)

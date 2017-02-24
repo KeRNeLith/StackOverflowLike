@@ -61,7 +61,11 @@
     },
     "service":
     {
-      "unavailable": "Ce service est temporairement indisponible. Veuillez réessayer plus tard."
+      "unavailable":
+      {
+        "signUp": "Il est impossible de s'inscrire pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard.",
+        "title": "Indisponible"
+      }
     },
     "register":
     {

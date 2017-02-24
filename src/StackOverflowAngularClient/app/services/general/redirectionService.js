@@ -4,7 +4,7 @@
 
 'use strict';
 
-var segFaultAuthModule = angular.module('segFault');
+var segFaultAuthModule = angular.module('segFault.general');
 
 class RedirectionService
 {
@@ -29,6 +29,11 @@ class RedirectionService
     redirectToHome()
     {
         this.$location.path('/');
+    }
+
+    redirectToUnavailable()
+    {
+        this.$location.path('/unavailable');
     }
 
     redirectToLogin()

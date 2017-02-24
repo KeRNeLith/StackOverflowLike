@@ -17,7 +17,7 @@ class UserService
     {
         // Sign up feature not enabled
         if (!featuresFlippingService.isSignUpEnabled())
-            return [ '"error.service.unavailable"' ]
+            return [ '"error.service.unavailable.signUp"' ]
 
         if (user == null)
         {

@@ -61,7 +61,11 @@
     },
     "service":
     {
-      "unavailable": "This service is temporary unavailable. Please try again later."
+      "unavailable":
+      {
+        "signUp": "It's impossible to sign up for now. Service is temporary unavailable. Please try again later.",
+        "title": "Unavailable"
+      }
     },
     "register":
     {

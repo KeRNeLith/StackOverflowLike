@@ -73,7 +73,7 @@ class UserController
     def register()
     {
         if (!featuresFlippingService.isSignUpEnabled())
-            render status: SERVICE_UNAVAILABLE, message: 'error.service.unavailable'
+            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.signUp"'
 
         User user = new User(request.JSON)
 
@@ -93,7 +93,7 @@ class UserController
     def available()
     {
         if (!featuresFlippingService.isSignUpEnabled())
-            render status: SERVICE_UNAVAILABLE, message: 'error.service.unavailable'
+            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.signUp"'
 
         String username = params.username
         User user = User.findByUsername(username)
