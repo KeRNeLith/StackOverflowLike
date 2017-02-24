@@ -9,8 +9,10 @@ var segFaultApp = angular.module('segFault', [
     'segFault.version',
     // Modules
     'segFault.auth',
+    'segFault.post',
     'segFault.login',
     'segFault.question',
+    'segFault.answer',
     'segFault.userProfile'
     // TO BE COMPLETED HERE
 ]);

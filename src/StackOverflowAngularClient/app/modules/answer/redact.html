@@ -1,0 +1,25 @@
+<div class="col-md-8">
+    <h3>
+        {{'answer.redact.write.title' | translate}}
+    </h3>
+
+    <form name="redactAnswer" novalidate ng-app="segFault" ng-controller="RedactPostCtrl as redactCtrl">
+        <textarea required
+                  maxlength="65535"
+                  name="uMessage"
+                  autofocus="autofocus"
+                  ng-model="redactCtrl.message"
+                  placeholder="{{'placeholder.field.answer.message' | translate}}"
+                  rows="6"
+                  class="form-control">
+        </textarea>
+        <br/>
+
+        <input name="Send"
+               ng-click="redactCtrl.send()"
+               title="{{'answer.redact.button.addAnswerTooltip' | translate}}"
+               value="{{'answer.redact.button.label' | translate}}"
+               class="btn btn-success"
+               type="submit">
+    </form>
+</div>

@@ -8,10 +8,8 @@
             <span class="entry-title">{{question.title}}</span>
         </a>
 
-        <!-- TODO <g:if test="${this.question.isResolved}">
-            <i class="fa fa-check" aria-hidden="true"></i>
-        </g:if>
-        <g:else>
+        <i ng-if="question.resolved" class="fa fa-check" aria-hidden="true"></i>
+        <!-- TODO <g:else>
             <g:isOwner owner="${this.question.user}">
                 <g:form controller="question" action="resolve" id="${this.question.id}">
                     <g:submitButton class="btn btn-success" name="${message(code: 'question.mark.resolved.button')}"/>
@@ -93,19 +91,16 @@
                     </ul>
                 </div>
 
-                <form>
-                <!-- TODO <g:form controller="answer" action="redact">-->
-                    <div class="qa-q-view-buttons">
-                        <i class="fa fa-comment" aria-hidden="true"></i>
-                        <input id="doanswer_question"
-                               name="question_{{question.id}}"
-                               title="{{'question.display.addAnswerTooltip' | translate}}"
-                               value="{{'question.display.answer' | translate}}"
-                               class="qa-form-light-button qa-form-light-button-answer"
-                               type="submit">
-                        <input type="hidden" name="question" value="{{question.id}}">
-                    </div>
-                </form>
+                <div class="qa-q-view-buttons" ng-app="segFault.post" ng-controller="RedactPostCtrl as redactCtrl">
+                    <i class="fa fa-comment" aria-hidden="true"></i>
+                    <a ng-click="redactCtrl.setPost(question.id)"
+                       ng-href="#!/answer/redact"
+                       name="question_{{question.id}}"
+                       title="{{'question.display.addAnswerTooltip' | translate}}"
+                       class="redact qa-form-light-button qa-form-light-button-answer">
+                        {{'question.display.answer' | translate}}
+                    </a>
+                </div>
             </div> <!-- End qa-q-view-main -->
 
         </div>  <!-- End qa-q-view -->

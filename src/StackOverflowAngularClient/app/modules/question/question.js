@@ -19,6 +19,6 @@ questionModule.config(['$routeProvider', function($routeProvider)
   $routeProvider.when('/question/display/:id', {
       templateUrl: 'modules/question/display.html',
       controller: 'QuestionDisplayCtrl',
-      css: 'assets/stylesheets/question/display.css'
+      css: [ 'assets/stylesheets/profile/font-awesome.css', 'assets/stylesheets/question/display.css' ]
   });
 }]);

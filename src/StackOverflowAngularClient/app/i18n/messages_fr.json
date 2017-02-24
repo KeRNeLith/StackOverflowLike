@@ -1,4 +1,23 @@
 {
+  "answer":
+  {
+    "redact":
+    {
+      "button":
+      {
+        "addAnswerTooltip": "Envoyer votre réponse",
+        "label": "Envoyer"
+      },
+      "write":
+      {
+        "title": "Écrivez votre réponse"
+      }
+    },
+    "title":
+    {
+      "page": "Nouvelle réponse"
+    }
+  },
   "button":
   {
     "logout": "Se déconnecter",
@@ -88,6 +107,10 @@
   {
     "field":
     {
+      "answer":
+      {
+        "message": "Votre réponse..."
+      },
       "username": "Nom d'utilisateur",
       "password": "Mot de passe"
     }

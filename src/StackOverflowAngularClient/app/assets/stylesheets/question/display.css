@@ -8,6 +8,9 @@
 	Theme License: GPLv2
 */
 
+.redact:visited {
+    color: #fff
+}
 
 .clearfix, .qa-q-item-clear,
 .qa-nav-main-list, .qa-nav-sub,

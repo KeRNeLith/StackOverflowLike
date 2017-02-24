@@ -1,4 +1,23 @@
 {
+  "answer":
+  {
+    "redact":
+    {
+      "button":
+      {
+        "addAnswerTooltip": "Send your answer",
+        "label": "Send"
+      },
+      "write":
+      {
+        "title": "Write your answer"
+      }
+    },
+    "title":
+    {
+      "page": "New answer"
+    }
+  },
   "button":
   {
     "logout": "Logout",
@@ -88,6 +107,10 @@
   {
     "field":
     {
+      "answer":
+      {
+        "message": "Your answer..."
+      },
       "username": "Username",
       "password": "Password"
     }
@@ -153,5 +176,4 @@
       "reputation": "Reputation"
     }
   }
-
 }
