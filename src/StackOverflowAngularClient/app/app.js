@@ -13,7 +13,7 @@ var segFaultApp = angular.module('segFault', [
     'segFault.login',
     'segFault.question',
     'segFault.answer',
-    'segFault.userProfile'
+    'segFault.user'
     // TO BE COMPLETED HERE
 ]);
 

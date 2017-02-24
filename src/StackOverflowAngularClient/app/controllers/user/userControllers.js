@@ -4,7 +4,7 @@
 
 'use strict';
 
-var userModule = angular.module('segFault.userProfile');
+var userModule = angular.module('segFault.user');
 
 // Define controllers
 userModule.controller('ProfileCtrl', function($scope, $http, API, PageService)
@@ -27,7 +27,7 @@ userModule.controller('ProfileCtrl', function($scope, $http, API, PageService)
         });
 });
 
-userModule.controller('rhzshr', function($scope, $http, $routeParams, API, PageService)
+/*userModule.controller('rhzshr', function($scope, $http, $routeParams, API, PageService)
 {
     $http.get(API + '/api/question/display/' + $routeParams.id) //TODO  change here
         .then(function(response)
@@ -41,4 +41,4 @@ userModule.controller('rhzshr', function($scope, $http, $routeParams, API, PageS
             $scope.questionVotes = data.questionVotes;
             $scope.answers = data.sortedAnswers;
         });
-});
+});*/
