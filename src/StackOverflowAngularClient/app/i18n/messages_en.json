@@ -59,10 +59,33 @@
         "impossible": "Impossible to contact server."
       }
     },
+    "question":
+    {
+      "add":
+      {
+        "answer":
+        {
+          "message":
+          {
+            "null": "Please provide a message for your answer.",
+            "tooLong": "Your message is too long!"
+          },
+          "notQuestion": "You're trying to answer to a post that is not a question.",
+          "wrong":
+          {
+            "parameters": "There are missing parameters in your answer submission."
+          }
+        }
+      }
+    },
     "service":
     {
       "unavailable":
       {
+        "post":
+        {
+          "answer": "It's impossible to post answers for now. Service is temporary unavailable. Please try again later."
+        },
         "signUp": "It's impossible to sign up for now. Service is temporary unavailable. Please try again later.",
         "title": "Unavailable"
       }
@@ -93,6 +116,10 @@
       {
         "impossible": "Impossible to contact server."
       }
+    },
+    "user":
+    {
+      "notFound": "Impossible to find user for the answer submission."
     }
   },
   "layout":
@@ -162,6 +189,13 @@
   },
   "success":
   {
+    "question":
+    {
+      "add":
+      {
+        "answer": "Answer posted with success!"
+      }
+    },
     "register":
     {
       "user": "Registration succeed!",

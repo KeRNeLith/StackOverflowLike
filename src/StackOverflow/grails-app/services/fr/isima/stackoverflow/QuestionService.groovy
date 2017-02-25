@@ -166,11 +166,6 @@ class QuestionService
                     else if (answer.errors['message'].code == 'nullable')
                         retCodes << '"error.question.add.answer.message.tooLong"'
                 }
-
-                if (answer.errors['question'] != null)
-                {
-                    println answer.errors['question'].code
-                }
             }
             else
             {

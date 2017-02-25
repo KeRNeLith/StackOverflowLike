@@ -59,10 +59,33 @@
         "impossible": "Impossible de contacter le server."
       }
     },
+    "question":
+    {
+      "add":
+      {
+        "answer":
+        {
+          "message":
+          {
+            "null": "Veuillez saisir un message pour votre réponse.",
+            "tooLong": "Votre message est trop long !"
+          },
+          "notQuestion": "Vous avez tenté de répondre à un post qui n'est pas une question.",
+          "wrong":
+          {
+            "parameters": "Il manque des informations pour soumettre votre réponse."
+          }
+        }
+      }
+    },
     "service":
     {
       "unavailable":
       {
+        "post":
+        {
+          "answer": "Il est impossible de poster des réponses pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard."
+        },
         "signUp": "Il est impossible de s'inscrire pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard.",
         "title": "Indisponible"
       }
@@ -93,6 +116,10 @@
       {
         "impossible": "Impossible de contacter le server."
       }
+    },
+    "user":
+    {
+      "notFound": "Impossible de trouver l'utilisateur pour la soumission de la réponse."
     }
   },
   "login":
@@ -162,6 +189,13 @@
   },
   "success":
   {
+    "question":
+    {
+      "add":
+      {
+        "answer": "Réponse postée avec succès !"
+      }
+    },
     "register":
     {
       "user": "Inscription réussie !",
