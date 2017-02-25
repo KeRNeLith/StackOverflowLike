@@ -83,42 +83,25 @@ class AnswerController
 
     @Secured('ROLE_USER')
     @Transactional
-    def addAnswer(Answer answer)
+    def saveAnswer()
     {
-        if (answer == null)
-        {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
+        def inputRequest = request.JSON
 
-        // Validate message constraint
-        if (!answer.validate(['message']))
-        {
-            transactionStatus.setRollbackOnly()
-            respond answer.errors, view:'redact'
-            return
-        }
-
+        def status = BAD_REQUEST
+        String retCode = '"error.question.add.answer.wrong.parameters"'
         // Add response
-        if (params.containsKey('question'))
+        if (inputRequest.message != null && inputRequest.question != null)
         {
-            def questionId = params.long('question')
             def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
 
-            if (questionService.addAnswerToQuestion(answer.message, user, questionId))
+            retCode = questionService.addAnswerToQuestion(inputRequest.message, user, Long.parseLong(inputRequest.question))
+            if (retCode == '"success.question.add.answer"')
             {
-                redirect(controller: 'question', action: 'display', id: questionId)
-            }
-            else
-            {
-                notFound()
+                status = CREATED
             }
         }
-        else
-        {
-            notFound()
-        }
+
+        render status: status, message: retCode
     }
 
     def edit(Answer answer)

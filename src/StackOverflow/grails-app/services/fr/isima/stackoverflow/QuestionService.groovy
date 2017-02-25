@@ -142,27 +142,54 @@ class QuestionService
      * @param message Response message.
      * @param writer User that write answer.
      * @param questionId Question id.
-     * @return true if succeed.
+     * @return Valid string if user is created, otherwise list of error codes.
      */
-    boolean addAnswerToQuestion(String message, User writer, Long questionId)
+    def addAnswerToQuestion(String message, User writer, Long questionId)
     {
-        boolean ret = false
-
         // Post answer feature not enabled
         if (!featuresFlippingService.isAnswerPostingEnabled())
-            return ret
+            return '"error.service.unavailable.post.answer"'
 
+        def retCodes = []
         def question = Question.get(questionId)
         if (writer != null && question != null)
         {
-            question.addToAnswers(message: message, question: question, user: writer).save()
+            Answer answer = new Answer(message: message, question: question, user: writer)
+            if (!answer.validate())
+            {
+                transactionStatus.setRollbackOnly()
 
-            ret = true
+                if (answer.errors['message'] != null)
+                {
+                    if (answer.errors['message'].code == 'maxSize.exceeded')
+                        retCodes << '"error.question.add.answer.message.null"'
+                    else if (answer.errors['message'].code == 'nullable')
+                        retCodes << '"error.question.add.answer.message.tooLong"'
+                }
 
-            userService.updateUserReputation(writer, 10)
-            badgeService.addFirstAnswerBadge(writer)
+                if (answer.errors['question'] != null)
+                {
+                    println answer.errors['question'].code
+                }
+            }
+            else
+            {
+                question.addToAnswers(answer).save()
+                retCodes = '"success.question.add.answer"'
+
+                userService.updateUserReputation(writer, 10)
+                badgeService.addFirstAnswerBadge(writer)
+            }
+        }
+        else
+        {
+            if (writer == null)
+                retCodes << '"error.user.notFound"'
+
+            if (question == null)
+                retCodes << '"error.question.add.answer.notQuestion"'
         }
 
-        return ret
+        return retCodes
     }
 }
