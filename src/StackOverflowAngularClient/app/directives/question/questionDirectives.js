@@ -17,7 +17,7 @@ questionModule.directive('sfQuestionVotes', function () {
     return {
         scope: {
             post: '=',
-            votes: '='
+            nbVotes: '='
         },
         templateUrl: 'modules/question/templates/_voteCount.html'
     };

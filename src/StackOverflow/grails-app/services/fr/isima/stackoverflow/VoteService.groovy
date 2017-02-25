@@ -29,12 +29,15 @@ class VoteService
      * @param post Post to vote.
      * @param user User that vote.
      * @param state Vote state (UP or DOWN).
+     * @return 0 = no changes, 1 = positive vote added, -1 = negative vote added, 2 = modified.
      */
     def updateVotes(Post post, User user, Vote.Value state)
     {
+        int ret = 0 // No changes
+
         // Vote feature not enabled
         if (!featuresFlippingService.isVotesEnabled())
-            return
+            return ret
 
         def alreadyVotes = Vote.createCriteria()
         def resultVote = alreadyVotes.get {
@@ -51,12 +54,14 @@ class VoteService
             // Up post's writer reputation
             if (state == Vote.Value.UP)
             {
+                ret = 1
                 userService.updateUserReputation(post.user, 10)
                 badgeService.checkThumbUpBadge(post)
             }
             // Down post's writer reputation
             else
             {
+                ret = -1
                 userService.updateUserReputation(post.user, -10)
             }
         }
@@ -65,6 +70,7 @@ class VoteService
         {
             resultVote.vote = state
             resultVote.save()
+            ret = 2
 
             // Change to a thumb up
             if (state == Vote.Value.UP)
@@ -73,5 +79,7 @@ class VoteService
             }
         }
         // Else do nothing
+
+        return ret
     }
 }

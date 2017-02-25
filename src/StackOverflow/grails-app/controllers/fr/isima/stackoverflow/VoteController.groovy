@@ -128,52 +128,63 @@ class VoteController
 
     protected boolean hasParams(Map params, String... paramsName)
     {
-        boolean ret = true;
+        boolean ret = true
 
         for (param in paramsName)
         {
             if (!params.containsKey(param))
             {
-                ret = false;
-                break;
+                ret = false
+                break
             }
         }
 
-        return ret;
+        return ret
     }
 
     @Secured('ROLE_USER')
     def performVote()
     {
-        if (hasParams(params, 'post', 'vote'))
+        def status = BAD_REQUEST
+        String retCode = '"error.vote.perform.vote.wrong.parameters"'
+
+        def inputRequest = request.JSON
+        if (hasParams(inputRequest, 'post', 'vote'))
         {
-            def postId = params.long('post')
+            def postId = -1
+            if (inputRequest.post instanceof String)
+            {
+                postId = Long.parseLong(inputRequest.post)
+            }
+            else
+            {
+                postId = inputRequest.post
+            }
+
             def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
-            def btnValue = params.vote as String
-            def voteState = btnValue.equalsIgnoreCase('/\\') ? Vote.Value.UP : Vote.Value.DOWN
+            def voteState = inputRequest.vote.equalsIgnoreCase('UP') ? Vote.Value.UP : Vote.Value.DOWN
 
             Post post = Post.get(postId)
             if (post != null)
             {
-                voteService.updateVotes(post, user, voteState)
+                int ret = voteService.updateVotes(post, user, voteState)
 
-                def questionId = postId
-                if (post instanceof Answer)
-                {
-                    Answer a = post as Answer
-                    questionId = a.question.id
-                }
+                if (Math.abs(ret) == 1)
+                    status = CREATED
+                else if (ret == 2)
+                    status = OK
+                else
+                    status = NOT_MODIFIED
 
-                redirect(controller: 'question', action: 'display', id: questionId)
+                retCode = '"success.vote.perform.vote"'
             }
             else
             {
-                notFound()
+                status = NOT_FOUND
+                retCode = '"error.vote.perform.vote.post.notFound"'
             }
         }
-        else
-        {
-            redirect(controller: 'question', action: 'index')
-        }
+
+        render status: status, message: retCode
     }
 }

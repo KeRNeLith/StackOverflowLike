@@ -21,10 +21,9 @@
 
     <div class="qa-part-q-view">
         <div class="qa-q-view  hentry question" id="question_${this.question.id}">
-            <form>
-            <!-- TODO <g:form controller="vote" action="performVote">-->
+            <form novalidate>
                 <div class="qa-q-view-stats">
-                    <div sf-question-votes post="question" votes="questionVotes"></div>
+                    <div sf-question-votes post="question" nb-votes="questionVotes"></div>
                     <span class="qa-view-count">
                         <span class="qa-view-count-data">{{question.views}}</span>
                         <span class="qa-view-count-pad"> {{question.views > 1 ? 'question.display.views' : 'question.display.view' | translate }}</span>
@@ -116,9 +115,8 @@
         <div class="qa-a-list" id="a_list">
             <div ng-repeat="answerAssoc in answers" class="qa-a-list-item  hentry answer" id="answer_${answer.id}">
                 <data ng-init="answer = answerAssoc.answer"></data>
-                <form>
-                <!-- TODO <g:form controller="vote" action="performVote">-->
-                    <div sf-question-votes post="answer" votes="answerAssoc.votes"></div>
+                <form novalidate>
+                    <div sf-question-votes post="answer" nb-votes="answerAssoc.votes"></div>
                 </form>
 
                 <div class="qa-a-item-main">

@@ -1,21 +1,22 @@
-<div class="qa-voting qa-voting-net" id="voting_{{post.id}}">
+<div ng-app="segFault" ng-controller="VoteCtrl as voteCtrl" class="qa-voting qa-voting-net" id="voting_{{post.id}}">
     <div class="qa-vote-buttons qa-vote-buttons-net">
         <input name="vote"
+               ng-click="voteCtrl.vote(post.id, voteCtrl.VoteEnum.UP)"
                title="{{'question.display.voteUpTooltip' | translate}}"
                value="/\"
                class="qa-vote-first-button"
                type="submit">
         <input name="vote"
+               ng-click="voteCtrl.vote(post.id, voteCtrl.VoteEnum.DOWN)"
                title="{{'question.display.voteDownTooltip' | translate}}"
                value="\/"
                class="qa-vote-second-button"
                type="submit">
-        <input type="hidden" name="post" value="{{post.id}}">
     </div>
     <div class="qa-vote-count qa-vote-count-net">
         <span class="qa-netvote-count">
-            <span class="qa-netvote-count-data">{{votes >= 0 ? '+' : ''}}{{votes}}</span>
-            <span class="qa-netvote-count-pad">{{votes > 1 || -votes > 1 ? 'question.display.votes' : 'question.display.vote' | translate }}</span>
+            <span class="qa-netvote-count-data">{{nbVotes >= 0 ? '+' : ''}}{{nbVotes}}</span>
+            <span class="qa-netvote-count-pad">{{nbVotes > 1 || -nbVotes > 1 ? 'question.display.votes' : 'question.display.vote' | translate }}</span>
         </span>
     </div>
     <div class="qa-vote-clear">
