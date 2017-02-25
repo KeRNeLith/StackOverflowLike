@@ -7,7 +7,7 @@
 var postModule = angular.module('segFault.post');
 
 // Define controllers
-postModule.controller('RedactPostCtrl', function($route, PostService, RedirectionService)
+postModule.controller('RedactPostCtrl', function($scope, $route, PostService, RedirectionService)
 {
     var self = this;
 
@@ -18,22 +18,53 @@ postModule.controller('RedactPostCtrl', function($route, PostService, Redirectio
         {
             ret.then(function successCallback(response)
                     {
-                        // TODO Check if errors
                         RedirectionService.redirectToLastURL();
                         $route.reload();
                     },
                     function errorCallback(response)
                     {
-                        // TODO Handle error
-                        //$scope.errorMessage = 'error.register.signUp.impossible';
+                        resetForm($scope.redactAnswerForm);
+
+                        if (response.data.message)
+                        {
+                            let errors = JSON.parse(response.data.message);
+
+                            let messageError = null;
+                            let otherErrors = [];
+
+                            // Check error's type
+                            if (!angular.isArray(errors))
+                            {
+                                errors = [ errors ];    // Make it array
+                            }
+
+                            angular.forEach(errors, function (errorCode) {
+                                if (errorCode.search('message') != -1)
+                                {
+                                    messageError = errorCode;
+                                }
+                                else
+                                {
+                                    otherErrors.push(errorCode);
+                                }
+                            });
+
+                            $scope.messageError = messageError;
+                            $scope.otherErrors = otherErrors;
+                        }
                     });
+        }
+        // Post id not set => redirect to last saved URL (should be home page in case of page refresh)
+        else
+        {
+            RedirectionService.redirectToLastURL();
         }
     };
 
     self.setPost = function(targetId)
     {
         PostService.setPostId(targetId);
-        
+
         // Save redirection after posting
         RedirectionService.saveLastURL();
     };

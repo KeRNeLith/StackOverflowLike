@@ -162,9 +162,9 @@ class QuestionService
                 if (answer.errors['message'] != null)
                 {
                     if (answer.errors['message'].code == 'maxSize.exceeded')
-                        retCodes << '"error.question.add.answer.message.null"'
-                    else if (answer.errors['message'].code == 'nullable')
                         retCodes << '"error.question.add.answer.message.tooLong"'
+                    else if (answer.errors['message'].code == 'nullable')
+                        retCodes << '"error.question.add.answer.message.notSet"'
                 }
             }
             else

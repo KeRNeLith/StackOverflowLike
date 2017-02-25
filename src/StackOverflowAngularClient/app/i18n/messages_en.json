@@ -67,7 +67,7 @@
         {
           "message":
           {
-            "null": "Please provide a message for your answer.",
+            "notSet": "Please provide a message for your answer.",
             "tooLong": "Your message is too long!"
           },
           "notQuestion": "You're trying to answer to a post that is not a question.",

@@ -87,15 +87,3 @@ h1, input {
 form input.ng-invalid.ng-touched {
     background-color: #c71111;
 }
-
-.error {
-    color: #b11111;
-}
-
-.success {
-    color: #048d00;
-}
-
-.info {
-    color: #b17d00;
-}

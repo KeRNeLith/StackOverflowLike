@@ -67,7 +67,7 @@
         {
           "message":
           {
-            "null": "Veuillez saisir un message pour votre réponse.",
+            "notSet": "Veuillez saisir un message pour votre réponse.",
             "tooLong": "Votre message est trop long !"
           },
           "notQuestion": "Vous avez tenté de répondre à un post qui n'est pas une question.",

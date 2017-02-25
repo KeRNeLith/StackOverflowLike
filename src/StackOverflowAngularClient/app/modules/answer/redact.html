@@ -3,7 +3,7 @@
         {{'answer.redact.write.title' | translate}}
     </h3>
 
-    <form name="redactAnswer" novalidate ng-app="segFault" ng-controller="RedactPostCtrl as redactCtrl">
+    <form name="redactAnswerForm" novalidate ng-app="segFault" ng-controller="RedactPostCtrl as redactCtrl">
         <textarea required
                   maxlength="65535"
                   name="uMessage"
@@ -13,6 +13,21 @@
                   rows="6"
                   class="form-control">
         </textarea>
+        <div ng-show="redactAnswerForm.$submitted || redactAnswerForm.uMessage.$touched" class="text-center error">
+            <span ng-show="redactAnswerForm.uMessage.$error.required">{{'error.question.add.answer.message.notSet' | translate}}</span>
+            <span ng-show="redactAnswerForm.uMessage.$error.maxlength">{{'error.question.add.answer.message.tooLong' | translate}}</span>
+        </div>
+
+        <div ng-show="redactAnswerForm.$pristine && redactAnswerForm.uMessage.$untouched" class="text-center error">
+            <span ng-show="messageError">{{messageError | translate}}</span>
+        </div>
+
+        <div ng-show="redactAnswerForm.$pristine && redactAnswerForm.uMessage.$untouched && otherErrors && otherErrors.length > 0">
+            <div ng-repeat="error in otherErrors" class="text-center error">
+                <span>{{error | translate}}</span>
+            </div>
+        </div>
+
         <br/>
 
         <input name="Send"

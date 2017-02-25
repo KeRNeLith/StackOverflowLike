@@ -81,3 +81,15 @@
     -webkit-box-shadow: 0 0 0.5em #ffaaaa;
     box-shadow: 0 0 0.5em #ffaaaa;
 }
+
+.error {
+    color: #b11111;
+}
+
+.success {
+    color: #048d00;
+}
+
+.info {
+    color: #b17d00;
+}

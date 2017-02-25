@@ -67,7 +67,7 @@ class BootStrap
                     .addToVotes(post: question2, vote: Vote.Value.DOWN, user: kernelith)
                     .addToVotes(post: question2, vote: Vote.Value.DOWN, user: tjgamerz).save()
 
-        def question3 = new Question(title: 'Question inutile : Pourquoi J2EE ?', message: 'Bonjour, j\'aurai voulu savoir pour le J2EE existe ?', user: tjgamerz).save()
+        def question3 = new Question(title: 'Question inutile : Pourquoi J2EE ?', message: 'Bonjour, j\'aurai voulu savoir pourquoi le J2EE existe ?', user: tjgamerz).save()
         def answer5 = new Answer(message: 'C\'est un truc de pros', question: question3, user: kernelith)
         def comment2 = new Comment(message: 'D\'accord merci !', answer: answer5, user: tjgamerz)
         answer5.addToComments(comment2).save()
