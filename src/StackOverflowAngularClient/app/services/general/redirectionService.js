@@ -12,6 +12,8 @@ class RedirectionService
     {
         this.$location = $location;
         this.redirectURLAfterLogin = redirectURLAfterLogin;
+
+        this._lastURL = '/';
     }
 
     saveAttemptURL()
@@ -26,14 +28,14 @@ class RedirectionService
         }
     }
 
+    saveLastURL()
+    {
+        this._lastURL = this.$location.path();
+    }
+
     redirectToHome()
     {
         this.$location.path('/');
-    }
-
-    redirectToUnavailable()
-    {
-        this.$location.path('/unavailable');
     }
 
     redirectToLogin()
@@ -44,6 +46,16 @@ class RedirectionService
     redirectToAttemptedURL()
     {
         this.$location.path(this.redirectURLAfterLogin.url);
+    }
+
+    redirectToLastURL()
+    {
+        this.$location.path(this._lastURL);
+    }
+
+    redirectToUnavailable()
+    {
+        this.$location.path('/unavailable');
     }
 }
 

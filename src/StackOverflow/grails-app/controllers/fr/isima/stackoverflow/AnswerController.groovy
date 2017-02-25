@@ -94,7 +94,17 @@ class AnswerController
         {
             def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
 
-            retCode = questionService.addAnswerToQuestion(inputRequest.message, user, Long.parseLong(inputRequest.question))
+            Long questionId = -1
+            if (inputRequest.question instanceof String)
+            {
+                questionId = Long.parseLong(inputRequest.question)
+            }
+            else
+            {
+                questionId = inputRequest.question
+            }
+
+            retCode = questionService.addAnswerToQuestion(inputRequest.message, user, questionId)
             if (retCode == '"success.question.add.answer"')
             {
                 status = CREATED

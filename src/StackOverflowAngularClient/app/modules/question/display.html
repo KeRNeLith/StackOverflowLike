@@ -92,7 +92,6 @@
                 </div>
 
                 <div class="qa-q-view-buttons" ng-app="segFault.post" ng-controller="RedactPostCtrl as redactCtrl">
-                    <i class="fa fa-comment" aria-hidden="true"></i>
                     <a ng-click="redactCtrl.setPost(question.id)"
                        ng-href="#!/answer/redact"
                        name="question_{{question.id}}"
@@ -174,7 +173,6 @@
                             </div>
                         </div>
                         <div class="qa-a-item-buttons">
-                            <i class="fa fa-comment-o" aria-hidden="true"></i>
                             <input name="answer_{{answer.id}}"
                                    title="{{'question.display.addCommentTooltip' | translate}}"
                                    value="{{'question.display.comment' | translate}}"
