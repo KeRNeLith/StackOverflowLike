@@ -108,41 +108,27 @@ class QuestionController
 
     @Secured('ROLE_USER')
     @Transactional
-    def addQuestion(Question question)
+    def saveQuestion()
     {
-        if (question == null)
+        def inputRequest = request.JSON
+
+        def status = BAD_REQUEST
+        def retCode = '"error.create.question.wrong.parameters"'
+        // Add question
+        if (inputRequest.title != null && inputRequest.message != null)
         {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
+            def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
+
+            retCode = questionService.createQuestion(inputRequest.title, inputRequest.message, user, inputRequest.tags)
+
+            // Creation succeed
+            if ((retCode instanceof Long || retCode instanceof Integer) && retCode >= 0)
+            {
+                status = CREATED
+            }
         }
 
-        // Validate message constraint
-        if (!question.validate(['title', 'message']))
-        {
-            transactionStatus.setRollbackOnly()
-            respond question.errors, view:'redact', model: [tags: TagValue.findAll()]
-            return
-        }
-
-        // Add optional tags
-        def tags = null
-        if (params.containsKey('tags'))
-        {
-            tags = params.list('tags')
-        }
-
-        def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
-
-        int questionId = questionService.createQuestion(question.title, question.message, user, tags)
-        if (questionId > 0)
-        {
-            redirect(action: 'display', id: questionId)
-        }
-        else
-        {
-            notFound()
-        }
+        render status: status, message: retCode
     }
 
     def edit(Question question)

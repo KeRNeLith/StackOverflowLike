@@ -17,30 +17,63 @@ class QuestionService
      * @param message Question message.
      * @param writer Question writer.
      * @param tags Optionals tags
-     * @return Created question id, otherwise -1.
+     * @return Created question id, otherwise list of error codes.
      */
-    int createQuestion(String title, String message, User writer, def tags)
+    def createQuestion(String title, String message, User writer, def tags)
     {
-        int ret = -1;
-
         // Post question feature not enabled
         if (!featuresFlippingService.isPostQuestionEnabled())
-            return ret
+            return '"error.service.unavailable.post.question"'
 
-        Question question = new Question(title: title, message: message, user: writer)
-        if (question.save(flush: true))
+        def retCodes = []
+        if (writer != null)
         {
-            ret = question.id
+            Question question = new Question(title: title, message: message, user: writer)
 
-            tagService.updateTagsToQuestion(question, tags)
+            // Errors
+            if (!question.validate())
+            {
+                transactionStatus.setRollbackOnly()
 
-            question.save()
+                if (question.errors['title'] != null)
+                {
+                    if (question.errors['title'].code == 'maxSize.exceeded')
+                        retCodes << '"error.create.question.title.tooLong"'
+                    else if (question.errors['title'].code == 'nullable')
+                        retCodes << '"error.create.question.title.notSet"'
+                    else if (question.errors['title'].code == 'unique')
+                        retCodes << '"error.create.question.title.unique"'
+                }
 
-            userService.updateUserReputation(writer, 10)
-            badgeService.addFirstQuestionBadge(writer)
+                if (question.errors['message'] != null)
+                {
+                    if (question.errors['message'].code == 'maxSize.exceeded')
+                        retCodes << '"error.create.question.message.tooLong"'
+                    else if (question.errors['message'].code == 'nullable')
+                        retCodes << '"error.create.question.message.notSet"'
+                }
+            }
+            // Save question
+            else
+            {
+                question.save(flush: true)
+
+                tagService.updateTagsToQuestion(question, tags)
+
+                question.save()
+
+                userService.updateUserReputation(writer, 10)
+                badgeService.addFirstQuestionBadge(writer)
+
+                retCodes = question.id
+            }
+        }
+        else
+        {
+            retCodes << '"error.user.notFound"'
         }
 
-        return ret
+        return retCodes
     }
 
     /**
