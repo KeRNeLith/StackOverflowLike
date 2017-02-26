@@ -9,12 +9,19 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class TagValueController
 {
+    static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max)
     {
         params.max = Math.min(max ?: 10, 100)
         respond TagValue.list(params), model:[tagValueCount: TagValue.count()]
+    }
+
+    @Secured('ROLE_ANONYMOUS')
+    def list()
+    {
+        respond tags: TagValue.findAll()
     }
 
     def show(TagValue tagValue)

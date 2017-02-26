@@ -1,0 +1,56 @@
+<div class="col-md-8">
+    <h3>
+        {{'question.redact.write.title' | translate}}
+    </h3>
+
+    <form name="redactQuestionForm" novalidate ng-app="segFault" ><!--ng-controller="RedactPostQuestionCtrl as redactCtrl"-->
+        <label>{{'question.redact.question.title.label' | translate}}
+            <input required
+                   type="text"
+                   name="uTitle"
+                   placeholder="{{'placeholder.field.question.title' | translate}}"
+                   ng-model="redactCtrl.message">
+        </label>
+        <br/>
+
+        <textarea required
+                  maxlength="65535"
+                  name="uMessage"
+                  autofocus="autofocus"
+                  ng-model="redactCtrl.message"
+                  placeholder="{{'placeholder.field.question.message' | translate}}"
+                  rows="10"
+                  class="form-control">
+        </textarea>
+        <br/>
+        <!--<div ng-show="redactAnswerForm.$submitted || redactAnswerForm.uMessage.$touched" class="text-center error">
+            <span ng-show="redactAnswerForm.uMessage.$error.required">{{'error.question.add.answer.message.notSet' | translate}}</span>
+            <span ng-show="redactAnswerForm.uMessage.$error.maxlength">{{'error.question.add.answer.message.tooLong' | translate}}</span>
+        </div>
+
+        <div ng-show="redactAnswerForm.$pristine && redactAnswerForm.uMessage.$untouched" class="text-center error">
+            <span ng-show="messageError">{{messageError | translate}}</span>
+        </div>
+
+        <div ng-show="redactAnswerForm.$pristine && redactAnswerForm.uMessage.$untouched && otherErrors && otherErrors.length > 0">
+            <div ng-repeat="error in otherErrors" class="text-center error">
+                <span>{{error | translate}}</span>
+            </div>
+        </div>
+
+        <br/>-->
+
+        <h4>{{'question.redact.tags.available.title' | translate}}</h4>
+        <select name="uTags" ng-model="data.multipleSelect" multiple>
+            <option ng-repeat="option in availableTags" ng-value="option.id">{{option.tagName}}</option>
+        </select>
+        <br/><br/>
+
+        <input name="Send"
+               ng-click="redactCtrl.send()"
+               title="{{'question.redact.button.addQuestionTooltip' | translate}}"
+               value="{{'question.redact.button.label' | translate}}"
+               class="btn btn-success"
+               type="submit">
+    </form>
+</div>

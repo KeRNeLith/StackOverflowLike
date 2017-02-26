@@ -32,27 +32,6 @@ class AnswerController
         respond new Answer(params)
     }
 
-    @Secured('ROLE_USER')
-    def redact()
-    {
-        if (params.containsKey('question'))
-        {
-            def questionId = params.long('question')
-            if (Question.exists(questionId))
-            {
-                respond new Answer(params), view: 'redact', model: [answerTo: questionId]
-            }
-            else
-            {
-                notFound()
-            }
-        }
-        else
-        {
-            notFound()
-        }
-    }
-
     @Transactional
     def save(Answer answer)
     {

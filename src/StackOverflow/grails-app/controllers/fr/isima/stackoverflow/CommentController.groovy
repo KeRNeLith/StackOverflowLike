@@ -33,27 +33,6 @@ class CommentController
     }
 
     @Secured('ROLE_USER')
-    def redact()
-    {
-        if (params.containsKey('answer'))
-        {
-            def answerId = params.long('answer')
-            if (Answer.exists(answerId))
-            {
-                respond new Comment(params), view: 'redact', model: [commentTo: answerId]
-            }
-            else
-            {
-                notFound()
-            }
-        }
-        else
-        {
-            notFound()
-        }
-    }
-
-    @Secured('ROLE_USER')
     def redactEdit(Comment comment)
     {
         respond comment, view: 'redactEdit'

@@ -37,3 +37,19 @@ questionModule.controller('QuestionDisplayCtrl', function($scope, $http, $routeP
             $scope.answers = data.sortedAnswers;
         });
 });
+
+questionModule.controller('RedactQuestionCtrl', function($scope, $http, $translate, API, PageService)
+{
+    $translate('question.redact.title.page').then(function (translatedKey)
+    {
+        PageService.setTitle(translatedKey + ' - ' + PageService.default());
+    });
+
+    $http.get(API + '/api/tagValue/list')
+        .then(function(response)
+        {
+            let data = response.data;
+
+            $scope.availableTags = data.tags;
+        });
+});

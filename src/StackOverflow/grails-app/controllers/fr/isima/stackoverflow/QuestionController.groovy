@@ -51,12 +51,6 @@ class QuestionController
         respond question
     }
 
-    @Secured('ROLE_USER')
-    def redact()
-    {
-        respond new Question(params), view: 'redact', model: [tags: TagValue.findAll()]
-    }
-
     @Secured('ROLE_ANONYMOUS')
     def display(Question question)
     {

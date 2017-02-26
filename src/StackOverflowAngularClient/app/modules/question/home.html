@@ -1,8 +1,8 @@
-<!--<div>
-    <g:form controller="question" action="redact">
-        <g:submitButton class="btn btn-success" name="${message(code: 'question.ask.button')}"/>
-    </g:form>
-</div>-->
+<a ng-href="#!/question/redact" class="redact btn btn-success">
+    {{'question.button.ask.new' | translate }}
+</a>
+<br/><br/>
+
 <p>
     {{ 'question.home.fact' | translate: { fact: randomSentence } }}
 </p>

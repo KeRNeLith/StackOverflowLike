@@ -21,4 +21,11 @@ questionModule.config(['$routeProvider', function($routeProvider)
       controller: 'QuestionDisplayCtrl',
       css: [ 'assets/stylesheets/profile/font-awesome.css', 'assets/stylesheets/question/display.css' ]
   });
+
+  // Redact page
+  $routeProvider.when('/question/redact', {
+      templateUrl: 'modules/question/redact.html',
+      controller: 'RedactQuestionCtrl',
+      loginRequired: true
+  });
 }]);

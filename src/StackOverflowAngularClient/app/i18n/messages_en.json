@@ -184,12 +184,24 @@
       {
         "message": "Your comment..."
       },
+      "question":
+      {
+        "message": "Your question...",
+        "title": "Title of the question..."
+      },
       "username": "Username",
       "password": "Password"
     }
   },
   "question":
   {
+    "button":
+    {
+      "ask":
+      {
+        "new": "Ask a new question"
+      }
+    },
     "home":
     {
       "fact": "Fact about number: {{fact}}",
@@ -219,6 +231,36 @@
       "comment": "comment",
       "Commented": "Commented on",
       "addCommentTooltip": "Add a comment on this answer"
+    },
+    "redact":
+    {
+      "button":
+      {
+        "addQuestionTooltip": "Ask your question",
+        "label": "Ask"
+      },
+      "question":
+      {
+        "title":
+        {
+          "label": "Title:"
+        }
+      },
+      "title":
+      {
+        "page": "New question"
+      },
+      "tags":
+      {
+        "available":
+        {
+          "title": "Tags:"
+        }
+      },
+      "write":
+      {
+        "title": "Ask a question"
+      }
     }
   },
   "register":

@@ -184,12 +184,24 @@
       {
         "message": "Votre commentaire..."
       },
+      "question":
+      {
+        "message": "Votre question...",
+        "title": "Titre de la question..."
+      },
       "username": "Nom d'utilisateur",
       "password": "Mot de passe"
     }
   },
   "question":
   {
+    "button":
+    {
+      "ask":
+      {
+        "new": "Poser une question"
+      }
+    },
     "home":
     {
       "fact": "Fait amusant à propos du nombre : {{fact}}",
@@ -219,6 +231,36 @@
       "comment": "commenter",
       "Commented": "Commenté le",
       "addCommentTooltip": "Ajouter un commentaire à cette réponse"
+    },
+    "redact":
+    {
+      "button":
+      {
+        "addQuestionTooltip": "Posez votre question",
+        "label": "Envoyer"
+      },
+      "question":
+      {
+        "title":
+        {
+          "label": "Titre :"
+        }
+      },
+      "title":
+      {
+        "page": "Nouvelle question"
+      },
+      "tags":
+      {
+        "available":
+        {
+          "title": "Tags :"
+        }
+      },
+      "write":
+      {
+        "title": "Posez votre question"
+      }
     }
   },
   "register":
