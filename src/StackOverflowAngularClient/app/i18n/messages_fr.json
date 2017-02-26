@@ -295,7 +295,8 @@
     {
       "label": "Profile de {{username}}",
       "inscriptionDate": "Date d'inscription",
-      "reputation": "Réputation"
+      "reputation": "Réputation",
+      "description": "A propos de {{username}}"
     }
   }
 }

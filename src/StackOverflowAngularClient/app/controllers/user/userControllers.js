@@ -11,10 +11,10 @@ userModule.controller('ProfileCtrl', function($scope, $http, API, PageService)
 {
     PageService.setTitle(PageService.default());
 
-    $http.get(API + '/api/user/display/1') // TODO  change here
+    $http.get(API + '/api/user/display/2') // TODO  change here
         .then(function(response)
         {
-            let data = response.data;
+            let data = response.data.user;
             PageService.setTitle(data.username + ' - ' + PageService.default());
 
             $scope.username = data.username;

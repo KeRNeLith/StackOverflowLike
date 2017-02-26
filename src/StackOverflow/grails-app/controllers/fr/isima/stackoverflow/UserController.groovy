@@ -1,6 +1,9 @@
 package fr.isima.stackoverflow
 
+import fr.isima.marshallers.UserMarshallers
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -32,7 +35,10 @@ class UserController
     @Secured('ROLE_ANONYMOUS')
     def display(User user)
     {
-        respond user, model: [ badges: badgeService.getUserBadgesSorted(badgeService.getUserBadges(user)) ]
+      
+      JSON.use(UserMarshallers.MEDIUM_USER_INFO) {
+        respond user: user, badges: badgeService.getUserBadgesSorted(badgeService.getUserBadges(user))
+      }
     }
 
     def create()

@@ -65,6 +65,27 @@
                 </div>
                 <!-- /. ROW  -->
                 <hr />
+
+                <div class="row">
+                  <div class="col-md-11">
+                      <h5>Description</h5>
+                      <div class="panel panel-primary">
+                          <div class="panel-heading">
+                              {{'user.profile.description' | translate: { username: username } }}
+                          </div>
+                          <div class="panel-body">
+                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                          </div>
+                          <div class="panel-footer">
+
+                          </div>
+                      </div>
+                  </div>
+                </div>
+
+                <!-- /. ROW  -->
+                <hr />
+
                 <div class="row">
                     <div class="col-md-10">
                         <h5>{{ 'question.home.titles.question' | translate }}</h5>
@@ -76,133 +97,13 @@
                               </tr>
                           </thead>
                           <tbody>
-                              <tr ng-repeat="answer in answers" >
-                                <td>  {{answer.id}}
-                                </td>
-                                <td>  {{answer.id}}
-                                </td>
-                              </tr>
+                                <tr ng-repeat="question in questions" sf-question-entry="question"></tr>
                           </tbody>
                         </table>
                     </div>
                 </div>
                 <!-- /. ROW  -->
                 <hr />
-
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <h5>Panel Sample</h5>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Default Panel
-                            </div>
-                            <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                            </div>
-                            <div class="panel-footer">
-                                Panel Footer
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <h5>Accordion Sample</h5>
-                        <div class="panel-group" id="accordion">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="collapsed">Collapsible Group Item #1</a>
-                                    </h4>
-                                </div>
-                                <div id="collapseOne" class="panel-collapse collapse" style="height: 0px;">
-                                    <div class="panel-body">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Collapsible Group Item #2</a>
-                                    </h4>
-                                </div>
-                                <div id="collapseTwo" class="panel-collapse in" style="height: auto;">
-                                    <div class="panel-body">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed">Collapsible Group Item #3</a>
-                                    </h4>
-                                </div>
-                                <div id="collapseThree" class="panel-collapse collapse">
-
-
-                                        <div class="panel-body">
-                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <h5>Tabs Sample</h5>
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#home" data-toggle="tab">Home</a>
-                            </li>
-                            <li class=""><a href="#profile" data-toggle="tab">Profile</a>
-                            </li>
-                            <li class=""><a href="#messages" data-toggle="tab">Messages</a>
-                            </li>
-
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane fade active in" id="home">
-                                <h4>Home Tab</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit eserunt mollit anim id est laborum.
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit eserunt mollit anim id est laborum.
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit eserunt mollit anim id est laborum.
-                                </p>
-                            </div>
-                            <div class="tab-pane fade" id="profile">
-                                <h4>Profile Tab</h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit eserunt mollit anim id est laborum.
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit eserunt mollit anim id est laborum.
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit eserunt mollit anim id est laborum.
-                                </p>
-
-                            </div>
-                            <div class="tab-pane fade" id="messages">
-                                <h4>Messages Tab</h4>
-                                <p >
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit eserunt mollit anim id est laborum.
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit eserunt mollit anim id est laborum.
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit eserunt mollit anim id est laborum.
-                                </p>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-                <!-- /. ROW  -->
-                <hr />
-                  <div class="row">
-                    <div class="col-md-12">
-                        <h5>Information</h5>
-                            This is a type of bare admin that means you can customize your own admin using this admin structured  template . For More Examples of bootstrap elements or components please visit official bootstrap website <a href="http://getbootstrap.com" target="_blank">getbootstrap.com</a>
-                        . And if you want full template please download <a href="http://www.binarytheme.com/bootstrap-free-admin-dashboard-template/" target="_blank" >FREE BCORE ADMIN </a>&nbsp;,&nbsp;  <a href="http://www.binarytheme.com/free-bootstrap-admin-template-siminta/" target="_blank" >FREE SIMINTA ADMIN</a> and <a href="http://binarycart.com/" target="_blank" >FREE BINARY ADMIN</a>.
-
-                    </div>
-                </div>
-                <!-- /. ROW  -->
 
             </div>
             <!-- /. PAGE INNER  -->
