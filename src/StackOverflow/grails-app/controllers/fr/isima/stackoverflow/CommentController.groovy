@@ -89,7 +89,7 @@ class CommentController
 
     @Secured('ROLE_USER')
     @Transactional
-    def addComment(Comment comment)
+    def saveComment(Comment comment)
     {
         if (comment == null)
         {

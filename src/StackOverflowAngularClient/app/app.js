@@ -14,6 +14,7 @@ var segFaultApp = angular.module('segFault', [
     'segFault.login',
     'segFault.question',
     'segFault.answer',
+    'segFault.comment',
     'segFault.user',
     'segFault.vote'
     // TO BE COMPLETED HERE

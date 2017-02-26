@@ -25,6 +25,25 @@
     "signIn": "Se connecter",
     "signUp": "S'inscrire"
   },
+  "comment":
+  {
+    "redact":
+    {
+      "button":
+      {
+        "addCommentTooltip": "Envoyer votre commentaire",
+        "label": "Envoyer"
+      },
+      "write":
+      {
+        "title": "Écrivez votre commentaire"
+      }
+    },
+    "title":
+    {
+      "page": "Nouveau commentaire"
+    }
+  },
   "info":
   {
     "register":
@@ -37,6 +56,25 @@
   },
   "error":
   {
+    "answer":
+    {
+      "add":
+      {
+        "comment":
+        {
+          "message":
+          {
+            "notSet": "Veuillez saisir un message pour votre commentaire.",
+            "tooLong": "Votre message est trop long !"
+          },
+          "notAnswer": "Vous avez tenté de commenter un post qui n'est pas une réponse.",
+          "wrong":
+          {
+            "parameters": "Il manque des informations pour soumettre votre commentaire."
+          }
+        }
+      }
+    },
     "login":
     {
       "invalid":
@@ -141,6 +179,10 @@
       "answer":
       {
         "message": "Votre réponse..."
+      },
+      "comment":
+      {
+        "message": "Votre commentaire..."
       },
       "username": "Nom d'utilisateur",
       "password": "Mot de passe"

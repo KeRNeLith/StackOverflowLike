@@ -90,7 +90,7 @@
                     </ul>
                 </div>
 
-                <div class="qa-q-view-buttons" ng-app="segFault.post" ng-controller="RedactPostCtrl as redactCtrl">
+                <div class="qa-q-view-buttons" ng-app="segFault.post" ng-controller="RedactPostAnswerCtrl as redactCtrl">
                     <a ng-click="redactCtrl.setPost(question.id)"
                        ng-href="#!/answer/redact"
                        name="question_{{question.id}}"
@@ -161,24 +161,23 @@
                         </span>
                     </span>
 
-                    <form>
-                    <!-- TODO <g:form controller="comment" action="redact">-->
-                        <div class="qa-a-selection">
+                    <div class="qa-a-selection">
+                    </div>
+                    <div class="qa-a-item-content">
+                        <div class="entry-content">
+                            {{answer.message}}
                         </div>
-                        <div class="qa-a-item-content">
-                            <div class="entry-content">
-                                {{answer.message}}
-                            </div>
-                        </div>
-                        <div class="qa-a-item-buttons">
-                            <input name="answer_{{answer.id}}"
-                                   title="{{'question.display.addCommentTooltip' | translate}}"
-                                   value="{{'question.display.comment' | translate}}"
-                                   class="qa-form-light-button qa-form-light-button-comment"
-                                   type="submit">
-                            <input type="hidden" name="answer" value="{{answer.id}}">
-                        </div>
-                    </form>
+                    </div>
+                    <div class="qa-a-item-buttons" ng-app="segFault" ng-controller="RedactPostCommentCtrl as redactCtrl">
+                        <a ng-click="redactCtrl.setPost(answer.id)"
+                           ng-href="#!/comment/redact"
+                           name="answer_{{answer.id}}"
+                           title="{{'question.display.addCommentTooltip' | translate}}"
+                           class="redact qa-form-light-button qa-form-light-button-comment">
+                            {{'question.display.comment' | translate}}
+                        </a>
+                    </div>
+
                     <div class="qa-a-item-c-list" id="comment_{{answer.id}}_list">
                         <div ng-repeat="comment in answer.comments" class="qa-c-list-item  hentry comment" id="comment_{{comment.id}}">
                             <span class="qa-c-item-avatar-meta">

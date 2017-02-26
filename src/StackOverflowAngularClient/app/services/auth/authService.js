@@ -11,7 +11,6 @@ class AuthService
     constructor($window)
     {
         this.$window = $window;
-        this.user = null;
     }
 
     // JWT methods
@@ -65,17 +64,16 @@ class AuthService
 
     currentUser()
     {
-        if (!this.user)
+        let currentUser = null;
+
+        let token = this.getToken();
+        if (token)
         {
-            let token = this.getToken();
-            if (token)
-            {
-                let params = this.parseJWTToken(token);
-                this.user = params.sub;
-            }
+            let params = this.parseJWTToken(token);
+            currentUser = params.sub;
         }
 
-        return this.user;
+        return currentUser;
     }
 }
 

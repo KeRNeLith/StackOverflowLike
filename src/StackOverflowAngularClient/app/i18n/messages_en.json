@@ -25,6 +25,25 @@
     "signIn": "Sign In",
     "signUp": "Sign Up"
   },
+  "comment":
+  {
+    "redact":
+    {
+      "button":
+      {
+        "addCommentTooltip": "Send your comment",
+        "label": "Send"
+      },
+      "write":
+      {
+        "title": "Write your comment"
+      }
+    },
+    "title":
+    {
+      "page": "New comment"
+    }
+  },
   "info":
   {
     "register":
@@ -37,6 +56,25 @@
   },
   "error":
   {
+    "answer":
+    {
+      "add":
+      {
+        "comment":
+        {
+          "message":
+          {
+            "notSet": "Please provide a message for your comment.",
+            "tooLong": "Your message is too long!"
+          },
+          "notAnswer": "You're trying to comment to a post that is not an answer.",
+          "wrong":
+          {
+            "parameters": "There are missing parameters in your comment submission."
+          }
+        }
+      }
+    },
     "login":
     {
       "invalid":
@@ -141,6 +179,10 @@
       "answer":
       {
         "message": "Your answer..."
+      },
+      "comment":
+      {
+        "message": "Your comment..."
       },
       "username": "Username",
       "password": "Password"

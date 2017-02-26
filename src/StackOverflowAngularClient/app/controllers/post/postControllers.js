@@ -7,23 +7,22 @@
 var postModule = angular.module('segFault.post');
 
 // Define controllers
-postModule.controller('RedactPostCtrl', function($scope, $route, PostService, RedirectionService)
+postModule.controller('RedactPostCtrl', function($scope, $route, RedirectionService)
 {
     var self = this;
 
-    self.send = function()
+    self.handleSendResult = function(result, form)
     {
-        let ret = PostService.send(self.message);
-        if (ret != null)
+        if (result != null)
         {
-            ret.then(function successCallback(response)
+            result.then(function successCallback(response)
                     {
                         RedirectionService.redirectToLastURL();
                         $route.reload();
                     },
                     function errorCallback(response)
                     {
-                        resetForm($scope.redactAnswerForm);
+                        resetForm(form);
 
                         if (response.data.message)
                         {
@@ -61,11 +60,58 @@ postModule.controller('RedactPostCtrl', function($scope, $route, PostService, Re
         }
     };
 
-    self.setPost = function(targetId)
+    self.saveRedirection = function()
     {
-        PostService.setPostId(targetId);
-
         // Save redirection after posting
         RedirectionService.saveLastURL();
+    };
+});
+
+// ------------------------------------------------------------------------
+postModule.controller('RedactPostAnswerCtrl', function($scope, $controller, PostAnswerService)
+{
+    var self = this;
+    // Instantiate base controller
+    angular.extend(self, $controller('RedactPostCtrl', { $scope: $scope }));
+
+    self.send = function()
+    {
+        PostAnswerService.setMessage(self.message);
+
+        let ret = PostAnswerService.send();
+
+        self.handleSendResult(ret, $scope.redactAnswerForm);
+    };
+
+    self.setPost = function(targetId)
+    {
+        PostAnswerService.setPostId(targetId);
+
+        self.saveRedirection();
+    };
+});
+
+
+// ------------------------------------------------------------------------
+postModule.controller('RedactPostCommentCtrl', function($scope, $controller, PostCommentService)
+{
+    var self = this;
+    // Instantiate base controller
+    angular.extend(self, $controller('RedactPostCtrl', { $scope: $scope }));
+
+    self.send = function()
+    {
+        PostCommentService.setMessage(self.message);
+
+        let ret = PostCommentService.send();
+
+        self.handleSendResult(ret, $scope.redactCommentForm);
+    };
+
+    self.setPost = function(targetId)
+    {
+        PostCommentService.setPostId(targetId);
+
+        self.saveRedirection();
     };
 });

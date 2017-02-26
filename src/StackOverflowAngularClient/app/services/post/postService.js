@@ -14,6 +14,7 @@ class PostService
         this.API = API;
 
         this._postId = -1;
+        this._message = '';
     }
 
     postId()
@@ -26,16 +27,73 @@ class PostService
         this._postId = newId;
     }
 
-    send(message)
+    message()
     {
-        if (this._postId < 0)
-            return null;
+        return this._message;
+    }
 
-        return this.$http.post(this.API + '/api/answer/saveAnswer', {
-            message: message,
-            question: this._postId
-        });
+    setMessage(newMessage)
+    {
+        this._message = newMessage;
+    }
+
+    send()
+    {
+        // Valid id
+        return this._postId >= 0;
     }
 }
 
 segFaultPostModule.service('PostService', PostService);
+
+// ------------------------------------------------------------------------
+class PostAnswerService extends PostService
+{
+    constructor($http, API)
+    {
+        super($http, API);
+    }
+
+    send()
+    {
+        let ret = null;
+
+        if (super.send())
+        {
+            ret = this.$http.post(this.API + '/api/answer/saveAnswer', {
+                message: this._message,
+                question: this._postId
+            });
+        }
+
+        return ret;
+    }
+}
+
+segFaultPostModule.service('PostAnswerService', PostAnswerService);
+
+// ------------------------------------------------------------------------
+class PostCommentService extends PostService
+{
+    constructor($http, API)
+    {
+        super($http, API);
+    }
+
+    send()
+    {
+        let ret = null;
+
+        if (super.send())
+        {
+            ret = this.$http.post(this.API + '/api/comment/saveComment', {
+                message: this._message,
+                answer: this._postId
+            });
+        }
+
+        return ret;
+    }
+}
+
+segFaultPostModule.service('PostCommentService', PostCommentService);
