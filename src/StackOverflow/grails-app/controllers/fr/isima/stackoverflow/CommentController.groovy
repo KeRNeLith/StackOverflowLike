@@ -89,44 +89,35 @@ class CommentController
 
     @Secured('ROLE_USER')
     @Transactional
-    def saveComment(Comment comment)
+    def saveComment()
     {
-        if (comment == null)
-        {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
+        def inputRequest = request.JSON
 
-        // Validate message constraint
-        if (!comment.validate(['message']))
-        {
-            transactionStatus.setRollbackOnly()
-            respond comment.errors, view:'redact'
-            return
-        }
-
+        def status = BAD_REQUEST
+        String retCode = '"error.answer.add.comment.wrong.parameters"'
         // Add comment
-        if (params.containsKey('answer'))
+        if (inputRequest.message != null && inputRequest.answer != null)
         {
-            def answerId = params.long('answer')
             def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
 
-            if (answerService.addCommentToAnswer(comment.message, user, answerId))
+            Long answerId = -1
+            if (inputRequest.answer instanceof String)
             {
-                Answer a = Answer.read(answerId)
-
-                redirect(controller: 'question', action: 'display', id: a.question.id)
+                answerId = Long.parseLong(inputRequest.answer)
             }
             else
             {
-                notFound()
+                answerId = inputRequest.answer
+            }
+
+            retCode = answerService.addCommentToAnswer(inputRequest.message, user, answerId)
+            if (retCode == '"success.answer.add.comment"')
+            {
+                status = CREATED
             }
         }
-        else
-        {
-            notFound()
-        }
+
+        render status: status, message: retCode
     }
 
     def edit(Comment comment)

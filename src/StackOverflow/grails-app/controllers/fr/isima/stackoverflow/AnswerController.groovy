@@ -89,7 +89,7 @@ class AnswerController
 
         def status = BAD_REQUEST
         String retCode = '"error.question.add.answer.wrong.parameters"'
-        // Add response
+        // Add answer
         if (inputRequest.message != null && inputRequest.question != null)
         {
             def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null

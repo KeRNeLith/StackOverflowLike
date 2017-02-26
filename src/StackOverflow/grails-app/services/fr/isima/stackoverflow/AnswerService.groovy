@@ -15,27 +15,49 @@ class AnswerService
      * @param message Comment message.
      * @param writer User that write comment.
      * @param answerId Answer id.
-     * @return true if succeed.
+     * @return Valid string if comment is created, otherwise list of error codes.
      */
-    boolean addCommentToAnswer(String message, User writer, Long answerId)
+    def addCommentToAnswer(String message, User writer, Long answerId)
     {
-        boolean ret = false
-
         // Post comment feature not enabled
         if (!featuresFlippingService.isCommentPostingEnabled())
-            return ret
+            return '"error.service.unavailable.post.answer"'
 
+        def retCodes = []
         def answer = Answer.get(answerId)
         if (writer != null && answer != null)
         {
-            answer.addToComments(message: message, answer: answer, user: writer).save()
+            Comment comment = new Comment(message: message, answer: answer, user: writer)
+            if (!comment.validate())
+            {
+                transactionStatus.setRollbackOnly()
 
-            ret = true
+                if (comment.errors['message'] != null)
+                {
+                    if (comment.errors['message'].code == 'maxSize.exceeded')
+                        retCodes << '"error.answer.add.comment.message.tooLong"'
+                    else if (comment.errors['message'].code == 'nullable')
+                        retCodes << '"error.answer.add.comment.message.notSet"'
+                }
+            }
+            else
+            {
+                answer.addToComments(comment).save()
+                retCodes = '"success.answer.add.comment"'
 
-            userService.updateUserReputation(writer, 10)
-            badgeService.addFirstCommentBadge(writer)
+                userService.updateUserReputation(writer, 10)
+                badgeService.addFirstCommentBadge(writer)
+            }
+        }
+        else
+        {
+            if (writer == null)
+                retCodes << '"error.user.notFound"'
+
+            if (answer == null)
+                retCodes << '"error.answer.add.comment.notAnswer"'
         }
 
-        return ret
+        return retCodes
     }
 }

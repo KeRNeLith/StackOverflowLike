@@ -142,7 +142,7 @@ class QuestionService
      * @param message Response message.
      * @param writer User that write answer.
      * @param questionId Question id.
-     * @return Valid string if user is created, otherwise list of error codes.
+     * @return Valid string if answer is created, otherwise list of error codes.
      */
     def addAnswerToQuestion(String message, User writer, Long questionId)
     {
