@@ -29,7 +29,10 @@ class NumbersService
         def rest = new RestBuilder()
         def resp = rest.get(url + random)
 
-        return resp.text
+        if (resp.status < 400)
+            return resp.text
+        else
+            return getRandomNumberSentenceFallback()
     }
 
     /**
