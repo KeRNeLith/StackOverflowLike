@@ -6,6 +6,7 @@
     <form name="redactQuestionForm" novalidate ng-app="segFault" ng-controller="RedactPostQuestionCtrl as redactCtrl">
         <label>{{'question.redact.question.title.label' | translate}}
             <input required
+                   autofocus="autofocus"
                    type="text"
                    name="uTitle"
                    placeholder="{{'placeholder.field.question.title' | translate}}"
@@ -24,7 +25,6 @@
         <textarea required
                   maxlength="65535"
                   name="uMessage"
-                  autofocus="autofocus"
                   ng-model="redactCtrl.message"
                   placeholder="{{'placeholder.field.question.message' | translate}}"
                   rows="10"

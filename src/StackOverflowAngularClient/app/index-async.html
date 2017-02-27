@@ -104,10 +104,9 @@
                 <!-- Login part -->
                 <div ng-controller="AuthCtrl as authCtrl" class="nav navbar-nav navbar-right">
                     <div ng-show="authCtrl.isAuthenticated()">
-                        <!-- TODO username
-                        <a ng-href="#!/user/profile/" class="navbar-brand">
+                        <a ng-href="#!/user/profile/{{authCtrl.currentUser()}}" class="navbar-brand">
                             {{authCtrl.currentUser()}}
-                        </a>-->
+                        </a>
                         <a ng-click="authCtrl.logout()" class="navbar-brand">
                             {{'button.logout' | translate}}
                         </a>

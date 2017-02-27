@@ -35,7 +35,7 @@
             <div class="qa-q-view-main">
                 <span class="qa-q-view-avatar-meta">
                     <span class="qa-q-view-avatar">
-                        <a ng-href="#!/user/profile/{{question.user.id}}" class="qa-avatar-link">
+                        <a ng-href="#!/user/profile/{{question.user.username}}" class="qa-avatar-link">
                             <img src="assets/images/avatar.jpg" width="50" height="50" class="qa-avatar-image" alt="">
                         </a>
                     </span>
@@ -54,7 +54,7 @@
                             <span class="qa-q-view-who-pad">{{'question.display.by' | translate }} </span>
                             <span class="qa-q-view-who-data">
                                 <span class="vcard author">
-                                    <a ng-href="#!/user/profile/{{question.user.id}}" id="{{question.user.id}}" class="qa-user-link url fn entry-title nickname">
+                                    <a ng-href="#!/user/profile/{{question.user.username}}" id="{{question.user.id}}" class="qa-user-link url fn entry-title nickname">
                                         {{question.user.username}}
                                     </a>
                                 </span>
@@ -123,7 +123,7 @@
                 <div class="qa-a-item-main">
                     <span class="qa-a-item-avatar-meta">
                         <span class="qa-a-item-avatar">
-                            <a ng-href="#!/user/profile/{{answer.user.id}}" class="qa-avatar-link">
+                            <a ng-href="#!/user/profile/{{answer.user.username}}" class="qa-avatar-link">
                                 <img src="assets/images/avatar.jpg" width="40" height="40" class="qa-avatar-image" alt="">
                             </a>
                         </span>
@@ -144,7 +144,7 @@
                                 <span class="qa-a-item-who-pad">{{'question.display.by' | translate}} </span>
                                 <span class="qa-a-item-who-data">
                                     <span class="vcard author">
-                                        <a ng-href="#!/user/profile/{{answer.user.id}}" class="qa-user-link url fn entry-title nickname">
+                                        <a ng-href="#!/user/profile/{{answer.user.username}}" class="qa-user-link url fn entry-title nickname">
                                             {{answer.user.username}}
                                         </a>
                                     </span>
@@ -183,7 +183,7 @@
                         <div ng-repeat="comment in answer.comments" class="qa-c-list-item  hentry comment" id="comment_{{comment.id}}">
                             <span class="qa-c-item-avatar-meta">
                                 <span class="qa-c-item-avatar">
-                                    <a ng-href="#!/user/profile/{{comment.user.id}}" class="qa-avatar-link">
+                                    <a ng-href="#!/user/profile/{{comment.user.username}}" class="qa-avatar-link">
                                         <img src="assets/images/avatar.jpg" width="20" height="20" class="qa-avatar-image" alt="">
                                     </a>
                                 </span>
@@ -202,7 +202,7 @@
                                         <span class="qa-c-item-who-pad">{{'question.display.by' | translate}} </span>
                                         <span class="qa-c-item-who-data">
                                             <span class="vcard author">
-                                                <a ng-href="#!/user/profile/{{comment.user.id}}" class="qa-user-link url fn entry-title nickname">
+                                                <a ng-href="#!/user/profile/{{comment.user.username}}" class="qa-user-link url fn entry-title nickname">
                                                     {{comment.user.username}}
                                                 </a>
                                             </span>

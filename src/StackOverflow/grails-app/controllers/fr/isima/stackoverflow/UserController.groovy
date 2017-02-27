@@ -33,12 +33,14 @@ class UserController
     }
 
     @Secured('ROLE_ANONYMOUS')
-    def display(User user)
+    def profile()
     {
-      
-      JSON.use(UserMarshallers.MEDIUM_USER_INFO) {
-        respond user: user, badges: badgeService.getUserBadgesSorted(badgeService.getUserBadges(user))
-      }
+        String username = params.username
+        User user = User.findByUsername(username)
+
+        JSON.use(UserMarshallers.MEDIUM_USER_INFO) {
+            respond user: user, badges: badgeService.getUserBadgesSorted(badgeService.getUserBadges(user))
+        }
     }
 
     def create()
