@@ -19,6 +19,7 @@ class QuestionController
     def questionService
     def tagService
     def numbersService
+    def featuresFlippingService
 
     // Actions
     def index(Integer max)
@@ -110,6 +111,12 @@ class QuestionController
     @Transactional
     def saveQuestion()
     {
+        if (!featuresFlippingService.isQuestionPostingEnabled())
+        {
+            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.post.question"'
+            return
+        }
+
         def inputRequest = request.JSON
 
         def status = BAD_REQUEST

@@ -14,6 +14,7 @@ class AnswerController
     // Services
     def springSecurityService
     def questionService
+    def featuresFlippingService
 
     // Actions
     def index(Integer max)
@@ -64,6 +65,12 @@ class AnswerController
     @Transactional
     def saveAnswer()
     {
+        if (!featuresFlippingService.isAnswerPostingEnabled())
+        {
+            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.post.answer"'
+            return
+        }
+
         def inputRequest = request.JSON
 
         def status = BAD_REQUEST

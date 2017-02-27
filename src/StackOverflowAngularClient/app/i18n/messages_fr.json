@@ -75,6 +75,27 @@
         }
       }
     },
+    "create":
+    {
+      "question":
+      {
+        "message":
+        {
+          "notSet": "Veuillez saisir un message pour votre question.",
+          "tooLong": "Votre message est trop long !"
+        },
+        "title":
+        {
+          "notSet": "Veuillez saisir un titre pour votre question.",
+          "tooLong": "Votre titre est trop long !",
+          "unique": "Vous avez déjà posé une question avec ce titre."
+        },
+        "wrong":
+        {
+          "parameters": "Il manque des informations pour soumettre votre question."
+        }
+      }
+    },
     "login":
     {
       "invalid":
@@ -122,7 +143,9 @@
       {
         "post":
         {
-          "answer": "Il est impossible de poster des réponses pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard."
+          "answer": "Il est impossible de poster des réponses pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard.",
+          "comment": "Il est impossible de poster des commentaires pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard.",
+          "question": "Il est impossible de poster des questions pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard."
         },
         "signUp": "Il est impossible de s'inscrire pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard.",
         "title": "Indisponible"

@@ -21,7 +21,7 @@ class AnswerService
     {
         // Post comment feature not enabled
         if (!featuresFlippingService.isCommentPostingEnabled())
-            return '"error.service.unavailable.post.answer"'
+            return '"error.service.unavailable.post.comment"'
 
         def retCodes = []
         def answer = Answer.get(answerId)

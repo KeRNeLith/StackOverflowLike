@@ -14,6 +14,7 @@ class CommentController
     // Services
     def springSecurityService
     def answerService
+    def featuresFlippingService
 
     // Actions
     def index(Integer max)
@@ -70,6 +71,12 @@ class CommentController
     @Transactional
     def saveComment()
     {
+        if (!featuresFlippingService.isCommentPostingEnabled())
+        {
+            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.post.comment"'
+            return
+        }
+
         def inputRequest = request.JSON
 
         def status = BAD_REQUEST

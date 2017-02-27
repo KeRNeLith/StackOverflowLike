@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value
 class FeaturesFlippingService
 {
     @Value('${features.posting.answer.enabled}')
-    private boolean postAnswerEnabled;
+    private boolean postAnswerEnabled
 
     /**
      * Posting answers feature enabled.
@@ -19,7 +19,7 @@ class FeaturesFlippingService
     }
 
     @Value('${features.posting.comment.enabled}')
-    private boolean postCommentEnabled;
+    private boolean postCommentEnabled
 
     /**
      * Posting comments feature enabled.
@@ -31,7 +31,7 @@ class FeaturesFlippingService
     }
 
     @Value('${features.signup.enabled}')
-    private boolean signUpEnabled;
+    private boolean signUpEnabled
 
     /**
      * Signing up feature enabled.
@@ -43,7 +43,7 @@ class FeaturesFlippingService
     }
 
     @Value('${features.signin.enabled}')
-    private boolean signInEnabled;
+    private boolean signInEnabled
 
     /**
      * Signing in feature enabled.
@@ -55,19 +55,19 @@ class FeaturesFlippingService
     }
 
     @Value('${features.question.ask.enabled}')
-    private boolean postQuestionEnabled;
+    private boolean postQuestionEnabled
 
     /**
      * Posting question feature enabled.
      * @return True if enabled.
      */
-    boolean isPostQuestionEnabled()
+    boolean isQuestionPostingEnabled()
     {
         return postQuestionEnabled
     }
 
     @Value('${features.profile.edit.enabled}')
-    private boolean editProfileEnabled;
+    private boolean editProfileEnabled
 
     /**
      * Edit user profile feature enabled.
@@ -79,7 +79,7 @@ class FeaturesFlippingService
     }
 
     @Value('${features.badges.enabled}')
-    private boolean badgesEnabled;
+    private boolean badgesEnabled
 
     /**
      * Badges feature enabled.
@@ -91,7 +91,7 @@ class FeaturesFlippingService
     }
 
     @Value('${features.votes.enabled}')
-    private boolean votesEnabled;
+    private boolean votesEnabled
 
     /**
      * Badges feature enabled.
