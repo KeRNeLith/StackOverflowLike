@@ -13,8 +13,73 @@ class PostService
         this.$http = $http;
         this.API = API;
 
-        this._postId = -1;
         this._message = '';
+    }
+
+    message()
+    {
+        return this._message;
+    }
+
+    setMessage(newMessage)
+    {
+        this._message = newMessage;
+    }
+}
+
+segFaultPostModule.service('PostService', PostService);
+
+// ------------------------------------------------------------------------
+class PostQuestionService extends PostService
+{
+    constructor($http, API)
+    {
+        super($http, API);
+
+        this._title = '';
+        this._tagsIds = [];
+    }
+
+    title()
+    {
+        return this._title;
+    }
+
+    setTitle(newTitle)
+    {
+        this._title = newTitle;
+    }
+
+    tags()
+    {
+        return this._tagsIds;
+    }
+
+    setTags(newTags)
+    {
+        this._tagsIds = newTags;
+    }
+
+    send()
+    {
+        return this.$http.post(this.API + '/api/question/saveQuestion', {
+            title: this._title,
+            message: this._message,
+            tags: this._tagsIds
+        });
+    }
+}
+
+segFaultPostModule.service('PostQuestionService', PostQuestionService);
+
+// ------------------------------------------------------------------------
+class SubPostService extends PostService
+{
+    constructor($http, API)
+    {
+        super($http, API);
+
+        this._postId = -1;
     }
 
     postId()
@@ -27,16 +92,6 @@ class PostService
         this._postId = newId;
     }
 
-    message()
-    {
-        return this._message;
-    }
-
-    setMessage(newMessage)
-    {
-        this._message = newMessage;
-    }
-
     send()
     {
         // Valid id
@@ -44,10 +99,10 @@ class PostService
     }
 }
 
-segFaultPostModule.service('PostService', PostService);
+segFaultPostModule.service('SubPostService', SubPostService);
 
 // ------------------------------------------------------------------------
-class PostAnswerService extends PostService
+class PostAnswerService extends SubPostService
 {
     constructor($http, API)
     {
@@ -73,7 +128,7 @@ class PostAnswerService extends PostService
 segFaultPostModule.service('PostAnswerService', PostAnswerService);
 
 // ------------------------------------------------------------------------
-class PostCommentService extends PostService
+class PostCommentService extends SubPostService
 {
     constructor($http, API)
     {

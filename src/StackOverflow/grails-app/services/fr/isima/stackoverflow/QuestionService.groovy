@@ -22,7 +22,7 @@ class QuestionService
     def createQuestion(String title, String message, User writer, def tags)
     {
         // Post question feature not enabled
-        if (!featuresFlippingService.isPostQuestionEnabled())
+        if (!featuresFlippingService.isQuestionPostingEnabled())
             return '"error.service.unavailable.post.question"'
 
         def retCodes = []

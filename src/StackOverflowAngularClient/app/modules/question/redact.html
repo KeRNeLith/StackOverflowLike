@@ -3,15 +3,23 @@
         {{'question.redact.write.title' | translate}}
     </h3>
 
-    <form name="redactQuestionForm" novalidate ng-app="segFault" ><!--ng-controller="RedactPostQuestionCtrl as redactCtrl"-->
+    <form name="redactQuestionForm" novalidate ng-app="segFault" ng-controller="RedactPostQuestionCtrl as redactCtrl">
         <label>{{'question.redact.question.title.label' | translate}}
             <input required
                    type="text"
                    name="uTitle"
                    placeholder="{{'placeholder.field.question.title' | translate}}"
-                   ng-model="redactCtrl.message">
+                   ng-model="redactCtrl.title">
         </label>
         <br/>
+        <div ng-show="redactQuestionForm.$submitted || redactQuestionForm.uTitle.$touched" class="text-center error">
+            <span ng-show="redactQuestionForm.uTitle.$error.required">{{'error.create.question.title.notSet' | translate}}</span>
+            <span ng-show="redactQuestionForm.uTitle.$error.maxlength">{{'error.create.question.title.tooLong' | translate}}</span>
+        </div>
+
+        <div ng-show="redactQuestionForm.$pristine && redactQuestionForm.uTitle.$untouched" class="text-center error">
+            <span ng-show="titleError">{{titleError | translate}}</span>
+        </div>
 
         <textarea required
                   maxlength="65535"
@@ -23,28 +31,31 @@
                   class="form-control">
         </textarea>
         <br/>
-        <!--<div ng-show="redactAnswerForm.$submitted || redactAnswerForm.uMessage.$touched" class="text-center error">
-            <span ng-show="redactAnswerForm.uMessage.$error.required">{{'error.question.add.answer.message.notSet' | translate}}</span>
-            <span ng-show="redactAnswerForm.uMessage.$error.maxlength">{{'error.question.add.answer.message.tooLong' | translate}}</span>
+        <div ng-show="redactQuestionForm.$submitted || redactQuestionForm.uMessage.$touched" class="text-center error">
+            <span ng-show="redactQuestionForm.uMessage.$error.required">{{'error.create.question.message.notSet' | translate}}</span>
+            <span ng-show="redactQuestionForm.uMessage.$error.maxlength">{{'error.create.question.message.tooLong' | translate}}</span>
         </div>
 
-        <div ng-show="redactAnswerForm.$pristine && redactAnswerForm.uMessage.$untouched" class="text-center error">
+        <div ng-show="redactQuestionForm.$pristine && redactQuestionForm.uMessage.$untouched" class="text-center error">
             <span ng-show="messageError">{{messageError | translate}}</span>
         </div>
 
-        <div ng-show="redactAnswerForm.$pristine && redactAnswerForm.uMessage.$untouched && otherErrors && otherErrors.length > 0">
-            <div ng-repeat="error in otherErrors" class="text-center error">
-                <span>{{error | translate}}</span>
-            </div>
-        </div>
-
-        <br/>-->
-
         <h4>{{'question.redact.tags.available.title' | translate}}</h4>
-        <select name="uTags" ng-model="data.multipleSelect" multiple>
+        <select name="uTags" ng-model="redactCtrl.tags" multiple>
             <option ng-repeat="option in availableTags" ng-value="option.id">{{option.tagName}}</option>
         </select>
         <br/><br/>
+
+        <div ng-show="  redactQuestionForm.$pristine
+                        && redactQuestionForm.uMessage.$untouched
+                        && redactQuestionForm.uTitle.$untouched
+                        && redactQuestionForm.uTags.$untouched
+                        && otherErrors && otherErrors.length > 0">
+            <div ng-repeat="error in otherErrors" class="text-center error">
+                <span>{{error | translate}}</span>
+            </div>
+            <br/>
+        </div>
 
         <input name="Send"
                ng-click="redactCtrl.send()"

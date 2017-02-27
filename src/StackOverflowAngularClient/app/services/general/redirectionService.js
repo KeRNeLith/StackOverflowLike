@@ -53,6 +53,11 @@ class RedirectionService
         this.$location.path(this._lastURL);
     }
 
+    redirectTo(path)
+    {
+        this.$location.path(path);
+    }
+
     redirectToUnavailable()
     {
         this.$location.path('/unavailable');
