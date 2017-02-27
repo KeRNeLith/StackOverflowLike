@@ -58,6 +58,18 @@ class QuestionMarshallers
 		return getMediumQuestionData(question)
 	}
 
+		public static userOwnedQuestionMarshaller = { Question question ->
+			def output = [:]
+			output['id'] = question.id
+			output['title'] = question.title
+			output['views'] = question.nbViews
+			output['resolved'] = question.isResolved
+			output['title'] = question.title
+			output['tags'] = question.tags
+
+			return output
+		}
+
 	private static getLightQuestionData(Question question)
 	{
 		def output = [:]
@@ -79,4 +91,6 @@ class QuestionMarshallers
 		output['message'] = question.message
 		return output
 	}
+
+
 }
