@@ -11,4 +11,11 @@ commentModule.config(['$routeProvider', function($routeProvider)
       controller: 'RedactCommentCtrl',
       loginRequired: true
   });
+
+  // Edit page
+  $routeProvider.when('/comment/edit/:id', {
+      templateUrl: 'modules/comment/edit.html',
+      controller: 'EditCommentCtrl',
+      loginRequired: true
+  });
 }]);

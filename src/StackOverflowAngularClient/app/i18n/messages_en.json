@@ -43,6 +43,22 @@
   },
   "comment":
   {
+    "edit":
+    {
+      "button":
+      {
+        "editCommentTooltip": "Send your modification",
+        "label": "Send"
+      },
+      "title":
+      {
+        "page": "Edit comment"
+      },
+      "write":
+      {
+        "title": "Edit your comment"
+      }
+    },
     "redact":
     {
       "button":
@@ -50,14 +66,14 @@
         "addCommentTooltip": "Send your comment",
         "label": "Send"
       },
+      "title":
+      {
+        "page": "New comment"
+      },
       "write":
       {
         "title": "Write your comment"
       }
-    },
-    "title":
-    {
-      "page": "New comment"
     }
   },
   "info":
@@ -110,6 +126,31 @@
       "message":
       {
         "notSet": "Please provide a message for your answer.",
+        "tooLong": "Your message is too long!"
+      }
+    },
+    "comment":
+    {
+      "edit":
+      {
+        "comment":
+        {
+          "notFound": "Impossible to find the comment you're trying to update."
+        },
+        "message":
+        {
+          "notSet": "Please provide a message for your comment.",
+          "tooLong": "Your message is too long!"
+        },
+        "wrong":
+        {
+          "parameters": "There are missing parameters in your comment edition submission.",
+          "writer": "You're not the writer of this comment. You cannot edit it."
+        }
+      },
+      "message":
+      {
+        "notSet": "Please provide a message for your comment.",
         "tooLong": "Your message is too long!"
       }
     },
@@ -279,6 +320,14 @@
           {
             "label": "edit",
             "tooltip": "Edit your answer"
+          }
+        },
+        "comment":
+        {
+          "button":
+          {
+            "label": "edit",
+            "tooltip": "Edit your comment"
           }
         }
       },

@@ -211,3 +211,27 @@ postModule.controller('RedactPostCommentCtrl', function($scope, $controller, Pos
         self.saveRedirection();
     };
 });
+
+// ------------------------------------------------------------------------
+postModule.controller('EditPostCommentCtrl', function($scope, $controller, EditPostCommentService)
+{
+    var self = this;
+    // Instantiate base controller
+    angular.extend(self, $controller('RedactPostCtrl', { $scope: $scope }));
+
+    self.send = function()
+    {
+        EditPostCommentService.setMessage($scope.message);
+
+        let ret = EditPostCommentService.send();
+
+        self.handleSendResult(ret);
+    };
+
+    self.setPost = function(targetId)
+    {
+        EditPostCommentService.setPostId(targetId);
+
+        self.saveRedirection();
+    };
+});

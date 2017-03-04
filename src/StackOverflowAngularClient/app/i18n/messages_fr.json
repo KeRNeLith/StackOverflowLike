@@ -43,6 +43,22 @@
   },
   "comment":
   {
+    "edit":
+    {
+      "button":
+      {
+        "editCommentTooltip": "Envoyer votre modification",
+        "label": "Envoyer"
+      },
+      "title":
+      {
+        "page": "Éditer commentaire"
+      },
+      "write":
+      {
+        "title": "Editez votre commentaire"
+      }
+    },
     "redact":
     {
       "button":
@@ -50,14 +66,14 @@
         "addCommentTooltip": "Envoyer votre commentaire",
         "label": "Envoyer"
       },
+      "title":
+      {
+        "page": "Nouveau commentaire"
+      },
       "write":
       {
         "title": "Écrivez votre commentaire"
       }
-    },
-    "title":
-    {
-      "page": "Nouveau commentaire"
     }
   },
   "info":
@@ -110,6 +126,31 @@
       "message":
       {
         "notSet": "Veuillez saisir un message pour votre réponse.",
+        "tooLong": "Votre message est trop long !"
+      }
+    },
+    "comment":
+    {
+      "edit":
+      {
+        "comment":
+        {
+          "notFound": "Impossible de trouver le commentaire que vous tentez d'éditer."
+        },
+        "message":
+        {
+          "notSet": "Veuillez saisir un message pour votre commentaire.",
+          "tooLong": "Votre message est trop long !"
+        },
+        "wrong":
+        {
+          "parameters": "Il manque des informations pour soumettre votre modification de commentaire.",
+          "writer": "Vous n'êtes pas l'auteur de ce commentaire. Vous ne pouvez donc pas l'éditer."
+        }
+      },
+      "message":
+      {
+        "notSet": "Veuillez saisir un message pour votre commentaire.",
         "tooLong": "Votre message est trop long !"
       }
     },
@@ -279,6 +320,14 @@
           {
             "label": "éditer",
             "tooltip": "Éditez votre réponse"
+          }
+        },
+        "comment":
+        {
+          "button":
+          {
+            "label": "éditer",
+            "tooltip": "Éditez votre commentaire"
           }
         }
       },

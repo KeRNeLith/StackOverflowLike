@@ -11,7 +11,7 @@ class AnswerService
     def featuresFlippingService
 
     /**
-     * Edit a response given question.
+     * Edit a response.
      * @param answerId Answer to edit.
      * @param message Response message.
      * @param writer User that should be the writer.

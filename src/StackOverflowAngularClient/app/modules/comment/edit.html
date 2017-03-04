@@ -1,0 +1,40 @@
+<div class="col-md-8">
+    <h3>
+        {{'comment.edit.write.title' | translate}}
+    </h3>
+
+    <form name="editCommentForm" novalidate ng-app="segFault" ng-controller="EditPostCommentCtrl as editCtrl">
+        <textarea required
+                  maxlength="65535"
+                  name="uMessage"
+                  autofocus="autofocus"
+                  ng-model="message"
+                  placeholder="{{'placeholder.field.comment.message' | translate}}"
+                  rows="6"
+                  class="form-control">
+        </textarea>
+        <div ng-show="editCommentForm.$submitted || editCommentForm.uMessage.$touched" class="text-center error">
+            <span ng-show="editCommentForm.uMessage.$error.required">{{'error.comment.message.notSet' | translate}}</span>
+            <span ng-show="editCommentForm.uMessage.$error.maxlength">{{'error.comment.message.tooLong' | translate}}</span>
+        </div>
+
+        <div ng-show="editCommentForm.$submitted && messageError && messageError.length > 0" class="text-center error">
+            <span ng-show="messageError">{{messageError | translate}}</span>
+        </div>
+
+        <div ng-show="editCommentForm.$submitted && otherErrors && otherErrors.length > 0">
+            <div ng-repeat="error in otherErrors" class="text-center error">
+                <span>{{error | translate}}</span>
+            </div>
+        </div>
+
+        <br/>
+
+        <input name="Send"
+               ng-click="editCtrl.send()"
+               title="{{'comment.edit.button.editCommentTooltip' | translate}}"
+               value="{{'comment.edit.button.label' | translate}}"
+               class="btn btn-success"
+               type="submit">
+    </form>
+</div>

@@ -1,5 +1,7 @@
 package fr.isima.stackoverflow
 
+import fr.isima.marshallers.CommentsMarshallers
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -9,11 +11,13 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class CommentController
 {
+    static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     // Services
     def springSecurityService
     def answerService
+    def commentService
     def featuresFlippingService
 
     // Actions
@@ -36,7 +40,9 @@ class CommentController
     @Secured('ROLE_USER')
     def redactEdit(Comment comment)
     {
-        respond comment, view: 'redactEdit'
+        JSON.use(CommentsMarshallers.LIGHT_COMMENT) {
+            respond comment
+        }
     }
 
     @Transactional
@@ -141,25 +147,42 @@ class CommentController
 
     @Secured('ROLE_USER')
     @Transactional
-    def updateEdit(Comment comment)
+    def updateComment()
     {
-        if (comment == null)
+        if (!featuresFlippingService.isCommentPostingEnabled())
         {
-            transactionStatus.setRollbackOnly()
-            notFound()
+            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.post.comment"'
             return
         }
 
-        if (comment.hasErrors())
+        def inputRequest = request.JSON
+
+        def status = BAD_REQUEST
+        String retCode = '"error.comment.edit.wrong.parameters"'
+
+        // Edit comment
+        if (inputRequest.message != null && inputRequest.comment != null)
         {
-            transactionStatus.setRollbackOnly()
-            respond comment.errors, view:'redactEdit'
-            return
+            def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
+
+            Long commentId = -1
+            if (inputRequest.comment instanceof String)
+            {
+                commentId = Long.parseLong(inputRequest.comment)
+            }
+            else
+            {
+                commentId = inputRequest.comment
+            }
+
+            retCode = commentService.editCommentToAnswer(commentId, inputRequest.message, user)
+            if (retCode == '"success.answer.edit.comment"')
+            {
+                status = OK
+            }
         }
 
-        comment.save flush:true
-
-        redirect(controller: 'question', action: 'display', id: comment.answer.question.id)
+        render status: status, message: retCode
     }
 
     @Transactional

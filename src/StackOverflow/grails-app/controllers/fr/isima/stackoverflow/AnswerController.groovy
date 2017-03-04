@@ -166,7 +166,7 @@ class AnswerController
             def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
 
             Long answerId = -1
-            if (inputRequest.question instanceof String)
+            if (inputRequest.answer instanceof String)
             {
                 answerId = Long.parseLong(inputRequest.answer)
             }

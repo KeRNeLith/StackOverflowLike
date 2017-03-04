@@ -178,3 +178,29 @@ class PostCommentService extends SubPostService
 }
 
 segFaultPostModule.service('PostCommentService', PostCommentService);
+
+// ------------------------------------------------------------------------
+class EditPostCommentService extends SubPostService
+{
+    constructor($http, API)
+    {
+        super($http, API);
+    }
+
+    send()
+    {
+        let ret = null;
+
+        if (super.send())
+        {
+            ret = this.$http.put(this.API + '/api/comment/updateComment', {
+                comment: this._postId,
+                message: this._message
+            });
+        }
+
+        return ret;
+    }
+}
+
+segFaultPostModule.service('EditPostCommentService', EditPostCommentService);
