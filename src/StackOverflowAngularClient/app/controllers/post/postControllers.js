@@ -84,8 +84,11 @@ postModule.controller('RedactPostCtrl', function($scope, $route, RedirectionServ
         {
             result.then(function successCallback(response)
                     {
-                        RedirectionService.redirectToLastURL();
-                        $route.reload();
+                        if (response.status < 400)
+                        {
+                            RedirectionService.redirectToLastURL();
+                            $route.reload();
+                        }
                     },
                     function errorCallback(response)
                     {

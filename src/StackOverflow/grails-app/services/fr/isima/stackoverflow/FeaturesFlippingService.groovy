@@ -26,7 +26,7 @@ class FeaturesFlippingService
      * @return True if enabled.
      */
     boolean isCommentPostingEnabled()
-    {return false
+    {
         return postCommentEnabled
     }
 
