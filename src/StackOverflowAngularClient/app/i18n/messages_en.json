@@ -299,6 +299,17 @@
       "Commented": "Commented on",
       "addCommentTooltip": "Add a comment on this answer"
     },
+    "mark":
+    {
+      "resolved":
+      {
+        "button":
+        {
+          "label": "Mark as Resolved",
+          "tooltip": "Mark this question as resolved"
+        }
+      }
+    },
     "redact":
     {
       "button":

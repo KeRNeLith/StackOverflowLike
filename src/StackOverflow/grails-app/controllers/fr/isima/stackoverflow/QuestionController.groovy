@@ -150,18 +150,37 @@ class QuestionController
     }
 
     @Secured('ROLE_USER')
-    def resolve(Question question)
+    def resolve()
     {
-        if (question == null)
+        def inputRequest = request.JSON
+
+        def status = BAD_REQUEST
+        String retCode = '"error.question.resolve.wrong.parameters"'
+
+        // Resolve question
+        if (inputRequest.question != null)
         {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
+            def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
+
+            Long questionId = -1
+            if (inputRequest.question instanceof String)
+            {
+                questionId = Long.parseLong(inputRequest.question)
+            }
+            else
+            {
+                questionId = inputRequest.question
+            }
+
+            retCode = questionService.resolveQuestion(questionId, user)
+
+            if (retCode == '"success.question.mark.resolved.added"')
+                status = OK
+            else if (retCode == '"success.question.mark.resolved.notChanged"')
+                status = NOT_MODIFIED
         }
 
-        questionService.resolveQuestion(question)
-
-        redirect(action: 'display', id: question.id)
+        render status: status, message: retCode
     }
 
     @Transactional

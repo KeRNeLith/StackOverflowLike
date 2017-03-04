@@ -9,15 +9,19 @@
             <span class="entry-title">{{question.title}}</span>
         </a>
 
-        <i ng-if="question.resolved" class="fa fa-check" aria-hidden="true"></i>
-        <!-- TODO <g:else>
-            <g:isOwner owner="${this.question.user}">
-                <g:form controller="question" action="resolve" id="${this.question.id}">
-                    <g:submitButton class="btn btn-success" name="${message(code: 'question.mark.resolved.button')}"/>
-                </g:form>
-            </g:isOwner>
-        </g:else>
-        -->
+        <i ng-show="question.resolved" class="fa fa-check" aria-hidden="true"></i>
+        <span ng-show="!question.resolved" ng-controller="AuthCtrl as authCtrl">
+            <form ng-if="authCtrl.isAuthenticated() && authCtrl.currentUser() == question.user.username" novalidate>
+                <span ng-controller="ResolveQuestionCtrl as resolveCtrl">
+                    <input name="resolve"
+                           ng-click="resolveCtrl.resolve(question)"
+                           title="{{'question.mark.resolved.button.tooltip' | translate}}"
+                           value="{{'question.mark.resolved.button.label' | translate}}"
+                           class="btn btn-success"
+                           type="submit">
+                </span>
+            </form>
+        </span>
     </h1>
 
     <div class="qa-part-q-view">

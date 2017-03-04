@@ -78,15 +78,39 @@ class QuestionService
 
     /**
      * Mark the input question as resolved.
-     * @param question Question to mark
+     * @param questionId Question to mark as resolved.
+     * @param user User that has asked to mark question as resolved.
      */
-    def resolveQuestion(Question question)
+    def resolveQuestion(Long questionId, User user)
     {
-        if (!question.isResolved)
+        String retCode = '"error.question.notFound"'
+        Question question = Question.get(questionId)
+
+        if (question != null)
         {
-            question.isResolved = true
-            question.save(flush: true)
+            // User that mark question as resolved is not the owner
+            if (question.user != user)
+            {
+                retCode = '"error.question.mark.resolved.invalid.user"'
+            }
+            else if (!question.isResolved)
+            {
+                question.isResolved = true
+                question.save(flush: true)
+
+                retCode = '"success.question.mark.resolved.added"'
+            }
+            else
+            {
+                retCode = '"success.question.mark.resolved.notChanged"'
+            }
         }
+        else
+        {
+            retCode = '"error.question.notFound"'
+        }
+
+        return retCode
     }
 
     /**

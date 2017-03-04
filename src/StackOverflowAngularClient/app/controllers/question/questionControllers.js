@@ -38,6 +38,30 @@ questionModule.controller('QuestionDisplayCtrl', function($scope, $http, $routeP
         });
 });
 
+questionModule.controller('ResolveQuestionCtrl', function($http, API)
+{
+    var self = this;
+
+    self.resolve = function (question)
+    {
+        $http.put(API + '/api/question/resolve', {
+            question: question.id
+        })
+        .then(  function successCallback(response)
+                {
+                    if (!question.resolved)
+                        question.resolved = true;
+                },
+                function errorCallback(response)
+                {
+                    if (response.status == 304)
+                        console.log("Question already resolved");
+                    else
+                        console.log("Impossible to mark this question as resolved");
+                });
+    };
+});
+
 questionModule.controller('RedactQuestionCtrl', function($scope, $http, $translate, API, PageService)
 {
     $translate('question.redact.title.page').then(function (translatedKey)
