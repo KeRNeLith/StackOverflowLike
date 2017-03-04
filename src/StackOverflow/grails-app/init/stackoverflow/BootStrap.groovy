@@ -84,12 +84,12 @@ class BootStrap
         def question5 = new Question(title: 'Question sans réponse (Java)', message: 'Bonjour, j\'aurai voulu savoir quand sortira Java 9 ?', user: tjgamerz).save()
         question5.addToTags(question: question3, tag: tagJava).save()
 
-        def badge1 = new Badge(name: 'Ask your First Question', rank: Badge.Rank.SILVER).save()
-        def badge2 = new Badge(name: 'First Answer', rank: Badge.Rank.BRONZE).save()
-        def badge3 = new Badge(name: 'First Comment', rank: Badge.Rank.BRONZE).save()
-        def badge4 = new Badge(name: 'Gain a positive vote', rank: Badge.Rank.BRONZE).save()
-        def badge5 = new Badge(name: 'Gain more than 10 positives votes', rank: Badge.Rank.SILVER).save()
-        def badge6 = new Badge(name: 'Gain more than 50 positives votes', rank: Badge.Rank.GOLD).save()
+        def badge1 = new Badge(name: 'badges.ask.question.first', rank: Badge.Rank.SILVER).save()
+        def badge2 = new Badge(name: 'badges.ask.answer.first', rank: Badge.Rank.BRONZE).save()
+        def badge3 = new Badge(name: 'badges.ask.comment.first', rank: Badge.Rank.BRONZE).save()
+        def badge4 = new Badge(name: 'badges.vote.positive.one', rank: Badge.Rank.BRONZE).save()
+        def badge5 = new Badge(name: 'badges.vote.positive.ten', rank: Badge.Rank.SILVER).save()
+        def badge6 = new Badge(name: 'badges.vote.positive.fifty', rank: Badge.Rank.GOLD).save()
 
         UserRole.withSession {
             it.flush()

@@ -34,6 +34,33 @@
       }
     }
   },
+  "badges":
+  {
+    "ask":
+    {
+      "answer":
+      {
+        "first": "First Answer"
+      },
+      "comment":
+      {
+        "first": "First Comment"
+      },
+      "question":
+      {
+        "first": "Ask your First Question"
+      }
+    },
+    "vote":
+    {
+      "positive":
+      {
+        "one": "Gain a positive vote",
+        "ten": "Gain more than 10 positives votes",
+        "fifty": "Gain more than 50 positives votes"
+      }
+    }
+  },
   "button":
   {
     "logout": "Logout",
