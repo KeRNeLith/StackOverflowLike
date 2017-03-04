@@ -21,17 +21,6 @@ class UserController
     def featuresFlippingService
 
     // Actions
-    def index(Integer max)
-    {
-        params.max = Math.min(max ?: 10, 100)
-        respond User.list(params), model:[userCount: User.count()]
-    }
-
-    def show(User user)
-    {
-        respond user
-    }
-
     @Secured('ROLE_ANONYMOUS')
     def profile()
     {
@@ -40,39 +29,6 @@ class UserController
 
         JSON.use(UserMarshallers.MEDIUM_USER_INFO) {
             respond user: user, badges: badgeService.getUserBadgesSorted(badgeService.getUserBadges(user))
-        }
-    }
-
-    def create()
-    {
-        respond new User(params)
-    }
-
-    @Transactional
-    def save(User user)
-    {
-        if (user == null)
-        {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        if (user.hasErrors())
-        {
-            transactionStatus.setRollbackOnly()
-            respond user.errors, view:'create'
-            return
-        }
-
-        user.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
-            }
-            '*' { respond user, [status: CREATED] }
         }
     }
 
@@ -122,39 +78,6 @@ class UserController
         render status: status
     }
 
-    def edit(User user)
-    {
-        respond user
-    }
-
-    @Transactional
-    def update(User user)
-    {
-        if (user == null)
-        {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        if (user.hasErrors())
-        {
-            transactionStatus.setRollbackOnly()
-            respond user.errors, view:'edit'
-            return
-        }
-
-        user.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
-            }
-            '*'{ respond user, [status: OK] }
-        }
-    }
-
     @Transactional
     def updateProfile()
     {
@@ -192,6 +115,84 @@ class UserController
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
                 redirect(action: 'display', id: user.id)
             }
+        }
+    }
+
+    // Default Grails routes
+    def index(Integer max)
+    {
+        params.max = Math.min(max ?: 10, 100)
+        respond User.list(params), model:[userCount: User.count()]
+    }
+
+    def show(User user)
+    {
+        respond user
+    }
+
+    def create()
+    {
+        respond new User(params)
+    }
+
+    @Transactional
+    def save(User user)
+    {
+        if (user == null)
+        {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (user.hasErrors())
+        {
+            transactionStatus.setRollbackOnly()
+            respond user.errors, view:'create'
+            return
+        }
+
+        user.save flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
+                redirect user
+            }
+            '*' { respond user, [status: CREATED] }
+        }
+    }
+
+    def edit(User user)
+    {
+        respond user
+    }
+
+    @Transactional
+    def update(User user)
+    {
+        if (user == null)
+        {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (user.hasErrors())
+        {
+            transactionStatus.setRollbackOnly()
+            respond user.errors, view:'edit'
+            return
+        }
+
+        user.save flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
+                redirect user
+            }
+            '*'{ respond user, [status: OK] }
         }
     }
 

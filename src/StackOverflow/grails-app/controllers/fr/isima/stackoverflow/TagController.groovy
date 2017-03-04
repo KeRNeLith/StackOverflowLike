@@ -1,6 +1,5 @@
 package fr.isima.stackoverflow
 
-import grails.rest.RestfulController
 import org.springframework.security.access.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*

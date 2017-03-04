@@ -23,19 +23,3 @@ userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, API, 
             $scope.votes = data.votes;
         });
 });
-
-/*userModule.controller('rhzshr', function($scope, $http, $routeParams, API, PageService)
-{
-    $http.get(API + '/api/question/display/' + $routeParams.id) //TODO  change here
-        .then(function(response)
-        {
-            let data = response.data;
-
-            let question = data.question;
-            $scope.question = question;
-            PageService.setTitle(question.title + ' - ' + PageService.default());
-
-            $scope.questionVotes = data.questionVotes;
-            $scope.answers = data.sortedAnswers;
-        });
-});*/

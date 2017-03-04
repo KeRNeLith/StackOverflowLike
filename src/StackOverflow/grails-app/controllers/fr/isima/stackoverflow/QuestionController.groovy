@@ -22,12 +22,6 @@ class QuestionController
     def featuresFlippingService
 
     // Actions
-    def index(Integer max)
-    {
-        params.max = Math.min(max ?: 10, 100)
-        respond Question.list(params), model:[questionCount: Question.count()]
-    }
-
     @Secured('ROLE_ANONYMOUS')
     def home()
     {
@@ -45,11 +39,6 @@ class QuestionController
             // Get recent and question by category
             respond recents: questionService.getMostRecentQuestions(nbRecentQuestions), questionsByCat: questionsByCat, randomSentence: numbersService.getRandomNumberSentence()
         }
-    }
-
-    def show(Question question)
-    {
-        respond question
     }
 
     @Secured('ROLE_ANONYMOUS')
@@ -72,81 +61,6 @@ class QuestionController
 	    JSON.use(QuestionMarshallers.FULL_QUESTION_FOR_DISPLAY) {
 		    respond question: question, questionVotes: questionVotes, sortedAnswers: sortedAnswers
 	    }
-    }
-
-    def create()
-    {
-        respond new Question(params)
-    }
-
-    @Transactional
-    def save(Question question)
-    {
-        if (question == null)
-        {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        if (question.hasErrors())
-        {
-            transactionStatus.setRollbackOnly()
-            respond question.errors, view:'create'
-            return
-        }
-
-        question.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'question.label', default: 'Question'), question.id])
-                redirect question
-            }
-            '*' { respond question, [status: CREATED] }
-        }
-    }
-
-    @Secured('ROLE_USER')
-    @Transactional
-    def saveQuestion()
-    {
-        if (!featuresFlippingService.isQuestionPostingEnabled())
-        {
-            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.post.question"'
-            return
-        }
-
-        def inputRequest = request.JSON
-
-        def status = BAD_REQUEST
-        def retCode = '"error.create.question.wrong.parameters"'
-        // Add question
-        if (inputRequest.title != null && inputRequest.message != null)
-        {
-            def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
-
-            retCode = questionService.createQuestion(inputRequest.title, inputRequest.message, user, inputRequest.tags)
-
-            // Creation succeed
-            if ((retCode instanceof Long || retCode instanceof Integer) && retCode >= 0)
-            {
-                status = CREATED
-            }
-        }
-
-        render status: status, message: retCode
-    }
-
-    def edit(Question question)
-    {
-        respond question
-    }
-
-    @Secured('ROLE_USER')
-    def redactEdit(Question question)
-    {
-        respond question, view: 'redactEdit', model: [tags: TagValue.findAll()]
     }
 
     @Secured('ROLE_USER')
@@ -183,32 +97,41 @@ class QuestionController
         render status: status, message: retCode
     }
 
+    @Secured('ROLE_USER')
     @Transactional
-    def update(Question question)
+    def saveQuestion()
     {
-        if (question == null)
+        if (!featuresFlippingService.isQuestionPostingEnabled())
         {
-            transactionStatus.setRollbackOnly()
-            notFound()
+            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.post.question"'
             return
         }
 
-        if (question.hasErrors())
+        def inputRequest = request.JSON
+
+        def status = BAD_REQUEST
+        def retCode = '"error.create.question.wrong.parameters"'
+        // Add question
+        if (inputRequest.title != null && inputRequest.message != null)
         {
-            transactionStatus.setRollbackOnly()
-            respond question.errors, view:'edit'
-            return
-        }
+            def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
 
-        question.save flush:true
+            retCode = questionService.createQuestion(inputRequest.title, inputRequest.message, user, inputRequest.tags)
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'question.label', default: 'Question'), question.id])
-                redirect question
+            // Creation succeed
+            if ((retCode instanceof Long || retCode instanceof Integer) && retCode >= 0)
+            {
+                status = CREATED
             }
-            '*'{ respond question, [status: OK] }
         }
+
+        render status: status, message: retCode
+    }
+
+    @Secured('ROLE_USER')
+    def redactEdit(Question question)
+    {
+        respond question, view: 'redactEdit', model: [tags: TagValue.findAll()]
     }
 
     @Secured('ROLE_USER')
@@ -239,6 +162,84 @@ class QuestionController
         question.save flush:true
 
         redirect(action: 'display', id: question.id)
+    }
+
+    // Grails default routes
+    def index(Integer max)
+    {
+        params.max = Math.min(max ?: 10, 100)
+        respond Question.list(params), model:[questionCount: Question.count()]
+    }
+
+    def show(Question question)
+    {
+        respond question
+    }
+
+    def create()
+    {
+        respond new Question(params)
+    }
+
+    @Transactional
+    def save(Question question)
+    {
+        if (question == null)
+        {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (question.hasErrors())
+        {
+            transactionStatus.setRollbackOnly()
+            respond question.errors, view:'create'
+            return
+        }
+
+        question.save flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'question.label', default: 'Question'), question.id])
+                redirect question
+            }
+            '*' { respond question, [status: CREATED] }
+        }
+    }
+
+    def edit(Question question)
+    {
+        respond question
+    }
+
+    @Transactional
+    def update(Question question)
+    {
+        if (question == null)
+        {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (question.hasErrors())
+        {
+            transactionStatus.setRollbackOnly()
+            respond question.errors, view:'edit'
+            return
+        }
+
+        question.save flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'question.label', default: 'Question'), question.id])
+                redirect question
+            }
+            '*'{ respond question, [status: OK] }
+        }
     }
 
     @Transactional

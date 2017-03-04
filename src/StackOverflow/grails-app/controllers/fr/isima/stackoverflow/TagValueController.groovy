@@ -12,16 +12,18 @@ class TagValueController
     static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max)
-    {
-        params.max = Math.min(max ?: 10, 100)
-        respond TagValue.list(params), model:[tagValueCount: TagValue.count()]
-    }
-
+    // Actions
     @Secured('ROLE_ANONYMOUS')
     def list()
     {
         respond tags: TagValue.findAll()
+    }
+
+    // Default Grails routes
+    def index(Integer max)
+    {
+        params.max = Math.min(max ?: 10, 100)
+        respond TagValue.list(params), model:[tagValueCount: TagValue.count()]
     }
 
     def show(TagValue tagValue)
