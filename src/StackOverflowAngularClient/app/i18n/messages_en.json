@@ -329,6 +329,14 @@
             "label": "edit",
             "tooltip": "Edit your comment"
           }
+        },
+        "question":
+        {
+          "button":
+          {
+            "label": "edit",
+            "tooltip": "Edit your question"
+          }
         }
       },
       "vote": "vote",

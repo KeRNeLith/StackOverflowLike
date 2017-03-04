@@ -64,15 +64,6 @@
                                 </span>
                             </span>
                         </span>
-                        <!-- TODO <sec:ifLoggedIn>
-                            <g:if test="${this.currentUser.id == question.user.id}">
-                                <span>
-                                    <g:form controller="question" action="redactEdit" id="${this.question.id}">
-                                        <g:submitButton title="${message(code: 'question.show.edit.button.tooltip')}" name="edit" value="${message(code: 'question.show.edit.button.label')}" />
-                                    </g:form>
-                                </span>
-                            </g:if>
-                        </sec:ifLoggedIn>-->
                     </span>
                 </span>
 
@@ -103,6 +94,20 @@
                        class="redact qa-form-light-button qa-form-light-button-answer">
                         {{'question.display.answer' | translate}}
                     </a>
+                    <span ng-app="segFault"
+                          ng-controller="AuthCtrl as authCtrl">
+                        <span ng-if="authCtrl.isAuthenticated() && authCtrl.currentUser() === question.user.username">
+                            <!--ng-controller="EditPostQuestionCtrl as editCtrl"
+                               ng-click="editCtrl.setPost(question.id)"-->
+                            <a ng-href="#!/question/edit/{{question.id}}"
+
+                               name="edit"
+                               title="{{'question.display.edit.question.button.tooltip' | translate}}"
+                               class="redact qa-form-light-button qa-form-light-button-question">
+                                {{'question.display.edit.question.button.label' | translate}}
+                            </a>
+                        </span>
+                    </span>
                 </div>
             </div> <!-- End qa-q-view-main -->
 
@@ -154,19 +159,6 @@
                                     </span>
                                 </span>
                             </span>
-                            <span ng-app="segFault"
-                                  ng-controller="AuthCtrl as authCtrl">
-                                <span ng-if="authCtrl.isAuthenticated() && authCtrl.currentUser() === answer.user.username">
-                                    <a ng-href="#!/answer/edit/{{answer.id}}"
-                                       ng-controller="EditPostAnswerCtrl as editCtrl"
-                                       ng-click="editCtrl.setPost(answer.id)"
-                                       name="edit"
-                                       title="{{'question.display.edit.answer.button.tooltip' | translate}}"
-                                       class="redact qa-form-light-button qa-form-light-button-answer">
-                                        {{'question.display.edit.answer.button.label' | translate}}
-                                    </a>
-                                </span>
-                            </span>
                         </span>
                     </span>
 
@@ -185,6 +177,20 @@
                            class="redact qa-form-light-button qa-form-light-button-comment">
                             {{'question.display.comment' | translate}}
                         </a>
+
+                        <span ng-app="segFault"
+                              ng-controller="AuthCtrl as authCtrl">
+                            <span ng-if="authCtrl.isAuthenticated() && authCtrl.currentUser() === answer.user.username">
+                                <a ng-href="#!/answer/edit/{{answer.id}}"
+                                   ng-controller="EditPostAnswerCtrl as editCtrl"
+                                   ng-click="editCtrl.setPost(answer.id)"
+                                   name="edit"
+                                   title="{{'question.display.edit.answer.button.tooltip' | translate}}"
+                                   class="redact qa-form-light-button qa-form-light-button-answer">
+                                    {{'question.display.edit.answer.button.label' | translate}}
+                                </a>
+                            </span>
+                        </span>
                     </div>
 
                     <div class="qa-a-item-c-list" id="comment_{{answer.id}}_list">
@@ -216,6 +222,13 @@
                                             </span>
                                         </span>
                                     </span>
+                                </span>
+                            </span>
+                            <div class="qa-c-item-content">
+                                <div class="entry-content">{{comment.message}}</div>
+                            </div>
+                            <div class="qa-c-item-footer">
+                                <div class="qa-c-item-buttons">
                                     <span ng-app="segFault"
                                           ng-controller="AuthCtrl as authCtrl">
                                         <span ng-if="authCtrl.isAuthenticated() && authCtrl.currentUser() === comment.user.username">
@@ -229,10 +242,7 @@
                                             </a>
                                         </span>
                                     </span>
-                                </span>
-                            </span>
-                            <div class="qa-c-item-content">
-                                <div class="entry-content">{{comment.message}}</div>
+                                </div>
                             </div>
                             <div class="qa-c-item-clear">
                             </div>

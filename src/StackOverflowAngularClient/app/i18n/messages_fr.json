@@ -329,6 +329,14 @@
             "label": "éditer",
             "tooltip": "Éditez votre commentaire"
           }
+        },
+        "question":
+        {
+          "button":
+          {
+            "label": "éditer",
+            "tooltip": "Éditez votre question"
+          }
         }
       },
       "vote": "vote",
