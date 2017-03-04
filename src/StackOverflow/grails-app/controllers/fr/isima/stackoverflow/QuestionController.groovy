@@ -131,37 +131,53 @@ class QuestionController
     @Secured('ROLE_USER')
     def redactEdit(Question question)
     {
-        respond question, view: 'redactEdit', model: [tags: TagValue.findAll()]
+        JSON.use(QuestionMarshallers.LIGHT_FOR_EDIT_QUESTION) {
+            respond question
+        }
     }
 
     @Secured('ROLE_USER')
     @Transactional
-    def updateEdit(Question question)
+    def updateQuestion()
     {
-        if (question == null)
+        if (!featuresFlippingService.isQuestionPostingEnabled())
         {
-            transactionStatus.setRollbackOnly()
-            notFound()
+            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.post.question"'
             return
         }
 
-        if (question.hasErrors())
+        def inputRequest = request.JSON
+
+        def status = BAD_REQUEST
+        String retCode = '"error.question.edit.wrong.parameters"'
+
+        // Edit question
+        if (inputRequest.message != null && inputRequest.question != null)
         {
-            transactionStatus.setRollbackOnly()
-            respond question.errors, view:'redactEdit'
-            return
+            def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
+
+            Long questionId = -1
+            if (inputRequest.question instanceof String)
+            {
+                questionId = Long.parseLong(inputRequest.question)
+            }
+            else
+            {
+                questionId = inputRequest.question
+            }
+
+            retCode = questionService.editQuestion( questionId,
+                                                    inputRequest.title,
+                                                    inputRequest.message,
+                                                    inputRequest.tags,
+                                                    user)
+            if (retCode == '"success.question.edit.question"')
+            {
+                status = OK
+            }
         }
 
-        // Update tags
-        if (params.containsKey('selectedTags'))
-        {
-            def tags = params.list('selectedTags');
-            tagService.updateTagsToQuestion(question, tags)
-        }
-
-        question.save flush:true
-
-        redirect(action: 'display', id: question.id)
+        render status: status, message: retCode
     }
 
     // Grails default routes

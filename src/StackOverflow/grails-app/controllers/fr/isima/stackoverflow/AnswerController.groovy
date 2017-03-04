@@ -21,6 +21,94 @@ class AnswerController
     def featuresFlippingService
 
     // Actions
+    @Secured('ROLE_USER')
+    @Transactional
+    def saveAnswer()
+    {
+        if (!featuresFlippingService.isAnswerPostingEnabled())
+        {
+            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.post.answer"'
+            return
+        }
+
+        def inputRequest = request.JSON
+
+        def status = BAD_REQUEST
+        String retCode = '"error.question.add.answer.wrong.parameters"'
+        // Add answer
+        if (inputRequest.message != null && inputRequest.question != null)
+        {
+            def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
+
+            Long questionId = -1
+            if (inputRequest.question instanceof String)
+            {
+                questionId = Long.parseLong(inputRequest.question)
+            }
+            else
+            {
+                questionId = inputRequest.question
+            }
+
+            retCode = questionService.addAnswerToQuestion(inputRequest.message, user, questionId)
+            if (retCode == '"success.question.add.answer"')
+            {
+                status = CREATED
+            }
+        }
+
+        render status: status, message: retCode
+    }
+
+    @Secured('ROLE_USER')
+    def redactEdit(Answer answer)
+    {
+        JSON.use(AnswersMarshallers.LIGHT_ANSWER) {
+            respond answer
+        }
+    }
+
+    @Secured('ROLE_USER')
+    @Transactional
+    def updateAnswer()
+    {
+        if (!featuresFlippingService.isAnswerPostingEnabled())
+        {
+            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.post.answer"'
+            return
+        }
+
+        def inputRequest = request.JSON
+
+        def status = BAD_REQUEST
+        String retCode = '"error.answer.edit.wrong.parameters"'
+
+        // Edit answer
+        if (inputRequest.message != null && inputRequest.answer != null)
+        {
+            def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
+
+            Long answerId = -1
+            if (inputRequest.answer instanceof String)
+            {
+                answerId = Long.parseLong(inputRequest.answer)
+            }
+            else
+            {
+                answerId = inputRequest.answer
+            }
+
+            retCode = answerService.editAnswerToQuestion(answerId, inputRequest.message, user)
+            if (retCode == '"success.question.edit.answer"')
+            {
+                status = OK
+            }
+        }
+
+        render status: status, message: retCode
+    }
+
+    // Default Grails routes
     def index(Integer max)
     {
         params.max = Math.min(max ?: 10, 100)
@@ -65,56 +153,9 @@ class AnswerController
         }
     }
 
-    @Secured('ROLE_USER')
-    @Transactional
-    def saveAnswer()
-    {
-        if (!featuresFlippingService.isAnswerPostingEnabled())
-        {
-            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.post.answer"'
-            return
-        }
-
-        def inputRequest = request.JSON
-
-        def status = BAD_REQUEST
-        String retCode = '"error.question.add.answer.wrong.parameters"'
-        // Add answer
-        if (inputRequest.message != null && inputRequest.question != null)
-        {
-            def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
-
-            Long questionId = -1
-            if (inputRequest.question instanceof String)
-            {
-                questionId = Long.parseLong(inputRequest.question)
-            }
-            else
-            {
-                questionId = inputRequest.question
-            }
-
-            retCode = questionService.addAnswerToQuestion(inputRequest.message, user, questionId)
-            if (retCode == '"success.question.add.answer"')
-            {
-                status = CREATED
-            }
-        }
-
-        render status: status, message: retCode
-    }
-
     def edit(Answer answer)
     {
         respond answer
-    }
-
-    @Secured('ROLE_USER')
-    def redactEdit(Answer answer)
-    {
-        JSON.use(AnswersMarshallers.LIGHT_ANSWER) {
-            respond answer
-        }
     }
 
     @Transactional
@@ -143,46 +184,6 @@ class AnswerController
             }
             '*'{ respond answer, [status: OK] }
         }
-    }
-
-    @Secured('ROLE_USER')
-    @Transactional
-    def updateAnswer()
-    {
-        if (!featuresFlippingService.isAnswerPostingEnabled())
-        {
-            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.post.answer"'
-            return
-        }
-
-        def inputRequest = request.JSON
-
-        def status = BAD_REQUEST
-        String retCode = '"error.answer.edit.wrong.parameters"'
-
-        // Edit answer
-        if (inputRequest.message != null && inputRequest.answer != null)
-        {
-            def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
-
-            Long answerId = -1
-            if (inputRequest.answer instanceof String)
-            {
-                answerId = Long.parseLong(inputRequest.answer)
-            }
-            else
-            {
-                answerId = inputRequest.answer
-            }
-
-            retCode = answerService.editAnswerToQuestion(answerId, inputRequest.message, user)
-            if (retCode == '"success.question.edit.answer"')
-            {
-                status = OK
-            }
-        }
-
-        render status: status, message: retCode
     }
 
     @Transactional

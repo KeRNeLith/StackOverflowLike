@@ -14,6 +14,7 @@ import grails.converters.JSON
 class QuestionMarshallers
 {
 	public static String LIGHT_QUESTION = 'LIGHT_QUESTION_MARSHALLER'
+	public static String LIGHT_FOR_EDIT_QUESTION = 'LIGHT_FOR_EDIT_QUESTION_MARSHALLER'
 	public static String FULL_QUESTION = 'FULL_QUESTION_MARSHALLER'
 	public static String FULL_QUESTION_FOR_DISPLAY = 'FULL_QUESTION_FOR_DISPLAY_MARSHALLER'
 
@@ -23,6 +24,11 @@ class QuestionMarshallers
 			config.registerObjectMarshaller(Question, lightQuestionMarshaller)
 			config.registerObjectMarshaller(User, UserMarshallers.lightUserMarshaller)
 			config.registerObjectMarshaller(Tag, TagsMarshallers.lightTagMarshaller)
+		}
+
+		JSON.createNamedConfig(LIGHT_FOR_EDIT_QUESTION) { config ->
+			config.registerObjectMarshaller(Question, lightForEditQuestionMarshaller)
+			config.registerObjectMarshaller(User, UserMarshallers.lightUserMarshaller)
 		}
 
 		JSON.createNamedConfig(FULL_QUESTION) { config ->
@@ -47,6 +53,16 @@ class QuestionMarshallers
 		getLightQuestionData(question)
 	}
 
+	public static lightForEditQuestionMarshaller = { Question question ->
+		def output = [:]
+		output['id'] = question.id
+		output['title'] = question.title
+		output['message'] = question.message
+		output['user'] = question.user
+
+		return output
+	}
+
 	public static fullQuestionMarshaller = { Question question ->
 		def output = getMediumQuestionData(question)
 		output['answers'] = question.answers
@@ -58,17 +74,17 @@ class QuestionMarshallers
 		return getMediumQuestionData(question)
 	}
 
-		public static userOwnedQuestionMarshaller = { Question question ->
-			def output = [:]
-			output['id'] = question.id
-			output['title'] = question.title
-			output['views'] = question.nbViews
-			output['resolved'] = question.isResolved
-			output['title'] = question.title
-			output['tags'] = question.tags
+	public static userOwnedQuestionMarshaller = { Question question ->
+		def output = [:]
+		output['id'] = question.id
+		output['title'] = question.title
+		output['views'] = question.nbViews
+		output['resolved'] = question.isResolved
+		output['title'] = question.title
+		output['tags'] = question.tags
 
-			return output
-		}
+		return output
+	}
 
 	private static getLightQuestionData(Question question)
 	{
@@ -91,6 +107,4 @@ class QuestionMarshallers
 		output['message'] = question.message
 		return output
 	}
-
-
 }

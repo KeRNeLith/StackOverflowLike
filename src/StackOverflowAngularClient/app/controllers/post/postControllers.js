@@ -7,9 +7,54 @@
 var postModule = angular.module('segFault.post');
 
 // Define controllers
-postModule.controller('RedactPostQuestionCtrl', function($scope, RedirectionService, PostQuestionService)
+postModule.controller('PostQuestionCtrl', function($scope)
 {
     var self = this;
+
+    self.handleErrors = function (response)
+    {
+        if (response.data.message)
+        {
+            let errors = JSON.parse(response.data.message);
+
+            let titleError = null;
+            let messageError = null;
+            let otherErrors = [];
+
+            // Check error's type
+            if (!angular.isArray(errors))
+            {
+                errors = [ errors ];    // Make it array
+            }
+
+            angular.forEach(errors, function (errorCode) {
+                if (errorCode.search('title') != -1)
+                {
+                    titleError = errorCode;
+                }
+                else if (errorCode.search('message') != -1)
+                {
+                    messageError = errorCode;
+                }
+                else
+                {
+                    otherErrors.push(errorCode);
+                }
+            });
+
+            $scope.titleError = titleError;
+            $scope.messageError = messageError;
+            $scope.otherErrors = otherErrors;
+        }
+    };
+});
+
+// ------------------------------------------------------------------------
+postModule.controller('RedactPostQuestionCtrl', function($scope, $controller, RedirectionService, PostQuestionService)
+{
+    var self = this;
+    // Instantiate base controller
+    angular.extend(self, $controller('PostQuestionCtrl', { $scope: $scope }));
 
     self.send = function()
     {
@@ -26,53 +71,64 @@ postModule.controller('RedactPostQuestionCtrl', function($scope, RedirectionServ
                         {
                             RedirectionService.redirectTo('/question/display/' + questionId);
                         }
-                        // Should never arrive : No question id found => redirect to home
-                        else
-                        {
-                            RedirectionService.redirectToHome();
-                        }
                     },
                     function errorCallback(response)
                     {
                         resetForm($scope.redactQuestionForm);
 
-                        if (response.data.message)
-                        {
-                            let errors = JSON.parse(response.data.message);
-
-                            let titleError = null;
-                            let messageError = null;
-                            let otherErrors = [];
-
-                            // Check error's type
-                            if (!angular.isArray(errors))
-                            {
-                                errors = [ errors ];    // Make it array
-                            }
-
-                            angular.forEach(errors, function (errorCode) {
-                                if (errorCode.search('title') != -1)
-                                {
-                                    titleError = errorCode;
-                                }
-                                else if (errorCode.search('message') != -1)
-                                {
-                                    messageError = errorCode;
-                                }
-                                else
-                                {
-                                    otherErrors.push(errorCode);
-                                }
-                            });
-
-                            $scope.titleError = titleError;
-                            $scope.messageError = messageError;
-                            $scope.otherErrors = otherErrors;
-                        }
+                        self.handleErrors(response);
                     });
     };
 });
 
+// ------------------------------------------------------------------------
+postModule.controller('EditPostQuestionCtrl', function($scope, $controller, $route, RedirectionService, EditPostQuestionService)
+{
+    var self = this;
+    // Instantiate base controller
+    angular.extend(self, $controller('PostQuestionCtrl', { $scope: $scope }));
+
+    self.setQuestionId = function(targetId)
+    {
+        EditPostQuestionService.setQuestionId(targetId);
+
+        // Save last URL to be redirected after update
+        RedirectionService.saveLastURL();
+    };
+
+    self.send = function()
+    {
+        EditPostQuestionService.setTitle($scope.title);
+        EditPostQuestionService.setTags($scope.tags);// TODO check
+        EditPostQuestionService.setMessage($scope.message);
+
+        let result = EditPostQuestionService.send();
+        if (result != null)
+        {
+            result.then(function successCallback(response)
+                        {
+                            if (response.status < 400)
+                            {
+                                RedirectionService.redirectToLastURL();
+                                $route.reload();
+                            }
+                        },
+                        function errorCallback(response)
+                        {
+                            self.handleErrors(response);
+                        });
+        }
+        // No question set => should never arrive unless refresh of the page
+        else
+        {
+            console.log("Impossible to update question: No question set");
+            RedirectionService.redirectToLastURL();
+        }
+    };
+});
+
+// ------------------------------------------------------------------------
+// ------------------------------------------------------------------------
 // ------------------------------------------------------------------------
 postModule.controller('RedactPostCtrl', function($scope, $route, RedirectionService)
 {

@@ -30,10 +30,15 @@ class PostService
 segFaultPostModule.service('PostService', PostService);
 
 // ------------------------------------------------------------------------
-class PostQuestionService extends PostService
+class AbstractPostQuestionService extends PostService
 {
     constructor($http, API)
     {
+        if (new.target === AbstractPostQuestionService)
+        {
+            throw new TypeError("Cannot construct AbstractPostQuestionService instances directly");
+        }
+
         super($http, API);
 
         this._title = '';
@@ -59,6 +64,17 @@ class PostQuestionService extends PostService
     {
         this._tagsIds = newTags;
     }
+}
+
+segFaultPostModule.service('AbstractPostQuestionService', AbstractPostQuestionService);
+
+// ------------------------------------------------------------------------
+class PostQuestionService extends AbstractPostQuestionService
+{
+    constructor($http, API)
+    {
+        super($http, API);
+    }
 
     send()
     {
@@ -72,6 +88,48 @@ class PostQuestionService extends PostService
 
 segFaultPostModule.service('PostQuestionService', PostQuestionService);
 
+// ------------------------------------------------------------------------
+class EditPostQuestionService extends AbstractPostQuestionService
+{
+    constructor($http, API)
+    {
+        super($http, API);
+
+        this._questionId = -1;
+    }
+
+    questionId()
+    {
+        return this._questionId;
+    }
+
+    setQuestionId(newQuestionId)
+    {
+        this._questionId = newQuestionId;
+    }
+
+    send()
+    {
+        let ret = null;
+
+        if (this._questionId != -1)
+        {
+            ret = this.$http.post(this.API + '/api/question/updateQuestion', {
+                question: this._questionId,
+                title: this._title,
+                message: this._message,
+                tags: this._tagsIds
+            });
+        }
+        
+        return ret;
+    }
+}
+
+segFaultPostModule.service('EditPostQuestionService', EditPostQuestionService);
+
+// ------------------------------------------------------------------------
+// ------------------------------------------------------------------------
 // ------------------------------------------------------------------------
 class SubPostService extends PostService
 {

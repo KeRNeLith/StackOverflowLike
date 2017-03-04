@@ -97,10 +97,9 @@
                     <span ng-app="segFault"
                           ng-controller="AuthCtrl as authCtrl">
                         <span ng-if="authCtrl.isAuthenticated() && authCtrl.currentUser() === question.user.username">
-                            <!--ng-controller="EditPostQuestionCtrl as editCtrl"
-                               ng-click="editCtrl.setPost(question.id)"-->
                             <a ng-href="#!/question/edit/{{question.id}}"
-
+                               ng-controller="EditPostQuestionCtrl as editCtrl"
+                               ng-click="editCtrl.setQuestionId(question.id)"
                                name="edit"
                                title="{{'question.display.edit.question.button.tooltip' | translate}}"
                                class="redact qa-form-light-button qa-form-light-button-question">

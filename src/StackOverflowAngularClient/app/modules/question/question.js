@@ -28,4 +28,11 @@ questionModule.config(['$routeProvider', function($routeProvider)
       controller: 'RedactQuestionCtrl',
       loginRequired: true
   });
+
+  // Edit page
+  $routeProvider.when('/question/edit/:id', {
+      templateUrl: 'modules/question/edit.html',
+      controller: 'EditQuestionCtrl',
+      loginRequired: true
+  });
 }]);

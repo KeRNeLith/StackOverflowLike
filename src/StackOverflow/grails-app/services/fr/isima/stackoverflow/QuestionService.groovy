@@ -77,9 +77,78 @@ class QuestionService
     }
 
     /**
+     * Edit the question.
+     * @param questionId Question's id.
+     * @param title New question title.
+     * @param message New question message.
+     * @param tags New question tags.
+     * @param user User that has asked to edit question.
+     * @return Valid string if question is updated, otherwise list of error codes.
+     */
+    def editQuestion(Long questionId, String title, String message, def tags, User user)
+    {
+        // Post question feature not enabled
+        if (!featuresFlippingService.isQuestionPostingEnabled())
+            return '"error.service.unavailable.post.answer"'
+
+        def retCodes = []
+        def question = Question.get(questionId)
+        if (user != null && question != null)
+        {
+            // Trying to edit a question that the user is not the owner
+            if (question.user != user)
+                return '"error.question.edit.wrong.writer"'
+
+            question.title = title
+            question.message = message
+
+            if (!question.validate())
+            {
+                transactionStatus.setRollbackOnly()
+
+                if (question.errors['title'] != null)
+                {
+                    if (question.errors['title'].code == 'maxSize.exceeded')
+                        retCodes << '"error.question.edit.title.tooLong"'
+                    else if (question.errors['title'].code == 'nullable')
+                        retCodes << '"error.question.edit.title.notSet"'
+                    else if (question.errors['title'].code == 'unique')
+                        retCodes << '"error.question.edit.title.unique"'
+                }
+
+                if (question.errors['message'] != null)
+                {
+                    if (question.errors['message'].code == 'maxSize.exceeded')
+                        retCodes << '"error.question.edit.message.tooLong"'
+                    else if (question.errors['message'].code == 'nullable')
+                        retCodes << '"error.question.edit.message.notSet"'
+                }
+            }
+            else
+            {
+                question.save()
+                tagService.updateTagsToQuestion(question, tags)
+
+                retCodes = '"success.question.edit.question"'
+            }
+        }
+        else
+        {
+            if (user == null)
+                retCodes << '"error.user.notFound"'
+
+            if (question == null)
+                retCodes << '"error.question.notFound"'
+        }
+
+        return retCodes
+    }
+
+    /**
      * Mark the input question as resolved.
      * @param questionId Question to mark as resolved.
      * @param user User that has asked to mark question as resolved.
+     * @return Valid string if question has been resolved, otherwise error code.
      */
     def resolveQuestion(Long questionId, User user)
     {

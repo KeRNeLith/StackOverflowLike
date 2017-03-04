@@ -209,7 +209,32 @@
             "parameters": "There are missing parameters in your answer submission."
           }
         }
-      }
+      },
+      "edit":
+      {
+        "message":
+        {
+          "notSet": "Please provide a message for your answer.",
+          "tooLong": "Your message is too long!"
+        },
+        "title":
+        {
+          "notSet": "Please provide a title for your question.",
+          "tooLong": "Your title is too long!",
+          "unique": "You already ask a question with this title."
+        },
+        "wrong":
+        {
+          "parameters": "There are missing parameters in your question edition submission.",
+          "writer": "You're not the writer of this question. You cannot edit it."
+        }
+      },
+      "message":
+      {
+        "notSet": "Please provide a message for your question.",
+        "tooLong": "Your message is too long!"
+      },
+      "notFound": "You're trying to edit an non-existent question."
     },
     "service":
     {
@@ -297,6 +322,22 @@
       "ask":
       {
         "new": "Ask a new question"
+      }
+    },
+    "edit":
+    {
+      "button":
+      {
+        "editQuestionTooltip": "Send your modification",
+        "label": "Send"
+      },
+      "title":
+      {
+        "page": "Edit question"
+      },
+      "write":
+      {
+        "title": "Edit your question"
       }
     },
     "home":
@@ -416,7 +457,8 @@
       },
       "edit":
       {
-        "answer": "Answer successfully updated!"
+        "answer": "Answer successfully updated!",
+        "question": "Question successfully updated!"
       }
     },
     "register":

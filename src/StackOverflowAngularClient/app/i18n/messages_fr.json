@@ -209,7 +209,32 @@
             "parameters": "Il manque des informations pour soumettre votre réponse."
           }
         }
-      }
+      },
+      "edit":
+      {
+        "message":
+        {
+          "notSet": "Veuillez saisir un message pour votre question.",
+          "tooLong": "Votre message est trop long !"
+        },
+        "title":
+        {
+          "notSet": "Veuillez saisir un titre pour votre question.",
+          "tooLong": "Votre titre est trop long !",
+          "unique": "Vous avez déjà posé une question avec ce titre."
+        },
+        "wrong":
+        {
+          "parameters": "Il manque des informations pour soumettre votre modification de question.",
+          "writer": "Vous n'êtes pas l'auteur de cette question. Vous ne pouvez donc pas l'éditer."
+        }
+      },
+      "message":
+      {
+        "notSet": "Veuillez saisir un message pour votre question.",
+        "tooLong": "Votre message est trop long !"
+      },
+      "notFound": "Vous tentez d'éditer une question qui n'existe pas."
     },
     "service":
     {
@@ -297,6 +322,22 @@
       "ask":
       {
         "new": "Poser une question"
+      }
+    },
+    "edit":
+    {
+      "button":
+      {
+        "editQuestionTooltip": "Envoyer votre modification",
+        "label": "Envoyer"
+      },
+      "title":
+      {
+        "page": "Éditer question"
+      },
+      "write":
+      {
+        "title": "Éditez votre question"
       }
     },
     "home":
@@ -416,7 +457,8 @@
       },
       "edit":
       {
-        "answer": "Réponse mise à jour !"
+        "answer": "Réponse mise à jour !",
+        "question": "Question mise à jour !"
       }
     },
     "register":

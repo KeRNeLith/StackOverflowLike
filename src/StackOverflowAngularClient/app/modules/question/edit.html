@@ -1,0 +1,40 @@
+<div class="col-md-8">
+    <h3>
+        {{'question.edit.write.title' | translate}}
+    </h3>
+
+    <form name="editQuestionForm" novalidate ng-app="segFault" ng-controller="EditPostQuestionCtrl as editCtrl">
+        <textarea required
+                  maxlength="65535"
+                  name="uMessage"
+                  autofocus="autofocus"
+                  ng-model="message"
+                  placeholder="{{'placeholder.field.question.message' | translate}}"
+                  rows="10"
+                  class="form-control">
+        </textarea>
+        <div ng-show="editQuestionForm.$submitted || editQuestionForm.uMessage.$touched" class="text-center error">
+            <span ng-show="editQuestionForm.uMessage.$error.required">{{'error.question.message.notSet' | translate}}</span>
+            <span ng-show="editQuestionForm.uMessage.$error.maxlength">{{'error.question.message.tooLong' | translate}}</span>
+        </div>
+
+        <div ng-show="editQuestionForm.$submitted && messageError && messageError.length > 0" class="text-center error">
+            <span ng-show="messageError">{{messageError | translate}}</span>
+        </div>
+
+        <div ng-show="editQuestionForm.$submitted && otherErrors && otherErrors.length > 0">
+            <div ng-repeat="error in otherErrors" class="text-center error">
+                <span>{{error | translate}}</span>
+            </div>
+        </div>
+
+        <br/>
+
+        <input name="Send"
+               ng-click="editCtrl.send()"
+               title="{{'question.edit.button.editQuestionTooltip' | translate}}"
+               value="{{'question.edit.button.label' | translate}}"
+               class="btn btn-success"
+               type="submit">
+    </form>
+</div>

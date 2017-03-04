@@ -77,3 +77,28 @@ questionModule.controller('RedactQuestionCtrl', function($scope, $http, $transla
             $scope.availableTags = data.tags;
         });
 });
+
+questionModule.controller('EditQuestionCtrl', function($scope, $http, $routeParams, $translate, API, PageService)
+{
+    $translate('question.edit.title.page').then(function (translatedKey)
+    {
+        PageService.setTitle(translatedKey + ' - ' + PageService.default());
+    });
+
+    $http.get(API + '/api/question/redactEdit/' + $routeParams.id)
+        .then(function(response)
+        {
+            let data = response.data;
+
+            $scope.title = data.title;
+            $scope.message = data.message;
+        });
+
+    $http.get(API + '/api/tagValue/list')
+        .then(function(response)
+        {
+            let data = response.data;
+
+            $scope.availableTags = data.tags;
+        });
+});
