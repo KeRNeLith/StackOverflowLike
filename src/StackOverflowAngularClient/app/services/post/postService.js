@@ -128,6 +128,32 @@ class PostAnswerService extends SubPostService
 segFaultPostModule.service('PostAnswerService', PostAnswerService);
 
 // ------------------------------------------------------------------------
+class EditPostAnswerService extends SubPostService
+{
+    constructor($http, API)
+    {
+        super($http, API);
+    }
+
+    send()
+    {
+        let ret = null;
+
+        if (super.send())
+        {
+            ret = this.$http.put(this.API + '/api/answer/updateAnswer', {
+                answer: this._postId,
+                message: this._message
+            });
+        }
+
+        return ret;
+    }
+}
+
+segFaultPostModule.service('EditPostAnswerService', EditPostAnswerService);
+
+// ------------------------------------------------------------------------
 class PostCommentService extends SubPostService
 {
     constructor($http, API)

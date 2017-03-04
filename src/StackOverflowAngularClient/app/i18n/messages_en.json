@@ -1,6 +1,22 @@
 {
   "answer":
   {
+    "edit":
+    {
+      "button":
+      {
+        "editAnswerTooltip": "Send your modification",
+        "label": "Send"
+      },
+      "title":
+      {
+        "page": "Edit answer"
+      },
+      "write":
+      {
+        "title": "Edit your answer"
+      }
+    },
     "redact":
     {
       "button":
@@ -8,14 +24,14 @@
         "addAnswerTooltip": "Send your answer",
         "label": "Send"
       },
+      "title":
+      {
+        "page": "New answer"
+      },
       "write":
       {
         "title": "Write your answer"
       }
-    },
-    "title":
-    {
-      "page": "New answer"
     }
   },
   "button":
@@ -73,6 +89,28 @@
             "parameters": "There are missing parameters in your comment submission."
           }
         }
+      },
+      "edit":
+      {
+        "answer":
+        {
+          "notFound": "Impossible to find the answer you're trying to update."
+        },
+        "message":
+        {
+          "notSet": "Please provide a message for your answer.",
+          "tooLong": "Your message is too long!"
+        },
+        "wrong":
+        {
+          "parameters": "There are missing parameters in your answer edition submission.",
+          "writer": "You're not the writer of this answer. You cannot edit it."
+        }
+      },
+      "message":
+      {
+        "notSet": "Please provide a message for your answer.",
+        "tooLong": "Your message is too long!"
       }
     },
     "create":
@@ -124,11 +162,6 @@
       {
         "answer":
         {
-          "message":
-          {
-            "notSet": "Please provide a message for your answer.",
-            "tooLong": "Your message is too long!"
-          },
           "notQuestion": "You're trying to answer to a post that is not a question.",
           "wrong":
           {
@@ -238,6 +271,17 @@
     },
     "display":
     {
+      "edit":
+      {
+        "answer":
+        {
+          "button":
+          {
+            "label": "edit",
+            "tooltip": "Edit your answer"
+          }
+        }
+      },
       "vote": "vote",
       "votes": "votes",
       "voteUpTooltip": "Click to vote up",
@@ -301,6 +345,10 @@
       "add":
       {
         "answer": "Answer posted with success!"
+      },
+      "edit":
+      {
+        "answer": "Answer successfully updated!"
       }
     },
     "register":

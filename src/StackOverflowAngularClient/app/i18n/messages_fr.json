@@ -1,6 +1,22 @@
 {
   "answer":
   {
+    "edit":
+    {
+      "button":
+      {
+        "editAnswerTooltip": "Envoyer votre modification",
+        "label": "Envoyer"
+      },
+      "title":
+      {
+        "page": "Éditer réponse"
+      },
+      "write":
+      {
+        "title": "Editez votre réponse"
+      }
+    },
     "redact":
     {
       "button":
@@ -8,14 +24,14 @@
         "addAnswerTooltip": "Envoyer votre réponse",
         "label": "Envoyer"
       },
+      "title":
+      {
+        "page": "Nouvelle réponse"
+      },
       "write":
       {
         "title": "Écrivez votre réponse"
       }
-    },
-    "title":
-    {
-      "page": "Nouvelle réponse"
     }
   },
   "button":
@@ -73,6 +89,28 @@
             "parameters": "Il manque des informations pour soumettre votre commentaire."
           }
         }
+      },
+      "edit":
+      {
+        "answer":
+        {
+          "notFound": "Impossible de trouver la réponse que vous tentez d'éditer."
+        },
+        "message":
+        {
+          "notSet": "Veuillez saisir un message pour votre réponse.",
+          "tooLong": "Votre message est trop long !"
+        },
+        "wrong":
+        {
+          "parameters": "Il manque des informations pour soumettre votre modification de réponse.",
+          "writer": "Vous n'êtes pas l'auteur de cette réponse. Vous ne pouvez donc pas l'éditer."
+        }
+      },
+      "message":
+      {
+        "notSet": "Veuillez saisir un message pour votre réponse.",
+        "tooLong": "Votre message est trop long !"
       }
     },
     "create":
@@ -124,11 +162,6 @@
       {
         "answer":
         {
-          "message":
-          {
-            "notSet": "Veuillez saisir un message pour votre réponse.",
-            "tooLong": "Votre message est trop long !"
-          },
           "notQuestion": "Vous avez tenté de répondre à un post qui n'est pas une question.",
           "wrong":
           {
@@ -238,6 +271,17 @@
     },
     "display":
     {
+      "edit":
+      {
+        "answer":
+        {
+          "button":
+          {
+            "label": "éditer",
+            "tooltip": "Éditez votre réponse"
+          }
+        }
+      },
       "vote": "vote",
       "votes": "votes",
       "voteUpTooltip": "Cliquez pour ajouter un vote positif",
@@ -301,6 +345,10 @@
       "add":
       {
         "answer": "Réponse postée avec succès !"
+      },
+      "edit":
+      {
+        "answer": "Réponse mise à jour !"
       }
     },
     "register":

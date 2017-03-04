@@ -1,5 +1,7 @@
 package fr.isima.stackoverflow
 
+import fr.isima.marshallers.AnswersMarshallers
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -9,11 +11,13 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class AnswerController
 {
+    static responseFormats = ['json']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     // Services
     def springSecurityService
     def questionService
+    def answerService
     def featuresFlippingService
 
     // Actions
@@ -108,7 +112,9 @@ class AnswerController
     @Secured('ROLE_USER')
     def redactEdit(Answer answer)
     {
-        respond answer, view: 'redactEdit'
+        JSON.use(AnswersMarshallers.LIGHT_ANSWER) {
+            respond answer
+        }
     }
 
     @Transactional
@@ -141,25 +147,42 @@ class AnswerController
 
     @Secured('ROLE_USER')
     @Transactional
-    def updateEdit(Answer answer)
+    def updateAnswer()
     {
-        if (answer == null)
+        if (!featuresFlippingService.isAnswerPostingEnabled())
         {
-            transactionStatus.setRollbackOnly()
-            notFound()
+            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.post.answer"'
             return
         }
 
-        if (answer.hasErrors())
+        def inputRequest = request.JSON
+
+        def status = BAD_REQUEST
+        String retCode = '"error.answer.edit.wrong.parameters"'
+
+        // Edit answer
+        if (inputRequest.message != null && inputRequest.answer != null)
         {
-            transactionStatus.setRollbackOnly()
-            respond answer.errors, view:'redactEdit'
-            return
+            def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
+
+            Long answerId = -1
+            if (inputRequest.question instanceof String)
+            {
+                answerId = Long.parseLong(inputRequest.answer)
+            }
+            else
+            {
+                answerId = inputRequest.answer
+            }
+
+            retCode = answerService.editAnswerToQuestion(answerId, inputRequest.message, user)
+            if (retCode == '"success.question.edit.answer"')
+            {
+                status = OK
+            }
         }
 
-        answer.save flush:true
-
-        redirect(controller: 'question', action: 'display', id: answer.question.id)
+        render status: status, message: retCode
     }
 
     @Transactional
