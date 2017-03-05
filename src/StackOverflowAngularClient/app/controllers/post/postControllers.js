@@ -88,6 +88,25 @@ postModule.controller('EditPostQuestionCtrl', function($scope, $controller, $rou
     // Instantiate base controller
     angular.extend(self, $controller('PostQuestionCtrl', { $scope: $scope }));
 
+    $scope.selectedTagValues = [];
+    $scope.$watch('selectedTags', function (newSelection)
+    {
+        $scope.selectedTagValues = [];
+
+        if (!newSelection)
+        {
+            // here we've initialized selected already
+            // but sometimes that's not the case
+            // then we get null or undefined
+            return;
+        }
+
+        angular.forEach(newSelection, function(val)
+        {
+            $scope.selectedTagValues.push(val.id);
+        });
+    });
+
     self.setQuestionId = function(targetId)
     {
         EditPostQuestionService.setQuestionId(targetId);
@@ -99,7 +118,7 @@ postModule.controller('EditPostQuestionCtrl', function($scope, $controller, $rou
     self.send = function()
     {
         EditPostQuestionService.setTitle($scope.title);
-        EditPostQuestionService.setTags($scope.tags);// TODO check
+        EditPostQuestionService.setTags($scope.selectedTagValues);
         EditPostQuestionService.setMessage($scope.message);
 
         let result = EditPostQuestionService.send();
@@ -115,6 +134,8 @@ postModule.controller('EditPostQuestionCtrl', function($scope, $controller, $rou
                         },
                         function errorCallback(response)
                         {
+                            softResetForm($scope.editQuestionForm);
+
                             self.handleErrors(response);
                         });
         }

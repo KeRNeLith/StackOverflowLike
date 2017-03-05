@@ -358,6 +358,20 @@
         "editQuestionTooltip": "Envoyer votre modification",
         "label": "Envoyer"
       },
+      "question":
+      {
+        "title":
+        {
+          "label": "Titre :"
+        }
+      },
+      "tags":
+      {
+        "available":
+        {
+          "title": "Tags:"
+        }
+      },
       "title":
       {
         "page": "Éditer question"

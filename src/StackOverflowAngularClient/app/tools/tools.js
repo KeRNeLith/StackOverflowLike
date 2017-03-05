@@ -5,7 +5,7 @@
 'use strict';
 
 /**
- * Reset the form passed in parameter.
+ * Reset the form passed in parameter and remove all field values.
  * @param form Form to reset.
  */
 function resetForm(form)
@@ -27,6 +27,20 @@ function resetForm(form)
             control.$render();  // Force render
         }
 
+        // Reset form
+        form.$setPristine();
+        form.$setUntouched();
+    }
+}
+
+/**
+ * Reset the given form without touching field values.
+ * @param form Form to reset.
+ */
+function softResetForm(form)
+{
+    if (form)
+    {
         // Reset form
         form.$setPristine();
         form.$setUntouched();

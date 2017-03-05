@@ -4,6 +4,24 @@
     </h3>
 
     <form name="editQuestionForm" novalidate ng-app="segFault" ng-controller="EditPostQuestionCtrl as editCtrl">
+        <label>{{'question.edit.question.title.label' | translate}}
+            <input required
+                   autofocus="autofocus"
+                   type="text"
+                   name="uTitle"
+                   placeholder="{{'placeholder.field.question.title' | translate}}"
+                   ng-model="title">
+        </label>
+        <br/>
+        <div ng-show="editQuestionForm.$submitted || editQuestionForm.uTitle.$touched" class="text-center error">
+            <span ng-show="editQuestionForm.uTitle.$error.required">{{'error.question.edit.title.notSet' | translate}}</span>
+            <span ng-show="editQuestionForm.uTitle.$error.maxlength">{{'error.question.edit.title.tooLong' | translate}}</span>
+        </div>
+
+        <div ng-show="editQuestionForm.$pristine && editQuestionForm.uTitle.$untouched" class="text-center error">
+            <span ng-show="titleError">{{titleError | translate}}</span>
+        </div>
+
         <textarea required
                   maxlength="65535"
                   name="uMessage"
@@ -29,6 +47,23 @@
         </div>
 
         <br/>
+
+        <h4>{{'question.edit.tags.available.title' | translate}}</h4>
+        <select name="uTags" ng-model="selectedTagValues" multiple>
+            <option ng-repeat="option in availableTags" ng-value="option.id">{{option.tagName}}</option>
+        </select>
+        <br/><br/>
+
+        <div ng-show="  editQuestionForm.$pristine
+                        && editQuestionForm.uMessage.$untouched
+                        && redactQuestionForm.uTitle.$untouched
+                        && editQuestionForm.uTags.$untouched
+                        && otherErrors && otherErrors.length > 0">
+            <div ng-repeat="error in otherErrors" class="text-center error">
+                <span>{{error | translate}}</span>
+            </div>
+            <br/>
+        </div>
 
         <input name="Send"
                ng-click="editCtrl.send()"

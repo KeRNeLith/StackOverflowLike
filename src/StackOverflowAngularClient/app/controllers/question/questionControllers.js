@@ -92,6 +92,7 @@ questionModule.controller('EditQuestionCtrl', function($scope, $http, $routePara
 
             $scope.title = data.title;
             $scope.message = data.message;
+            $scope.selectedTags = data.tags;
         });
 
     $http.get(API + '/api/tagValue/list')

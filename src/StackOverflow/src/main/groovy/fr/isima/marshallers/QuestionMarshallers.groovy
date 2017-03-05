@@ -29,6 +29,7 @@ class QuestionMarshallers
 		JSON.createNamedConfig(LIGHT_FOR_EDIT_QUESTION) { config ->
 			config.registerObjectMarshaller(Question, lightForEditQuestionMarshaller)
 			config.registerObjectMarshaller(User, UserMarshallers.lightUserMarshaller)
+			config.registerObjectMarshaller(Tag, TagsMarshallers.lightTagMarshaller)
 		}
 
 		JSON.createNamedConfig(FULL_QUESTION) { config ->
@@ -59,6 +60,7 @@ class QuestionMarshallers
 		output['title'] = question.title
 		output['message'] = question.message
 		output['user'] = question.user
+		output['tags'] = question.tags
 
 		return output
 	}
