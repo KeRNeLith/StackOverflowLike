@@ -12,7 +12,9 @@ import grails.transaction.Transactional
 class QuestionController
 {
     static responseFormats = ['json']
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [saveQuestion: "POST", updateQuestion: "PUT", resolve: "PUT",
+                             // Default grails methods
+                             save: "POST", update: "PUT", delete: "DELETE"]
 
     // Services
     def springSecurityService

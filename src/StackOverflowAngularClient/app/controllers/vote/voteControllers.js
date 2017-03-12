@@ -21,7 +21,7 @@ voteModule.controller('VoteCtrl', function($scope, $http, API)
 
     self.vote = function(postId, value)
     {
-        $http.post(API + '/api/vote/performVote', {
+        $http.put(API + '/api/vote/performVote', {
             post: postId,
             vote: value
         }).then(function successCallback(response)

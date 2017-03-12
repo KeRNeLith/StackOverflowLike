@@ -12,7 +12,9 @@ import grails.transaction.Transactional
 class CommentController
 {
     static responseFormats = ['json']
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [saveComment: "POST", updateComment: "PUT",
+                             // Default grails methods
+                             save: "POST", update: "PUT", delete: "DELETE"]
 
     // Services
     def springSecurityService

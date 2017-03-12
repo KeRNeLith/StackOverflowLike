@@ -12,7 +12,9 @@ import grails.transaction.Transactional
 class UserController
 {
     static responseFormats = ['json']
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [register: "POST", updateProfile: "PUT",
+                             // Default grails methods
+                             save: "POST", update: "PUT", delete: "DELETE"]
 
     // Services
     def badgeService

@@ -114,7 +114,7 @@ class EditPostQuestionService extends AbstractPostQuestionService
 
         if (this._questionId != -1)
         {
-            ret = this.$http.post(this.API + '/api/question/updateQuestion', {
+            ret = this.$http.put(this.API + '/api/question/updateQuestion', {
                 question: this._questionId,
                 title: this._title,
                 message: this._message,

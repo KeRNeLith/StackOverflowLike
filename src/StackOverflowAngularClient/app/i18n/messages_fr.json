@@ -265,6 +265,14 @@
     },
     "service":
     {
+      "error":
+      {
+        "title": "Erreur"
+      },
+      "notAllowed":
+      {
+        "method": "Vous essayez de réaliser une action avec le mauvais verbe HTTP."
+      },
       "unavailable":
       {
         "post":
@@ -276,6 +284,10 @@
         },
         "signUp": "Il est impossible de s'inscrire pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard.",
         "title": "Indisponible"
+      },
+      "unknown":
+      {
+        "error": "Erreur inconnue. Navré..."
       }
     },
     "register":

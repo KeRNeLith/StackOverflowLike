@@ -265,6 +265,14 @@
     },
     "service":
     {
+      "error":
+      {
+        "title": "Error"
+      },
+      "notAllowed":
+      {
+        "method": "You're trying to perform an action with the wrong HTTP verb."
+      },
       "unavailable":
       {
         "post":
@@ -276,6 +284,10 @@
         },
         "signUp": "It's impossible to sign up for now. Service is temporary unavailable. Please try again later.",
         "title": "Unavailable"
+      },
+      "unknown":
+      {
+        "error": "Unknown error. Sorry..."
       }
     },
     "register":

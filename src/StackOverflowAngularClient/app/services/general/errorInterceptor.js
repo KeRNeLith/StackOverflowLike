@@ -37,11 +37,22 @@ segFaultGeneralModule.factory('ErrorInterceptor', function ($q, ErrorService, Re
                 }
 
                 RedirectionService.redirectToUnavailable();
+            }
+            // Method not allowed => should never arrive but...
+            else if (response.status == 405)
+            {
+                ErrorService.setErrors(['error.service.notAllowed.method']);
 
-                return response;
+                RedirectionService.redirectToError();
+            }
+            else
+            {
+                ErrorService.setErrors(['error.service.unknown.error']);
+
+                RedirectionService.redirectToError();
             }
 
-            return $q.reject(response);
+            return response;
         }
     }
 });

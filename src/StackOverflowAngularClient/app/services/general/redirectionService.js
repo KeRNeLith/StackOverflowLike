@@ -62,6 +62,11 @@ class RedirectionService
     {
         this.$location.path('/unavailable');
     }
+
+    redirectToError()
+    {
+        this.$location.path('/error');
+    }
 }
 
 segFaultAuthModule.service('RedirectionService', RedirectionService);

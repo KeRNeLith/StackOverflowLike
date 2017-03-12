@@ -22,3 +22,13 @@ segFaultGeneralModule.controller('UnavailableCtrl', function($scope, $translate,
 
     $scope.messages = ErrorService.errors();
 });
+
+segFaultGeneralModule.controller('ErrorCtrl', function($scope, $translate, ErrorService, PageService)
+{
+    $translate('error.service.error.title').then(function (translatedKey)
+    {
+        PageService.setTitle(translatedKey + ' - ' + PageService.default());
+    });
+
+    $scope.messages = ErrorService.errors();
+});

@@ -10,7 +10,9 @@ import grails.transaction.Transactional
 class VoteController
 {
     static responseFormats = ['json']
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [performVote: "PUT",
+                             // Default grails methods
+                             save: "POST", update: "PUT", delete: "DELETE"]
 
     // Services
     def voteService

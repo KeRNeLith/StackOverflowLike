@@ -14,4 +14,10 @@ segFaultGeneralModule.config(['$routeProvider', function($routeProvider)
         templateUrl: 'modules/general/unavailable.html',
         controller: 'UnavailableCtrl'
     });
+
+    // Error Page
+    $routeProvider.when('/error', {
+        templateUrl: 'modules/general/error.html',
+        controller: 'ErrorCtrl'
+    });
 }]);
