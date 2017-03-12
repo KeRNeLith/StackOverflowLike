@@ -1,0 +1,71 @@
+<div id="editProfile">
+    <div class="inner">
+        <div class="container top-margin-50">
+            <div id="registerDiv" ng-app="segFault" ng-controller="AuthCtrl as authCtrl" class="top-margin-50">
+                <form name="registerForm" novalidate>
+                    <h1>{{username}}</h1>
+
+                    <!-- Username -->
+                    <input required
+                           sf-username
+                           type="text"
+                           minlength="3"
+                           maxlength="50"
+                           name="uUsername"
+                           autofocus="autofocus"
+                           ng-model="authCtrl.username"
+                           placeholder="{{'placeholder.field.username' | translate}}"
+                           class="input pass">
+                    <div ng-show="registerForm.$submitted || registerForm.uUsername.$touched" class="text-center error">
+                        <span ng-show="registerForm.uUsername.$error.required">{{'error.register.invalid.username.notSet' | translate}}</span>
+                        <span ng-show="registerForm.uUsername.$error.minlength">{{'error.register.invalid.username.tooSmall' | translate}}</span>
+                        <span ng-show="registerForm.uUsername.$error.maxlength">{{'error.register.invalid.username.tooLong' | translate}}</span>
+                    </div>
+                    <div class="text-center">
+                        <span ng-show="registerForm.uUsername.$pending.username" class="info">{{'info.register.checking.username' | translate}}</span>
+                        <span ng-show="registerForm.uUsername.$error.username" class="error">{{'error.register.invalid.user.alreadyExists' | translate}}</span>
+                        <span ng-show="registerForm.uUsername.$valid" class="success">{{'success.register.username.available' | translate}}</span>
+                    </div>
+                    <div ng-show="registerForm.$pristine && registerForm.uUsername.$untouched && registerForm.uPassword.$untouched" class="text-center error">
+                        <span ng-show="usernameError">{{usernameError | translate}}</span>
+                    </div>
+
+                    <!-- Password -->
+                    <!--
+                    <input required
+                           type="password"
+                           minlength="6"
+                           name="uPassword"
+                           ng-model="authCtrl.password"
+                           placeholder="{{'placeholder.field.password' | translate}}"
+                           class="input pass" >
+                    <div ng-show="registerForm.$submitted || registerForm.uUsername.$touched" class="text-center error">
+                        <span ng-show="registerForm.uPassword.$error.required">{{'error.register.invalid.password.notSet' | translate}}</span>
+                        <span ng-show="registerForm.uPassword.$error.minlength">{{'error.register.invalid.password.tooSmall' | translate}}</span>
+                    </div>
+                    <div ng-show="registerForm.$pristine && registerForm.uUsername.$untouched && registerForm.uPassword.$untouched" class="text-center error">
+                        <span ng-show="passwordError">{{passwordError | translate}}</span>
+                    </div>
+
+                    <div ng-show="registerForm.$pristine && registerForm.uUsername.$untouched && registerForm.uPassword.$untouched && otherErrors && otherErrors.length > 0">
+                        <div ng-repeat="error in otherErrors" class="text-center error">
+                            <span>{{error | translate}}</span>
+                        </div>
+                    </div>
+                  -->
+
+                    <!-- Sign up -->
+                    <input name="Submit"
+                           ng-click="authCtrl.register()"
+                           value="Validate"
+                           class="inputButton"
+                           type="submit">
+
+                    <div ng-show="registerForm.$submitted" class="text-center success">
+                        <span ng-show="successMessage">{{successMessage | translate}}</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

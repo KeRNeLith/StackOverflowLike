@@ -74,4 +74,51 @@ class UserService
         user.reputation = Math.max(0, user.reputation + change)
         user.save()
     }
+
+    /**
+    * Changes a user's username
+    * @param user User whose reputation we change
+    * @param new userName
+    *
+    def updateUserUsername(User user, String username)
+    {
+      user.username = username
+
+      // Sign up feature not enabled
+      if (!featuresFlippingService.isSignUpEnabled())
+          return [ '"error.service.unavailable.signUp"' ]
+
+      if (user == null)
+      {
+          transactionStatus.setRollbackOnly()
+          return [ '"error.register.impossible"' ]
+      }
+
+      user.validate()
+      if (user.hasErrors())
+      {
+          transactionStatus.setRollbackOnly()
+
+          def errors = []
+          // Check username
+          if (user.errors['username'] != null)
+          {
+              if (user.errors['username'].code == 'minSize.notmet')
+                  errors << '"error.register.invalid.username.tooSmall"'
+              else if (user.errors['username'].code == 'maxSize.exceeded')
+                  errors << '"error.register.invalid.username.tooLong"'
+              else if (user.errors['username'].code == 'nullable')
+                  errors << '"error.register.invalid.username.notSet"'
+              else if (user.errors['username'].code == 'unique')
+                  errors << '"error.register.invalid.user.alreadyExists"'
+          }
+
+
+          return errors
+      }
+
+      user = user.save(flush: true, insert: true)
+      //user = user.save()
+    }
+    */
 }

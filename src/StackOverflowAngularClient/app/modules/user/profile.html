@@ -9,22 +9,22 @@
                     </li>
 
                     <li>
-                          <a ng-href="#!/profile/dashboard"><i class="fa fa-desktop "></i>Dashboard</a>
+                          <a href=""><i class="fa fa-desktop "></i>Dashboard</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-edit "></i>Activities<span class="fa arrow"></span></a>
+                        <a href=""><i class="fa fa-edit "></i>Activities<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">Questions</a>
+                                <a href="">{{'Questions' | translate }}</a>
                             </li>
                             <li>
-                                <a href="#">Answers</a>
+                                <a href="">{{'Answers' | translate }}</a>
                             </li>
                             <li>
-                                <a href="#">Votes</a>
+                                <a href="">{{'Votes' | translate }}</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-qrcode "></i>Badges</a>
+                                <a href=""><i class="fa fa-qrcode "></i>{{'Badges' | translate }}</a>
                             </li>
                         </ul>
                     </li>
@@ -38,6 +38,18 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2>{{ 'user.profile.label' | translate: { username: username } }}</h2>
+
+                      <span ng-app="segFault"
+                            ng-controller="AuthCtrl as authCtrl">
+                        <span ng-if="authCtrl.isAuthenticated() && authCtrl.currentUser() === username">
+                          <a ng-href="#!/"
+                             name="edit"
+                             title="{{'question.display.edit.question.button.tooltip' | translate}}"
+                             class="redact qa-form-light-button qa-form-light-button-question">
+                              {{'question.display.edit.question.button.label' | translate}}
+                          </a>
+                        </span>
+                      </span>
                     </div>
                 </div>
                 <!-- /. ROW  -->
@@ -68,7 +80,6 @@
 
                 <div class="row">
                   <div class="col-md-11">
-                      <h5>Description</h5>
                       <div class="panel panel-primary">
                           <div class="panel-heading">
                               {{'user.profile.description' | translate: { username: username } }}

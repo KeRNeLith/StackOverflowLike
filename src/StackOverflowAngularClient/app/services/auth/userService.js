@@ -38,6 +38,11 @@ class UserService
         this.AuthService.logout();
         this.RedirectionService.redirectToHome();
     }
+
+    changeUsername()
+    {
+
+    }
 }
 
 segFaultAuthModule.service('UserService', UserService);
