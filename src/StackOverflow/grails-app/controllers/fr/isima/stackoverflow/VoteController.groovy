@@ -15,6 +15,7 @@ class VoteController
     // Services
     def voteService
     def springSecurityService
+    def featuresFlippingService
 
     // Actions
     protected boolean hasParams(Map params, String... paramsName)
@@ -36,6 +37,12 @@ class VoteController
     @Secured('ROLE_USER')
     def performVote()
     {
+        if (!featuresFlippingService.isVotesEnabled())
+        {
+            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.post.vote"'
+            return
+        }
+
         def status = BAD_REQUEST
         String retCode = '"error.vote.perform.vote.wrong.parameters"'
 

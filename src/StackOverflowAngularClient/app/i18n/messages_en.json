@@ -271,7 +271,8 @@
         {
           "answer": "It's impossible to post answers for now. Service is temporary unavailable. Please try again later.",
           "comment": "It's impossible to post comments for now. Service is temporary unavailable. Please try again later.",
-          "question": "It's impossible to post questions for now. Service is temporary unavailable. Please try again later."
+          "question": "It's impossible to post questions for now. Service is temporary unavailable. Please try again later.",
+          "vote": "It's impossible to vote for now. Service is temporary unavailable. Please try again later."
         },
         "signUp": "It's impossible to sign up for now. Service is temporary unavailable. Please try again later.",
         "title": "Unavailable"

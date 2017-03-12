@@ -271,7 +271,8 @@
         {
           "answer": "Il est impossible de poster des réponses pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard.",
           "comment": "Il est impossible de poster des commentaires pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard.",
-          "question": "Il est impossible de poster des questions pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard."
+          "question": "Il est impossible de poster des questions pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard.",
+          "vote": "Il est impossible de voter pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard."
         },
         "signUp": "Il est impossible de s'inscrire pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard.",
         "title": "Indisponible"
