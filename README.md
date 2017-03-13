@@ -31,8 +31,8 @@ Web developpement project of a StackOverflow like website.
 ## Part 2 
 ### Expected features
 
-- [ ] Provide Feature flipping capabilities (Partly with Spring Cloud : Config server + ifs)
-- [ ] Be Stateless (AngularsJS)
+- [x] Provide Feature flipping capabilities (Partly with Spring Cloud : Config server + ifs)
+- [x] Be Stateless (AngularsJS)
 - [x] With an authentication mechanism (spring-security-rest)
 - [x] Embed Health Check for all underlying components
 - [x] Implement Circuit Breaker & Graceful degradation with a third party service (seems to be with Spring Cloud)
