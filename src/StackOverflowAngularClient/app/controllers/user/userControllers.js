@@ -25,16 +25,25 @@ userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, API, 
         });
 });
 
-userModule.controller('ProfileedfCtrl', function($scope, $http, $routeParams, API, PageService)
+userModule.controller('EditProfileCtrl', function($scope, $controller, EditPostAnswerService)
 {
-  /* create a forme with the user's profile info  with which when the user will
-  * call this controller  it will "validate" everything and call the correct API service
-  */
-  /*  $http.get(API + '/api/user/profile?username=' + $routeParams.username)
-        .then(function(response)
-        {
-            PageService.setTitle($routeParams.username + ' - ' + PageService.default());
+  var self = this;
+  // Instantiate base controller
+  //angular.extend(self, $controller('ProfileCtrl', { $scope: $scope }));
 
+  self.send = function()
+  {
+      EditPostAnswerService.setMessage($scope.message);
 
-        });*/
+      let ret = EditPostAnswerService.send();
+
+      self.handleSendResult(ret);
+  };
+
+  self.setPost = function(targetId)
+  {
+      EditPostAnswerService.setPostId(targetId);
+
+      self.saveRedirection();
+  };
 });

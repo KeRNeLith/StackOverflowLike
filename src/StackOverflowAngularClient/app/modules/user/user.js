@@ -12,15 +12,8 @@ userModule.config(['$routeProvider', function($routeProvider)
         css: [ 'assets/stylesheets/profile/font-awesome.css', 'assets/stylesheets/profile/custom.css' ]
     });
 
-    $routeProvider.when('/user/profile/dashboard', {
-        templateUrl: 'modules/user/profile.html',
-        controller: 'ProfileCtrl',
-        css: [ 'assets/stylesheets/profile/font-awesome.css', 'assets/stylesheets/profile/custom.css' ],
-        loginRequired: true
-    });
-
     // User profile Edit page
-    $routeProvider.when('/user/profile/edit', {
+    $routeProvider.when('/user/profile/:username/edit', {
         templateUrl: 'modules/user/editProfile.html',
         controller: 'EditProfileCtrl',
         css: [ 'assets/stylesheets/profile/font-awesome.css', 'assets/stylesheets/profile/custom.css' ],

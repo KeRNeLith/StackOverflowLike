@@ -532,10 +532,18 @@
   {
     "profile":
     {
-      "label": "{{username}}'s Profile",
-      "inscriptionDate": "Registration Date",
-      "reputation": "Reputation",
-      "description": "About {{username}}"
+      "display":
+      {
+        "label": "{{username}}'s Profile",
+        "inscriptionDate": "Registration Date",
+        "reputation": "Reputation",
+        "description": "About {{username}}"
+      },
+      "edit":
+      {
+        "description":"New Description"
+      }
+
     }
   }
 }
