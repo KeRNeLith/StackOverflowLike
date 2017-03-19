@@ -1,7 +1,6 @@
 package fr.isima.marshallers
 
 import fr.isima.stackoverflow.Badge
-import grails.converters.JSON
 
 /**
  * Created by kernelith on 18/02/17.

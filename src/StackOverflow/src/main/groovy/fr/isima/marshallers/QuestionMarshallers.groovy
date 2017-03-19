@@ -1,11 +1,6 @@
 package fr.isima.marshallers
 
-import fr.isima.stackoverflow.Answer
-import fr.isima.stackoverflow.Comment
-import fr.isima.stackoverflow.Question
-import fr.isima.stackoverflow.Tag
-import fr.isima.stackoverflow.User
-import fr.isima.stackoverflow.Vote
+import fr.isima.stackoverflow.*
 import grails.converters.JSON
 
 /**

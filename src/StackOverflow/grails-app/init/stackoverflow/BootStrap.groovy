@@ -1,17 +1,7 @@
 package stackoverflow
 
 import fr.isima.marshallers.JSONMarshallers
-import fr.isima.stackoverflow.Answer
-import fr.isima.stackoverflow.Badge
-import fr.isima.stackoverflow.Comment
-import fr.isima.stackoverflow.Question
-import fr.isima.stackoverflow.Role
-import fr.isima.stackoverflow.Tag
-import fr.isima.stackoverflow.TagValue
-import fr.isima.stackoverflow.User
-import fr.isima.stackoverflow.UserRole
-import fr.isima.stackoverflow.Vote
-import grails.converters.JSON
+import fr.isima.stackoverflow.*
 
 class BootStrap
 {

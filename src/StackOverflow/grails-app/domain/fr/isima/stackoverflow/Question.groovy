@@ -1,8 +1,5 @@
 package fr.isima.stackoverflow
 
-import com.sun.org.apache.xpath.internal.operations.Bool
-import stackoverflow.BootStrap
-
 class Question extends Post
 {
 	// Attributes

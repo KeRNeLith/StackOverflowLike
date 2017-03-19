@@ -1,10 +1,9 @@
 package fr.isima.stackoverflow.thirdpart
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand
 import grails.plugins.rest.client.RestBuilder
 import grails.transaction.Transactional
 import org.springframework.stereotype.Service
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand
 
 @Transactional
 @Service

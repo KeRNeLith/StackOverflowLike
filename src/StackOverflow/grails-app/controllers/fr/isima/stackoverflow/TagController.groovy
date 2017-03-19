@@ -1,9 +1,9 @@
 package fr.isima.stackoverflow
 
+import grails.transaction.Transactional
 import org.springframework.security.access.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
-import grails.transaction.Transactional
 
 @Secured('ROLE_ADMIN')
 @Transactional(readOnly = true)

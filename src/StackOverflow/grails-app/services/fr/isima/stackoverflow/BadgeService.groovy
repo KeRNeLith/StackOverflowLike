@@ -1,7 +1,6 @@
 package fr.isima.stackoverflow
 
 import grails.transaction.Transactional
-import javafx.geometry.Pos
 
 @Transactional
 class BadgeService
