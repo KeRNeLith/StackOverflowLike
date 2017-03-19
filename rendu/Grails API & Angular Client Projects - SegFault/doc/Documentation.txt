@@ -1,0 +1,24 @@
+Le site web créé s'appelle SegFault. C'est un site qui repose sur le principe Q&A.
+Soit Questions et Réponses.
+
+La page d'accueil du site permet de visualiser les dernières questions posées, ainsi que quelques une faisant parties
+des catégories dernièrement utilisées.
+
+Il est possible de consulter plus en détails les questions, ceci notamment afin de pouvoir répondre ou commenter les questions
+posées. Il est aussi possible de voter sur les questions et les réponses apportées à celles-ci en fonction de leur pertinence.
+En fonction de l'utilisateur visonnant la page il est possible d'éditer la question, réponses et/ou commentaires apportés.
+De plus, il est possible pour l'auteur de marquer la question comme résolue quand cela lui semble pertinent.
+
+Le site propose des liens vers les profils des utilisateurs afin de consulter leurs actions (reponses apportées, badges, réputation).
+
+
+Le site repose sur 3 roles qui sont ADMIN, USER, ANONYME.
+Certaines parties du site sont accessibles de manière anonyme comme la consultation des questions, ou du profil d'un utilisateur.
+En revanche d'autres sont limitées aux utilisateurs uniquement, comme pour poser ou répondre à une question.
+
+Afin de faire fonctionner correctement le projet il y a 3 entités distinctes.
+- Le serveur de configuration. Celui-ci doit être lancé en premier car il va récupérer la configuration sur un dépôt GitHub.
+- L'API créée grâce à l'ancien projet Grails.
+- Le client AngularJS qui permet de requêter l'API Grails afin de fournir une interface web semblable au précent projet (statefull) et ceci de manière stateless cette fois-ci.
+
+Ces 3 projets sont séparés dans 3 dossiers distincts.
