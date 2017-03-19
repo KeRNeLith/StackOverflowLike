@@ -23,6 +23,7 @@ class User implements Serializable
 	// Custom fields
 	Date registerDate = new Date()
 	Integer reputation = 0
+	String description = ""
 
 	// Constraints
 	static transients = ['springSecurityService']
@@ -30,6 +31,7 @@ class User implements Serializable
 	static constraints = {
 		password password: true, minSize: 6
 		username unique: true, minSize: 3, maxSize: 50
+		description maxSize: 65535
 		reputation min: 0
 	}
 

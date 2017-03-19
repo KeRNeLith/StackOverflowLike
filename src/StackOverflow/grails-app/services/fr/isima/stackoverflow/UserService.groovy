@@ -76,49 +76,43 @@ class UserService
     }
 
     /**
-    * Changes a user's username
-    * @param user User whose reputation we change
-    * @param new userName
-    *
-    def updateUserUsername(User user, String username)
+     * Change user description.
+     * @param newDesc New description.
+     * @param user User to update.
+     * @return Valid string if description is edited, otherwise list of error codes.
+     */
+    def editProfileDescription(String newDesc, User user)
     {
-      user.username = username
+        // Edit user profile feature not enabled
+        if (!featuresFlippingService.isEditProfileEnabled())
+            return '"error.service.unavailable.edit.profile"'
 
-      // Sign up feature not enabled
-      if (!featuresFlippingService.isSignUpEnabled())
-          return [ '"error.service.unavailable.signUp"' ]
+        def retCodes = []
+        if (user != null)
+        {
+            user.description = newDesc
+            println user.description.size()
+            if (!user.validate())
+            {
+                transactionStatus.setRollbackOnly()
 
-      if (user == null)
-      {
-          transactionStatus.setRollbackOnly()
-          return [ '"error.register.impossible"' ]
-      }
+                if (user.errors['description'] != null)
+                {
+                    if (user.errors['description'].code == 'maxSize.exceeded')
+                        retCodes << '"error.user.edit.profile.description.tooLong"'
+                }
+            }
+            else
+            {
+                user.save()
+                retCodes = '"success.user.edit.profile"'
+            }
+        }
+        else
+        {
+            retCodes << '"error.user.notFound"'
+        }
 
-      user.validate()
-      if (user.hasErrors())
-      {
-          transactionStatus.setRollbackOnly()
-
-          def errors = []
-          // Check username
-          if (user.errors['username'] != null)
-          {
-              if (user.errors['username'].code == 'minSize.notmet')
-                  errors << '"error.register.invalid.username.tooSmall"'
-              else if (user.errors['username'].code == 'maxSize.exceeded')
-                  errors << '"error.register.invalid.username.tooLong"'
-              else if (user.errors['username'].code == 'nullable')
-                  errors << '"error.register.invalid.username.notSet"'
-              else if (user.errors['username'].code == 'unique')
-                  errors << '"error.register.invalid.user.alreadyExists"'
-          }
-
-
-          return errors
-      }
-
-      user = user.save(flush: true, insert: true)
-      //user = user.save()
+        return retCodes
     }
-    */
 }

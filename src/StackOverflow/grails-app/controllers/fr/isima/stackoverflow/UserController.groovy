@@ -80,44 +80,34 @@ class UserController
         render status: status
     }
 
+    @Secured('ROLE_USER')
     @Transactional
     def updateProfile()
     {
-        def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
-
-        if (user == null)
+        if (!featuresFlippingService.isEditProfileEnabled())
         {
-            transactionStatus.setRollbackOnly()
-            notFound()
+            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.edit.profile"'
             return
         }
 
-        // TODO update user
-        /*if (params.containsKey('username'))
+        def inputRequest = request.JSON
+
+        def status = BAD_REQUEST
+        String retCode = '"error.user.profile.edit.wrong.parameters"'
+
+        // Edit user description
+        if (inputRequest.description != null)
         {
-            user.username = params.username
-        }
+            def user = springSecurityService.isLoggedIn() ? springSecurityService.currentUser : null
 
-        if (params.containsKey('password'))
-        {
-            user.password = params.password
-        }*/
-
-        if (user.hasErrors())
-        {
-            transactionStatus.setRollbackOnly()
-            respond user.errors, view:'display'
-            return
-        }
-
-        user.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect(action: 'display', id: user.id)
+            retCode = userService.editProfileDescription(inputRequest.description, user)
+            if (retCode == '"success.user.edit.profile"')
+            {
+                status = OK
             }
         }
+
+        render status: status, message: retCode
     }
 
     // Default Grails routes
