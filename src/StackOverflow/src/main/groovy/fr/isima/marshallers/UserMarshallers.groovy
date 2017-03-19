@@ -20,7 +20,7 @@ class UserMarshallers
 		JSON.createNamedConfig(MEDIUM_USER_INFO) { config ->
 			config.registerObjectMarshaller(User, mediumUserInfoMarshaller)
 			config.registerObjectMarshaller(Question, QuestionMarshallers.userOwnedQuestionMarshaller)
-			config.registerObjectMarshaller(Answer, AnswersMarshallers.fullAnswerMarshaller)
+			config.registerObjectMarshaller(Answer, AnswersMarshallers.associatedQuestionMarshaller)
 			config.registerObjectMarshaller(Tag, TagsMarshallers.lightTagMarshaller)
 			config.registerObjectMarshaller(Badge, BadgesMarshallers.simpleBadgeMarshaller)
 		}
@@ -40,6 +40,7 @@ class UserMarshallers
 
 	public static mediumUserInfoMarshaller = { User user ->
 		def output = getLightUserData(user)
+		output['answers'] = user.answers
 		output['description'] = user.description
 		output['questions'] = user.questions
 		output['registerDate'] = user.registerDate

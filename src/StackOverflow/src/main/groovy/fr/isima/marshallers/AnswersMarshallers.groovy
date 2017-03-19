@@ -33,6 +33,10 @@ class AnswersMarshallers
 		return getMainAnswerData(answer)
 	}
 
+	public static associatedQuestionMarshaller = {Answer answer ->
+		return getAssociatedQuestion(answer)
+	}
+
 	private static getLightAnswerData(Answer answer)
 	{
 		def output = [:]
@@ -52,4 +56,15 @@ class AnswersMarshallers
 
 		return output
 	}
+
+	private static getAssociatedQuestion(Answer answer)
+	{
+		def output = [:]
+
+		output["id"] = answer.id
+		output["question"] = answer.question
+		//output['question'] = answer.question
+		return output
+	}
+
 }

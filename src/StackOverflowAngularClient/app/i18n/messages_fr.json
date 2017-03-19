@@ -578,6 +578,7 @@
         "reputation": "Réputation",
         "titles":
         {
+          "anwers": "Questions répondues",
           "question": "Question",
           "mybadges": "Mes badges",
           "myquestions": "Mes questions",

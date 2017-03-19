@@ -80,9 +80,8 @@ class QuestionMarshallers
 		def output = [:]
 		output['id'] = question.id
 		output['title'] = question.title
-		output['views'] = question.nbViews
-		output['resolved'] = question.isResolved
-		output['title'] = question.title
+		//output['views'] = question.nbViews
+		//output['resolved'] = question.isResolved
 		output['tags'] = question.tags
 
 		return output
