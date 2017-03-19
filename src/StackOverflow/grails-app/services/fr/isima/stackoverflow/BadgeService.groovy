@@ -131,7 +131,16 @@ class BadgeService
             }
         }
 
-        return results
+        def badges = []
+
+        results.each {
+          def badge = [:]
+          badge["name"] = it.name
+          badge["rank"] = it.rank.toString()
+
+          badges.add(badge)
+        }
+        return badges
     }
 
     /**
@@ -140,16 +149,20 @@ class BadgeService
      */
     def getUserBadgesSorted(def badges)
     {
-        def badgesAssoc = [:]
+        def badgesAssoc = []
+        def badgeInfo = [:]
         badges.each {
-            if (badgesAssoc.containsKey(it))
+          badgeInfo["badge"] = it;
+
+            if (badgeInfo.containsKey(it))
             {
-                badgesAssoc[it]++
+                badgeInfo["number"]++
             }
             else
             {
-                badgesAssoc[it] = 1
+                badgeInfo["number"] = 1
             }
+            badgesAssoc.add(badgeInfo)
         }
 
         return badgesAssoc

@@ -1,11 +1,12 @@
 package fr.isima.marshallers
 
-import fr.isima.stackoverflow.User
 import fr.isima.stackoverflow.Answer
+import fr.isima.stackoverflow.Badge
 import fr.isima.stackoverflow.Comment
 import fr.isima.stackoverflow.Question
 import fr.isima.stackoverflow.Vote
 import fr.isima.stackoverflow.Tag
+import fr.isima.stackoverflow.User
 import grails.converters.JSON
 
 /**
@@ -21,6 +22,7 @@ class UserMarshallers
 			config.registerObjectMarshaller(Question, QuestionMarshallers.userOwnedQuestionMarshaller)
 			config.registerObjectMarshaller(Answer, AnswersMarshallers.fullAnswerMarshaller)
 			config.registerObjectMarshaller(Tag, TagsMarshallers.lightTagMarshaller)
+			config.registerObjectMarshaller(Badge, BadgesMarshallers.simpleBadgeMarshaller)
 		}
 	}
 

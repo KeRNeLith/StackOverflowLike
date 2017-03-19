@@ -9,6 +9,7 @@ class JSONMarshallers
 		UserMarshallers.init()
 		CommentsMarshallers.init()
 		AnswersMarshallers.init()
+    BadgesMarshallers.init()
 		QuestionMarshallers.init()
 		VoteMarshallers.init()
 		TagsMarshallers.init()
