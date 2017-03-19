@@ -590,19 +590,18 @@
         "reputation": "Réputation",
         "titles":
         {
-          "anwers": "Questions répondues",
+          "answers": "Questions répondues",
+          "question": "Question",
           "questions":
           {
-             "owner":"Mes questions",
-             "other":"Questions posées"
+            "owner":"Mes questions",
+            "other":"Questions posées"
           },
           "badges":
           {
-             "owner":"My badges",
-             "other":"Badges Earned"
+            "owner":"Mes badges",
+            "other":"Badges gagnés"
           },
-
-          "myquestions": "Mes questions",
           "tags": "Tags"
         },
         "votes": "Votes"
