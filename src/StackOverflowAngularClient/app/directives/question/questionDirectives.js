@@ -9,6 +9,9 @@ var questionModule = angular.module('segFault.question');
 // Directives
 questionModule.directive('sfQuestionEntry', function () {
     return {
+        scope: {
+          question: '='
+        },
         templateUrl: 'modules/question/templates/_questionEntry.html'
     };
 });

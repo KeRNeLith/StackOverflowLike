@@ -575,8 +575,9 @@
         "reputation": "Reputation",
         "titles":
         {
+          "answers": "Questions answered to",
           "question": "Question",
-          "mybadges": "Mes badges",
+          "mybadges": "My badges",
           "myquestions": "My questions",
           "tags": "Tags"
         },

@@ -7,7 +7,7 @@ class Answer extends Post
 	// Constraints
     static constraints = {
     }
-	
+
 	// Relations
 	static hasMany = [comments: Comment]
 	static belongsTo = [question: Question]
