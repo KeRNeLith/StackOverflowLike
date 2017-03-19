@@ -149,7 +149,8 @@
                     <div ng-repeat="badgeAssoc in badges">
                         <data ng-init="badge = badgeAssoc.badge"></data>
                         <data ng-init="count = badgeAssoc.number"></data>
-                        <span class="label label-success right-margin-10">
+
+                        <span  ng-class="{bronze: badge.rank == 'BRONZE', silver: badge.rank == 'SILVER', gold: badge.rank == 'GOLD'}" class="label right-margin-10 ">
                             {{badge.name | translate}}
                         </span>
                         x{{count}}

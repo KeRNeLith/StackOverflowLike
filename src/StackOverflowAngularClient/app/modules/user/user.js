@@ -9,7 +9,7 @@ userModule.config(['$routeProvider', function($routeProvider)
     $routeProvider.when('/user/profile/:username', {
         templateUrl: 'modules/user/profile.html',
         controller: 'ProfileCtrl',
-        css: [ 'assets/stylesheets/profile/font-awesome.css', 'assets/stylesheets/profile/custom.css' ]
+        css: [ 'assets/stylesheets/profile/font-awesome.css', 'assets/stylesheets/profile/custom.css', 'assets/stylesheets/profile/badges.css' ]
     });
 
     // User profile Edit page
