@@ -12,16 +12,16 @@ class BadgesMarshallers
 	{
 	}
 
-	private static getBadgeData(Badge badge)
-	{
-		def output = [:]
-		output['Rank'] = badge.rank
-		output['name'] = badge.name
-		return output
-	}
-
 	public static simpleBadgeMarshaller = { Badge badge ->
 		return getBadgeData(badge)
 	}
 
+	private static getBadgeData(Badge badge)
+	{
+		def output = [:]
+		output['rank'] = badge.rank.name()
+		output['name'] = badge.name
+
+		return output
+	}
 }

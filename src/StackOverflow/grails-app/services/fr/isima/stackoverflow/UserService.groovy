@@ -91,7 +91,6 @@ class UserService
         if (user != null)
         {
             user.description = newDesc
-            println user.description.size()
             if (!user.validate())
             {
                 transactionStatus.setRollbackOnly()
