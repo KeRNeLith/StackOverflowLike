@@ -29,9 +29,14 @@ class UserController
         String username = params.username
         User user = User.findByUsername(username)
 
-        JSON.use(UserMarshallers.MEDIUM_USER_INFO) {
-            respond user: user, badges: badgeService.getUserBadgesSorted(badgeService.getUserBadges(user))
+        if (user != null)
+        {
+            JSON.use(UserMarshallers.MEDIUM_USER_INFO) {
+                respond user: user, badges: badgeService.getUserBadgesSorted(badgeService.getUserBadges(user))
+            }
         }
+        else
+            render status: NOT_FOUND, message: '"error.user.notFound"'
     }
 
     @Secured('ROLE_ANONYMOUS')
