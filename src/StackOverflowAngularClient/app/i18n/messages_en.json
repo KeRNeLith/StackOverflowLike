@@ -558,7 +558,11 @@
     {
       "display":
       {
-        "activities": "My activities",
+        "activities":
+        {
+          "other": "Activities",
+          "owner": "My Activities"
+        },
         "answers": "Answers",
         "badges":"Badges",
         "button":
@@ -568,17 +572,33 @@
         },
         "comments": "Comments",
         "dashboard": "Dashboard",
-        "description": "About {{username}}",
+        "description":
+        {
+          "other": "About {{username}}",
+          "owner": "About me"
+        },
         "questions": "Questions",
         "inscriptionDate": "Registration Date",
-        "label": "{{username}}'s Profile",
+        "label":
+        {
+          "owner": "Your Profile",
+          "other":"{{username}}'s Profile"
+        },
         "reputation": "Reputation",
         "titles":
         {
           "answers": "Questions answered to",
           "question": "Question",
-          "mybadges": "My badges",
-          "myquestions": "My questions",
+          "badges":
+          {
+             "owner":"My badges",
+             "other":"Earned Badges"
+          },
+          "questions":
+          {
+             "owner":"My questions",
+             "other":"Questions asked"
+          },
           "tags": "Tags"
         },
         "votes": "Votes"

@@ -7,7 +7,7 @@
 var userModule = angular.module('segFault.user');
 
 // Define controllers
-userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, $location, $anchorScroll, API, PageService)
+userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, $location, $anchorScroll, API, PageService, AuthService)
 {
     $http.get(API + '/api/user/profile?username=' + $routeParams.username)
         .then(function(response)
@@ -25,8 +25,9 @@ userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, $loca
             $scope.reputation = user.reputation;
             $scope.questions = user.questions;
             $scope.votes = user.votes;
-
             $scope.badges = data.badges;
+
+            $scope.isOwner = AuthService.isAuthenticated() && AuthService.currentUser() == user.username;
         });
 
     // Anchors
