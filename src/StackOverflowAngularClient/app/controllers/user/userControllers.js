@@ -16,6 +16,7 @@ userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, API, 
 
             let data = response.data.user;
             $scope.id = data.id;
+            $scope.description = data.description;
             $scope.username = data.username;
             $scope.registeredDate = data.registerDate;
             $scope.answers = data.answers;
@@ -25,7 +26,7 @@ userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, API, 
         });
 });
 
-userModule.controller('EditProfileCtrl', function($scope,  $routeParams, API, UserService, PageService)
+userModule.controller('EditProfileCtrl', function($scope, $http, $routeParams, API, UserService, PageService, RedirectionService)
 {
   var self = this;
 
