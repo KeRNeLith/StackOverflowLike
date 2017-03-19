@@ -25,25 +25,94 @@ userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, API, 
         });
 });
 
-userModule.controller('EditProfileCtrl', function($scope, $controller, EditPostAnswerService)
+userModule.controller('EditProfileCtrl', function($scope,  $routeParams, API, UserService, PageService)
 {
   var self = this;
-  // Instantiate base controller
-  //angular.extend(self, $controller('ProfileCtrl', { $scope: $scope }));
 
-  self.send = function()
+  $http.get(API + '/api/user/profile?username=' + $routeParams.username)
+  .then(function(response)
   {
-      EditPostAnswerService.setMessage($scope.message);
+      PageService.setTitle($routeParams.username + ' - ' + PageService.default());
 
-      let ret = EditPostAnswerService.send();
+      let data = response.data.user;
+      $scope.description = data.description;
 
-      self.handleSendResult(ret);
+  });
+
+  self.handleErrors = function (response)
+  {
+      if (response.data.message)
+      {
+          let errors = JSON.parse(response.data.message);
+
+          let titleError = null;
+          let messageError = null;
+          let otherErrors = [];
+
+          // Check error's type
+          if (!angular.isArray(errors))
+          {
+              errors = [ errors ];    // Make it array
+          }
+
+          angular.forEach(errors, function (errorCode) {
+              if (errorCode.search('title') != -1)
+              {
+                  titleError = errorCode;
+              }
+              else if (errorCode.search('message') != -1)
+              {
+                  messageError = errorCode;
+              }
+              else
+              {
+                  otherErrors.push(errorCode);
+              }
+          });
+
+          $scope.titleError = titleError;
+          $scope.messageError = messageError;
+          $scope.otherErrors = otherErrors;
+      }
   };
 
-  self.setPost = function(targetId)
+  self.handleSendResult = function(result, form = null)
   {
-      EditPostAnswerService.setPostId(targetId);
+      if (result != null)
+      {
+          result.then(function successCallback(response)
+                  {
+                      if (response.status < 400)
+                      {
+                          RedirectionService.redirectToLastURL();
+                          $route.reload();
+                      }
+                  },
+                  function errorCallback(response)
+                  {
+                      if (form != null)
+                          resetForm(form);
 
-      self.saveRedirection();
+                      self.handleErrors(response);
+                  });
+      }
+      // Post id not set => redirect to last saved URL (should be home page in case of page refresh)
+      else
+      {
+          RedirectionService.redirectToLastURL();
+      }
   };
+
+  self.edit = function()
+  {
+      let ret = UserService.changeDescription($scope.description);
+
+      self.handleSendResult(ret, $scope.userDescriptionEdit);
+  };
+
+  self.saveCurrentURL = function()
+  {
+    // Save last URL to be redirected after update
+    RedirectionService.saveLastURL();
+  }
 });

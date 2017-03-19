@@ -6,23 +6,23 @@
     <form name="userDescriptionEdit" novalidate ng-app="segFault" ng-controller="EditProfileCtrl as descCtrl">
         <textarea required
                   maxlength="4096"
-                  name="uMessage"
+                  name="uDescription"
                   autofocus="autofocus"
-                  ng-model="descCtrl.desc"
+                  ng-model="description"
                   placeholder="{{'placeholder.field.comment.message' | translate}}"
                   rows="6"
                   class="form-control">
         </textarea>
-        <div ng-show="redactCommentForm.$submitted || redactCommentForm.uMessage.$touched" class="text-center error">
-            <span ng-show="redactCommentForm.uMessage.$error.required">{{'error.answer.add.comment.message.notSet' | translate}}</span>
-            <span ng-show="redactCommentForm.uMessage.$error.maxlength">{{'error.answer.add.comment.message.tooLong' | translate}}</span>
+        <div ng-show="redactCommentForm.$submitted || redactCommentForm.uDescription.$touched" class="text-center error">
+            <span ng-show="redactCommentForm.uDescription.$error.required">{{'error.answer.add.comment.message.notSet' | translate}}</span>
+            <span ng-show="redactCommentForm.uDescription.$error.maxlength">{{'error.answer.add.comment.message.tooLong' | translate}}</span>
         </div>
 
-        <div ng-show="redactCommentForm.$pristine && redactCommentForm.uMessage.$untouched" class="text-center error">
+        <div ng-show="redactCommentForm.$pristine && redactCommentForm.uDescription.$untouched" class="text-center error">
             <span ng-show="messageError">{{messageError | translate}}</span>
         </div>
 
-        <div ng-show="redactCommentForm.$pristine && redactCommentForm.uMessage.$untouched && otherErrors && otherErrors.length > 0">
+        <div ng-show="redactCommentForm.$pristine && redactCommentForm.uDescription.$untouched && otherErrors && otherErrors.length > 0">
             <div ng-repeat="error in otherErrors" class="text-center error">
                 <span>{{error | translate}}</span>
             </div>
@@ -31,7 +31,7 @@
         <br/>
 
         <input name="Submit"
-               ng-click="descCtrl.send()"
+               ng-click="descCtrl.send( )"
                title="{{'comment.redact.button.addCommentTooltip' | translate}}"
                value="{{'comment.redact.button.label' | translate}}"
                class="btn btn-success"

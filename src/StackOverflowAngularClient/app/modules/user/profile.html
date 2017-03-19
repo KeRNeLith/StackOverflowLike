@@ -15,16 +15,16 @@
                         <a href=""><i class="fa fa-edit "></i>Activities<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="">{{'Questions' | translate }}</a>
+                                <a href="">{{'question.display.Questions' | translate }}</a>
                             </li>
                             <li>
-                                <a href="">{{'Answers' | translate }}</a>
+                                <a href="">{{'question.display.Answers' | translate }}</a>
                             </li>
                             <li>
-                                <a href="">{{'Votes' | translate }}</a>
+                                <a href="">{{'question.display.Votes' | translate }}</a>
                             </li>
                             <li>
-                                <a href=""><i class="fa fa-qrcode "></i>{{'Badges' | translate }}</a>
+                                <a href=""><i class="fa fa-qrcode "></i>{{'user.profile.display.Badges' | translate }}</a>
                             </li>
                         </ul>
                     </li>
@@ -44,6 +44,8 @@
                         <span ng-if="authCtrl.isAuthenticated() && authCtrl.currentUser() === username">
                           <a ng-href="#!/user/profile/{{authCtrl.currentUser()}}/edit"
                              name="edit"
+                             ng-controller="EditProfileCtrl as editCtrl"
+                             ng-click="editCtrl.saveCurrentURL()"
                              title="{{'question.display.edit.question.button.tooltip' | translate}}"
                              class="redact qa-form-light-button qa-form-light-button-question">
                               {{'question.display.edit.question.button.label' | translate}}

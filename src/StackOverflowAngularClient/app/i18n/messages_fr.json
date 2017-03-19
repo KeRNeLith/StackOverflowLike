@@ -443,7 +443,6 @@
       "views": "vues",
       "Asked": "Posté le",
       "by": "par",
-      "Badges":"Badges",
       "answer": "répondre",
       "Answer": "Réponse",
       "Answers": "Réponses",
@@ -532,10 +531,19 @@
   {
     "profile":
     {
-      "label": "Profile de {{username}}",
-      "inscriptionDate": "Date d'inscription",
-      "reputation": "Réputation",
-      "description": "A propos de {{username}}"
+      "display": {
+        "Badges":"Badges",
+        "description": "A propos de {{username}}",
+        "inscriptionDate": "Date d'inscription",
+        "label": "Profile de {{username}}",
+        "reputation": "Réputation",
+
+      },
+      "edit":
+      {
+        "description": "Nouvelle description"
+      }
+
     }
   }
 }

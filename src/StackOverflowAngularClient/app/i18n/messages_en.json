@@ -443,7 +443,6 @@
       "views": "views",
       "Asked": "Asked on",
       "by": "by",
-      "Badges":"Badges",
       "answer": "answer",
       "Answer": "Answer",
       "Answers": "Answers",
@@ -534,10 +533,12 @@
     {
       "display":
       {
-        "label": "{{username}}'s Profile",
+        "Badges":"Badges",
+        "description": "About {{username}}",
         "inscriptionDate": "Registration Date",
-        "reputation": "Reputation",
-        "description": "About {{username}}"
+        "label": "{{username}}'s Profile",
+        "reputation": "Reputation"
+
       },
       "edit":
       {

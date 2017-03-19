@@ -121,7 +121,7 @@ class EditPostQuestionService extends AbstractPostQuestionService
                 tags: this._tagsIds
             });
         }
-        
+
         return ret;
     }
 }
