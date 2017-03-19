@@ -7,7 +7,7 @@
 var userModule = angular.module('segFault.user');
 
 // Define controllers
-userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, $location, API, PageService)
+userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, $location, $anchorScroll, API, PageService)
 {
     $http.get(API + '/api/user/profile?username=' + $routeParams.username)
         .then(function(response)
