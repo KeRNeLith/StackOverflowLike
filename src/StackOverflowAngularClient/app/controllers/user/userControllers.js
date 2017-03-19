@@ -7,7 +7,7 @@
 var userModule = angular.module('segFault.user');
 
 // Define controllers
-userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, API, PageService)
+userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, $location, API, PageService)
 {
     $http.get(API + '/api/user/profile?username=' + $routeParams.username)
         .then(function(response)
@@ -24,6 +24,47 @@ userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, API, 
             $scope.questions = data.questions;
             $scope.votes = data.votes;
         });
+
+    // Anchors
+    $scope.goToTop = function()
+    {
+        $location.hash('Top');
+
+        // call $anchorScroll()
+        $anchorScroll();
+    };
+
+    $scope.goToMyQuestions = function()
+    {
+        $location.hash('MyQuestions');
+
+        // call $anchorScroll()
+        $anchorScroll();
+    };
+
+    $scope.goToMyAnswers = function()
+    {
+        $location.hash('MyAnswers');
+
+        // call $anchorScroll()
+        $anchorScroll();
+    };
+
+    $scope.goToMyVotes = function()
+    {
+        $location.hash('MyVotes');
+
+        // call $anchorScroll()
+        $anchorScroll();
+    };
+
+    $scope.goToMyBadges = function()
+    {
+        $location.hash('MyBadges');
+
+        // call $anchorScroll()
+        $anchorScroll();
+    };
 });
 
 userModule.controller('EditProfileCtrl', function($scope, $http, $routeParams, API, UserService, PageService, RedirectionService)
@@ -31,23 +72,24 @@ userModule.controller('EditProfileCtrl', function($scope, $http, $routeParams, A
   var self = this;
 
   $http.get(API + '/api/user/profile?username=' + $routeParams.username)
-  .then(function(response)
+      .then(function(response)
+      {
+          PageService.setTitle($routeParams.username + ' - ' + PageService.default());
+
+          let data = response.data.user;
+          $scope.description = data.description;
+      });
+
+  self.handleErrors = function (response, form = null)
   {
-      PageService.setTitle($routeParams.username + ' - ' + PageService.default());
+      if (form != null)
+          resetForm(form);
 
-      let data = response.data.user;
-      $scope.description = data.description;
-
-  });
-
-  self.handleErrors = function (response)
-  {
       if (response.data.message)
       {
           let errors = JSON.parse(response.data.message);
 
-          let titleError = null;
-          let messageError = null;
+          let descriptionError = null;
           let otherErrors = [];
 
           // Check error's type
@@ -57,13 +99,9 @@ userModule.controller('EditProfileCtrl', function($scope, $http, $routeParams, A
           }
 
           angular.forEach(errors, function (errorCode) {
-              if (errorCode.search('title') != -1)
+              if (errorCode.search('description') != -1)
               {
-                  titleError = errorCode;
-              }
-              else if (errorCode.search('message') != -1)
-              {
-                  messageError = errorCode;
+                  descriptionError = errorCode;
               }
               else
               {
@@ -71,8 +109,7 @@ userModule.controller('EditProfileCtrl', function($scope, $http, $routeParams, A
               }
           });
 
-          $scope.titleError = titleError;
-          $scope.messageError = messageError;
+          $scope.descriptionError = descriptionError;
           $scope.otherErrors = otherErrors;
       }
   };
@@ -86,21 +123,16 @@ userModule.controller('EditProfileCtrl', function($scope, $http, $routeParams, A
                       if (response.status < 400)
                       {
                           RedirectionService.redirectToLastURL();
-                          $route.reload();
+                      }
+                      else
+                      {
+                          self.handleErrors(response, form);
                       }
                   },
                   function errorCallback(response)
                   {
-                      if (form != null)
-                          resetForm(form);
-
-                      self.handleErrors(response);
+                      self.handleErrors(response, form);
                   });
-      }
-      // Post id not set => redirect to last saved URL (should be home page in case of page refresh)
-      else
-      {
-          RedirectionService.redirectToLastURL();
       }
   };
 
@@ -108,7 +140,7 @@ userModule.controller('EditProfileCtrl', function($scope, $http, $routeParams, A
   {
       let ret = UserService.changeDescription($scope.description);
 
-      self.handleSendResult(ret, $scope.userDescriptionEdit);
+      self.handleSendResult(ret, $scope.userEditProfileForm);
   };
 
   self.saveCurrentURL = function()

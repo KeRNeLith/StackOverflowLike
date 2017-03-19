@@ -282,6 +282,10 @@
           "question": "It's impossible to post questions for now. Service is temporary unavailable. Please try again later.",
           "vote": "It's impossible to vote for now. Service is temporary unavailable. Please try again later."
         },
+        "profile":
+        {
+          "edit": "It's impossible to edit your profile for now. Service is temporary unavailable. Please try again later."
+        },
         "signUp": "It's impossible to sign up for now. Service is temporary unavailable. Please try again later.",
         "title": "Unavailable"
       },
@@ -319,6 +323,26 @@
     },
     "user":
     {
+      "edit":
+      {
+        "profile":
+        {
+          "description":
+          {
+            "tooLong": "Your description is too long."
+          }
+        }
+      },
+      "profile":
+      {
+        "edit":
+        {
+          "wrong":
+          {
+            "parameters": "There are incorrect information, so you could not edit your profile."
+          }
+        }
+      },
       "notFound": "Impossible to find user for the answer submission."
     }
   },
@@ -350,6 +374,10 @@
       {
         "message": "Your question...",
         "title": "Title of the question..."
+      },
+      "user":
+      {
+        "description": "Your description..."
       },
       "username": "Username",
       "password": "Password"
@@ -436,7 +464,6 @@
       },
       "vote": "vote",
       "votes": "votes",
-      "Votes": "Votes",
       "voteUpTooltip": "Click to vote up",
       "voteDownTooltip": "Click to vote down",
       "view": "view",
@@ -449,9 +476,7 @@
       "Answered": "Answered on",
       "addAnswerTooltip": "Answer this question",
       "comment": "comment",
-      "Comments": "Comments",
       "Commented": "Commented on",
-      "Questions":"Questions",
       "addCommentTooltip": "Add a comment on this answer"
     },
     "mark":
@@ -533,18 +558,38 @@
     {
       "display":
       {
-        "Badges":"Badges",
+        "activities": "My activities",
+        "answers": "Answers",
+        "badges":"Badges",
+        "button":
+        {
+          "label": "Edit",
+          "tooltip": "Edit your profile"
+        },
+        "comments": "Comments",
+        "dashboard": "Dashboard",
         "description": "About {{username}}",
+        "questions": "Questions",
         "inscriptionDate": "Registration Date",
         "label": "{{username}}'s Profile",
-        "reputation": "Reputation"
-
+        "reputation": "Reputation",
+        "titles":
+        {
+          "question": "Question",
+          "myquestions": "My questions",
+          "tags": "Tags"
+        },
+        "votes": "Votes"
       },
       "edit":
       {
-        "description":"New Description"
+        "button":
+        {
+          "editDescriptionTooltip": "Edit your description.",
+          "label": "Edit"
+        },
+        "description": "Edit your description"
       }
-
     }
   }
 }

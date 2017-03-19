@@ -3,26 +3,24 @@
         {{'user.profile.edit.description' | translate}}
     </h3>
 
-    <form name="userDescriptionEdit" novalidate ng-app="segFault" ng-controller="EditProfileCtrl as descCtrl">
-        <textarea required
-                  maxlength="4096"
+    <form name="userEditProfileForm" novalidate ng-app="segFault" ng-controller="EditProfileCtrl as editProfileCtrl">
+        <textarea maxlength="65535"
                   name="uDescription"
                   autofocus="autofocus"
                   ng-model="description"
-                  placeholder="{{'placeholder.field.comment.message' | translate}}"
+                  placeholder="{{'placeholder.field.user.description' | translate}}"
                   rows="6"
                   class="form-control">
         </textarea>
-        <div ng-show="redactCommentForm.$submitted || redactCommentForm.uDescription.$touched" class="text-center error">
-            <span ng-show="redactCommentForm.uDescription.$error.required">{{'error.answer.add.comment.message.notSet' | translate}}</span>
-            <span ng-show="redactCommentForm.uDescription.$error.maxlength">{{'error.answer.add.comment.message.tooLong' | translate}}</span>
+        <div ng-show="userEditProfileForm.$submitted || userEditProfileForm.uDescription.$touched" class="text-center error">
+            <span ng-show="userEditProfileForm.uDescription.$error.maxlength">{{'error.user.edit.profile.description.tooLong' | translate}}</span>
         </div>
 
-        <div ng-show="redactCommentForm.$pristine && redactCommentForm.uDescription.$untouched" class="text-center error">
-            <span ng-show="messageError">{{messageError | translate}}</span>
+        <div ng-show="userEditProfileForm.$pristine && userEditProfileForm.uDescription.$untouched" class="text-center error">
+            <span ng-show="descriptionError">{{descriptionError | translate}}</span>
         </div>
 
-        <div ng-show="redactCommentForm.$pristine && redactCommentForm.uDescription.$untouched && otherErrors && otherErrors.length > 0">
+        <div ng-show="userEditProfileForm.$pristine && userEditProfileForm.uDescription.$untouched && otherErrors && otherErrors.length > 0">
             <div ng-repeat="error in otherErrors" class="text-center error">
                 <span>{{error | translate}}</span>
             </div>
@@ -31,9 +29,9 @@
         <br/>
 
         <input name="Submit"
-               ng-click="descCtrl.edit()"
-               title="{{'comment.redact.button.addCommentTooltip' | translate}}"
-               value="{{'comment.redact.button.label' | translate}}"
+               ng-click="editProfileCtrl.edit()"
+               title="{{'user.profile.edit.button.editDescriptionTooltip' | translate}}"
+               value="{{'user.profile.edit.button.label' | translate}}"
                class="btn btn-success"
                type="submit">
     </form>

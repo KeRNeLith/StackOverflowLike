@@ -282,6 +282,10 @@
           "question": "Il est impossible de poster des questions pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard.",
           "vote": "Il est impossible de voter pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard."
         },
+        "profile":
+        {
+          "edit": "Il est impossible d'éditer votre profil pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard."
+        },
         "signUp": "Il est impossible de s'inscrire pour le moment. Ce service est temporairement indisponible. Veuillez réessayer plus tard.",
         "title": "Indisponible"
       },
@@ -319,6 +323,26 @@
     },
     "user":
     {
+      "edit":
+      {
+        "profile":
+        {
+          "description":
+          {
+            "tooLong": "Votre description est trop longue."
+          }
+        }
+      },
+      "profile":
+      {
+        "edit":
+        {
+          "wrong":
+          {
+            "parameters": "Il y a des informations incorrectes, vous ne pouvez donc pas éditer votre profil."
+          }
+        }
+      },
       "notFound": "Impossible de trouver l'utilisateur pour la soumission de la réponse."
     }
   },
@@ -350,6 +374,10 @@
       {
         "message": "Votre question...",
         "title": "Titre de la question..."
+      },
+      "user":
+      {
+        "description": "Votre description..."
       },
       "username": "Nom d'utilisateur",
       "password": "Mot de passe"
@@ -531,19 +559,40 @@
   {
     "profile":
     {
-      "display": {
-        "Badges":"Badges",
+      "display":
+      {
+        "activities": "Mes activités",
+        "answers": "Réponses",
+        "badges":"Badges",
+        "button":
+        {
+          "label": "Éditer",
+          "tooltip": "Éditez votre profil"
+        },
+        "comments": "Commentaires",
+        "dashboard": "Tableau de bord",
         "description": "A propos de {{username}}",
+        "questions": "Questions",
         "inscriptionDate": "Date d'inscription",
-        "label": "Profile de {{username}}",
+        "label": "Profil de {{username}}",
         "reputation": "Réputation",
-
+        "titles":
+        {
+          "question": "Question",
+          "myquestions": "Mes questions",
+          "tags": "Tags"
+        },
+        "votes": "Votes"
       },
       "edit":
       {
-        "description": "Nouvelle description"
+        "button":
+        {
+          "editDescriptionTooltip": "Éditez votre description.",
+          "label": "Éditer"
+        },
+        "description": "Éditez votre description"
       }
-
     }
   }
 }
