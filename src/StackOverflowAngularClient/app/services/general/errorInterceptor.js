@@ -45,6 +45,10 @@ segFaultGeneralModule.factory('ErrorInterceptor', function ($q, ErrorService, Re
 
                 RedirectionService.redirectToError();
             }
+            else if (response.status == 406)
+            {
+                // Nothing to do
+            }
             // All error except 400 that should be handled in app
             else if (response.status != 400)
             {
