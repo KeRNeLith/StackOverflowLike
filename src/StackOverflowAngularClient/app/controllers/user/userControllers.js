@@ -14,15 +14,19 @@ userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, $loca
         {
             PageService.setTitle($routeParams.username + ' - ' + PageService.default());
 
-            let data = response.data.user;
-            $scope.id = data.id;
-            $scope.description = data.description;
-            $scope.username = data.username;
-            $scope.registeredDate = data.registerDate;
-            $scope.answers = data.answers;
-            $scope.reputation = data.reputation;
-            $scope.questions = data.questions;
-            $scope.votes = data.votes;
+            let data = response.data;
+
+            let user = data.user;
+            $scope.id = user.id;
+            $scope.description = user.description;
+            $scope.username = user.username;
+            $scope.registeredDate = user.registerDate;
+            $scope.answers = user.answers;
+            $scope.reputation = user.reputation;
+            $scope.questions = user.questions;
+            $scope.votes = user.votes;
+
+            $scope.badges = data.badges;
         });
 
     // Anchors
@@ -45,14 +49,6 @@ userModule.controller('ProfileCtrl', function($scope, $http, $routeParams, $loca
     $scope.goToMyAnswers = function()
     {
         $location.hash('MyAnswers');
-
-        // call $anchorScroll()
-        $anchorScroll();
-    };
-
-    $scope.goToMyVotes = function()
-    {
-        $location.hash('MyVotes');
 
         // call $anchorScroll()
         $anchorScroll();

@@ -21,9 +21,6 @@
                             <a ng-click="goToMyAnswers()">{{'user.profile.display.answers' | translate }}</a>
                         </li>
                         <li>
-                            <a ng-click="goToMyVotes()">{{'user.profile.display.votes' | translate }}</a>
-                        </li>
-                        <li>
                             <a ng-click="goToMyBadges()"><i class="fa fa-qrcode "></i>{{'user.profile.display.badges' | translate }}</a>
                         </li>
                     </ul>
@@ -115,6 +112,25 @@
                 </div>
             </div>
             <!-- /. ROW  -->
+
+            <!-- /. ROW  -->
+            <hr />
+
+            <div class="row">
+                <div class="col-md-10">
+                    <h5 id="MyBadges">{{ 'user.profile.display.titles.mybadges' | translate }}</h5>
+                    <div ng-repeat="badgeAssoc in badges">
+                        <data ng-init="badge = badgeAssoc.badge"></data>
+                        <data ng-init="count = badgeAssoc.number"></data>
+                        <span class="label label-success right-margin-10">
+                            {{badge.name | translate}}
+                        </span>
+                        x{{count}}
+                    </div>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+
             <hr />
 
         </div>

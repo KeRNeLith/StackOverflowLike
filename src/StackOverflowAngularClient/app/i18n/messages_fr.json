@@ -579,6 +579,7 @@
         "titles":
         {
           "question": "Question",
+          "mybadges": "Mes badges",
           "myquestions": "Mes questions",
           "tags": "Tags"
         },
