@@ -1,133 +1,134 @@
-﻿
-    <div id="wrapper">
-        <!-- SIDE NAV BAR  -->
-        <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-                    <li class="text-center user-image-back">
-                        <img src="assets/images/find_user.png" class="img-responsive" />
-                    </li>
+﻿<div id="Top"></div>
+<div id="wrapper">
+    <!-- SIDE NAV BAR  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li class="text-center user-image-back">
+                    <img src="assets/images/find_user.png" class="img-responsive" />
+                </li>
 
-                    <li>
-                          <a href=""><i class="fa fa-desktop "></i>Dashboard</a>
-                    </li>
-                    <li>
-                        <a href=""><i class="fa fa-edit "></i>Activities<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="">{{'Questions' | translate }}</a>
-                            </li>
-                            <li>
-                                <a href="">{{'Answers' | translate }}</a>
-                            </li>
-                            <li>
-                                <a href="">{{'Votes' | translate }}</a>
-                            </li>
-                            <li>
-                                <a href=""><i class="fa fa-qrcode "></i>{{'Badges' | translate }}</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!-- /. NAV SIDE  -->
-        <!-- MAIN CONTENT -->
-        <div id="page-wrapper">
-            <div id="page-inner">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2>{{ 'user.profile.display.label' | translate: { username: username } }}</h2>
+                <li>
+                      <a ng-click="goToTop()"><i class="fa fa-desktop "></i>{{'user.profile.display.dashboard' | translate }}</a>
+                </li>
+                <li>
+                    <a href=""><i class="fa fa-edit "></i>{{'user.profile.display.activities' | translate }}<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a ng-click="goToMyQuestions()">{{'user.profile.display.questions' | translate }}</a>
+                        </li>
+                        <li>
+                            <a ng-click="goToMyAnswers()">{{'user.profile.display.answers' | translate }}</a>
+                        </li>
+                        <li>
+                            <a ng-click="goToMyVotes()">{{'user.profile.display.votes' | translate }}</a>
+                        </li>
+                        <li>
+                            <a ng-click="goToMyBadges()"><i class="fa fa-qrcode "></i>{{'user.profile.display.badges' | translate }}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- /. NAV SIDE  -->
+    <!-- MAIN CONTENT -->
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{ 'user.profile.display.label' | translate: { username: username } }}</h2>
 
-                      <span ng-app="segFault"
-                            ng-controller="AuthCtrl as authCtrl">
+                    <span ng-app="segFault"
+                          ng-controller="AuthCtrl as authCtrl">
                         <span ng-if="authCtrl.isAuthenticated() && authCtrl.currentUser() === username">
-                          <a ng-href="#!/user/profile/{{authCtrl.currentUser()}}/edit"
-                             name="edit"
-                             title="{{'question.display.edit.question.button.tooltip' | translate}}"
-                             class="redact qa-form-light-button qa-form-light-button-question">
-                              {{'question.display.edit.question.button.label' | translate}}
-                          </a>
+                            <a ng-href="#!/user/profile/{{authCtrl.currentUser()}}/edit"
+                               name="edit"
+                               ng-controller="EditProfileCtrl as editCtrl"
+                               ng-click="editCtrl.saveCurrentURL()"
+                               title="{{'user.profile.display.button.tooltip' | translate}}">
+                                {{'user.profile.display.button.label' | translate}}
+                            </a>
                         </span>
-                      </span>
-                    </div>
+                    </span>
                 </div>
-                <!-- /. ROW  -->
-                <hr />
-                <div class="row">
-                    <div class="col-md-3 col-sm-3 col-xs-6">
-                        <div class="panel panel-primary text-center no-boder bg-color-blue">
-                            <div class="panel-body">
-                                <i class="fa fa-bar-chart-o fa-5x"></i>
-                                <h3>{{registeredDate}} </h3>
-                            </div>
-                            <div class="panel-footer back-footer-blue">
-                                {{'user.profile.display.inscriptionDate' | translate }}
-                            </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr />
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="panel panel-primary text-center no-boder bg-color-blue">
+                        <div class="panel-body">
+                            <i class="fa fa-bar-chart-o fa-5x"></i>
+                            <h3>{{registeredDate}} </h3>
+                        </div>
+                        <div class="panel-footer back-footer-blue">
+                            {{'user.profile.display.inscriptionDate' | translate }}
                         </div>
                     </div>
-                    <div class="col-md-8 col-sm-3 col-xs-6">
-                      <h5>{{'user.profile.display.reputation'| translate }}</h5>
-                      <div class="progress progress-striped active">
-                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{reputation}}" aria-valuemin="0" aria-valuemax="100" style="width: {{reputation}}%">
-                              <span class="sr-only">{{reputation}}</span>
-                          </div>
-                      </div>
-                    </div>
                 </div>
-                <!-- /. ROW  -->
-                <hr />
-
-                <div class="row">
-                  <div class="col-md-11">
-                      <div class="panel panel-primary">
-                          <div class="panel-heading">
-                              {{'user.profile.display.description' | translate: { username: username } }}
-                          </div>
-                          <div class="panel-body">
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                          </div>
-                          <div class="panel-footer">
-
-                          </div>
+                <div class="col-md-8 col-sm-3 col-xs-6">
+                  <h5>{{'user.profile.display.reputation'| translate }}</h5>
+                  <div class="progress progress-striped active">
+                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{reputation}}" aria-valuemin="0" aria-valuemax="100" style="width: {{reputation}}%">
+                          <span class="sr-only">{{reputation}}</span>
                       </div>
                   </div>
                 </div>
-
-                <!-- /. ROW  -->
-                <hr />
-
-                <div class="row">
-                    <div class="col-md-10">
-                        <h5>{{ 'question.home.titles.question' | translate }}</h5>
-                        <table class="table table-striped table-bordered table-hover">
-                          <thead>
-                              <tr>
-                                  <th class="text-center">{{ 'question.home.titles.question' | translate }}</th>
-                                  <th class="text-center">{{ 'question.home.titles.tags' | translate }}</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                                <tr ng-repeat="question in questions" sf-question-entry="question"></tr>
-                          </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- /. ROW  -->
-                <hr />
-
             </div>
-            <!-- /. PAGE INNER  -->
+            <!-- /. ROW  -->
+            <hr />
+
+            <div class="row">
+              <div class="col-md-11">
+                  <div class="panel panel-primary">
+                      <div class="panel-heading">
+                          {{'user.profile.display.description' | translate: { username: username } }}
+                      </div>
+                      <div class="panel-body">
+                          {{description}}
+                      </div>
+                      <div class="panel-footer">
+
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <!-- /. ROW  -->
+            <hr />
+
+            <div class="row">
+                <div class="col-md-10">
+                    <h5 id="MyQuestions">{{ 'user.profile.display.titles.myquestions' | translate }}</h5>
+                    <table class="table table-striped table-bordered table-hover">
+                      <thead>
+                          <tr>
+                              <th class="text-center">{{ 'user.profile.display.titles.question' | translate }}</th>
+                              <th class="text-center">{{ 'user.profile.display.titles.tags' | translate }}</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                            <tr ng-repeat="question in questions" sf-question-entry="question"></tr>
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr />
+
         </div>
-        <!-- /. PAGE WRAPPER  -->
+        <!-- /. PAGE INNER  -->
     </div>
-    <!-- /. WRAPPER  -->
-    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
-    <!-- JQUERY SCRIPTS -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
-    <!-- BOOTSTRAP SCRIPTS -->
-    <script src="assets/js/bootstrap.min.js"></script>
-    <!-- METISMENU SCRIPTS -->
-    <script src="assets/js/jquery.metisMenu.js"></script>
-    <!-- CUSTOM SCRIPTS -->
-    <script src="assets/js/custom.js"></script>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+<!-- JQUERY SCRIPTS -->
+<script src="assets/js/jquery-1.10.2.js"></script>
+<!-- BOOTSTRAP SCRIPTS -->
+<script src="assets/js/bootstrap.min.js"></script>
+<!-- METISMENU SCRIPTS -->
+<script src="assets/js/jquery.metisMenu.js"></script>
+<!-- CUSTOM SCRIPTS -->
+<script src="assets/js/custom.js"></script>

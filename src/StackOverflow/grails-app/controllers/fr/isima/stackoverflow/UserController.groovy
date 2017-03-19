@@ -86,7 +86,7 @@ class UserController
     {
         if (!featuresFlippingService.isEditProfileEnabled())
         {
-            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.edit.profile"'
+            render status: SERVICE_UNAVAILABLE, message: '"error.service.unavailable.profile.edit"'
             return
         }
 

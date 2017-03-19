@@ -45,7 +45,8 @@ segFaultGeneralModule.factory('ErrorInterceptor', function ($q, ErrorService, Re
 
                 RedirectionService.redirectToError();
             }
-            else
+            // All error except 400 that should be handled in app
+            else if (response.status != 400)
             {
                 ErrorService.setErrors(['error.service.unknown.error']);
 

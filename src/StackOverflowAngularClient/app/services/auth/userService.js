@@ -39,8 +39,12 @@ class UserService
         this.RedirectionService.redirectToHome();
     }
 
-    changeUsername()
+    changeDescription(description)
     {
+
+      return this.$http.put(this.API + '/api/user/updateProfile', {
+          description: description
+      });
 
     }
 }

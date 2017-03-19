@@ -85,7 +85,7 @@ class UserService
     {
         // Edit user profile feature not enabled
         if (!featuresFlippingService.isEditProfileEnabled())
-            return '"error.service.unavailable.edit.profile"'
+            return '"error.service.unavailable.profile.edit"'
 
         def retCodes = []
         if (user != null)
